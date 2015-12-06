@@ -1,9 +1,7 @@
 var path = require('path');
-
 var port = 8000;
 var srcPath = path.join(__dirname, '/../src');
 var publicPath = '/assets/';
-
 module.exports = {
   port: port,
   debug: true,
@@ -21,7 +19,11 @@ module.exports = {
     noInfo: false
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: [
+      '',
+      '.js',
+      '.jsx'
+    ],
     alias: {
       actions: srcPath + '/actions/',
       components: srcPath + '/components/',
@@ -32,33 +34,31 @@ module.exports = {
     }
   },
   module: {
-    preLoaders: [
-      {
+    preLoaders: [{
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'src'),
         loader: 'eslint-loader'
-      }
-    ],
+      }],
     loaders: [
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader!postcss-loader'
       },
       {
         test: /\.sass/,
-        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax'
       },
       {
         test: /\.scss/,
-        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded'
       },
       {
         test: /\.less/,
-        loader: 'style-loader!css-loader!less-loader'
+        loader: 'style-loader!css-loader!postcss-loader!less-loader'
       },
       {
         test: /\.styl/,
-        loader: 'style-loader!css-loader!stylus-loader'
+        loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
       },
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
@@ -72,5 +72,8 @@ module.exports = {
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,    loader: "file" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&mimetype=image/svg+xml" }      
     ]
+  },
+  postcss: function () {
+    return [];
   }
 };
