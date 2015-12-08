@@ -1,7 +1,7 @@
 require('normalize.css');
-require('styles/App.css');
 require('expose?$!expose?jQuery!jquery');
 require("bootstrap-webpack");
+require('styles/App.less');
 
 import React from 'react';
 
@@ -10,7 +10,7 @@ let yeomanImage = require('../images/yeoman.png');
 class AppComponent extends React.Component {
   render() {
     return (
-      <div><nav className="navbar navbar-default">
+      <div className="showpreper-container"><nav className="navbar navbar-default showpreper-header">
         <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -61,8 +61,38 @@ class AppComponent extends React.Component {
           </div>{/*<!-- /.navbar-collapse -->*/}
         </div>{/*<!-- /.container-fluid -->*/}
       </nav>
-      <div className="index">
+      <div className="index showpreper-content">
         <img src={yeomanImage} alt="Yeoman Generator" />
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
+        <p>sdffds</p>
         <button type="button" className="btn btn-warning">Default</button>
         <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
       </div></div>
