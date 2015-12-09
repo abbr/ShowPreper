@@ -1,11 +1,12 @@
-require('normalize.css');
-require('expose?$!expose?jQuery!jquery');
-require("bootstrap-webpack");
-require('styles/App.less');
+import 'normalize.css'
+import 'expose?$!expose?jQuery!jquery'
+import 'bootstrap-webpack'
+import 'styles/App.less'
+import lang from 'i18n/lang'
 
-import React from 'react';
+import React from 'react'
 
-let yeomanImage = require('../images/yeoman.png');
+let yeomanImage = require('../images/yeoman.png')
 
 class AppComponent extends React.Component {
   render() {
@@ -69,44 +70,19 @@ class AppComponent extends React.Component {
         </nav>
         <div className="index showpreper-content">
           <img src={yeomanImage} alt="Yeoman Generator"/>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
-          <p>sdffds</p>
+          <p>{lang.text}</p>
+          <p>{lang.text}</p>
+          <p>{lang.text}</p>
+          <p>{lang.text}</p>
+          <p>{lang.text}</p>
           <button type="button" className="btn btn-warning">Default</button>
           <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-AppComponent.defaultProps = {};
+AppComponent.defaultProps = {}
 
-export default AppComponent;
+export default AppComponent

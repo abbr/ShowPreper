@@ -31,7 +31,8 @@ module.exports = {
       stores: srcPath + '/stores/',
       styles: srcPath + '/styles/',
       config: srcPath + '/config/' + process.env.REACT_WEBPACK_ENV
-    }
+    },
+    root: srcPath,
   },
   module: {
     preLoaders: [{
