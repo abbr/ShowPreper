@@ -1,9 +1,9 @@
 /* Base Application Styles */
+@import "~bootstrap/less/variables";
 
 html,
 body {
   height: 100%;
-  margin: 0
 }
 
 .index img {
@@ -22,18 +22,23 @@ body {
   background: #666;
 }
 
-#app{
-  height: 100%;
+#app {
+  /*
+   For Medium devices (desktops, 992px and up), no page level scroll
+  */
+  @media (min-width: @screen-md-min) {
+    height: 100%;
+  }
   .showpreper-container {
     display: flex;
     flex-flow: column;
     height: 100%;
-    .navbar{
+    .navbar {
       margin-bottom: 0px;
     }
     .showpreper-header {
       flex: 0 1 auto;
-    }  
+    }
     .showpreper-content {
       flex: 1 1 auto;
       height: 100%;
