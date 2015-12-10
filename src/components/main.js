@@ -4,7 +4,7 @@ import SlideDeck from 'components/slideDeck'
 import SlideEditor from 'components/slideEditor'
 module.exports = React.createClass({
   render: () =>
-    <div className="index showpreper-content">
+    <div className="showpreper-content">
       <SlideDeck/>
       <SlideEditor/>
     </div>

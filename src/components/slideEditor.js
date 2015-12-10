@@ -10,6 +10,16 @@ module.exports = React.createClass({
       <p>{lang.text}</p>
       <p>{lang.text}</p>
       <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>{lang.text}</p>
+      <p>end</p>
       <button type="button" className="btn btn-warning">Default</button>
       <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
     </div>
