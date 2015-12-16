@@ -13,8 +13,8 @@ let App = React.createClass({
   getInitialState: () => DeckStore.getDefaultDeck(),
   render: function () {
     return <div className="showpreper-container">
-      <Header slides={this.state.slides}/>
-      <Main slides={this.state.slides}/>
+      <Header deck={this.state.deck}/>
+      <Main deck={this.state.deck}/>
     </div>
   }
 })

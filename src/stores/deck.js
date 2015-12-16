@@ -1,5 +1,5 @@
 'use strict'
-exports.getDefaultDeck = function(){
+exports.getDefaultDeck = function () {
   let slide = {
     components: [],
     active: true
@@ -7,10 +7,16 @@ exports.getDefaultDeck = function(){
   let slides = []
   slides.push(slide)
   return {
-    slides: slides
+    deck: {
+      slides: slides,
+      config: {
+        slideWidth: 900,
+        slideHeight: 700
+      }
+    }
   }
 }
 
-exports.getActiveSlideIdx = function(deck){
+exports.getActiveSlideIdx = function (deck) {
   deck.findIndex(e => e.active)
 }
