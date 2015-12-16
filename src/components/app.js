@@ -1,3 +1,4 @@
+'use strict'
 import 'normalize.css'
 import 'expose?$!expose?jQuery!jquery'
 import 'bootstrap-webpack'
@@ -6,18 +7,16 @@ import 'styles/App.less'
 import React from 'react'
 import Header from 'components/header'
 import Main from 'components/main'
+import DeckStore from 'stores/deck'
 
-class AppComponent extends React.Component {
-  render() {
-    return (
-      <div className="showpreper-container">
-        <Header/>
-        <Main/>
-      </div>
-    )
+let App = React.createClass({
+  getInitialState: () => DeckStore.getDefaultDeck(),
+  render: function () {
+    return <div className="showpreper-container">
+      <Header slides={this.state.slides}/>
+      <Main slides={this.state.slides}/>
+    </div>
   }
-}
+})
 
-AppComponent.defaultProps = {}
-
-export default AppComponent
+module.exports = App

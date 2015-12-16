@@ -1,8 +1,9 @@
+'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
-module.exports = React.createClass({
-  render: () =>
-    <nav className="navbar navbar-default showpreper-header">
+let Header = React.createClass({
+  render: function () {
+    return <nav className="navbar navbar-default showpreper-header">
       <div className="container-fluid">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
@@ -50,4 +51,7 @@ module.exports = React.createClass({
       </div>
       {/*<!-- /.container-fluid -->*/}
     </nav>
+  }
 })
+
+module.exports = Header

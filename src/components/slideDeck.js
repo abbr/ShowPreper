@@ -1,7 +1,8 @@
+'use strict'
 import React from 'react'
-module.exports = React.createClass({
-  render: () =>
-    <div className="slide-deck">
+let SlideDeck = React.createClass({
+  render: function () {
+    return <div className="slide-deck">
       <p>Slide Deck</p>
       <p>Slide Deck</p>
       <p>Slide Deck</p>
@@ -50,4 +51,6 @@ module.exports = React.createClass({
       <p>Slide Deck</p>
       <p>end</p>
     </div>
+  }
 })
+module.exports = SlideDeck
