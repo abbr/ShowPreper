@@ -10,8 +10,8 @@ import ReactDOM from 'react-dom'
 let OperatingTable = React.createClass({
   _computeOtsSquare: function () {
     let deck = this.props.deck
-    let slideWidth = deck.config.slideWidth
-    let slideHeight = deck.config.slideHeight
+    let slideWidth = deck.slideWidth
+    let slideHeight = deck.slideHeight
 
     let rootElSize = window.getComputedStyle(ReactDOM.findDOMNode(this))
 
