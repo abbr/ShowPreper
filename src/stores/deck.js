@@ -2,7 +2,8 @@
 exports.getDefaultDeck = function () {
   let slide = {
     components: [],
-    active: true
+    active: true,
+    id: 0
   }
   let slides = []
   slides.push(slide)
