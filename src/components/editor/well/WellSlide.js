@@ -1,23 +1,22 @@
-'use strict';
+'use strict'
 
-var React = require('react');
+var React = require('react')
 
 var WellSlide = React.createClass({
-	_clicked: function() {
-		this.props.onClick(this.props.index);
-	},
+  _clicked: function () {
+    this.props.onSlideClicked(this.props.index)
+  },
 
-	render: function() {
-
-		return (
-			<div
-				className={
+  render: function () {
+    return (
+      <div
+        className={
 					"sp-well-slide " + (this.props.model.selected? "selected":'')
 				}
-				onClick={this._clicked}>
-			</div>
-		);
-	}
-});
+        onClick={this._clicked}>
+      </div>
+    )
+  }
+})
 
-module.exports = WellSlide;
+module.exports = WellSlide

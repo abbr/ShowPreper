@@ -1,5 +1,6 @@
 'use strict'
-exports.getDefaultDeck = function () {
+
+let Deck = function () {
   let slide = {
     components: [],
     active: true,
@@ -8,16 +9,28 @@ exports.getDefaultDeck = function () {
   }
   let slides = []
   slides.push(slide)
-  return {
-    deck: {
-      slides: slides,
-      nextId: 1,
-      slideWidth: 900,
-      slideHeight: 700
-    }
+  slide = {
+    components: [],
+    selected: false,
+    id: 1
   }
+
+  slides.push(slide)
+  this.slides = slides
+  this.nextId = 2
+  this.slideWidth = 900
+  this.slideHeight = 700
 }
 
-exports.getActiveSlideIdx = function (deck) {
-  deck.findIndex(e => e.active)
+Deck.prototype.getSelectedSlideIdx = function () {
+  return this.slides.findIndex((e, i, a) => e.selected === true)
+}
+
+Deck.prototype.selectSlide = function (i) {
+  this.slides[this.getSelectedSlideIdx()].selected = false
+  this.slides[i].selected = true
+}
+
+exports.getDefaultDeck = function () {
+  return {deck: new Deck()}
 }

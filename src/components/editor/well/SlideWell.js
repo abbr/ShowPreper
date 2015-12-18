@@ -1,28 +1,26 @@
-'use strict';
+'use strict'
 
-var React = require('react');
-var Slide = require('./wellSlide');
+var React = require('react')
+var WellSlide = require('./wellSlide')
 
 require('./slideWell.less')
 
 var SlideWell = React.createClass({
-	renderSlide: function(slide, index) {
-		return (
-			<Slide
-				model={slide}
-				key={slide.id}
-				index={index}
-				onClick={this.props.onSlideClicked}
-			/>
-		);
-	},
+  render: function () {
+    var slides = this.props.deck.slides.map((slide, index) => {
+      return (
+        <WellSlide
+          model={slide}
+          key={slide.id}
+          index={index}
+          onSlideClicked={this.props.onSlideClicked}
+        />
+      )
+    })
+    return <div className="slide-deck">
+      {slides}
+    </div>
+  }
+})
 
-	render: function() {
-		var slides = this.props.deck.slides.map(this.renderSlide);
-		return 	<div {...this.props} className="sp-slide-well">
-				{slides}
-			</div>
-	}
-});
-
-module.exports = SlideWell;
+module.exports = SlideWell
