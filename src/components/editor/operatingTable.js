@@ -3,6 +3,7 @@
 let React = require('react')
 let Geometry = require('math/geometry')
 let _ = require('lodash')
+import ComponentViewFactory  from 'components/widgets/componentViewFactory'
 
 require('components/editor/operatingTable.less')
 import ReactDOM from 'react-dom'
@@ -73,11 +74,21 @@ let OperatingTable = React.createClass({
   },
 
   render: function () {
+    let slide = this.props.deck.getSelectedSlide()
+    let componentsView = slide.components.map((component, index) => {
+      let ComponentView = ComponentViewFactory(component)
+      return (
+        <ComponentView {...component}
+          key = {index}
+        />
+      )
+    })
     return (
       <div
         className="sp-operating-table"
         onClick={this.onClick}>
         <div className="sp-ot-slide" style={this.state.otsStyle}>
+          {componentsView}
         </div>
       </div>
     )

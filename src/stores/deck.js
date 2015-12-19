@@ -5,8 +5,10 @@ let Deck = function () {
     components: [{
       "type": "TextBox",
       "text": "<font face=\"Hammersmith One\" color=\"#000000\">ddd</font>"
-    }
-    ],
+    }, {
+      "type": "TextBox",
+      "text": "<font face=\"Hammersmith One\" color=\"#000000\">yyy</font>"
+    }],
     active: true,
     selected: true,
     id: 0
@@ -28,6 +30,10 @@ let Deck = function () {
 
 Deck.prototype.getSelectedSlideIdx = function () {
   return this.slides.findIndex((e, i, a) => e.selected === true)
+}
+
+Deck.prototype.getSelectedSlide = function () {
+  return this.slides.find((e, i, a) => e.selected === true)
 }
 
 Deck.prototype.selectSlide = function (i) {
