@@ -1,8 +1,9 @@
 'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
-module.exports = React.createClass({
+let TextBox = React.createClass({
   render: function () {
-    return <div>Text</div>
+    return <div dangerouslySetInnerHTML={{__html: this.props.text}}></div>
   }
 })
+module.exports = TextBox

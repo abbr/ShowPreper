@@ -10,6 +10,7 @@ var SlideWell = React.createClass({
     var slides = this.props.deck.slides.map((slide, index) => {
       return (
         <WellSlide
+          deck={this.props.deck}
           model={slide}
           key={slide.id}
           index={index}

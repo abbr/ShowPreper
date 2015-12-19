@@ -2,7 +2,11 @@
 
 let Deck = function () {
   let slide = {
-    components: [],
+    components: [{
+      "type": "TextBox",
+      "text": "<font face=\"Hammersmith One\" color=\"#000000\">ddd</font>"
+    }
+    ],
     active: true,
     selected: true,
     id: 0
