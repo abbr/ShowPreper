@@ -4,6 +4,8 @@ let Deck = function () {
   let slide = {
     components: [{
       "type": "TextBox",
+      "x": 100,
+      "y":50,
       "text": "<font face=\"Hammersmith One\" color=\"#000000\">ddd</font>"
     }, {
       "type": "TextBox",

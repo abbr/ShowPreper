@@ -1,5 +1,5 @@
 'use strict'
-
+import './widgets.less'
 var constructors = {
   other: require('./textBox')
 }
