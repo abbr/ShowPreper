@@ -8,6 +8,8 @@ let TextBox = React.createClass({
     return (
       <div className="sp-widget"
            draggable={this.props.editable || false}
+           onDrag={this.onDrag}
+           onDragStart={this.onDragStart}
            style={{left: this.props.x, top: this.props.y}}
            dangerouslySetInnerHTML={{__html: this.props.text}}>
       </div>)

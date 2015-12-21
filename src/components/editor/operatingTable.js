@@ -38,6 +38,8 @@ let OperatingTable = React.createClass({
         <ComponentView {...component}
           onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           key={index}
+          idx ={index}
+          scale={this.state.scale}
           editable="true"
         />
       )

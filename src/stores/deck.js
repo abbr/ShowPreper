@@ -6,10 +6,10 @@ let Deck = function () {
       "type": "TextBox",
       "x": 100,
       "y":50,
-      "text": "<font face=\"Hammersmith One\" color=\"#000000\">ddd</font>"
+      "text": "<font face=\"Hammersmith One\" size=\"200pt\">ddd</font>"
     }, {
       "type": "TextBox",
-      "text": "<font face=\"Hammersmith One\" color=\"#000000\">yyy</font>"
+      "text": "<font face=\"Hammersmith One\" size=\"500pt\">yyy</font>"
     }],
     active: true,
     selected: true,
