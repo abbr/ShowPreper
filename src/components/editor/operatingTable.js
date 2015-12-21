@@ -8,6 +8,9 @@ require('components/editor/operatingTable.less')
 
 let OperatingTable = React.createClass({
   mixins: [AutoScale],
+  allowDrop: function (ev) {
+    ev.preventDefault()
+  },
   componentDidMount: function () {
     this._resized()
     window.addEventListener('resize', this._resized)
@@ -40,7 +43,8 @@ let OperatingTable = React.createClass({
     return (
       <div
         className="sp-operating-table"
-        onClick={this.onClick}>
+        onClick={this.onClick}
+        onDragOver={this.allowDrop}>
         <div className="sp-ot-slide" style={this.state.scaleStyle}>
           {componentsView}
         </div>
