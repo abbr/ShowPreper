@@ -32,6 +32,7 @@ module.exports = {
         marginLeft: leftOffset + 'px',
         width: slideWidth,
         height: slideHeight,
+        transformOrigin: '0 0'
       }
     ]
   },
