@@ -6,10 +6,10 @@ let Deck = function () {
       "type": "TextBox",
       "x": 100,
       "y":50,
-      "text": "<font face=\"Hammersmith One\" size=\"200pt\">ddd</font>"
+      "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">ddd</div>"
     }, {
       "type": "TextBox",
-      "text": "<font face=\"Hammersmith One\" size=\"500pt\">yyy</font>"
+      "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
     }],
     active: true,
     selected: true,
@@ -26,8 +26,8 @@ let Deck = function () {
   slides.push(slide)
   this.slides = slides
   this.nextId = 2
-  this.slideWidth = 900
-  this.slideHeight = 700
+  this.slideWidth = 640
+  this.slideHeight = 480
 }
 
 Deck.prototype.getSelectedSlideIdx = function () {
