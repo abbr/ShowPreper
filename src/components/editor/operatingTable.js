@@ -36,7 +36,9 @@ let OperatingTable = React.createClass({
       let ComponentView = ComponentViewFactory(component)
       return (
         <ComponentView {...component}
+          onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           key={index}
+          editable="true"
         />
       )
     })

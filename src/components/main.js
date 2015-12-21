@@ -7,7 +7,8 @@ let Main = React.createClass({
   render: function () {
     return <div className="showpreper-content">
       <SlideWell onSlideClicked={this.props.onSlideClicked} deck={this.props.deck}/>
-      <SlideEditor deck={this.props.deck}/>
+      <SlideEditor onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+                   deck={this.props.deck}/>
     </div>
   }
 })

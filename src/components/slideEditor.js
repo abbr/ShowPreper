@@ -5,7 +5,9 @@ import OperatingTable from 'components/editor/operatingTable'
 let SlideEditor = React.createClass({
   render: function () {
     return <div className="slide-editor">
-      <OperatingTable deck={this.props.deck}/>
+      <OperatingTable
+        onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+        deck={this.props.deck}/>
     </div>
   }
 })
