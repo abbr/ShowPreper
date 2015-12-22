@@ -15,6 +15,7 @@ let App = React.createClass({
   onSlideClicked: function (i) {
     let deck = this.state.deck
     deck.selectSlide(i)
+    deck.save()
     this.setState({
       deck: deck
     })
@@ -24,6 +25,7 @@ let App = React.createClass({
     let selectedSlide = deck.getSelectedSlide()
     let selectedWidget = selectedSlide.components[widgetIdx]
     _.merge(selectedWidget, newProps)
+    deck.save()
     this.setState({
       deck: deck
     })
