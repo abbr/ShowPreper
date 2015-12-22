@@ -38,4 +38,4 @@ module.exports = {
 	newPresentation: 'New Presentation',
 	name: 'Name',
 	createPresentation: 'Create Presentation'
-};
+}

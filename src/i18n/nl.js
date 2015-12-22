@@ -34,4 +34,4 @@ module.exports = {
 	},
 	background: 'Achtergrond',
 	surface: 'Werkblad'
-};
+}

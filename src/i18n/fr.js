@@ -34,4 +34,4 @@ module.exports = {
 	},
 	background: 'Fond de la diapo',
 	surface: 'Surface'
-};
+}

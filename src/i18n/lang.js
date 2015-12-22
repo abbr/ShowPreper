@@ -6,7 +6,7 @@ var langs = {
 	nl: require('./nl'),
 	ru: require('./ru'),
 	zh: require('./zh')
-};
+}
 
-var lang = window.navigator.language || window.navigator.userLanguage;
-module.exports = langs[lang.split('-')[0]] || langs.en;
+var lang = window.navigator.language || window.navigator.userLanguage
+module.exports = langs[lang.split('-')[0]] || langs.en
