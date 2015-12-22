@@ -20,20 +20,22 @@ exports.onMouseDown = function(ev){
     document.addEventListener('mouseup', this.onMouseUp)
   }
   draggable.dragging = true
+  document.onselectstart = function() { return false }
 
   let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this))
   draggable.oleft = parseInt(computedStyle.left, 10) || 0
   draggable.otop = parseInt(computedStyle.top, 10) || 0
   draggable.ox = ev.pageX
   draggable.oy = ev.pageY
-  ev.stopPropagation()
+  return ev._stopPropagation && ev._stopPropagation()
 }
 
 exports.onMouseUp = function (ev) {
   this._draggable.dragging = false
+  document.onselectstart = function() { return true }
   document.removeEventListener('mousemove', this.onMouseMove)
   document.removeEventListener('mouseup', this.onMouseUp)
-  ev.stopPropagation()
+  return ev._stopPropagation && ev._stopPropagation()
 }
 
 exports.onMouseMove = function(ev){
@@ -44,5 +46,14 @@ exports.onMouseMove = function(ev){
     x: draggable.oleft + Math.round((ev.pageX-draggable.ox)/scale),
     y: draggable.otop + Math.round((ev.pageY-draggable.oy)/scale)
   })
-  ev.stopPropagation()
+  ev = ev || window.event;
+  return ev._stopPropagation && ev._stopPropagation()
+}
+
+MouseEvent.prototype._stopPropagation = function(){
+  this.stopPropagation && this.stopPropagation()
+  this.preventDefault && this.preventDefault()
+  this.cancelBubble=true
+  this.returnValue=false
+  return false
 }
