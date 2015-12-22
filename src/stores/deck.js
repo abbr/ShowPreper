@@ -1,6 +1,8 @@
 'use strict'
 import _ from 'lodash'
 const _spDefaultFileNm = 'default.json'
+import 'babel-polyfill'
+
 let Deck = function () {
   var defaultDeckObj
   if (typeof(Storage) !== "undefined") {
