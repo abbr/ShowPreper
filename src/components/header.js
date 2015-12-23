@@ -13,7 +13,15 @@ let Header = React.createClass({
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="#">ShowPreper</a>
+          <div className="dropdown">
+            <a href="#" className="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button btn-default"
+               aria-haspopup="true"
+               aria-expanded="false">ShowPreper<span className="caret"></span></a>
+            <ul className="dropdown-menu">
+              <li><a href="#" onClick={this.props.onUndo}>Undo</a></li>
+              <li><a href="#" onClick={this.props.onRedo}>Redo</a></li>
+            </ul>
+          </div>
         </div>
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div className="nav navbar-btn btn-group navbar-left" role="group">
@@ -34,17 +42,6 @@ let Header = React.createClass({
           </div>
           <ul className="nav navbar-nav navbar-right">
             <li><a href="#">Link</a></li>
-            <li className="dropdown">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                 aria-expanded="false">Dropdown <span className="caret"></span></a>
-              <ul className="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" className="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li>
           </ul>
         </div>
         {/*<!-- /.navbar-collapse -->*/}

@@ -33,5 +33,10 @@ module.exports = {
 		clickBelow: 'Klicken sie zum Herunterladen auf das Symbol unten'
 	},
 	background: 'Hintergrund',
-	surface: 'Oberfläche'
+	surface: 'Oberfläche',
+  invalidFilename: 'Invalid Filename',
+  newPresentation: 'New Presentation',
+  name: 'Name',
+  createPresentation: 'Create Presentation',
+  moveComponents: 'Move Components',
 }

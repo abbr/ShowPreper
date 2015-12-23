@@ -33,5 +33,10 @@ module.exports = {
 		clickBelow: 'Для этого нажмите ниже.'
 	},
 	background: 'Фон',
-	surface: 'Холст'
+	surface: 'Холст',
+  invalidFilename: 'Invalid Filename',
+  newPresentation: 'New Presentation',
+  name: 'Name',
+  createPresentation: 'Create Presentation',
+  moveComponents: 'Move Components',
 }

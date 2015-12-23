@@ -20,11 +20,32 @@ let App = React.createClass({
       deck: deck
     })
   },
-  onSelectedWidgetUpdated: function (widgetIdx, newProps) {
+  onSelectedWidgetUpdated: function (widgetIdx, newProps, markUndoDesc) {
     let deck = this.state.deck
     let selectedSlide = deck.getSelectedSlide()
     let selectedWidget = selectedSlide.components[widgetIdx]
     _.merge(selectedWidget, newProps)
+    deck.save()
+    if (markUndoDesc) {
+      deck.markUndo(markUndoDesc)
+    }
+    this.setState({
+      deck: deck
+    })
+  },
+
+  onUndo: function(){
+    let deck = this.state.deck
+    deck.undo()
+    deck.save()
+    this.setState({
+      deck: deck
+    })
+  },
+
+  onRedo: function(){
+    let deck = this.state.deck
+    deck.redo()
     deck.save()
     this.setState({
       deck: deck
@@ -33,7 +54,10 @@ let App = React.createClass({
 
   render: function () {
     return <div className="showpreper-container">
-      <Header deck={this.state.deck}/>
+      <Header deck={this.state.deck}
+              onUndo={this.onUndo}
+              onRedo={this.onRedo}
+      />
       <Main deck={this.state.deck}
             onSlideClicked={this.onSlideClicked}
             onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}/>

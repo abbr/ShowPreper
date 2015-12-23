@@ -6,10 +6,11 @@ import 'babel-polyfill'
 let Deck = function () {
   var defaultDeckObj
   if (typeof(Storage) !== "undefined") {
-    try{
+    try {
       defaultDeckObj = JSON.parse(localStorage.getItem(_spDefaultFileNm))
     }
-    catch(ex){}
+    catch (ex) {
+    }
   }
   if (defaultDeckObj && typeof(defaultDeckObj) === 'object') {
     _.assign(this, defaultDeckObj)
@@ -45,6 +46,15 @@ let Deck = function () {
     this.slideHeight = 480
     this.save()
   }
+
+  Object.defineProperty(this, "undoStack", {
+    enumerable: false,
+    value: {
+      stack: [],
+      current: -1
+    }
+  })
+  this.markUndo('')
 }
 
 Deck.prototype.getSelectedSlideIdx = function () {
@@ -60,10 +70,25 @@ Deck.prototype.selectSlide = function (i) {
   this.slides[i].selected = true
 }
 
-Deck.prototype.save = function(){
+Deck.prototype.save = function () {
   if (typeof(Storage) !== "undefined") {
-    localStorage.setItem(_spDefaultFileNm,JSON.stringify(this))
+    localStorage.setItem(_spDefaultFileNm, JSON.stringify(this))
   }
+}
+
+Deck.prototype.markUndo = function (desc) {
+  this.undoStack.stack.splice(++this.undoStack.current, this.undoStack.stack.length, {
+    desc: desc,
+    deck: _.cloneDeep(this)
+  })
+}
+
+Deck.prototype.undo = function () {
+  (this.undoStack.current > 0) && _.assign(this, _.cloneDeep(this.undoStack.stack[--this.undoStack.current].deck))
+}
+
+Deck.prototype.redo = function () {
+  (this.undoStack.current < this.undoStack.stack.length) && _.assign(this, _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck))
 }
 
 exports.getDefaultDeck = function () {

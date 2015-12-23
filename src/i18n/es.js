@@ -33,5 +33,10 @@ module.exports = {
 		clickBelow: 'Haz Click abajo para descargar.'
 	},
 	background: 'Fondo',
-	surface: 'Superficie'
+	surface: 'Superficie',
+  invalidFilename: 'Invalid Filename',
+  newPresentation: 'New Presentation',
+  name: 'Name',
+  createPresentation: 'Create Presentation',
+  moveComponents: 'Move Components',
 }
