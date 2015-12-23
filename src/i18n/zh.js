@@ -38,9 +38,5 @@ module.exports = {
 	newPresentation: '新课件',
 	name: '名称',
 	createPresentation: '创建课件',
-  invalidFilename: 'Invalid Filename',
-  newPresentation: 'New Presentation',
-  name: 'Name',
-  createPresentation: 'Create Presentation',
   moveComponents: 'Move Components',
 }
