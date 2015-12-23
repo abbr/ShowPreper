@@ -88,7 +88,7 @@ Deck.prototype.undo = function () {
 }
 
 Deck.prototype.redo = function () {
-  (this.undoStack.current < this.undoStack.stack.length) && _.assign(this, _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck))
+  ((this.undoStack.current + 1) < this.undoStack.stack.length) && _.assign(this, _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck))
 }
 
 exports.getDefaultDeck = function () {

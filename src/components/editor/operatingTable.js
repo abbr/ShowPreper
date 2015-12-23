@@ -19,14 +19,6 @@ let OperatingTable = React.createClass({
   componentWillUnmount: function () {
     window.removeEventListener('resize', this._resized)
   },
-  onClick() {
-    let slide = this.props.deck.getSelectedSlide()
-    if (slide) {
-      slide.unselectComponents()
-      slide.stopEditingComponents()
-    }
-  },
-
   getInitialState: function () {
     return {}
   },
@@ -47,7 +39,6 @@ let OperatingTable = React.createClass({
     return (
       <div
         className="sp-operating-table"
-        onClick={this.onClick}
         onDragOver={this.allowDrop}>
         <div className="sp-ot-slide" style={this.state.scaleStyle}>
           {componentsView}
