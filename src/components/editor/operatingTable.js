@@ -22,7 +22,7 @@ let OperatingTable = React.createClass({
     this.setState({
       selectedWidgets: selectedWidgets
     })
-    ev.stopPropagation()
+    ev.stopPropagation && ev.stopPropagation()
   },
   componentDidMount: function () {
     this._resized()

@@ -29,11 +29,13 @@ let EditableComponent = React.createClass({
       <ComponentView {...this.props}
         className={cmpClass}
         onMouseDown={this.onMouseDown}>
-        <div className="positioningCtrls form-inline">
-          <span className="leftposition">→</span>
-          <input className="position" type="text" defaultValue="1"/>
-          <span className="bottomposition">↑</span>
-          <input className="position" type="text" defaultValue="2"/>
+        <div className="sp-edit-ctrls">
+          <div className="positioningCtrls">
+            <span className="leftposition">→</span>
+            <input className="position" type="text" defaultValue="1"/>
+            <span className="bottomposition">↓</span>
+            <input className="position" type="text" defaultValue="2"/>
+          </div>
         </div>
       </ComponentView>)
   }

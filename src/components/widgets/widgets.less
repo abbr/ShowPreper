@@ -3,6 +3,14 @@
   .selected{
     border: orange 2px dashed;
   }
+  .sp-edit-ctrls{
+    visibility: hidden;
+  }
+  &.selected{
+    .sp-edit-ctrls{
+      visibility: visible;
+    }
+  }
   input {
     width: 25px;
     height: 18px;

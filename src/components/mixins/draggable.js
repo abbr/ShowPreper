@@ -32,7 +32,7 @@ exports.onDraggableMouseDown = function (ev) {
   draggable.otop = parseInt(computedStyle.top, 10) || 0
   draggable.ox = ev.pageX
   draggable.oy = ev.pageY
-  return ev._stopPropagation && ev._stopPropagation()
+  ev.stopPropagation && ev.stopPropagation()
 }
 
 exports.onMouseUp = function (ev) {
@@ -47,7 +47,7 @@ exports.onMouseUp = function (ev) {
       y: draggable.otop + Math.round((ev.pageY - draggable.oy) / scale)
     }, lang.moveComponents
   )
-  return ev._stopPropagation && ev._stopPropagation()
+  ev.stopPropagation && ev.stopPropagation()
 }
 
 exports.onMouseMove = function (ev) {
@@ -59,13 +59,5 @@ exports.onMouseMove = function (ev) {
     x: draggable.oleft + Math.round((ev.pageX - draggable.ox) / scale),
     y: draggable.otop + Math.round((ev.pageY - draggable.oy) / scale)
   })
-  return ev._stopPropagation && ev._stopPropagation()
-}
-
-MouseEvent.prototype._stopPropagation = function () {
-  this.stopPropagation && this.stopPropagation()
-  this.preventDefault && this.preventDefault()
-  this.cancelBubble = true
-  this.returnValue = false
-  return false
+  ev.stopPropagation && ev.stopPropagation()
 }
