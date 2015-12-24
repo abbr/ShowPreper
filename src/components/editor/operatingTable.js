@@ -25,14 +25,13 @@ let OperatingTable = React.createClass({
   render: function () {
     let slide = this.props.deck.getSelectedSlide()
     let componentsView = slide.components.map((component, index) => {
-      let ComponentView = ComponentViewFactory(component)
+      let EditableComponentView = ComponentViewFactory(component, true)
       return (
-        <ComponentView {...component}
+        <EditableComponentView {...component}
           onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           key={index}
           idx ={index}
           scale={this.state.scale}
-          editable="true"
         />
       )
     })

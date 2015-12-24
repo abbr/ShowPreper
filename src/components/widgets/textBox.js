@@ -8,8 +8,9 @@ let TextBox = React.createClass({
     return (
       <div className="sp-widget"
            onMouseDown={this.onMouseDown}
-           style={{left: this.props.x, top: this.props.y}}
-           dangerouslySetInnerHTML={{__html: this.props.text}}>
+           style={{left: this.props.x, top: this.props.y}}>
+        <div dangerouslySetInnerHTML={{__html: this.props.text}}/>
+        {this.props.children}
       </div>)
   }
 })
