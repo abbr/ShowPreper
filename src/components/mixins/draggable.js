@@ -14,7 +14,6 @@ exports.componentWillUnmount = function () {
 exports.onMouseDown = function (ev) {
   // only left mouse button
   if (ev.button !== 0) return
-  if (!this.props.editable) return
   let draggable = this._draggable
   if (!draggable.dragging) {
     document.addEventListener('mousemove', this.onMouseMove)

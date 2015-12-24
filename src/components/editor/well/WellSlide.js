@@ -18,7 +18,7 @@ var WellSlide = React.createClass({
     let componentsView = this.props.model.components.map((component, index) => {
       let ComponentView = ComponentViewFactory(component)
       return (
-        <ComponentView {...component}
+        <ComponentView component={component}
           key = {index}
         />
       )
