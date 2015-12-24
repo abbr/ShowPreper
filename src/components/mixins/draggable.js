@@ -6,12 +6,18 @@ exports.componentWillMount = function () {
   this._draggable = {dragging: false}
 }
 
+exports.componentDidMount = function () {
+  if (this.mouseDownHdlrs) {
+    this.mouseDownHdlrs.push(this.onDraggableMouseDown)
+  }
+}
+
 exports.componentWillUnmount = function () {
   document.removeEventListener('mousemove', this.onMouseMove)
   document.removeEventListener('mouseup', this.onMouseUp)
 }
 
-exports.onMouseDown = function (ev) {
+exports.onDraggableMouseDown = function (ev) {
   // only left mouse button
   if (ev.button !== 0) return
   let draggable = this._draggable
@@ -20,9 +26,6 @@ exports.onMouseDown = function (ev) {
     document.addEventListener('mouseup', this.onMouseUp)
   }
   draggable.dragging = true
-  document.onselectstart = function () {
-    return false
-  }
 
   let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this))
   draggable.oleft = parseInt(computedStyle.left, 10) || 0
@@ -35,9 +38,7 @@ exports.onMouseDown = function (ev) {
 exports.onMouseUp = function (ev) {
   let draggable = this._draggable
   draggable.dragging = false
-  document.onselectstart = function () {
-    return true
-  }
+  document.body.style.MozUserSelect = ""
   document.removeEventListener('mousemove', this.onMouseMove)
   document.removeEventListener('mouseup', this.onMouseUp)
   let scale = this.props.scale || 1
@@ -52,6 +53,7 @@ exports.onMouseUp = function (ev) {
 exports.onMouseMove = function (ev) {
   let draggable = this._draggable
   if (!draggable.dragging) return
+  document.body.style.MozUserSelect = "none"
   let scale = this.props.scale || 1
   this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(this.props.idx, {
     x: draggable.oleft + Math.round((ev.pageX - draggable.ox) / scale),
