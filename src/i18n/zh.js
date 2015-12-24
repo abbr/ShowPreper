@@ -38,5 +38,5 @@ module.exports = {
 	newPresentation: '新课件',
 	name: '名称',
 	createPresentation: '创建课件',
-  moveComponents: 'Move Components',
+  moveComponents: 'move components',
 }

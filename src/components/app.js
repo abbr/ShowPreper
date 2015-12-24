@@ -9,8 +9,13 @@ import Header from 'components/header'
 import Main from 'components/main'
 import DeckStore from 'stores/deck'
 import _ from 'lodash'
+import key from 'keymaster'
 
 let App = React.createClass({
+  componentDidMount: function () {
+    key('ctrl+z', () => this.onUndo())
+    key('ctrl+y', () => this.onRedo())
+  },
   getInitialState: () => DeckStore.getDefaultDeck(),
   onSlideClicked: function (i) {
     let deck = this.state.deck
@@ -34,7 +39,7 @@ let App = React.createClass({
     })
   },
 
-  onUndo: function(){
+  onUndo: function () {
     let deck = this.state.deck
     deck.undo()
     deck.save()
@@ -43,7 +48,7 @@ let App = React.createClass({
     })
   },
 
-  onRedo: function(){
+  onRedo: function () {
     let deck = this.state.deck
     deck.redo()
     deck.save()
