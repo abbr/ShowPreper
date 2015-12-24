@@ -3,8 +3,8 @@ import React from 'react'
 import lang from 'i18n/lang'
 let Header = React.createClass({
   render: function () {
-    let undoTitle = 'Undo ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
-    let redoTitle = 'Redo ' + ((this.props.deck.undoStack.current+1 < this.props.deck.undoStack.stack.length)?this.props.deck.undoStack.stack[this.props.deck.undoStack.current+1].desc:'')
+    let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
+    let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current+1 < this.props.deck.undoStack.stack.length)?this.props.deck.undoStack.stack[this.props.deck.undoStack.current+1].desc:'')
     return <nav className="navbar navbar-default showpreper-header">
       <div className="container-fluid">
         <div className="navbar-header">
@@ -20,8 +20,8 @@ let Header = React.createClass({
                aria-haspopup="true"
                aria-expanded="false">ShowPreper<span className="caret"></span></a>
             <ul className="dropdown-menu">
-              <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>Undo <span className="badge">Ctrl-z</span></a></li>
-              <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>Redo<span className="badge">Ctrl-y</span></a></li>
+              <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>{lang.undo}<span className="badge">Ctrl-z</span></a></li>
+              <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>{lang.redo}<span className="badge">Ctrl-y</span></a></li>
             </ul>
           </div>
         </div>
