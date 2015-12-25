@@ -1,23 +1,14 @@
 'use strict'
 
 import React from 'react'
-import Draggable from 'components/mixins/draggable'
 import classNames from 'classnames'
 
-
 let EditableComponent = React.createClass({
-  mixins: [Draggable],
-  componentWillMount: function () {
-    this.mouseDownHdlrs = []
-  },
-  componentDidMount: function () {
-    this.mouseDownHdlrs.push(this.onSelectionMouseDown)
-  },
   onMouseDown: function (ev) {
-    this.mouseDownHdlrs.forEach(e=>e(ev))
-  },
-  onSelectionMouseDown: function (ev) {
     this.props.onMouseDown(ev, this.props.idx)
+  },
+  onMouseUp: function (ev) {
+    this.props.onMouseUp(ev, this.props.idx)
   },
   render: function () {
     const ComponentViewFactory = require('components/widgets/componentViewFactory')
@@ -28,7 +19,9 @@ let EditableComponent = React.createClass({
     return (
       <ComponentView {...this.props}
         className={cmpClass}
-        onMouseDown={this.onMouseDown}>
+        onMouseDown={this.onMouseDown}
+        onMouseUp={this.onMouseUp}
+      >
         <div className="sp-edit-ctrls">
           <div className="positioningCtrls">
             <span className="leftposition">→</span>

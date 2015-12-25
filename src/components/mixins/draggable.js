@@ -3,61 +3,61 @@ import ReactDOM from 'react-dom'
 import lang from 'i18n/lang'
 
 exports.componentWillMount = function () {
-  this._draggable = {dragging: false}
 }
 
 exports.componentDidMount = function () {
-  if (this.mouseDownHdlrs) {
-    this.mouseDownHdlrs.push(this.onDraggableMouseDown)
-  }
+  this.mouseDownHdlrs && this.mouseDownHdlrs.push(this.onDraggableMouseDown)
 }
 
 exports.componentWillUnmount = function () {
-  document.removeEventListener('mousemove', this.onMouseMove)
-  document.removeEventListener('mouseup', this.onMouseUp)
+  document.removeEventListener('mousemove', this.onDraggableMouseMove)
+  document.removeEventListener('mouseup', this.onDraggableMouseUp)
 }
 
 exports.onDraggableMouseDown = function (ev) {
   // only left mouse button
   if (ev.button !== 0) return
-  let draggable = this._draggable
-  if (!draggable.dragging) {
-    document.addEventListener('mousemove', this.onMouseMove)
-    document.addEventListener('mouseup', this.onMouseUp)
-  }
-  draggable.dragging = true
+  document.addEventListener('mousemove', this.onDraggableMouseMove)
+  document.addEventListener('mouseup', this.onDraggableMouseUp)
 
-  let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this))
-  draggable.oleft = parseInt(computedStyle.left, 10) || 0
-  draggable.otop = parseInt(computedStyle.top, 10) || 0
-  draggable.ox = ev.pageX
-  draggable.oy = ev.pageY
+  this._draggable = []
+  this.state.selectedWidgets.forEach(e => {
+    let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this.refs[e]))
+    let draggable = {}
+    draggable.oleft = parseInt(computedStyle.left, 10) || 0
+    draggable.otop = parseInt(computedStyle.top, 10) || 0
+    draggable.ox = ev.pageX
+    draggable.oy = ev.pageY
+    this._draggable[e] = draggable
+  })
+
   ev.stopPropagation && ev.stopPropagation()
 }
 
-exports.onMouseUp = function (ev) {
-  let draggable = this._draggable
-  draggable.dragging = false
+exports.onDraggableMouseUp = function (ev) {
   document.body.style.MozUserSelect = ""
-  document.removeEventListener('mousemove', this.onMouseMove)
-  document.removeEventListener('mouseup', this.onMouseUp)
+  document.removeEventListener('mousemove', this.onDraggableMouseMove)
+  document.removeEventListener('mouseup', this.onDraggableMouseUp)
   let scale = this.props.scale || 1
-  this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(this.props.idx, {
-      x: draggable.oleft + Math.round((ev.pageX - draggable.ox) / scale),
-      y: draggable.otop + Math.round((ev.pageY - draggable.oy) / scale)
-    }, lang.moveComponents
-  )
+
+  this.state.selectedWidgets.forEach(e=>{
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+        x: this._draggable[e].oleft + Math.round((ev.pageX - this._draggable[e].ox) / scale),
+        y: this._draggable[e].otop + Math.round((ev.pageY - this._draggable[e].oy) / scale)
+      }, lang.moveComponents
+    )
+  })
   ev.stopPropagation && ev.stopPropagation()
 }
 
-exports.onMouseMove = function (ev) {
-  let draggable = this._draggable
-  if (!draggable.dragging) return
+exports.onDraggableMouseMove = function (ev) {
   document.body.style.MozUserSelect = "none"
   let scale = this.props.scale || 1
-  this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(this.props.idx, {
-    x: draggable.oleft + Math.round((ev.pageX - draggable.ox) / scale),
-    y: draggable.otop + Math.round((ev.pageY - draggable.oy) / scale)
+  this.state.selectedWidgets.forEach(e=>{
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+      x: this._draggable[e].oleft + Math.round((ev.pageX - this._draggable[e].ox) / scale),
+      y: this._draggable[e].otop + Math.round((ev.pageY - this._draggable[e].oy) / scale)
+    })
   })
   ev.stopPropagation && ev.stopPropagation()
 }
