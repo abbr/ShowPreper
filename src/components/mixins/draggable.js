@@ -19,6 +19,9 @@ exports.onDraggableMouseDown = function (ev) {
   if (ev.button !== 0) return
   document.addEventListener('mousemove', this.onDraggableMouseMove)
   document.addEventListener('mouseup', this.onDraggableMouseUp)
+  document.body.style.WebkitUserSelect = "none"
+  document.body.style.MozUserSelect = "none"
+  document.body.style.MsUserSelect = "none"
 
   this._draggable = []
   this.state.selectedWidgets.forEach(e => {
@@ -35,12 +38,14 @@ exports.onDraggableMouseDown = function (ev) {
 }
 
 exports.onDraggableMouseUp = function (ev) {
+  document.body.style.WebkitUserSelect = ""
   document.body.style.MozUserSelect = ""
+  document.body.style.MsUserSelect = ""
   document.removeEventListener('mousemove', this.onDraggableMouseMove)
   document.removeEventListener('mouseup', this.onDraggableMouseUp)
   let scale = this.props.scale || 1
 
-  this.state.selectedWidgets.forEach(e=>{
+  this.state.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
         x: this._draggable[e].oleft + Math.round((ev.pageX - this._draggable[e].ox) / scale),
         y: this._draggable[e].otop + Math.round((ev.pageY - this._draggable[e].oy) / scale)
@@ -51,9 +56,8 @@ exports.onDraggableMouseUp = function (ev) {
 }
 
 exports.onDraggableMouseMove = function (ev) {
-  document.body.style.MozUserSelect = "none"
   let scale = this.props.scale || 1
-  this.state.selectedWidgets.forEach(e=>{
+  this.state.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
       x: this._draggable[e].oleft + Math.round((ev.pageX - this._draggable[e].ox) / scale),
       y: this._draggable[e].otop + Math.round((ev.pageY - this._draggable[e].oy) / scale)

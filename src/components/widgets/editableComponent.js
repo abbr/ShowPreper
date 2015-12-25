@@ -10,7 +10,30 @@ let EditableComponent = React.createClass({
   onMouseUp: function (ev) {
     this.props.onMouseUp(ev, this.props.idx)
   },
+  onChangeX: function (ev) {
+    if (ev.key){
+      if(ev.key === 'Enter') {
+        ev.preventDefault()
+        $(ev.target).trigger("blur")
+      }
+      return
+    }
+    let newV = parseInt(ev.target.innerText)
+    !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, {x: newV})
+  },
+  onChangeY: function (ev) {
+    if (ev.key){
+      if(ev.key === 'Enter') {
+        ev.preventDefault()
+        $(ev.target).trigger("blur")
+      }
+      return
+    }
+    let newV = parseInt(ev.target.innerText)
+    !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, {y: newV})
+  },
   render: function () {
+    this.x = this.props.component.x
     const ComponentViewFactory = require('components/widgets/componentViewFactory')
     let ComponentView = ComponentViewFactory(this.props, false)
     let cmpClass = classNames({
@@ -25,9 +48,17 @@ let EditableComponent = React.createClass({
         <div className="sp-edit-ctrls">
           <div className="positioningCtrls">
             <span className="leftposition">→</span>
-            <input className="position" type="text" defaultValue="1"/>
+            <span contentEditable="true"
+                  onKeyDown={this.onChangeX}
+                  onBlur = {this.onChangeX}
+                  tabIndex = "-1"
+                  dangerouslySetInnerHTML={{__html: this.props.component.x}}/>
             <span className="bottomposition">↓</span>
-            <input className="position" type="text" defaultValue="2"/>
+            <span contentEditable="true"
+                  onKeyDown={this.onChangeY}
+                  onBlur = {this.onChangeY}
+                  tabIndex = "-1"
+                  dangerouslySetInnerHTML={{__html: this.props.component.y}}/>
           </div>
         </div>
       </ComponentView>)
