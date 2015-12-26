@@ -18,7 +18,7 @@ let EditableComponent = React.createClass({
       }
       return
     }
-    let newV = parseInt(ev.target.innerText)
+    let newV = parseInt(ev.target.innerHTML)
     !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, {x: newV})
   },
   onChangeY: function (ev) {
@@ -29,7 +29,7 @@ let EditableComponent = React.createClass({
       }
       return
     }
-    let newV = parseInt(ev.target.innerText)
+    let newV = parseInt(ev.target.innerHTML)
     !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, {y: newV})
   },
   render: function () {
