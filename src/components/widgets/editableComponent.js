@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classNames from 'classnames'
+import EditableHtmlElement from './editableHtmlElement'
 
 let EditableComponent = React.createClass({
   onMouseDown: function (ev) {
@@ -9,28 +10,6 @@ let EditableComponent = React.createClass({
   },
   onMouseUp: function (ev) {
     this.props.onMouseUp(ev, this.props.idx)
-  },
-  onChangeX: function (ev) {
-    if (ev.key){
-      if(ev.key === 'Enter') {
-        ev.preventDefault()
-        $(ev.target).trigger("blur")
-      }
-      return
-    }
-    let newV = parseInt(ev.target.innerHTML)
-    !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, {x: newV})
-  },
-  onChangeY: function (ev) {
-    if (ev.key){
-      if(ev.key === 'Enter') {
-        ev.preventDefault()
-        $(ev.target).trigger("blur")
-      }
-      return
-    }
-    let newV = parseInt(ev.target.innerHTML)
-    !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, {y: newV})
   },
   render: function () {
     this.x = this.props.component.x
@@ -48,17 +27,19 @@ let EditableComponent = React.createClass({
         <div className="sp-edit-ctrls">
           <div className="positioningCtrls">
             <span className="leftposition">→</span>
-            <span contentEditable="true"
-                  onKeyDown={this.onChangeX}
-                  onBlur = {this.onChangeX}
-                  tabIndex = "-1"
-                  dangerouslySetInnerHTML={{__html: this.props.component.x}}/>
+            <EditableHtmlElement
+              eleNm="span"
+              idx={this.props.idx}
+              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+              componentPropName="x"
+              dangerouslySetInnerHTML={{__html: this.props.component.x}}/>
             <span className="bottomposition">↓</span>
-            <span contentEditable="true"
-                  onKeyDown={this.onChangeY}
-                  onBlur = {this.onChangeY}
-                  tabIndex = "-1"
-                  dangerouslySetInnerHTML={{__html: this.props.component.y}}/>
+            <EditableHtmlElement
+              eleNm="span"
+              idx={this.props.idx}
+              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+              componentPropName="y"
+              dangerouslySetInnerHTML={{__html: this.props.component.y}}/>
           </div>
         </div>
       </ComponentView>)
