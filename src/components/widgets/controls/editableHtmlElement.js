@@ -1,5 +1,7 @@
 'use strict'
 import React from 'react'
+import lang from 'i18n/lang'
+
 let EditableHtmlElement = React.createClass({
   getInitialState: function () {
     return {
@@ -26,7 +28,7 @@ let EditableHtmlElement = React.createClass({
     let newV = parseInt(ev.target.innerHTML)
     let newPropObj = {}
     newPropObj[this.props.componentPropName] = newV
-    !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, newPropObj)
+    !isNaN(newV) && this.props.onSelectedWidgetUpdated(this.props.idx, newPropObj, lang.moveComponents)
   },
   render: function () {
     var { eleNm, ...otherProps } = this.props

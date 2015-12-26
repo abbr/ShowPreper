@@ -2,7 +2,7 @@
 
 import React from 'react'
 import classNames from 'classnames'
-import EditableHtmlElement from './editableHtmlElement'
+import PositionControl from './controls/positionControl'
 
 let EditableComponent = React.createClass({
   onMouseDown: function (ev) {
@@ -25,22 +25,10 @@ let EditableComponent = React.createClass({
         onMouseUp={this.onMouseUp}
       >
         <div className="sp-edit-ctrls">
-          <div className="positioningCtrls">
-            <span className="leftposition">→</span>
-            <EditableHtmlElement
-              eleNm="span"
-              idx={this.props.idx}
-              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
-              componentPropName="x"
-              dangerouslySetInnerHTML={{__html: this.props.component.x}}/>
-            <span className="bottomposition">↓</span>
-            <EditableHtmlElement
-              eleNm="span"
-              idx={this.props.idx}
-              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
-              componentPropName="y"
-              dangerouslySetInnerHTML={{__html: this.props.component.y}}/>
-          </div>
+          <PositionControl
+            idx={this.props.idx}
+            component={this.props.component}
+          />
         </div>
       </ComponentView>)
   }
