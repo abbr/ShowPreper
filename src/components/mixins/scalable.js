@@ -72,5 +72,5 @@ exports.computeDeltaScale = function (ev) {
   let widgetOriginalScale = this._scalable.scales[this._scalable.selectedIdx]
   let deltaScaleX = (widgetOriginalScale.oWidth + (ev.pageX - widgetOriginalScale.ox) / scale) / widgetOriginalScale.oWidth
   let deltaScaleY = (widgetOriginalScale.oHeight + (ev.pageY - widgetOriginalScale.oy) / scale) / widgetOriginalScale.oHeight
-  return Math.max(deltaScaleX, deltaScaleY)
+  return Math.max(deltaScaleX, deltaScaleY, 0)
 }
