@@ -24,6 +24,10 @@ let Deck = function () {
         "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">ddd</div>"
       }, {
         "type": "TextBox",
+        "scale": {
+          "x": 2,
+          "y": 2
+        },
         "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
       }],
       active: true,

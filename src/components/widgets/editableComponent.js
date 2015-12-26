@@ -2,7 +2,8 @@
 
 import React from 'react'
 import classNames from 'classnames'
-import PositionControl from './controls/positionControl'
+import PositionControl from './controls/position'
+import ScaleControl from './controls/scale'
 
 let EditableComponent = React.createClass({
   onMouseDown: function (ev) {
@@ -26,6 +27,10 @@ let EditableComponent = React.createClass({
       >
         <div className="sp-edit-ctrls">
           <PositionControl
+            idx={this.props.idx}
+            component={this.props.component}
+          />
+          <ScaleControl
             idx={this.props.idx}
             component={this.props.component}
           />
