@@ -27,7 +27,6 @@ exports.onScaleMouseDown = function (ev, idx) {
     scalable.oHeight = parseInt(computedStyle.height) || 1
     scalable.osx = (slide.components[e].scale && slide.components[e].scale.x) || 1
     scalable.osy = (slide.components[e].scale && slide.components[e].scale.y) || 1
-    console.log('(osx,osy)=' + scalable.osx + ',' + scalable.osy)
     scalable.ox = ev.pageX
     scalable.oy = ev.pageY
     this._scalable.scales[e] = scalable
@@ -43,7 +42,6 @@ exports.onScaleMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onScaleMouseUp)
   let deltaScale = this.computeDeltaScale(ev)
   this.state.selectedWidgets.forEach(e=> {
-    console.log("(sx,sy)=" + (this._scalable.scales[e].osx * deltaScale) + ',' + (this._scalable.scales[e].osy * deltaScale))
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
         scale: {
           x: this._scalable.scales[e].osx * deltaScale,
@@ -59,7 +57,6 @@ exports.onScaleMouseUp = function (ev) {
 exports.onScaleMouseMove = function (ev) {
   let deltaScale = this.computeDeltaScale(ev)
   this.state.selectedWidgets.forEach(e=> {
-    console.log("(sx,sy)=" + (this._scalable.scales[e].osx * deltaScale) + ',' + (this._scalable.scales[e].osy * deltaScale))
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
       scale: {
         x: this._scalable.scales[e].osx * deltaScale,
@@ -73,9 +70,7 @@ exports.onScaleMouseMove = function (ev) {
 exports.computeDeltaScale = function (ev) {
   let scale = this.state.scale || 1
   let widgetOriginalScale = this._scalable.scales[this._scalable.selectedIdx]
-  console.log('(dx,dy)=' + (ev.pageX - widgetOriginalScale.ox) + ',' + (ev.pageY - widgetOriginalScale.oy))
   let deltaScaleX = (widgetOriginalScale.oWidth + (ev.pageX - widgetOriginalScale.ox) / scale) / widgetOriginalScale.oWidth
   let deltaScaleY = (widgetOriginalScale.oHeight + (ev.pageY - widgetOriginalScale.oy) / scale) / widgetOriginalScale.oHeight
-  console.log('(dsx,dsy)=' + deltaScaleX + ',' + deltaScaleY)
   return Math.max(deltaScaleX, deltaScaleY)
 }
