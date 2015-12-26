@@ -39,4 +39,5 @@ module.exports = {
   name: 'Name',
   createPresentation: 'Create Presentation',
   moveComponents: 'move components',
+  scaleComponents: 'scale components',
 }

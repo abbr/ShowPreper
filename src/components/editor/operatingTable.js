@@ -5,10 +5,11 @@ let _ = require('lodash')
 import ComponentViewFactory  from 'components/widgets/componentViewFactory'
 import AutoScale from 'components/mixins/autoScale'
 import Draggable from 'components/mixins/draggable'
+import Scalable from 'components/mixins/scalable'
 require('components/editor/operatingTable.less')
 
 let OperatingTable = React.createClass({
-  mixins: [AutoScale, Draggable],
+  mixins: [AutoScale, Draggable, Scalable],
   componentWillMount: function () {
     this.mouseDownHdlrs = []
     this.mouseUpHdlrs = []
@@ -66,6 +67,7 @@ let OperatingTable = React.createClass({
           selected={this.state.selectedWidgets.indexOf(index) >= 0}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
+          onScaleMouseDown ={this.onScaleMouseDown}
           ref={index}
         />
       )

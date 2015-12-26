@@ -33,6 +33,7 @@ let EditableComponent = React.createClass({
           <ScaleControl
             idx={this.props.idx}
             component={this.props.component}
+            onScaleMouseDown={this.props.onScaleMouseDown}
           />
         </div>
       </ComponentView>)

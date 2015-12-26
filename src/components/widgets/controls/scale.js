@@ -2,8 +2,13 @@
 import React from 'react'
 
 let PositionControl = React.createClass({
-  render: function(){
-    return  <span className="scale">↔</span>
+  onMouseDown: function (ev) {
+    this.props.onScaleMouseDown(ev, this.props.idx)
+  },
+  render: function () {
+    return <span
+      onMouseDown={this.onMouseDown}
+      className="scale">↔</span>
   }
 })
 module.exports = PositionControl
