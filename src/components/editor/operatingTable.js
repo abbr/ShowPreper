@@ -11,6 +11,9 @@ require('components/editor/operatingTable.less')
 
 let OperatingTable = React.createClass({
   mixins: [AutoScale, Selectable, Draggable, Scalable],
+  getInitialState: function () {
+    return {}
+  },
   componentWillMount: function () {
     this.mouseDownHdlrs = []
     this.mouseUpHdlrs = []
@@ -30,6 +33,10 @@ let OperatingTable = React.createClass({
   },
   render: function () {
     let slide = this.props.deck.getSelectedSlide()
+    let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
+      if (e.selected) pv.push(i)
+      return pv
+    }, [])
     this.componentsView = slide.components.map((component, index) => {
       let EditableComponentView = ComponentViewFactory(component, true)
       return (
@@ -39,7 +46,7 @@ let OperatingTable = React.createClass({
           key={index}
           idx={index}
           scale={this.state.scale}
-          selected={this.state.selectedWidgets.indexOf(index) >= 0}
+          selected={selectedWidgets.indexOf(index) >= 0}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
           onScaleMouseDown ={this.onScaleMouseDown}

@@ -24,7 +24,7 @@ exports.onDraggableMouseDown = function (ev) {
   document.body.style.MsUserSelect = "none"
 
   this._draggable = []
-  this.state.selectedWidgets.forEach(e => {
+  this.selectedWidgets.forEach(e => {
     let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this.refs[e]))
     let draggable = {}
     draggable.oleft = parseInt(computedStyle.left, 10) || 0
@@ -45,7 +45,7 @@ exports.onDraggableMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onDraggableMouseUp)
   let scale = this.props.scale || 1
 
-  this.state.selectedWidgets.forEach(e=> {
+  this.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
         x: this._draggable[e].oleft + Math.round((ev.pageX - this._draggable[e].ox) / scale),
         y: this._draggable[e].otop + Math.round((ev.pageY - this._draggable[e].oy) / scale)
@@ -57,7 +57,7 @@ exports.onDraggableMouseUp = function (ev) {
 
 exports.onDraggableMouseMove = function (ev) {
   let scale = this.props.scale || 1
-  this.state.selectedWidgets.forEach(e=> {
+  this.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
       x: this._draggable[e].oleft + Math.round((ev.pageX - this._draggable[e].ox) / scale),
       y: this._draggable[e].otop + Math.round((ev.pageY - this._draggable[e].oy) / scale)

@@ -2,10 +2,6 @@
 import ReactDOM from 'react-dom'
 import lang from 'i18n/lang'
 
-exports.getInitialState = function () {
-  return {selectedWidgets: []}
-}
-
 exports.componentDidMount = function () {
   this.mouseDownHdlrs.unshift(this.onSelectionMouseDown)
 }
@@ -14,7 +10,11 @@ exports.componentWillUnmount = function () {
 }
 exports.onSelectionMouseDown = function (ev, i) {
   ev.stopPropagation && ev.stopPropagation()
-  let selectedWidgets = _.cloneDeep(this.state.selectedWidgets)
+  let slide = this.props.deck.getSelectedSlide()
+  let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
+    if (e.selected) pv.push(i)
+    return pv
+  }, [])
   if (!ev.shiftKey) {
     if (selectedWidgets.length > 1 && typeof(i) === 'number') {
       return false
@@ -24,9 +24,15 @@ exports.onSelectionMouseDown = function (ev, i) {
   if (typeof(i) === 'number') {
     selectedWidgets.unshift(i)
   }
-  // call this.state.selectedWidgets redundantly to avoid event racing
-  this.state.selectedWidgets = selectedWidgets
-  this.setState({
-    selectedWidgets: selectedWidgets
+  // call this.selectedWidgets redundantly to avoid event racing
+  this.selectedWidgets = selectedWidgets
+  slide.components.forEach((e, i, a) => {
+    if ((e.selected && selectedWidgets.indexOf(i) < 0) ||
+      (selectedWidgets.indexOf(i) >= 0 && e.selected !== true)) {
+      this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(i, {
+          selected: selectedWidgets.indexOf(i) >= 0
+        }
+      )
+    }
   })
 }
