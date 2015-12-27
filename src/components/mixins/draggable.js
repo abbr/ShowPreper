@@ -24,6 +24,12 @@ exports.onDraggableMouseDown = function (ev) {
   document.body.style.MsUserSelect = "none"
 
   this._draggable = []
+  if(!this.selectedWidgets) {
+    this.selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
+      if (e.selected) pv.push(i)
+      return pv
+    }, [])
+  }
   this.selectedWidgets.forEach(e => {
     let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this.refs[e]))
     let draggable = {}

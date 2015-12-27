@@ -20,6 +20,12 @@ exports.onScaleMouseDown = function (ev, idx) {
   this._scalable.scales = []
   this._scalable.selectedIdx = idx
   let slide = this.props.deck.getSelectedSlide()
+  if(!this.selectedWidgets) {
+    this.selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
+      if (e.selected) pv.push(i)
+      return pv
+    }, [])
+  }
   this.selectedWidgets.forEach(e => {
     let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this.refs[e]))
     let scalable = {}

@@ -11,7 +11,7 @@ import Rotatable from 'components/mixins/rotatable'
 require('components/editor/operatingTable.less')
 
 let OperatingTable = React.createClass({
-  mixins: [AutoScale, Selectable, Draggable, Scalable,Rotatable],
+  mixins: [AutoScale, Selectable, Draggable, Scalable, Rotatable],
   getInitialState: function () {
     return {}
   },
@@ -50,8 +50,8 @@ let OperatingTable = React.createClass({
           selected={selectedWidgets.indexOf(index) >= 0}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
-          onScaleMouseDown ={this.onScaleMouseDown}
-          onRotateMouseDown ={this.onRotateMouseDown}
+          onScaleMouseDown={this.onScaleMouseDown}
+          onRotateMouseDown={this.onRotateMouseDown}
           ref={index}
         />
       )
