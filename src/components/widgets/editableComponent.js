@@ -29,6 +29,7 @@ let EditableComponent = React.createClass({
           <PositionControl
             idx={this.props.idx}
             component={this.props.component}
+            onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           />
           <ScaleControl
             idx={this.props.idx}
