@@ -50,7 +50,7 @@
     "karma-phantomjs-shim": "^1.1.1",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
-    "keymaster": "^1.6.2",
+    "key-emit": "0.0.4",
     "less": "^2.5.3",
     "less-loader": "^2.0.0",
     "minimist": "^1.2.0",

@@ -9,12 +9,12 @@ import Header from 'components/header'
 import Main from 'components/main'
 import DeckStore from 'stores/deck'
 import _ from 'lodash'
-import key from 'keymaster'
-
+let key = require('key-emit')(document)
 let App = React.createClass({
   componentDidMount: function () {
-    key('ctrl+z', () => this.onUndo())
-    key('ctrl+y', () => this.onRedo())
+    key.down.on('ctrl Z', this.onUndo)
+    key.down.on('ctrl Y', this.onRedo)
+    key.down.on('left', ()=> console.log('left'))
   },
   getInitialState: () => DeckStore.getDefaultDeck(),
   onSlideClicked: function (i) {
