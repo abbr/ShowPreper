@@ -11,8 +11,9 @@ let TextBox = React.createClass({
     let scaleX = (this.props.component.scale && this.props.component.scale.x) || 1
     let scaleY = (this.props.component.scale && this.props.component.scale.y) || 1
     widgetStyle.transform = "scale(" + scaleX + "," + scaleY + ")"
-    widgetStyle.transformOrigin = '0 0'
-
+    if (this.props.component.rotate) {
+      widgetStyle.transform += " rotate(" + this.props.component.rotate + "rad)"
+    }
     return (
       <div
         {...this.props}

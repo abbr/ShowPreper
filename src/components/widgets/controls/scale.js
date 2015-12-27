@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 
-let PositionControl = React.createClass({
+let ScaleControl = React.createClass({
   onMouseDown: function (ev) {
     this.props.onScaleMouseDown(ev, this.props.idx)
   },
@@ -11,5 +11,5 @@ let PositionControl = React.createClass({
       className="scale">↔</span>
   }
 })
-module.exports = PositionControl
+module.exports = ScaleControl
 

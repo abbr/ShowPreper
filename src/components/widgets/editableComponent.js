@@ -4,6 +4,7 @@ import React from 'react'
 import classNames from 'classnames'
 import PositionControl from './controls/position'
 import ScaleControl from './controls/scale'
+import RotateControl from './controls/rotate'
 
 let EditableComponent = React.createClass({
   onMouseDown: function (ev) {
@@ -35,6 +36,11 @@ let EditableComponent = React.createClass({
             idx={this.props.idx}
             component={this.props.component}
             onScaleMouseDown={this.props.onScaleMouseDown}
+          />
+          <RotateControl
+            idx={this.props.idx}
+            component={this.props.component}
+            onRotateMouseDown={this.props.onRotateMouseDown}
           />
         </div>
       </ComponentView>)

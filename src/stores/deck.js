@@ -28,6 +28,7 @@ let Deck = function () {
           "x": 2,
           "y": 2
         },
+        "rotate": -0.785, // 45°counterclock-wise
         "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
       }],
       active: true,

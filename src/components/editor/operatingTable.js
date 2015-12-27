@@ -7,10 +7,11 @@ import AutoScale from 'components/mixins/autoScale'
 import Draggable from 'components/mixins/draggable'
 import Scalable from 'components/mixins/scalable'
 import Selectable from 'components/mixins/selectable'
+import Rotatable from 'components/mixins/rotatable'
 require('components/editor/operatingTable.less')
 
 let OperatingTable = React.createClass({
-  mixins: [AutoScale, Selectable, Draggable, Scalable],
+  mixins: [AutoScale, Selectable, Draggable, Scalable,Rotatable],
   getInitialState: function () {
     return {}
   },
@@ -50,6 +51,7 @@ let OperatingTable = React.createClass({
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
           onScaleMouseDown ={this.onScaleMouseDown}
+          onRotateMouseDown ={this.onRotateMouseDown}
           ref={index}
         />
       )
