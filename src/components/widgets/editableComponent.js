@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import PositionControl from './controls/position'
 import ScaleControl from './controls/scale'
 import RotateControl from './controls/rotate'
+import DisplayableComponent from './displayableComponent'
 
 let EditableComponent = React.createClass({
   onMouseDown: function (ev) {
@@ -14,14 +15,11 @@ let EditableComponent = React.createClass({
     this.props.onMouseUp(ev, this.props.idx)
   },
   render: function () {
-    this.x = this.props.component.x
-    const ComponentViewFactory = require('components/widgets/componentViewFactory')
-    let ComponentView = ComponentViewFactory(this.props, false)
     let cmpClass = classNames({
       'selected': this.props.selected
     });
     return (
-      <ComponentView {...this.props}
+      <DisplayableComponent {...this.props}
         className={cmpClass}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
@@ -43,7 +41,7 @@ let EditableComponent = React.createClass({
             onRotateMouseDown={this.props.onRotateMouseDown}
           />
         </div>
-      </ComponentView>)
+      </DisplayableComponent>)
   }
 })
 module.exports = EditableComponent
