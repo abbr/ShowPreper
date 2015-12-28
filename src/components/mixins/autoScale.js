@@ -1,6 +1,5 @@
 'use strict'
 import ReactDOM from 'react-dom'
-let Geometry = require('math/geometry')
 module.exports = {
   _computeOtsSquare: function () {
     let deck = this.props.deck
@@ -15,7 +14,7 @@ module.exports = {
     let width = parseInt(rootElSize.width) - parseInt(rootElSize.paddingLeft) - parseInt(rootElSize.paddingRight)
     let height = parseInt(rootElSize.height) - parseInt(rootElSize.paddingTop) - parseInt(rootElSize.paddingBottom)
 
-    let scale = Geometry.getFitSquareScaleFactor(
+    let scale = getFitSquareScaleFactor(
       slideWidth,
       slideHeight,
       width,
@@ -44,4 +43,18 @@ module.exports = {
       scale: style[0]
     })
   }
+}
+
+let getFitSquareScaleFactor = function (desiredWidth, desiredHeight, width, height) {
+  var xScale = width / desiredWidth
+  var yScale = height / desiredHeight
+
+  var newHeight = desiredHeight * xScale
+  if (newHeight > height) {
+    var scale = yScale
+  } else {
+    var scale = xScale
+  }
+
+  return scale
 }
