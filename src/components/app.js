@@ -4,7 +4,6 @@ import 'expose?$!expose?jQuery!jquery'
 import 'bootstrap-webpack'
 import 'styles/App.less'
 import lang from 'i18n/lang'
-
 import React from 'react'
 import Header from './header'
 import Slides from './slides'
@@ -25,7 +24,16 @@ let App = React.createClass({
     key.up.on('up', ()=>this.panBy("y", 0, lang.moveComponents))
     key.up.on('down', ()=>this.panBy("y", 0, lang.moveComponents))
   },
-  getInitialState: () => DeckStore.getDefaultDeck(),
+  getInitialState: () => ({
+    deck: DeckStore.getDefaultDeck(),
+    view: 'slides'
+  }),
+  changeView: function (newView) {
+    this.setState({
+        view: newView
+      }
+    )
+  },
   onSlideClicked: function (i) {
     let deck = this.state.deck
     deck.selectSlide(i)
@@ -81,14 +89,24 @@ let App = React.createClass({
   },
 
   render: function () {
+    var Main
+    switch (this.state.view) {
+      case 'slides':
+        Main = <Slides deck={this.state.deck}
+                       onSlideClicked={this.onSlideClicked}
+                       onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}/>
+        break;
+      case 'overview':
+        Main = <Overview deck={this.state.deck}/>
+    }
     return <div className="showpreper-container">
       <Header deck={this.state.deck}
               onUndo={this.onUndo}
               onRedo={this.onRedo}
+              changeView={this.changeView}
+              currentView={this.state.view}
       />
-      <Slides deck={this.state.deck}
-            onSlideClicked={this.onSlideClicked}
-            onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}/>
+      {Main}
     </div>
   }
 })

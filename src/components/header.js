@@ -4,7 +4,7 @@ import lang from 'i18n/lang'
 let Header = React.createClass({
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
-    let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current+1 < this.props.deck.undoStack.stack.length)?this.props.deck.undoStack.stack[this.props.deck.undoStack.current+1].desc:'')
+    let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current + 1 < this.props.deck.undoStack.stack.length) ? this.props.deck.undoStack.stack[this.props.deck.undoStack.current + 1].desc : '')
     return <nav className="navbar navbar-default showpreper-header">
       <div className="container-fluid">
         <div className="navbar-header">
@@ -20,8 +20,10 @@ let Header = React.createClass({
                aria-haspopup="true"
                aria-expanded="false">ShowPreper<span className="caret"></span></a>
             <ul className="dropdown-menu">
-              <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>{lang.undo}<span className="badge">Ctrl-z</span></a></li>
-              <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>{lang.redo}<span className="badge">Ctrl-y</span></a></li>
+              <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>{lang.undo}<span
+                className="badge">Ctrl-z</span></a></li>
+              <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>{lang.redo}<span
+                className="badge">Ctrl-y</span></a></li>
             </ul>
           </div>
         </div>
@@ -42,8 +44,29 @@ let Header = React.createClass({
               </button>
             )}
           </div>
-          <ul className="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
+          <ul className="nav navbar-btn navbar-right">
+            <li style={this.props.currentView!=='slides'?{}: {display: 'none'}}>
+              <button type="button"
+                      className="btn btn-default"
+                      onClick={()=>this.props.changeView('slides')}
+              >
+                <span className={'glyphicon glyphicon-th-list'}/>
+                <div className="btn-label">
+                  {lang.slides}
+                </div>
+              </button>
+            </li>
+            <li style={this.props.currentView!=='overview' ?{}: {display: 'none'}}>
+              <button type="button"
+                      className="btn btn-default"
+                      onClick={()=>this.props.changeView('overview')}
+              >
+                <span className={'glyphicon glyphicon-th'}/>
+                <div className="btn-label">
+                  {lang.overview}
+                </div>
+              </button>
+            </li>
           </ul>
         </div>
         {/*<!-- /.navbar-collapse -->*/}

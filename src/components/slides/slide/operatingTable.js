@@ -38,7 +38,7 @@ let OperatingTable = React.createClass({
       if (e.selected) pv.push(i)
       return pv
     }, [])
-    this.componentsView = slide.components.map((component, index) => {
+    let componentsView = slide.components.map((component, index) => {
       return (
         <EditableComponent
           component={component}
@@ -60,7 +60,7 @@ let OperatingTable = React.createClass({
            onMouseDown={this.onSelectionMouseDown}
       >
         <div className="sp-ot-slide" style={this.state.scaleStyle}>
-          {this.componentsView}
+          {componentsView}
         </div>
       </div>
     )

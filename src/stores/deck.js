@@ -105,5 +105,5 @@ Deck.prototype.redo = function () {
 }
 
 exports.getDefaultDeck = function () {
-  return {deck: new Deck()}
+  return new Deck()
 }
