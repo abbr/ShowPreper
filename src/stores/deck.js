@@ -31,9 +31,12 @@ let Deck = function () {
         "rotate": -0.785, // 45°counterclock-wise
         "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
       }],
-      active: true,
-      selected: true,
-      id: 0
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0.76,
+      "rotateY": 0.74,
+      "rotateZ": 0,
+      "selected": true
     }
     let slides = []
     slides.push(slide)
@@ -46,14 +49,12 @@ let Deck = function () {
           "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">bbb</div>"
         }
       ],
-      selected: false,
-      id: 1
+      "selected": false
     }
 
     slides.push(slide)
 
     this.slides = slides
-    this.nextId = 2
     this.slideWidth = 640
     this.slideHeight = 480
     this.save()

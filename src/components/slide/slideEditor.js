@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
-import OperatingTable from 'components/editor/operatingTable'
+import OperatingTable from './operatingTable'
 let SlideEditor = React.createClass({
   render: function () {
     return <div className="slide-editor">
