@@ -1,0 +1,172 @@
+{
+  "slides": [
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 341.3333333333333,
+          "y": 256,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 144,
+          "text": "<font face=\"Hammersmith One\" color=\"#000000\">ddd</font>",
+          "selected": false
+        },
+        {
+          "src": "http://www2.gov.bc.ca/",
+          "type": "WebFrame",
+          "x": 150,
+          "y": 63,
+          "scale": {
+            "x": 0.8427083333333333,
+            "y": 0.8427083333333333,
+            "width": 809,
+            "height": 647.1999999999999
+          },
+          "selected": false,
+          "skewX": -0.3,
+          "skewY": 0.22,
+          "rotate": -0.33
+        }
+      ],
+      "z": 100,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0.42,
+      "rotateZ": 0.49,
+      "index": 0,
+      "selected": false,
+      "active": false,
+      "x": 373,
+      "y": 176,
+      "markdown": ""
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 93,
+          "y": 85,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 152,
+          "text": "<font face=\"Hammersmith One\" color=\"#000000\">Text</font>",
+          "selected": false,
+          "skewX": -0.17,
+          "rotate": -0.02,
+          "skewY": 0.39
+        },
+        {
+          "TextBox": {},
+          "x": 517,
+          "y": 527,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 144,
+          "text": "<font face=\"Hammersmith One\" color=\"#000000\">Text</font>",
+          "selected": false
+        },
+        {
+          "src": "http://www.wenxuecity.com/images/wxc-logo.gif",
+          "type": "Image",
+          "x": 328,
+          "y": 370,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "imageType": "GIF",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0.76,
+      "rotateY": 0.74,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": true,
+      "active": true,
+      "x": 795,
+      "y": 314,
+      "markdown": "",
+      "surface": "bg-surf-grad-darkgreen"
+    }
+  ],
+  "background": "bg-solid-yellow",
+  "activeSlide": {
+    "components": [
+      {
+        "TextBox": {},
+        "x": 93,
+        "y": 85,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "size": 152,
+        "text": "<font face=\"Hammersmith One\" color=\"#000000\">Text</font>",
+        "selected": false,
+        "skewX": -0.17,
+        "rotate": -0.02,
+        "skewY": 0.39
+      },
+      {
+        "TextBox": {},
+        "x": 517,
+        "y": 527,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "size": 144,
+        "text": "<font face=\"Hammersmith One\" color=\"#000000\">Text</font>",
+        "selected": false
+      },
+      {
+        "src": "http://www.wenxuecity.com/images/wxc-logo.gif",
+        "type": "Image",
+        "x": 328,
+        "y": 370,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "imageType": "GIF",
+        "selected": false
+      }
+    ],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 0.76,
+    "rotateY": 0.74,
+    "rotateZ": 0,
+    "index": 1,
+    "selected": true,
+    "active": true,
+    "x": 795,
+    "y": 314,
+    "markdown": "",
+    "surface": "bg-surf-grad-darkgreen"
+  },
+  "fileName": "ddd",
+  "surface": "bg-surf-grad-smoke",
+  "customStylesheet": "/*.example {\n\tborder: 4px groove orange;\n}*/\n\n.strut-surface .ddd {\n\tcolor: green;\n}",
+  "deckVersion": "1.0",
+  "customBackgrounds": {
+    "bgs": []
+  },
+  "overviewX": 584,
+  "overviewY": 245
+}

@@ -12,7 +12,7 @@ var SlideWell = React.createClass({
         <WellSlide
           deck={this.props.deck}
           model={slide}
-          key={slide.id}
+          key={slide.id || index}
           index={index}
           onSlideClicked={this.props.onSlideClicked}
         />

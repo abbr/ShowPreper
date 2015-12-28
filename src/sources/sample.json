@@ -1,0 +1,45 @@
+{
+  "slides": [
+    {
+      "components": [
+        {
+          "type": "TextBox",
+          "x": 100,
+          "y": 50,
+          "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">ddd</div>"
+        },
+        {
+          "type": "TextBox",
+          "scale": {
+            "x": 2,
+            "y": 2
+          },
+          "rotate": -0.785,
+          "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0.76,
+      "rotateY": 0.74,
+      "rotateZ": 0,
+      "selected": true,
+      "id": 0
+    },
+    {
+      "components": [
+        {
+          "type": "TextBox",
+          "x": 50,
+          "y": 50,
+          "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">bbb</div>"
+        }
+      ],
+      "selected": false,
+      "id": 1
+    }
+  ],
+  "nextSlideId": 2,
+  "slideWidth": 640,
+  "slideHeight": 480
+}

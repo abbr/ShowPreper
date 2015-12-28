@@ -2,6 +2,7 @@
 import _ from 'lodash'
 const _spDefaultFileNm = 'default.json'
 import 'babel-polyfill'
+import SampleDeck from "sources/sample.json"
 
 let Deck = function () {
   var defaultDeckObj
@@ -16,47 +17,7 @@ let Deck = function () {
     _.assign(this, defaultDeckObj)
   }
   else {
-    let slide = {
-      components: [{
-        "type": "TextBox",
-        "x": 100,
-        "y": 50,
-        "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">ddd</div>"
-      }, {
-        "type": "TextBox",
-        "scale": {
-          "x": 2,
-          "y": 2
-        },
-        "rotate": -0.785, // 45°counterclock-wise
-        "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
-      }],
-      "z": 0,
-      "impScale": 3,
-      "rotateX": 0.76,
-      "rotateY": 0.74,
-      "rotateZ": 0,
-      "selected": true
-    }
-    let slides = []
-    slides.push(slide)
-    slide = {
-      components: [
-        {
-          "type": "TextBox",
-          "x": 50,
-          "y": 50,
-          "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">bbb</div>"
-        }
-      ],
-      "selected": false
-    }
-
-    slides.push(slide)
-
-    this.slides = slides
-    this.slideWidth = 640
-    this.slideHeight = 480
+    _.assign(this,SampleDeck)
     this.save()
   }
 
