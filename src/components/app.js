@@ -6,8 +6,9 @@ import 'styles/App.less'
 import lang from 'i18n/lang'
 
 import React from 'react'
-import Header from 'components/header'
-import Main from 'components/main'
+import Header from './header'
+import Slides from './slides'
+import Overview from './overview'
 import DeckStore from 'stores/deck'
 import _ from 'lodash'
 let key = require('key-emit')(document)
@@ -85,7 +86,7 @@ let App = React.createClass({
               onUndo={this.onUndo}
               onRedo={this.onRedo}
       />
-      <Main deck={this.state.deck}
+      <Slides deck={this.state.deck}
             onSlideClicked={this.onSlideClicked}
             onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}/>
     </div>

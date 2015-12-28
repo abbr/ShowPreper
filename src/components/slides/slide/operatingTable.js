@@ -2,7 +2,7 @@
 
 let React = require('react')
 let _ = require('lodash')
-import EditableComponent  from 'components/widgets/editableComponent'
+import EditableComponent  from 'components/slides/widgets/editableComponent'
 import AutoScale from 'components/mixins/autoScale'
 import Draggable from 'components/mixins/draggable'
 import Scalable from 'components/mixins/scalable'

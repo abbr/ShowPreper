@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 let DisplayableComponent = React.createClass({
   render: function () {
-    const WidgetFactory = require('components/widgets/widgetFactory')
+    const WidgetFactory = require('./widgetFactory')
     let Widget = WidgetFactory(this.props.component)
 
     let widgetStyle = {}
