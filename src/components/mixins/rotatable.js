@@ -37,7 +37,7 @@ exports.onRotateMouseDown = function (ev, idx) {
   }
   rotatable.aO = this.computeAngle(pC, pO)
 
-  if(!this.selectedWidgets) {
+  if (!this.selectedWidgets) {
     this.selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
       if (e.selected) pv.push(i)
       return pv
@@ -45,7 +45,7 @@ exports.onRotateMouseDown = function (ev, idx) {
   }
 
   this.selectedWidgets.forEach(e => {
-    rotatable.rotates[e] = slide.components[e].rotate
+    rotatable.rotates[e] = slide.components[e].rotate || 0
   })
   ev.stopPropagation && ev.stopPropagation()
 }

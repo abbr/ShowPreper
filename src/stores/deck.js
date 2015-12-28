@@ -38,7 +38,14 @@ let Deck = function () {
     let slides = []
     slides.push(slide)
     slide = {
-      components: [],
+      components: [
+        {
+          "type": "TextBox",
+          "x": 50,
+          "y": 50,
+          "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">bbb</div>"
+        }
+      ],
       selected: false,
       id: 1
     }
