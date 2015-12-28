@@ -1,7 +1,7 @@
 'use strict'
 
 var React = require('react')
-var ComponentViewFactory = require('components/widgets/componentViewFactory')
+var DisplayableComponent = require('components/widgets/displayableComponent')
 import AutoScale from 'components/mixins/autoScale'
 var WellSlide = React.createClass({
   mixins: [AutoScale],
@@ -16,10 +16,10 @@ var WellSlide = React.createClass({
   },
   render: function () {
     let componentsView = this.props.model.components.map((component, index) => {
-      let ComponentView = ComponentViewFactory(component)
       return (
-        <ComponentView component={component}
-          key = {index}
+        <DisplayableComponent
+          component={component}
+          key={index}
         />
       )
     })
@@ -31,7 +31,7 @@ var WellSlide = React.createClass({
         onClick={this._clicked}>
         <div
           style={this.state.scaleStyle}>
-        {componentsView}
+          {componentsView}
         </div>
       </div>
     )

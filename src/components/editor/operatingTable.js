@@ -2,7 +2,7 @@
 
 let React = require('react')
 let _ = require('lodash')
-import ComponentViewFactory  from 'components/widgets/componentViewFactory'
+import EditableComponent  from 'components/widgets/editableComponent'
 import AutoScale from 'components/mixins/autoScale'
 import Draggable from 'components/mixins/draggable'
 import Scalable from 'components/mixins/scalable'
@@ -39,9 +39,8 @@ let OperatingTable = React.createClass({
       return pv
     }, [])
     this.componentsView = slide.components.map((component, index) => {
-      let EditableComponentView = ComponentViewFactory(component, true)
       return (
-        <EditableComponentView
+        <EditableComponent
           component={component}
           onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           key={index}

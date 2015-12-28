@@ -1,13 +1,11 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
 import classNames from 'classnames'
 
 let DisplayableComponent = React.createClass({
   render: function () {
-
     const WidgetFactory = require('components/widgets/widgetFactory')
-    let Widget = WidgetFactory(this.props, false)
+    let Widget = WidgetFactory(this.props.component)
 
     let widgetStyle = {}
     this.props.component.x && (widgetStyle.left = this.props.component.x)
@@ -25,7 +23,7 @@ let DisplayableComponent = React.createClass({
         style={widgetStyle}>
         <Widget
           className={this.props.className}
-          component={this.props.component.text}
+          component={this.props.component}
         />
         {this.props.children}
       </div>)
