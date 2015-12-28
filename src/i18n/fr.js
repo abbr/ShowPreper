@@ -40,4 +40,5 @@ module.exports = {
   createPresentation: 'Create Presentation',
   moveComponents: 'move components',
   scaleComponents: 'scale components',
+  rotateComponents: 'rotate components',
 }

@@ -40,4 +40,5 @@ module.exports = {
 	createPresentation: '创建课件',
   moveComponents: 'move components',
   scaleComponents: 'scale components',
+  rotateComponents: 'rotate components',
 }
