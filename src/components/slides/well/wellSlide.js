@@ -1,7 +1,7 @@
 'use strict'
 
 var React = require('react')
-var DisplayableComponent = require('components/slides/widgets/displayableComponent')
+var DisplayableComponent = require('components/widgets/displayableComponent')
 import AutoScale from 'components/mixins/autoScale'
 var WellSlide = React.createClass({
   mixins: [AutoScale],
