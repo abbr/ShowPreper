@@ -10,19 +10,27 @@ import Slides from './slides'
 import Overview from './overview'
 import DeckStore from 'stores/deck'
 import _ from 'lodash'
-let key = require('key-emit')(document)
+let key = require('mousetrap')
 let App = React.createClass({
   componentDidMount: function () {
-    key.down.on('ctrl Z', this.onUndo)
-    key.down.on('ctrl Y', this.onRedo)
-    key.down.on('left', ()=>this.panBy("x", -1))
-    key.down.on('right', ()=>this.panBy("x", 1))
-    key.down.on('up', ()=>this.panBy("y", -1))
-    key.down.on('down', ()=>this.panBy("y", 1))
-    key.up.on('left', ()=>this.panBy("x", 0, lang.moveComponents))
-    key.up.on('right', ()=>this.panBy("x", 0, lang.moveComponents))
-    key.up.on('up', ()=>this.panBy("y", 0, lang.moveComponents))
-    key.up.on('down', ()=>this.panBy("y", 0, lang.moveComponents))
+    key.bind('ctrl+z', this.onUndo)
+    key.bind('ctrl+y', this.onRedo)
+    key.bind('left', ()=>this.panBy("x", -1),"keydown")
+    key.bind('left', ()=>this.panBy("x", 0, lang.moveComponents),"keyup")
+    key.bind('shift+left', ()=>this.panBy("x", -10),"keydown")
+    key.bind('shift+left', ()=>{this.panBy("x", 0, lang.moveComponents)},"keyup")
+    key.bind('right', ()=>this.panBy("x", 1),"keydown")
+    key.bind('right', ()=>this.panBy("x", 0, lang.moveComponents),"keyup")
+    key.bind('shift+right', ()=>this.panBy("x", 10),"keydown")
+    key.bind('shift+right', ()=>{this.panBy("x", 0, lang.moveComponents)},"keyup")
+    key.bind('up', ()=>this.panBy("y", -1),"keydown")
+    key.bind('up', ()=>this.panBy("y", 0, lang.moveComponents),"keyup")
+    key.bind('shift+up', ()=>this.panBy("y", -10),"keydown")
+    key.bind('shift+up', ()=>{this.panBy("y", 0, lang.moveComponents)},"keyup")
+    key.bind('down', ()=>this.panBy("y", 1),"keydown")
+    key.bind('down', ()=>this.panBy("y", 0, lang.moveComponents),"keyup")
+    key.bind('shift+down', ()=>this.panBy("y", 10),"keydown")
+    key.bind('shift+down', ()=>{this.panBy("y", 0, lang.moveComponents)},"keyup")
   },
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(),
