@@ -19,7 +19,7 @@ exports.onScaleMouseDown = function (ev, idx) {
   this._scalable = {}
   this._scalable.scales = []
   this._scalable.selectedIdx = idx
-  let slide = this.props.deck.getSelectedSlide()
+  let slide = this.props.deck.getActiveSlide()
   if(!this.selectedWidgets) {
     this.selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
       if (e.selected) pv.push(i)

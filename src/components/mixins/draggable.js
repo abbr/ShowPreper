@@ -27,7 +27,7 @@ exports.onDraggableMouseDown = function (ev) {
   this._draggable.drags = []
   this._draggable.dragged = false
   if(!this.selectedWidgets) {
-    let slide = this.props.deck.getSelectedSlide()
+    let slide = this.props.deck.getActiveSlide()
     this.selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
       if (e.selected) pv.push(i)
       return pv

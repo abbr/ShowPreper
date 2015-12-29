@@ -3,6 +3,8 @@
 var React = require('react')
 var DisplayableComponent = require('components/widgets/displayableComponent')
 import AutoScale from 'components/mixins/autoScale'
+import classNames from 'classnames'
+
 var WellSlide = React.createClass({
   mixins: [AutoScale],
   componentDidMount: function () {
@@ -31,9 +33,8 @@ var WellSlide = React.createClass({
     })
     return (
       <div
-        className={
-					"sp-well-slide " + (this.props.model.selected? "selected":'')
-				}
+        className={classNames("sp-well-slide"
+        , {selected: this.props.deck.activeSlide===this.props.index})}
         onClick={this._clicked}>
         <div
           style={this.state.scaleStyle}>

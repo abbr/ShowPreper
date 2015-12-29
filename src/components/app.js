@@ -44,7 +44,7 @@ let App = React.createClass({
   },
   onSlideClicked: function (i) {
     let deck = this.state.deck
-    deck.selectSlide(i)
+    deck.activateSlide(i)
     deck.save()
     this.setState({
       deck: deck
@@ -52,8 +52,8 @@ let App = React.createClass({
   },
   onSelectedWidgetUpdated: function (widgetIdx, newProps, markUndoDesc) {
     let deck = this.state.deck
-    let selectedSlide = deck.getSelectedSlide()
-    let selectedWidget = selectedSlide.components[widgetIdx]
+    let activeSlide = deck.getActiveSlide()
+    let selectedWidget = activeSlide.components[widgetIdx]
     _.merge(selectedWidget, newProps)
     deck.save()
     if (markUndoDesc) {
@@ -84,7 +84,7 @@ let App = React.createClass({
 
   panBy: function (axis, delta, markUndoDesc) {
     let deck = this.state.deck
-    let slide = deck.getSelectedSlide()
+    let slide = deck.getActiveSlide()
     let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
       if (e.selected) pv.push(i)
       return pv

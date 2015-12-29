@@ -39,7 +39,7 @@ let OperatingTable = React.createClass({
     window.removeEventListener('resize', this._resized)
   },
   render: function () {
-    let slide = this.props.deck.getSelectedSlide()
+    let slide = this.props.deck.getActiveSlide()
     let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
       if (e.selected) pv.push(i)
       return pv

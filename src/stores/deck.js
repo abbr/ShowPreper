@@ -32,17 +32,12 @@ let Deck = function () {
   this.markUndo('')
 }
 
-Deck.prototype.getSelectedSlideIdx = function () {
-  return this.slides.findIndex((e, i, a) => e.selected === true)
+Deck.prototype.getActiveSlide = function () {
+  return this.slides[this.activeSlide||0]
 }
 
-Deck.prototype.getSelectedSlide = function () {
-  return this.slides.find((e, i, a) => e.selected === true)
-}
-
-Deck.prototype.selectSlide = function (i) {
-  this.slides[this.getSelectedSlideIdx()].selected = false
-  this.slides[i].selected = true
+Deck.prototype.activateSlide = function (i) {
+  this.activeSlide = i
 }
 
 Deck.prototype.save = function () {

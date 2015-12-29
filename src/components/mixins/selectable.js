@@ -10,7 +10,7 @@ exports.componentWillUnmount = function () {
 }
 exports.onSelectionMouseDown = function (ev, i) {
   ev.stopPropagation && ev.stopPropagation()
-  let slide = this.props.deck.getSelectedSlide()
+  let slide = this.props.deck.getActiveSlide()
   let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
     if (e.selected) pv.push(i)
     return pv
