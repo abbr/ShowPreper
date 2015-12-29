@@ -13,7 +13,7 @@ let Overview = React.createClass({
     return {}
   },
   _resized: function () {
-    let bb = this.props.deck.boundingBox || this.props.deck.getSlideBoundingBox()
+    let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     this._scale({width: bb.right - bb.left, height: bb.bottom - bb.top})
   },
   render: function () {
@@ -26,9 +26,18 @@ let Overview = React.createClass({
           />
         )
       })
+
+      let slideStyle = {}
+      let bb = this.props.deck.getSlideBoundingBox(slide, index)
+      slideStyle.top = bb.top
+      slideStyle.left = bb.left
+      slideStyle.width = bb.right - bb.left
+      slideStyle.height = bb.bottom - bb.top
       return (
         <div
+          className="sp-overview-slide"
           key={index}
+          style={slideStyle}
         >
           {componentsView}
         </div>
@@ -38,6 +47,7 @@ let Overview = React.createClass({
       <div
         className="sp-overview">
         <div
+          className="sp-overview-deck"
           style={this.state.scaleStyle}>
           {deckView}
         </div>
