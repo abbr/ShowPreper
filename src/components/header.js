@@ -5,7 +5,7 @@ let Header = React.createClass({
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
     let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current + 1 < this.props.deck.undoStack.stack.length) ? this.props.deck.undoStack.stack[this.props.deck.undoStack.current + 1].desc : '')
-    return <nav className="navbar navbar-default showpreper-header">
+    return <nav className="navbar navbar-default sp-header">
       <div className="container-fluid">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
@@ -44,7 +44,7 @@ let Header = React.createClass({
               </button>
             )}
           </div>
-          <ul className="nav navbar-btn navbar-right">
+          <ul className="nav navbar-btn navbar-right sp-view-btns">
             <li style={this.props.currentView!=='slides'?{}: {display: 'none'}}>
               <button type="button"
                       className="btn btn-default"

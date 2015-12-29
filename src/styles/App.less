@@ -13,22 +13,27 @@ body {
   @media (min-width: @screen-md-min) {
     height: 100%;
   }
-  .showpreper-container {
+  .sp-container {
     display: flex;
     flex-flow: column;
     align-items: stretch;
     height: 100%;
-    .navbar {
-      margin-bottom: 0px;
-      .navbar-header  .dropdown {
-        float: left;
-        .badge{
-          position: absolute;
-          right: 5px;
+    .sp-header{
+      &.navbar {
+        margin-bottom: 0px;
+        .navbar-header  .dropdown {
+          float: left;
+          .badge{
+            position: absolute;
+            right: 5px;
+          }
+        }
+        .sp-view-btns li button {
+          width: 70pt;
         }
       }
     }
-    .showpreper-content {
+    .sp-content {
       flex: 1;
       display: flex;
       flex-flow: row;

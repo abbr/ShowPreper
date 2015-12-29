@@ -107,7 +107,7 @@ let App = React.createClass({
       case 'overview':
         Main = <Overview deck={this.state.deck}/>
     }
-    return <div className="showpreper-container">
+    return <div className="sp-container">
       <Header deck={this.state.deck}
               onUndo={this.onUndo}
               onRedo={this.onRedo}
