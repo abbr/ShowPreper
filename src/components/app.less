@@ -33,23 +33,5 @@ body {
         }
       }
     }
-    .sp-content {
-      flex: 1;
-      display: flex;
-      flex-flow: row;
-      align-items: stretch;
-      overflow: hidden;
-      .slide-deck {
-        flex: 0 1 200px;
-        overflow: auto;
-        // mitigate Chrome bug; see http://stackoverflow.com/questions/34325439
-        z-index: 2;
-      }
-      .slide-editor {
-        flex: 1 1 auto;
-        position: relative;
-        overflow: auto;
-      }
-    }
   }
 }

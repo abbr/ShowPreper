@@ -2,7 +2,7 @@
 import 'normalize.css'
 import 'expose?$!expose?jQuery!jquery'
 import 'bootstrap-webpack'
-import 'styles/App.less'
+import './app.less'
 import lang from 'i18n/lang'
 import React from 'react'
 import Header from './header'

@@ -3,7 +3,7 @@
 var React = require('react')
 var WellSlide = require('./wellSlide')
 
-require('./slideWell.less')
+require('./index.less')
 
 var SlideWell = React.createClass({
   render: function () {
@@ -18,7 +18,7 @@ var SlideWell = React.createClass({
         />
       )
     })
-    return <div className="slide-deck">
+    return <div className="sp-well">
       {slides}
     </div>
   }
