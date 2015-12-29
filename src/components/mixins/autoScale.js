@@ -18,10 +18,13 @@ let getFitSquareScaleFactor = function (desiredWidth, desiredHeight, width, heig
 exports._scale = function (size) {
   let slideWidth = size.width
   let slideHeight = size.height
-  let rootElSize = window.getComputedStyle(ReactDOM.findDOMNode(this))
-
-  if (!rootElSize)
-    return {}
+  let rootElSize
+  try {
+    rootElSize = window.getComputedStyle(ReactDOM.findDOMNode(this))
+  }
+  catch (ex) {
+    return
+  }
 
   let width = parseInt(rootElSize.width) - parseInt(rootElSize.paddingLeft) - parseInt(rootElSize.paddingRight)
   let height = parseInt(rootElSize.height) - parseInt(rootElSize.paddingTop) - parseInt(rootElSize.paddingBottom)
