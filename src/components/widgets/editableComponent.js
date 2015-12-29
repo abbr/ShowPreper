@@ -9,13 +9,13 @@ import DisplayableComponent from './displayableComponent'
 
 let EditableComponent = React.createClass({
   onMouseDown: function (ev) {
-    this.props.onMouseDown(ev, this.props.idx)
+    this.props.onMouseDown && this.props.onMouseDown(ev, this.props.idx)
   },
   onMouseUp: function (ev) {
-    this.props.onMouseUp(ev, this.props.idx)
+    this.props.onMouseUp && this.props.onMouseUp(ev, this.props.idx)
   },
   render: function () {
-    let cmpClass = classNames({
+    let cmpClass = classNames(this.props.className, {
       'selected': this.props.selected
     });
     return (

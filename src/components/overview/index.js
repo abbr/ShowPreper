@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import './index.less'
-var DisplayableComponent = require('components/widgets/displayableComponent')
+var EditableComponent = require('components/widgets/editableComponent')
 import AutoScale from 'components/mixins/autoScale'
 let Overview = React.createClass({
   mixins: [AutoScale],
@@ -25,10 +25,12 @@ let Overview = React.createClass({
       slide.height = bb.bottom - bb.top
       slide.type || (slide.type = "Slide")
       return (
-        <DisplayableComponent
+        <EditableComponent
           className="sp-overview-slide"
-          key={index}
           component={slide}
+          key={index}
+          idx={index}
+          ref={index}
         />
       )
     })
