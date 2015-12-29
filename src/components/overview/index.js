@@ -18,29 +18,18 @@ let Overview = React.createClass({
   },
   render: function () {
     let deckView = this.props.deck.slides.map((slide, index) => {
-      let componentsView = slide.components.map((component, index)=> {
-        return (
-          <DisplayableComponent
-            component={component}
-            key={index}
-          />
-        )
-      })
-
-      let slideStyle = {}
       let bb = this.props.deck.getSlideBoundingBox(slide, index)
-      slideStyle.top = bb.top
-      slideStyle.left = bb.left
-      slideStyle.width = bb.right - bb.left
-      slideStyle.height = bb.bottom - bb.top
+      slide.y = bb.top
+      slide.x = bb.left
+      slide.width = bb.right - bb.left
+      slide.height = bb.bottom - bb.top
+      slide.type || (slide.type = "Slide")
       return (
-        <div
+        <DisplayableComponent
           className="sp-overview-slide"
           key={index}
-          style={slideStyle}
-        >
-          {componentsView}
-        </div>
+          component={slide}
+        />
       )
     })
     return (

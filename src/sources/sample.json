@@ -18,6 +18,7 @@
           "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
         }
       ],
+      "type": "Slide",
       "z": 0,
       "impScale": 3,
       "rotateX": 0.76,
@@ -34,6 +35,7 @@
           "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">bbb</div>"
         }
       ],
+      "type": "Slide",
       "selected": false
     },
     {
@@ -54,6 +56,7 @@
           "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">cc</div>"
         }
       ],
+      "type": "Slide",
       "z": 0,
       "impScale": 3,
       "rotateX": 0.76,
@@ -70,9 +73,11 @@
           "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">d</div>"
         }
       ],
+      "type": "Slide",
       "selected": false
     }
   ],
+  "activeSlide": 0,
   "slideWidth": 640,
   "slideHeight": 480
 }
