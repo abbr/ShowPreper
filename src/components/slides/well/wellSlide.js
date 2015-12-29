@@ -11,6 +11,12 @@ var WellSlide = React.createClass({
   getInitialState: function () {
     return {}
   },
+  _resized: function () {
+    let deck = this.props.deck
+    let slideWidth = deck.slideWidth
+    let slideHeight = deck.slideHeight
+    this._scale({width: slideWidth, height: slideHeight})
+  },
   _clicked: function () {
     this.props.onSlideClicked(this.props.index)
   },

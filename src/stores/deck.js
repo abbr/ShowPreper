@@ -66,22 +66,28 @@ Deck.prototype.redo = function () {
   ((this.undoStack.current + 1) < this.undoStack.stack.length) && _.assign(this, _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck))
 }
 
-Deck.prototype.getSlideBondingBox = function () {
+Deck.prototype.getSlideBoundingBox = function () {
+  let nCols = Math.ceil(Math.sqrt(this.slides.length))
   return this.slides.reduce((pv, e, i, a) => {
-    let silidWidth = this.slideWidth || DEFAULT_SLIDE_SIZE.width
+    let slideWidth = this.slideWidth || DEFAULT_SLIDE_SIZE.width
     let slideHeight = this.slideHeight || DEFAULT_SLIDE_SIZE.height
-    let slideMargin = Math.min(silidWidth, slideHeight) * 0.1
-    let left = e.x || (silidWidth + slideMargin) * i
+    let slideMargin = Math.min(slideWidth, slideHeight) * 0.1
+
+    // assume square grid layout
+    let row = Math.floor(i/nCols)
+    let col = i % nCols
+    let left = e.x || (slideWidth + slideMargin) * col
     let right = left + slideWidth
-    let top = e.y || (silidHeight + slideMargin) * i
+    let top = e.y || (slideHeight + slideMargin) * row
     let bottom = top + slideHeight
+    pv = pv || {top: top, right: right, bottom: bottom, left: left}
     return {
       top: Math.min(top, pv.top)
       , right: Math.max(right, pv.right)
       , bottom: Math.max(bottom, pv.bottom)
       , left: Math.min(left, pv.left)
     }
-  }, {})
+  }, null)
 }
 
 exports.getDefaultDeck = function () {

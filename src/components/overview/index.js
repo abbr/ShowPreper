@@ -7,11 +7,15 @@ let Overview = React.createClass({
   mixins: [AutoScale],
   componentDidMount: function () {
     this._resized()
+    window.addEventListener('resize', this._resized)
   },
   getInitialState: function () {
     return {}
   },
-
+  _resized: function () {
+    let bb = this.props.deck.boundingBox || this.props.deck.getSlideBoundingBox()
+    this._scale({width: bb.right - bb.left, height: bb.bottom - bb.top})
+  },
   render: function () {
     let deckView = this.props.deck.slides.map((slide, index) => {
       let componentsView = slide.components.map((component, index)=> {
@@ -24,7 +28,7 @@ let Overview = React.createClass({
       })
       return (
         <div
-          key = {index}
+          key={index}
         >
           {componentsView}
         </div>

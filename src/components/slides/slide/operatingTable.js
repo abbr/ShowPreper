@@ -23,6 +23,12 @@ let OperatingTable = React.createClass({
     this._resized()
     window.addEventListener('resize', this._resized)
   },
+  _resized: function () {
+    let deck = this.props.deck
+    let slideWidth = deck.slideWidth
+    let slideHeight = deck.slideHeight
+    this._scale({width: slideWidth, height: slideHeight})
+  },
   onMouseUp: function () {
     this.mouseUpHdlrs.forEach(e=>e.apply(this, arguments))
   },
