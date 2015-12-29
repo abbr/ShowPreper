@@ -4,7 +4,7 @@ import EditableHtmlElement from './editableHtmlElement'
 import lang from 'i18n/lang'
 
 let PositionControl = React.createClass({
-  onChange: function (p, v) {
+  onBlur: function (p, v) {
     if (isNaN(v)) {
       return
     }
@@ -18,13 +18,13 @@ let PositionControl = React.createClass({
       <EditableHtmlElement
         eleNm="span"
         idx={this.props.idx}
-        onChange={(v)=>this.onChange('x',v)}
+        onBlur={(ev)=>this.onBlur('x',ev.target.innerHTML)}
         dangerouslySetInnerHTML={{__html: this.props.component.x}}/>
       <span className="bottomposition">↓</span>
       <EditableHtmlElement
         eleNm="span"
         idx={this.props.idx}
-        onChange={(v)=>this.onChange('y',v)}
+        onBlur={(ev)=>this.onBlur('y',ev.target.innerHTML)}
         dangerouslySetInnerHTML={{__html: this.props.component.y}}/>
     </div>
   }

@@ -13,25 +13,21 @@ let EditableHtmlElement = React.createClass({
   },
   onBlur: function () {
     this.props.onBlur && this.props.onBlur.apply(this, arguments)
-    this.onChange.apply(this, arguments)
     this.setState({contentEditable: false})
   },
-  onChange: function (ev) {
-    if (ev.key) {
-      if (ev.key === 'Enter') {
-        ev.preventDefault()
-        $(ev.target).trigger("blur")
-      }
+  onKeyPress: function (ev) {
+    if (ev.key !== 'Enter') {
       return
     }
-    this.props.onChange(ev.target.innerHTML)
+    ev.preventDefault()
+    $(ev.target).trigger("blur")
   },
   render: function () {
     var { eleNm, ...otherProps } = this.props
     otherProps.contentEditable = this.state.contentEditable
     otherProps.onMouseDown = this.onMouseDown
     otherProps.onBlur = this.onBlur
-    otherProps.onKeyDown = this.onChange
+    otherProps.onKeyPress = this.onKeyPress
     return React.DOM[eleNm]({...otherProps})
   }
 })
