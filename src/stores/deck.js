@@ -3,6 +3,7 @@ import _ from 'lodash'
 const _spDefaultFileNm = 'default.json'
 import 'babel-polyfill'
 import SampleDeck from "sources/sample.json"
+const DEFAULT_SLIDE_SIZE = {width: 640, height: 480}
 
 let Deck = function () {
   var defaultDeckObj
@@ -17,7 +18,7 @@ let Deck = function () {
     _.assign(this, defaultDeckObj)
   }
   else {
-    _.assign(this,SampleDeck)
+    _.assign(this, SampleDeck)
     this.save()
   }
 
@@ -63,6 +64,24 @@ Deck.prototype.undo = function () {
 
 Deck.prototype.redo = function () {
   ((this.undoStack.current + 1) < this.undoStack.stack.length) && _.assign(this, _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck))
+}
+
+Deck.prototype.getSlideBondingBox = function () {
+  return this.slides.reduce((pv, e, i, a) => {
+    let silidWidth = this.slideWidth || DEFAULT_SLIDE_SIZE.width
+    let slideHeight = this.slideHeight || DEFAULT_SLIDE_SIZE.height
+    let slideMargin = Math.min(silidWidth, slideHeight) * 0.1
+    let left = e.x || (silidWidth + slideMargin) * i
+    let right = left + slideWidth
+    let top = e.y || (silidHeight + slideMargin) * i
+    let bottom = top + slideHeight
+    return {
+      top: Math.min(top, pv.top)
+      , right: Math.max(right, pv.right)
+      , bottom: Math.max(bottom, pv.bottom)
+      , left: Math.min(left, pv.left)
+    }
+  }, {})
 }
 
 exports.getDefaultDeck = function () {
