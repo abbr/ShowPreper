@@ -17,7 +17,7 @@ let Overview = React.createClass({
     this._scale({width: bb.right - bb.left, height: bb.bottom - bb.top})
   },
   render: function () {
-    let deckView = this.props.deck.slides.map((slide, index) => {
+    let deckView = this.props.deck.getSlides().map((slide, index) => {
       let bb = this.props.deck.getSlideBoundingBox(slide, index)
       slide.y = bb.top
       slide.x = bb.left

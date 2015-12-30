@@ -7,7 +7,7 @@ require('./index.less')
 
 var SlideWell = React.createClass({
   render: function () {
-    var slides = this.props.deck.slides.map((slide, index) => {
+    var slides = this.props.deck.getSlides().map((slide, index) => {
       return (
         <WellSlide
           deck={this.props.deck}

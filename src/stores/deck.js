@@ -33,7 +33,7 @@ let Deck = function () {
 }
 
 Deck.prototype.getActiveSlide = function () {
-  return this.slides[this.activeSlide||0]
+  return this.getSlides()[this.activeSlide || 0]
 }
 
 Deck.prototype.activateSlide = function (i) {
@@ -60,9 +60,11 @@ Deck.prototype.undo = function () {
 Deck.prototype.redo = function () {
   ((this.undoStack.current + 1) < this.undoStack.stack.length) && _.assign(this, _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck))
 }
-
+Deck.prototype.getSlides = function () {
+  return this.components.filter((e, i, a)=>e.type === 'Slide')
+}
 Deck.prototype.getSlideBoundingBox = function (e, i) {
-  let nCols = Math.ceil(Math.sqrt(this.slides.length))
+  let nCols = Math.ceil(Math.sqrt(this.getSlides().length))
   // assume square grid layout
   let slideWidth = this.slideWidth || DEFAULT_SLIDE_SIZE.width
   let slideHeight = this.slideHeight || DEFAULT_SLIDE_SIZE.height
@@ -77,7 +79,7 @@ Deck.prototype.getSlideBoundingBox = function (e, i) {
 }
 
 Deck.prototype.getDefaultDeckBoundingBox = function () {
-  return this.slides.reduce((pv, e, i, a) => {
+  return this.getSlides().reduce((pv, e, i, a) => {
     let bb = this.getSlideBoundingBox(e, i)
     pv = pv || {top: bb.top, right: bb.right, bottom: bb.bottom, left: bb.left}
     return {
