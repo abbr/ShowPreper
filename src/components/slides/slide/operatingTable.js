@@ -51,13 +51,13 @@ let OperatingTable = React.createClass({
           onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           key={index}
           idx={index}
+          ref={index}
           scale={this.state.scale}
           selected={selectedWidgets.indexOf(index) >= 0}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
           onScaleMouseDown={this.onScaleMouseDown}
           onRotateMouseDown={this.onRotateMouseDown}
-          ref={index}
         />
       )
     })

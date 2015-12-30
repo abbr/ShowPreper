@@ -1,6 +1,8 @@
 'use strict'
 import React from 'react'
 var DisplayableComponent = require('../displayableComponent')
+import classNames from 'classnames'
+
 let TextBox = React.createClass({
   render: function () {
     let componentsView = this.props.component.components.map((component, index)=> {
@@ -12,7 +14,7 @@ let TextBox = React.createClass({
       )
     })
     return <div
-      className={this.props.className}
+      className={classNames(this.props.className,'sp-widget-slide')}
     >
       {componentsView}
     </div>
