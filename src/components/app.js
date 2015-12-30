@@ -15,22 +15,30 @@ let App = React.createClass({
   componentDidMount: function () {
     key.bind('ctrl+z', this.onUndo)
     key.bind('ctrl+y', this.onRedo)
-    key.bind('left', ()=>this.panBy("x", -1),"keydown")
-    key.bind('left', ()=>this.panBy("x", 0, lang.moveComponents),"keyup")
-    key.bind('shift+left', ()=>this.panBy("x", -10),"keydown")
-    key.bind('shift+left', ()=>{this.panBy("x", 0, lang.moveComponents)},"keyup")
-    key.bind('right', ()=>this.panBy("x", 1),"keydown")
-    key.bind('right', ()=>this.panBy("x", 0, lang.moveComponents),"keyup")
-    key.bind('shift+right', ()=>this.panBy("x", 10),"keydown")
-    key.bind('shift+right', ()=>{this.panBy("x", 0, lang.moveComponents)},"keyup")
-    key.bind('up', ()=>this.panBy("y", -1),"keydown")
-    key.bind('up', ()=>this.panBy("y", 0, lang.moveComponents),"keyup")
-    key.bind('shift+up', ()=>this.panBy("y", -10),"keydown")
-    key.bind('shift+up', ()=>{this.panBy("y", 0, lang.moveComponents)},"keyup")
-    key.bind('down', ()=>this.panBy("y", 1),"keydown")
-    key.bind('down', ()=>this.panBy("y", 0, lang.moveComponents),"keyup")
-    key.bind('shift+down', ()=>this.panBy("y", 10),"keydown")
-    key.bind('shift+down', ()=>{this.panBy("y", 0, lang.moveComponents)},"keyup")
+    key.bind('left', ()=>this.panBy("x", -1), "keydown")
+    key.bind('left', ()=>this.panBy("x", 0, lang.moveComponents), "keyup")
+    key.bind('shift+left', ()=>this.panBy("x", -10), "keydown")
+    key.bind('shift+left', ()=> {
+      this.panBy("x", 0, lang.moveComponents)
+    }, "keyup")
+    key.bind('right', ()=>this.panBy("x", 1), "keydown")
+    key.bind('right', ()=>this.panBy("x", 0, lang.moveComponents), "keyup")
+    key.bind('shift+right', ()=>this.panBy("x", 10), "keydown")
+    key.bind('shift+right', ()=> {
+      this.panBy("x", 0, lang.moveComponents)
+    }, "keyup")
+    key.bind('up', ()=>this.panBy("y", -1), "keydown")
+    key.bind('up', ()=>this.panBy("y", 0, lang.moveComponents), "keyup")
+    key.bind('shift+up', ()=>this.panBy("y", -10), "keydown")
+    key.bind('shift+up', ()=> {
+      this.panBy("y", 0, lang.moveComponents)
+    }, "keyup")
+    key.bind('down', ()=>this.panBy("y", 1), "keydown")
+    key.bind('down', ()=>this.panBy("y", 0, lang.moveComponents), "keyup")
+    key.bind('shift+down', ()=>this.panBy("y", 10), "keydown")
+    key.bind('shift+down', ()=> {
+      this.panBy("y", 0, lang.moveComponents)
+    }, "keyup")
   },
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(),
@@ -50,10 +58,20 @@ let App = React.createClass({
       deck: deck
     })
   },
-  onSelectedWidgetUpdated: function (widgetIdx, newProps, markUndoDesc) {
-    let deck = this.state.deck
-    let activeSlide = deck.getActiveSlide()
-    let selectedWidget = activeSlide.components[widgetIdx]
+  onSelectedWidgetUpdated: function (widget, newProps, markUndoDesc) {
+    let component, widgetIdx
+    switch (typeof(widget)) {
+      case 'number':
+        let deck = this.state.deck
+        component = deck.getActiveSlide()
+        widgetIdx = widget
+        break
+      case 'object':
+        component = widget.container
+        widgetIdx = widget.index
+        break
+    }
+    let selectedWidget = component.components[widgetIdx]
     _.merge(selectedWidget, newProps)
     deck.save()
     if (markUndoDesc) {
@@ -105,7 +123,15 @@ let App = React.createClass({
                        onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}/>
         break;
       case 'overview':
-        Main = <Overview deck={this.state.deck}/>
+        let selectedWidgets = this.state.deck.components.reduce((pv, e, i, a)=> {
+          if (e.selected) pv.push(i)
+          return pv
+        }, [])
+        Main = <Overview
+          deck={this.state.deck}
+          component={this.state.deck}
+          selectedWidgets={selectedWidgets}
+        />
     }
     return <div className="sp-container">
       <Header deck={this.state.deck}
