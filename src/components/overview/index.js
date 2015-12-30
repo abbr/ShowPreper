@@ -27,6 +27,34 @@ let Overview = React.createClass({
     let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     this._scale({width: bb.right - bb.left, height: bb.bottom - bb.top})
   },
+  zoom: function (pct) {
+    let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
+    let width = bb.right - bb.left
+    let height = bb.bottom - bb.top
+    let cx = bb.left + width / 2
+    let cy = bb.top + height / 2
+    let newWidth = width * (1 + pct)
+    let newHeight = height * (1 + pct)
+    let newLeft = cx - newWidth / 2
+    let newRight = cx + newWidth / 2
+    let newTop = cy - newHeight / 2
+    let newBottom = cy + newHeight / 2
+    let newBB = {top: newTop, right: newRight, bottom: newBottom, left: newLeft}
+    this.props.onSelectedWidgetUpdated({container: this.props.deck, index: -1}, {boundingBox: newBB})
+    this._resized()
+  },
+  zoomIn: function () {
+    this.zoomInTimer = setInterval(()=>this.zoom(-0.01),100)
+  },
+  stopZoomIn: function () {
+    clearInterval(this.zoomInTimer)
+  },
+  zoomOut: function () {
+    this.zoomOutTimer = setInterval(()=>this.zoom(0.01),100)
+  },
+  stopZoomOut: function(){
+    clearInterval(this.zoomOutTimer)
+  },
   onMouseUp: function () {
     this.mouseUpHdlrs.forEach(e=>e.apply(this, arguments))
   },
@@ -68,6 +96,14 @@ let Overview = React.createClass({
       <div
         onMouseDown={this.onSelectionMouseDown}
         className="sp-overview">
+        <span className='glyphicon glyphicon-zoom-in'
+              onMouseDown={this.zoomIn}
+              onMouseUp={this.stopZoomIn}
+        />
+        <span className='glyphicon glyphicon-zoom-out'
+              onMouseDown={this.zoomOut}
+              onMouseUp={this.stopZoomOut}
+        />
         <div
           className="sp-overview-deck"
           style={this.state.scaleStyle}>

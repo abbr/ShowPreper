@@ -2,6 +2,24 @@
   flex: 1;
   overflow: hidden;
   padding: 10px;
+  position: relative;
+  .glyphicon{
+    font-size: 40pt;
+    position:absolute;
+    right: 0px;
+    opacity: 0.1;
+    color: #777;
+    z-index: 9999;
+    &.glyphicon-zoom-in{
+      top: 30%;
+    }
+    &.glyphicon-zoom-out{
+      top: 50%;
+    }
+    &:hover{
+      opacity: 1.0;
+    }
+  }
   .sp-overview-deck {
     position: relative;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .5);

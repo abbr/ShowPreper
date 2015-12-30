@@ -71,7 +71,7 @@ let App = React.createClass({
         widgetIdx = widget.index
         break
     }
-    let selectedWidget = component.components[widgetIdx]
+    let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
     _.merge(selectedWidget, newProps)
     deck.save()
     if (markUndoDesc) {
