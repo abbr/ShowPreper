@@ -8,24 +8,39 @@
   }
   .sp-edit-ctrls{
     visibility: hidden;
+    font-size: 14pt;
+    .scale{
+      position: absolute;
+      right: -12pt;
+      bottom: 1pt;
+      cursor: se-resize;
+      transform: rotate(45deg);
+    }
+    .rotate{
+      position: absolute;
+      right: -13pt;
+      top: 50%;
+    }
+  }
+  &.sp-overview-component .sp-edit-ctrls{
+    font-size: 40pt;
+    .scale{
+      position: absolute;
+      right: -35pt;
+      bottom: -40pt;
+      cursor: se-resize;
+      transform: rotate(45deg);
+    }
+    .rotate{
+      position: absolute;
+      right: -35pt;
+      top: 50%;
+    }
   }
   &.selected{
     z-index: 1;
     .sp-edit-ctrls{
       visibility: visible;
-      font-size: 14pt;
-      .scale{
-        position: absolute;
-        right: -12pt;
-        bottom: 1pt;
-        cursor: se-resize;
-        transform: rotate(45deg);
-      }
-      .rotate{
-        position: absolute;
-        right: -13pt;
-        top: 50%;
-      }
     }
   }
   input {
