@@ -17,17 +17,18 @@ let Overview = React.createClass({
     this._scale({width: bb.right - bb.left, height: bb.bottom - bb.top})
   },
   render: function () {
-    let deckView = this.props.deck.getSlides().map((slide, index) => {
-      let bb = this.props.deck.getSlideBoundingBox(slide, index)
-      slide.y = bb.top
-      slide.x = bb.left
-      slide.width = bb.right - bb.left
-      slide.height = bb.bottom - bb.top
-      slide.type || (slide.type = "Slide")
+    let deckView = this.props.deck.components.map((component, index) => {
+      if (component.type === 'Slide') {
+        let bb = this.props.deck.getSlideBoundingBox(component)
+        component.y = bb.top
+        component.x = bb.left
+        component.width = bb.right - bb.left
+        component.height = bb.bottom - bb.top
+      }
       return (
         <EditableComponent
-          className="sp-overview-slide"
-          component={slide}
+          className="sp-overview-component"
+          component={component}
           key={index}
           idx={index}
           ref={index}
