@@ -10,7 +10,7 @@ let PositionControl = React.createClass({
     }
     let newPropObj = {}
     newPropObj[p] = parseInt(v)
-    this.props.onSelectedWidgetUpdated(this.props.idx, newPropObj, lang.moveComponents)
+    this.props.onSelectedWidgetUpdated({container: this.props.component, index:this.props.idx}, newPropObj, lang.moveComponents)
   },
   render: function () {
     return <div className="positioningCtrls">

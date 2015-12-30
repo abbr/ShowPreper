@@ -60,9 +60,9 @@ let App = React.createClass({
   },
   onSelectedWidgetUpdated: function (widget, newProps, markUndoDesc) {
     let component, widgetIdx
+    let deck = this.state.deck
     switch (typeof(widget)) {
       case 'number':
-        let deck = this.state.deck
         component = deck.getActiveSlide()
         widgetIdx = widget
         break
@@ -102,15 +102,23 @@ let App = React.createClass({
 
   panBy: function (axis, delta, markUndoDesc) {
     let deck = this.state.deck
-    let slide = deck.getActiveSlide()
-    let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
+    let component
+    switch (this.state.view) {
+      case 'slides':
+        component = deck.getActiveSlide()
+        break
+      case 'overview':
+        component = deck
+        break
+    }
+    let selectedWidgets = component.components.reduce((pv, e, i, a)=> {
       if (e.selected) pv.push(i)
       return pv
     }, [])
     selectedWidgets.forEach(e=> {
       let newProp = {}
-      newProp[axis] = slide.components[e][axis] + delta
-      this.onSelectedWidgetUpdated(e, newProp, markUndoDesc)
+      newProp[axis] = component.components[e][axis] + delta
+      this.onSelectedWidgetUpdated({container: component, index: e}, newProp, markUndoDesc)
     })
   },
 
@@ -131,6 +139,7 @@ let App = React.createClass({
           deck={this.state.deck}
           component={this.state.deck}
           selectedWidgets={selectedWidgets}
+          onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
         />
     }
     return <div className="sp-container">

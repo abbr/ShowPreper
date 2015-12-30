@@ -43,7 +43,7 @@ exports.onDraggableMouseMove = function (ev) {
   let scale = this.props.scale || 1
   this._draggable.dragged = true
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
       x: this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale),
       y: this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)
     })
@@ -57,13 +57,13 @@ exports.onDraggableMouseUp = function (ev) {
   document.body.style.MsUserSelect = ""
   document.removeEventListener('mousemove', this.onDraggableMouseMove)
   document.removeEventListener('mouseup', this.onDraggableMouseUp)
+  if(!this._draggable.dragged) return
   let scale = this.props.scale || 1
-
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
         x: this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale),
         y: this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)
-      }, this._draggable.dragged && lang.moveComponents
+      }, lang.moveComponents
     )
   })
   ev.stopPropagation && ev.stopPropagation()

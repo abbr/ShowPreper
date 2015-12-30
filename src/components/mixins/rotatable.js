@@ -44,7 +44,7 @@ exports.onRotateMouseDown = function (ev, idx) {
 exports.onRotateMouseMove = function (ev) {
   let deltaRotate = this.computeDeltaRotate(ev)
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
       rotate: this._rotatable.rotates[e] + deltaRotate
     })
   })
@@ -59,7 +59,7 @@ exports.onRotateMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onRotateMouseUp)
   let deltaRotate = this.computeDeltaRotate(ev)
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
         rotate: this._rotatable.rotates[e] + deltaRotate
       },
       lang.rotateComponents

@@ -41,7 +41,7 @@ exports.onScaleMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onScaleMouseUp)
   let deltaScale = this.computeDeltaScale(ev)
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
         scale: {
           x: this._scalable.scales[e].osx * deltaScale,
           y: this._scalable.scales[e].osy * deltaScale
@@ -56,7 +56,7 @@ exports.onScaleMouseUp = function (ev) {
 exports.onScaleMouseMove = function (ev) {
   let deltaScale = this.computeDeltaScale(ev)
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
       scale: {
         x: this._scalable.scales[e].osx * deltaScale,
         y: this._scalable.scales[e].osy * deltaScale
