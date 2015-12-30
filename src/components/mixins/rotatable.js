@@ -21,7 +21,6 @@ exports.onRotateMouseDown = function (ev, idx) {
   rotatable.rotates = []
   this._rotatable = rotatable
   rotatable.selectedIdx = idx
-  let slide = this.props.deck.getActiveSlide()
   let computedStyle = ReactDOM.findDOMNode(this.refs[idx]).getBoundingClientRect()
   rotatable.cX = computedStyle.left + computedStyle.width / 2
   rotatable.cY = computedStyle.top + computedStyle.height / 2
@@ -36,23 +35,15 @@ exports.onRotateMouseDown = function (ev, idx) {
     y: rotatable.oY
   }
   rotatable.aO = this.computeAngle(pC, pO)
-
-  if (!this.selectedWidgets) {
-    this.selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
-      if (e.selected) pv.push(i)
-      return pv
-    }, [])
-  }
-
-  this.selectedWidgets.forEach(e => {
-    rotatable.rotates[e] = slide.components[e].rotate || 0
+  this.props.selectedWidgets.forEach(e => {
+    rotatable.rotates[e] = this.props.component.components[e].rotate || 0
   })
   ev.stopPropagation && ev.stopPropagation()
 }
 
 exports.onRotateMouseMove = function (ev) {
   let deltaRotate = this.computeDeltaRotate(ev)
-  this.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
       rotate: this._rotatable.rotates[e] + deltaRotate
     })
@@ -67,7 +58,7 @@ exports.onRotateMouseUp = function (ev) {
   document.removeEventListener('mousemove', this.onRotateMouseMove)
   document.removeEventListener('mouseup', this.onRotateMouseUp)
   let deltaRotate = this.computeDeltaRotate(ev)
-  this.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
         rotate: this._rotatable.rotates[e] + deltaRotate
       },

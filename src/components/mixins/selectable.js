@@ -10,11 +10,7 @@ exports.componentWillUnmount = function () {
 }
 exports.onSelectionMouseDown = function (ev, i) {
   ev.stopPropagation && ev.stopPropagation()
-  let slide = this.props.deck.getActiveSlide()
-  let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
-    if (e.selected) pv.push(i)
-    return pv
-  }, [])
+  let selectedWidgets = this.props.selectedWidgets
   if (!ev.shiftKey) {
     if (selectedWidgets.length > 1 && typeof(i) === 'number') {
       return false
@@ -24,9 +20,7 @@ exports.onSelectionMouseDown = function (ev, i) {
   if (typeof(i) === 'number') {
     selectedWidgets.unshift(i)
   }
-  // call this.selectedWidgets redundantly to avoid event racing
-  this.selectedWidgets = selectedWidgets
-  slide.components.forEach((e, i, a) => {
+  this.props.component.components.forEach((e, i, a) => {
     if ((e.selected && selectedWidgets.indexOf(i) < 0) ||
       (selectedWidgets.indexOf(i) >= 0 && e.selected !== true)) {
       this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(i, {

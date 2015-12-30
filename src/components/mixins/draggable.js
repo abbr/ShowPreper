@@ -26,14 +26,7 @@ exports.onDraggableMouseDown = function (ev) {
   this._draggable = {}
   this._draggable.drags = []
   this._draggable.dragged = false
-  if(!this.selectedWidgets) {
-    let slide = this.props.deck.getActiveSlide()
-    this.selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
-      if (e.selected) pv.push(i)
-      return pv
-    }, [])
-  }
-  this.selectedWidgets.forEach(e => {
+  this.props.selectedWidgets.forEach(e => {
     let computedStyle = window.getComputedStyle(ReactDOM.findDOMNode(this.refs[e]))
     let draggable = {}
     draggable.oleft = parseInt(computedStyle.left, 10) || 0
@@ -49,7 +42,7 @@ exports.onDraggableMouseDown = function (ev) {
 exports.onDraggableMouseMove = function (ev) {
   let scale = this.props.scale || 1
   this._draggable.dragged = true
-  this.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
       x: this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale),
       y: this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)
@@ -66,7 +59,7 @@ exports.onDraggableMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onDraggableMouseUp)
   let scale = this.props.scale || 1
 
-  this.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated(e, {
         x: this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale),
         y: this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)
