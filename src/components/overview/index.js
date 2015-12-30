@@ -66,6 +66,7 @@ let Overview = React.createClass({
     })
     return (
       <div
+        onMouseDown={this.onSelectionMouseDown}
         className="sp-overview">
         <div
           className="sp-overview-deck"
