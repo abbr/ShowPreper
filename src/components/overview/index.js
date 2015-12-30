@@ -50,6 +50,7 @@ let Overview = React.createClass({
         <EditableComponent
           className="sp-overview-component"
           component={component}
+          container={this.props.deck}
           key={index}
           idx={index}
           ref={index}
@@ -59,6 +60,7 @@ let Overview = React.createClass({
           onMouseUp={this.onMouseUp}
           onScaleMouseDown={this.onScaleMouseDown}
           onRotateMouseDown={this.onRotateMouseDown}
+          onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
         />
       )
     })

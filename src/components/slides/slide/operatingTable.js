@@ -48,6 +48,7 @@ let OperatingTable = React.createClass({
       return (
         <EditableComponent
           component={component}
+          container={slide}
           onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           key={index}
           idx={index}
