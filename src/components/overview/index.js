@@ -25,7 +25,7 @@ let Overview = React.createClass({
   },
   _resized: function () {
     let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
-    this._scale({width: bb.right - bb.left, height: bb.bottom - bb.top})
+    this._scale(bb)
   },
   zoom: function (pct) {
     let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
@@ -44,15 +44,15 @@ let Overview = React.createClass({
     this._resized()
   },
   zoomIn: function () {
-    this.zoomInTimer = setInterval(()=>this.zoom(-0.01),100)
+    this.zoomInTimer = setInterval(()=>this.zoom(-0.01), 100)
   },
   stopZoomIn: function () {
     clearInterval(this.zoomInTimer)
   },
   zoomOut: function () {
-    this.zoomOutTimer = setInterval(()=>this.zoom(0.01),100)
+    this.zoomOutTimer = setInterval(()=>this.zoom(0.01), 100)
   },
-  stopZoomOut: function(){
+  stopZoomOut: function () {
     clearInterval(this.zoomOutTimer)
   },
   onMouseUp: function () {
