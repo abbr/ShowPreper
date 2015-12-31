@@ -16,7 +16,6 @@ exports.onRotateMouseDown = function (ev, idx) {
   document.body.style.MozUserSelect = "none"
   document.body.style.MsUserSelect = "none"
 
-  let scale = this.state.scale || 1
   let rotatable = {}
   rotatable.rotates = []
   this._rotatable = rotatable

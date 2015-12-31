@@ -44,13 +44,15 @@ let Overview = React.createClass({
     this._resized()
   },
   zoomIn: function () {
-    this.zoomInTimer = setInterval(()=>this.zoom(-0.01), 100)
+    this.zoom(-0.1)
+    this.zoomInTimer = setInterval(()=>this.zoom(-0.1), 100)
   },
   stopZoomIn: function () {
     clearInterval(this.zoomInTimer)
   },
   zoomOut: function () {
-    this.zoomOutTimer = setInterval(()=>this.zoom(0.01), 100)
+    this.zoom(0.1)
+    this.zoomOutTimer = setInterval(()=>this.zoom(0.1), 100)
   },
   stopZoomOut: function () {
     clearInterval(this.zoomOutTimer)

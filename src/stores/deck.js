@@ -3,7 +3,7 @@ import _ from 'lodash'
 const _spDefaultFileNm = 'default.json'
 import 'babel-polyfill'
 import SampleDeck from "sources/sample.json"
-const DEFAULT_SLIDE_SIZE = {width: 640, height: 480}
+const DEFAULT_SLIDE_SIZE = {width: 900, height: 700}
 
 let Deck = function () {
   var defaultDeckObj
