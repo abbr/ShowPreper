@@ -41,4 +41,6 @@ module.exports = {
   moveComponents: 'move components',
   scaleComponents: 'scale components',
   rotateComponents: 'rotate components',
+  show: 'Show',
+  handouts: 'Handouts',
 }

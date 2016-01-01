@@ -40,4 +40,6 @@ module.exports = {
   createPresentation: 'Create Presentation',
   moveComponents: 'move components',
   rotateComponents: 'rotate components',
+  show: 'Show',
+  handouts: 'Handouts',
 }

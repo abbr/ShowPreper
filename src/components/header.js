@@ -44,7 +44,8 @@ let Header = React.createClass({
               </button>
             )}
           </div>
-          <ul className="nav navbar-btn navbar-right sp-view-btns">
+          <div className="navbar-right">
+          <ul className="nav navbar-btn sp-view-btns">
             <li style={this.props.currentView!=='slides'?{}: {display: 'none'}}>
               <button type="button"
                       className="btn btn-default"
@@ -68,6 +69,21 @@ let Header = React.createClass({
               </button>
             </li>
           </ul>
+
+          <div className="nav navbar-btn btn-group">
+            <button type="button" className="btn btn-success">
+              <span className={'glyphicon glyphicon-play'}/>
+              <div>{lang.show}</div>
+            </button>
+            <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span className="caret"></span>
+              <span className="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul className="dropdown-menu">
+              <li><a href="#">{lang.handouts}</a></li>
+            </ul>
+          </div>
+          </div>
         </div>
         {/*<!-- /.navbar-collapse -->*/}
       </div>
