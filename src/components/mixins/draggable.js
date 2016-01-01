@@ -40,7 +40,7 @@ exports.onDraggableMouseDown = function (ev) {
 }
 
 exports.onDraggableMouseMove = function (ev) {
-  let scale = this.props.scale || 1
+  let scale = this.state.scale || 1
   this._draggable.dragged = true
   this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
@@ -58,7 +58,7 @@ exports.onDraggableMouseUp = function (ev) {
   document.removeEventListener('mousemove', this.onDraggableMouseMove)
   document.removeEventListener('mouseup', this.onDraggableMouseUp)
   if(!this._draggable.dragged) return
-  let scale = this.props.scale || 1
+  let scale = this.state.scale || 1
   this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
         x: this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale),

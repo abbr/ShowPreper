@@ -53,18 +53,18 @@ exports._scale = function (size) {
   let leftOffset = (domWidth - componentWidth * scale) / 2
   let topOffset = (domHeight - componentHeight * scale) / 2
   let scaleStr = " scale(" + scale + ")"
-  let componentCx = (componentLeft + componentRight)/2
-  let componentCy = (componentTop + componentBottom)/2
+  let componentCx = (componentLeft + componentRight) / 2
+  let componentCy = (componentTop + componentBottom) / 2
   let domCx = componentWidth * scale / 2
   let domCy = componentHeight * scale / 2
-  let translateX = parseInt(domCx - componentCx )
-  let translateY = parseInt(domCy - componentCy )
+  let translateX = domCx - componentCx
+  let translateY = domCy - componentCy
   let translateStr = ' translate(' + translateX + 'px,' + translateY + 'px)'
   let scaleStyle = {
     transform: translateStr + scaleStr,
     marginLeft: leftOffset + 'px',
-    width: componentWidth,
-    height: componentHeight,
+    width: componentCx * 2,
+    height: componentCy * 2,
   }
   this.setState({
     scaleStyle: scaleStyle,
