@@ -16,7 +16,7 @@ let EditableComponent = React.createClass({
   },
   render: function () {
     let cmpClass = classNames(this.props.className, {
-      'selected': this.props.selected
+      'sp-selected': this.props.selected
     });
     return (
       <DisplayableComponent {...this.props}

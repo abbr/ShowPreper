@@ -1,10 +1,13 @@
-.sp-widget{
+.sp-component{
   position: absolute;
   .sp-widget-slide{
     height: 100%;
   }
-  .selected{
+  .sp-selected{
     border: orange 3pt dashed!important;
+    > .sp-widget{
+      border: 1pt dotted blue;
+    }
   }
   :first-child{
     height: 100%;
@@ -40,7 +43,7 @@
       top: 50%;
     }
   }
-  &.selected{
+  &.sp-selected{
     z-index: 1;
     .sp-edit-ctrls{
       visibility: visible;
