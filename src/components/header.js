@@ -80,6 +80,7 @@ let Header = React.createClass({
               <span className="sr-only">Toggle Dropdown</span>
             </button>
             <ul className="dropdown-menu">
+              <li><a href="#">{lang.presentation}</a></li>
               <li><a href="#">{lang.handouts}</a></li>
             </ul>
           </div>
