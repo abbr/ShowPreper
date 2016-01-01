@@ -14,6 +14,7 @@ let TextBox = React.createClass({
       )
     })
     return <div
+      style={this.props.style}
       className={classNames(this.props.className,'sp-widget-slide')}
     >
       {componentsView}

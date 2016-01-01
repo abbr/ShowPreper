@@ -7,23 +7,18 @@ body {
 }
 
 #app {
-  /*
-   For Medium devices (desktops, 992px and up), no page level scroll
-  */
-  @media (min-width: @screen-md-min) {
-    height: 100%;
-  }
+  height: 100%;
   .sp-container {
     display: flex;
     flex-flow: column;
     align-items: stretch;
     height: 100%;
-    .sp-header{
+    .sp-header {
       &.navbar {
         margin-bottom: 0px;
-        .navbar-header  .dropdown {
+        .navbar-header .dropdown {
           float: left;
-          .badge{
+          .badge {
             position: absolute;
             right: 5px;
           }

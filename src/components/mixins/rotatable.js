@@ -44,7 +44,7 @@ exports.onRotateMouseMove = function (ev) {
   let deltaRotate = this.computeDeltaRotate(ev)
   this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
-      rotate: this._rotatable.rotates[e] + deltaRotate
+      rotate: (this._rotatable.rotates[e] + deltaRotate)%(2*Math.PI)
     })
   })
   ev.stopPropagation && ev.stopPropagation()
@@ -59,7 +59,7 @@ exports.onRotateMouseUp = function (ev) {
   let deltaRotate = this.computeDeltaRotate(ev)
   this.props.selectedWidgets.forEach(e=> {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
-        rotate: this._rotatable.rotates[e] + deltaRotate
+        rotate: (this._rotatable.rotates[e] + deltaRotate)%(2*Math.PI)
       },
       lang.rotateComponents
     )
