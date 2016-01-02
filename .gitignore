@@ -31,6 +31,7 @@ bower_components/
 
 # NetBeans
 nbproject/private/
+
 /dist/
 
 #WebStorm

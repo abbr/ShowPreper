@@ -8,7 +8,10 @@ var baseConfig = require('./base');
 var BowerWebpackPlugin = require('bower-webpack-plugin');
 
 var config = _.merge({
-  entry: path.join(__dirname, '../src/components/run'),
+  entry: {
+    app: path.join(__dirname, '../src/components/run'),
+    presentation: './src/components/show/presentation',
+  },
   cache: false,
   devtool: 'sourcemap',
   plugins: [

@@ -8,11 +8,12 @@ var baseConfig = require('./base');
 var BowerWebpackPlugin = require('bower-webpack-plugin');
 
 var config = _.merge({
-  entry: [
-    'webpack-dev-server/client?http://127.0.0.1:' + baseConfig.port,
-    'webpack/hot/only-dev-server',
-    './src/components/run'
-  ],
+  entry: {
+    devserver: 'webpack-dev-server/client?http://127.0.0.1:' +baseConfig.port,
+    hot: 'webpack/hot/only-dev-server',
+    app: './src/components/run',
+    presentation: './src/components/show/presentation',
+  },
   cache: true,
   devtool: 'inline-source-map',
   plugins: [
