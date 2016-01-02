@@ -71,17 +71,17 @@ let Header = React.createClass({
           </ul>
 
           <div className="nav navbar-btn btn-group">
-            <button type="button" className="btn btn-success">
+            <a type="button" className="btn btn-success"  href="./presentation.html" target="_blank">
               <span className={'glyphicon glyphicon-play'}/>
               <div>{lang.show}</div>
-            </button>
+            </a>
             <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span className="caret"></span>
               <span className="sr-only">Toggle Dropdown</span>
             </button>
             <ul className="dropdown-menu">
-              <li><a href="#">{lang.presentation}</a></li>
-              <li><a href="#">{lang.handouts}</a></li>
+              <li><a href="./presentation.html" target="_blank">{lang.presentation}</a></li>
+              <li><a href="./handout.html" target="_blank">{lang.handouts}</a></li>
             </ul>
           </div>
           </div>
