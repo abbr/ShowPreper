@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'impress.js'
-import './impress.less'
+import './presentation.less'
 import DeckStore from 'stores/deck'
 
 let Presentation = React.createClass({
