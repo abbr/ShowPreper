@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom'
 import 'impress.js'
 import './presentation.less'
 import DeckStore from 'stores/deck'
+import AutoScale from 'components/mixins/autoScale'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 
 let Presentation = React.createClass({
+  mixins: [AutoScale],
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck()
   }),
@@ -38,6 +40,18 @@ let Presentation = React.createClass({
         />
       )
     })
+    let overviewX = (this.state.deck.boundingBox.left + this.state.deck.boundingBox.right) / 2
+    let overviewY = (this.state.deck.boundingBox.top + this.state.deck.boundingBox.bottom) / 2
+    let overviewWidth = this.state.deck.boundingBox.right - this.state.deck.boundingBox.left
+    let overviewHeight = this.state.deck.boundingBox.bottom - this.state.deck.boundingBox.top
+    let overviewScale = this.getFitSquareScaleFactor(this.state.deck.slideWidth, this.state.deck.slideHeight, overviewWidth, overviewHeight)
+    deckView.push(<div id="overview"
+                       key={this.state.deck.components.length}
+                       className="step"
+                       data-x={overviewX}
+                       data-y={overviewY}
+                       data-scale={overviewScale}/>)
+
     return <div>
       <div className="fallback-message">
         <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a

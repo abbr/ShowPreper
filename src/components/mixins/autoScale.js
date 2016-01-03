@@ -1,18 +1,8 @@
 'use strict'
 import ReactDOM from 'react-dom'
 
-let getFitSquareScaleFactor = function (desiredWidth, desiredHeight, width, height) {
-  var xScale = width / desiredWidth
-  var yScale = height / desiredHeight
-
-  var newHeight = desiredHeight * xScale
-  if (newHeight > height) {
-    var scale = yScale
-  } else {
-    var scale = xScale
-  }
-
-  return scale
+exports.getFitSquareScaleFactor = function (desiredWidth, desiredHeight, width, height) {
+  return (desiredWidth / desiredHeight < width / height) ? height / desiredHeight : width / desiredWidth
 }
 
 exports._scale = function (size) {
@@ -44,7 +34,7 @@ exports._scale = function (size) {
     componentLeft = size.left
   }
 
-  let scale = getFitSquareScaleFactor(
+  let scale = exports.getFitSquareScaleFactor(
     componentWidth,
     componentHeight,
     domWidth,
