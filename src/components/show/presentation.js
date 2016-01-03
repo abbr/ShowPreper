@@ -58,7 +58,11 @@ let Presentation = React.createClass({
           simplified version of this presentation.</p>
         <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
       </div>
-      <div id="impress" data-width={this.state.deck.slideWidth} data-height={this.state.deck.slideHeight}>
+      <div id="impress"
+           //virtually disable max scale
+           data-max-scale="9999"
+           data-width={this.state.deck.slideWidth}
+           data-height={this.state.deck.slideHeight}>
         {deckView}
       </div>
       <div className="hint">
