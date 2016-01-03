@@ -32,11 +32,13 @@ let Presentation = React.createClass({
           ownClassName="step slide"
           data-x={component.x+component.width/2}
           data-y={component.y+component.height/2}
+          data-rotate={component.rotate?component.rotate*180/Math.PI:0}
           component={component}
           container={this.props.deck}
           key={index}
           idx={index}
           ref={index}
+          combinedTransform={true}
         />
       )
     })
@@ -59,8 +61,7 @@ let Presentation = React.createClass({
         <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
       </div>
       <div id="impress"
-           //virtually disable max scale
-           data-max-scale="9999"
+           data-max-scale="9999" //virtually disable max scale
            data-width={this.state.deck.slideWidth}
            data-height={this.state.deck.slideHeight}>
         {deckView}

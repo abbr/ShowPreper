@@ -18,10 +18,15 @@ let DisplayableComponent = React.createClass({
     this.props.component.height && (componentStyle.height = this.props.component.height)
     let scaleX = (this.props.component.scale && this.props.component.scale.x) || 1
     let scaleY = (this.props.component.scale && this.props.component.scale.y) || 1
-
     componentStyle.transform += " scale(" + scaleX + "," + scaleY + ")"
     if (this.props.component.rotate) {
-      widgetStyle.transform = "rotate(" + this.props.component.rotate + "rad)"
+      let rotStr = " rotate(" + this.props.component.rotate + "rad)"
+      if(this.props.combinedTransform){
+        componentStyle.transform += rotStr
+      }
+      else{
+        widgetStyle.transform = rotStr
+      }
     }
     return (
       <div
