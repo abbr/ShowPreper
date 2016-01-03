@@ -22,7 +22,7 @@ let DisplayableComponent = React.createClass({
     return (
       <div
         {...this.props}
-        className={classNames("sp-component",this.props.className)}
+        className={classNames("sp-component", this.props.ownClassName,this.props.className)}
         style={componentStyle}>
         <div
           className={this.props.className}
