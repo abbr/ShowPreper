@@ -18,15 +18,18 @@ let Presentation = React.createClass({
   },
   render: function () {
     let deckView = this.state.deck.components.map((component, index) => {
-      let bb
       if (component.type === 'Slide') {
-        bb = this.state.deck.getSlideBoundingBox(component)
+        let bb = this.state.deck.getSlideBoundingBox(component)
+        component.y = bb.top
+        component.x = bb.left
+        component.width = bb.right - bb.left
+        component.height = bb.bottom - bb.top
       }
       return (
         <DisplayableComponent
           ownClassName="step slide"
-          data-x={(bb.left+bb.right)/2}
-          data-y={(bb.top+bb.bottom)/2}
+          data-x={component.x+component.width/2}
+          data-y={component.y+component.height/2}
           component={component}
           container={this.props.deck}
           key={index}
@@ -41,7 +44,7 @@ let Presentation = React.createClass({
           simplified version of this presentation.</p>
         <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
       </div>
-      <div id="impress">
+      <div id="impress" data-width={this.state.deck.slideWidth} data-height={this.state.deck.slideHeight}>
         {deckView}
       </div>
       <div className="hint">
