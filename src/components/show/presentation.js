@@ -20,18 +20,19 @@ let Presentation = React.createClass({
   },
   render: function () {
     let deckView = this.state.deck.components.map((component, index) => {
+      let bb
       if (component.type === 'Slide') {
-        let bb = this.state.deck.getSlideBoundingBox(component)
-        component.y = bb.top
-        component.x = bb.left
+        bb = this.state.deck.getSlideBoundingBox(component)
         component.width = bb.right - bb.left
         component.height = bb.bottom - bb.top
+        delete component.x
+        delete component.y
       }
       return (
         <DisplayableComponent
           ownClassName="step slide"
-          data-x={component.x+component.width/2}
-          data-y={component.y+component.height/2}
+          data-x={(bb.left+bb.right)/2}
+          data-y={(bb.top+bb.bottom)/2}
           data-rotate={component.rotate?component.rotate*180/Math.PI:0}
           component={component}
           container={this.props.deck}

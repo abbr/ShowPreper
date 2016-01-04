@@ -7,13 +7,10 @@ let DisplayableComponent = React.createClass({
     const WidgetFactory = require('./widgetFactory')
     let Widget = WidgetFactory(this.props.component)
 
-    let widgetStyle = {}, componentStyle = {}
+    let widgetStyle = {transform: ''}, componentStyle = {transform: ''}
 
-    let translate3D = {}
-    translate3D.x = this.props.component.x || 0
-    translate3D.y = this.props.component.y || 0
-    translate3D.z = this.props.component.z || 0
-    componentStyle.transform = 'translate3d(' + translate3D.x + 'px,' + translate3D.y + 'px,' + translate3D.z + 'px)'
+    this.props.component.x && (componentStyle.left = this.props.component.x)
+    this.props.component.y && (componentStyle.top = this.props.component.y)
     this.props.component.width && (componentStyle.width = this.props.component.width)
     this.props.component.height && (componentStyle.height = this.props.component.height)
     let scaleX = (this.props.component.scale && this.props.component.scale.x) || 1
@@ -25,7 +22,7 @@ let DisplayableComponent = React.createClass({
         componentStyle.transform += rotStr
       }
       else{
-        widgetStyle.transform = rotStr
+        widgetStyle.transform += rotStr
       }
     }
     return (
