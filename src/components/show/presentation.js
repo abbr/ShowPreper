@@ -33,6 +33,7 @@ let Presentation = React.createClass({
           data-x={component.x+component.width/2}
           data-y={component.y+component.height/2}
           data-rotate={component.rotate?component.rotate*180/Math.PI:0}
+          data-scale={component.scale?Math.max(component.scale.x,component.scale.y):1}
           component={component}
           container={this.props.deck}
           key={index}
@@ -42,10 +43,11 @@ let Presentation = React.createClass({
         />
       )
     })
-    let overviewX = (this.state.deck.boundingBox.left + this.state.deck.boundingBox.right) / 2
-    let overviewY = (this.state.deck.boundingBox.top + this.state.deck.boundingBox.bottom) / 2
-    let overviewWidth = this.state.deck.boundingBox.right - this.state.deck.boundingBox.left
-    let overviewHeight = this.state.deck.boundingBox.bottom - this.state.deck.boundingBox.top
+    let bb = this.state.deck.boundingBox || this.state.deck.getDefaultDeckBoundingBox()
+    let overviewX = (bb.left + bb.right) / 2
+    let overviewY = (bb.top + bb.bottom) / 2
+    let overviewWidth = bb.right - bb.left
+    let overviewHeight = bb.bottom - bb.top
     let overviewScale = this.getFitSquareScaleFactor(this.state.deck.slideWidth, this.state.deck.slideHeight, overviewWidth, overviewHeight)
     deckView.push(<div id="overview"
                        key={this.state.deck.components.length}
