@@ -60,4 +60,14 @@ exports._scale = function (size) {
     scaleStyle: scaleStyle,
     scale: scale
   })
+  if(leftOffset > 1 || topOffset > 1){
+    let suggestedBB = {}
+    let suggestedWidth = domWidth/scale
+    let suggestedHeight = domHeight/scale
+    suggestedBB.left = componentCx - suggestedWidth/2
+    suggestedBB.right = componentCx + suggestedWidth/2
+    suggestedBB.top = componentCy - suggestedHeight/2
+    suggestedBB.bottom = componentCy + suggestedHeight/2
+    return suggestedBB
+  }
 }
