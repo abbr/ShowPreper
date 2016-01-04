@@ -9,8 +9,11 @@ let DisplayableComponent = React.createClass({
 
     let widgetStyle = {transform: ''}, componentStyle = {transform: ''}
 
-    this.props.component.x && (componentStyle.left = this.props.component.x)
-    this.props.component.y && (componentStyle.top = this.props.component.y)
+    let translate3D = {}
+    translate3D.x = this.props.component.x || 0
+    translate3D.y = this.props.component.y || 0
+    translate3D.z = this.props.component.z || 0
+    componentStyle.transform += ' translate3d(' + translate3D.x + 'px,' + translate3D.y + 'px,' + translate3D.z + 'px)'
     this.props.component.width && (componentStyle.width = this.props.component.width)
     this.props.component.height && (componentStyle.height = this.props.component.height)
     let scaleX = (this.props.component.scale && this.props.component.scale.x) || 1
