@@ -27,7 +27,6 @@ let Overview = React.createClass({
     let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     let newBB = this._scale(bb)
     if(newBB){
-      console.log('new: '+ newBB.top+','+newBB.right+','+newBB.bottom+','+newBB.left+',')
       this.props.onSelectedWidgetUpdated({container: this.props.deck, index: -1}, {boundingBox: newBB})
     }
   },

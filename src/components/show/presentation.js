@@ -48,7 +48,12 @@ let Presentation = React.createClass({
     let overviewY = (bb.top + bb.bottom) / 2
     let overviewWidth = bb.right - bb.left
     let overviewHeight = bb.bottom - bb.top
-    let overviewScale = this.getFitSquareScaleFactor(this.state.deck.slideWidth, this.state.deck.slideHeight, overviewWidth, overviewHeight)
+    let overviewScale = 1 / this.getFitSquareScaleFactor(overviewWidth, overviewHeight, window.innerWidth, window.innerHeight)
+    let slideScale = 1 / this.getFitSquareScaleFactor(this.state.deck.slideWidth, this.state.deck.slideHeight, window.innerWidth, window.innerHeight)
+    if (isNaN(slideScale)) {
+      slideScale = 1
+    }
+    overviewScale /= slideScale
     deckView.push(<div id="overview"
                        key={this.state.deck.components.length}
                        className="step"
