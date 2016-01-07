@@ -1,13 +1,15 @@
 'use strict'
 import ReactDOM from 'react-dom'
 import lang from 'i18n/lang'
+import _ from 'lodash'
 
 exports.componentWillUnmount = function () {
   document.removeEventListener('mousemove', this.onRotateMouseMove)
   document.removeEventListener('mouseup', this.onRotateMouseUp)
 }
 
-exports.onRotateMouseDown = function (ev, idx) {
+exports.onRotateMouseDown = function (ev, idx, _axis) {
+  let axis = _axis || 'z'
   // only left mouse button
   if (ev.button !== 0) return
   document.addEventListener('mousemove', this.onRotateMouseMove)
@@ -20,6 +22,7 @@ exports.onRotateMouseDown = function (ev, idx) {
   rotatable.rotates = []
   this._rotatable = rotatable
   rotatable.selectedIdx = idx
+  rotatable.axis = axis.toLowerCase()
   let computedStyle = ReactDOM.findDOMNode(this.refs[idx]).getBoundingClientRect()
   rotatable.cX = computedStyle.left + computedStyle.width / 2
   rotatable.cY = computedStyle.top + computedStyle.height / 2
@@ -35,7 +38,8 @@ exports.onRotateMouseDown = function (ev, idx) {
   }
   rotatable.aO = this.computeAngle(pC, pO)
   this.props.selectedWidgets.forEach(e => {
-    rotatable.rotates[e] = this.props.component.components[e].rotate || 0
+    rotatable.rotates[e] = _.cloneDeep(this.props.component.components[e].rotate) || {x: 0, y: 0, z: 0}
+    rotatable.rotates[e][axis] = rotatable.rotates[e][axis] || 0
   })
   ev.stopPropagation && ev.stopPropagation()
 }
@@ -43,8 +47,15 @@ exports.onRotateMouseDown = function (ev, idx) {
 exports.onRotateMouseMove = function (ev) {
   let deltaRotate = this.computeDeltaRotate(ev)
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
-      rotate: (this._rotatable.rotates[e] + deltaRotate)%(2*Math.PI)
+    let axis = this._rotatable.axis.toLowerCase()
+    let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
+    let newRotate = _.cloneDeep(this._rotatable.rotates[e])
+    newRotate[axis] = newRotateAngle
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+      container: this.props.component,
+      index: e
+    }, {
+      rotate: newRotate
     })
   })
   ev.stopPropagation && ev.stopPropagation()
@@ -58,8 +69,16 @@ exports.onRotateMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onRotateMouseUp)
   let deltaRotate = this.computeDeltaRotate(ev)
   this.props.selectedWidgets.forEach(e=> {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({container: this.props.component, index: e}, {
-        rotate: (this._rotatable.rotates[e] + deltaRotate)%(2*Math.PI)
+    let axis = this._rotatable.axis.toLowerCase()
+    let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
+    let newRotate = _.cloneDeep(this._rotatable.rotates[e])
+    newRotate[axis] = newRotateAngle
+
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+        container: this.props.component,
+        index: e
+      }, {
+        rotate: newRotate
       },
       lang.rotateComponents
     )

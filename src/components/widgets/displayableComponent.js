@@ -20,7 +20,10 @@ let DisplayableComponent = React.createClass({
     let scaleY = (this.props.component.scale && this.props.component.scale.y) || 1
     componentStyle.transform += " scale(" + scaleX + "," + scaleY + ")"
     if (this.props.component.rotate) {
-      let rotStr = " rotate(" + this.props.component.rotate + "rad)"
+      let rotStr = ''
+      this.props.component.rotate.z && (rotStr += " rotateZ(" + this.props.component.rotate.z + "rad)")
+      this.props.component.rotate.y && (rotStr += " rotateY(" + this.props.component.rotate.y + "rad)")
+      this.props.component.rotate.x && (rotStr += " rotateX(" + this.props.component.rotate.x + "rad)")
       if(this.props.combinedTransform){
         componentStyle.transform += rotStr
       }

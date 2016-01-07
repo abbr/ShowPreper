@@ -14,16 +14,15 @@
             "x": 2,
             "y": 2
           },
-          "rotate": -0.785,
+          "rotate": {
+            "x": -0.785
+          },
           "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">yyy</div>"
         }
       ],
       "type": "Slide",
       "z": 0,
       "impScale": 3,
-      "rotateX": 0.76,
-      "rotateY": 0.74,
-      "rotateZ": 0,
       "selected": true
     },
     {
@@ -52,16 +51,20 @@
             "x": 2,
             "y": 2
           },
-          "rotate": -0.785,
+          "rotate": {
+            "z": -0.785
+          },
           "text": "<div style=\"font-family: Hammersmith One;font-size: 50pt\">cc</div>"
         }
       ],
       "type": "Slide",
       "z": 0,
       "impScale": 3,
-      "rotateX": 0.76,
-      "rotateY": 0.74,
-      "rotateZ": 0,
+      "rotate": {
+        "x": 0.76,
+        "y": 0.74,
+        "z": 0
+      },
       "selected": false
     },
     {

@@ -39,6 +39,21 @@ let EditableComponent = React.createClass({
           <RotateControl
             idx={this.props.idx}
             component={this.props.component}
+            axis="z"
+            position="right"
+            onRotateMouseDown={this.props.onRotateMouseDown}
+          />
+          <RotateControl
+            idx={this.props.idx}
+            component={this.props.component}
+            axis="x"
+            position="left"
+            onRotateMouseDown={this.props.onRotateMouseDown}
+          />
+          <RotateControl
+            idx={this.props.idx}
+            component={this.props.component}
+            axis="y"
             onRotateMouseDown={this.props.onRotateMouseDown}
           />
         </div>
