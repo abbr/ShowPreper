@@ -8,8 +8,9 @@ exports.componentWillUnmount = function () {
   document.removeEventListener('mouseup', this.onRotateMouseUp)
 }
 
-exports.onRotateMouseDown = function (ev, idx, _axis) {
+exports.onRotateMouseDown = function (ev, idx, _axis, _operation) {
   let axis = _axis || 'z'
+  let operation = _operation || 'rotate'
   // only left mouse button
   if (ev.button !== 0) return
   document.addEventListener('mousemove', this.onRotateMouseMove)
@@ -23,6 +24,7 @@ exports.onRotateMouseDown = function (ev, idx, _axis) {
   this._rotatable = rotatable
   rotatable.selectedIdx = idx
   rotatable.axis = axis.toLowerCase()
+  rotatable.operation=operation
   let computedStyle = ReactDOM.findDOMNode(this.refs[idx]).getBoundingClientRect()
   rotatable.cX = computedStyle.left + computedStyle.width / 2
   rotatable.cY = computedStyle.top + computedStyle.height / 2
@@ -38,7 +40,7 @@ exports.onRotateMouseDown = function (ev, idx, _axis) {
   }
   rotatable.aO = this.computeAngle(pC, pO)
   this.props.selectedWidgets.forEach(e => {
-    rotatable.rotates[e] = _.cloneDeep(this.props.component.components[e].rotate) || {x: 0, y: 0, z: 0}
+    rotatable.rotates[e] = _.cloneDeep(this.props.component.components[e][operation]) || {x: 0, y: 0, z: 0}
     rotatable.rotates[e][axis] = rotatable.rotates[e][axis] || 0
   })
   ev.stopPropagation && ev.stopPropagation()
@@ -51,12 +53,12 @@ exports.onRotateMouseMove = function (ev) {
     let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
     let newRotate = _.cloneDeep(this._rotatable.rotates[e])
     newRotate[axis] = newRotateAngle
+    let newOperation = {}
+    newOperation[this._rotatable.operation] = newRotate
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
       container: this.props.component,
       index: e
-    }, {
-      rotate: newRotate
-    })
+    }, newOperation)
   })
   ev.stopPropagation && ev.stopPropagation()
 }
@@ -73,13 +75,13 @@ exports.onRotateMouseUp = function (ev) {
     let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
     let newRotate = _.cloneDeep(this._rotatable.rotates[e])
     newRotate[axis] = newRotateAngle
+    let newOperation = {}
+    newOperation[this._rotatable.operation] = newRotate
 
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
         container: this.props.component,
         index: e
-      }, {
-        rotate: newRotate
-      },
+      }, newOperation,
       lang.rotateComponents
     )
   })

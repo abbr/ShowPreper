@@ -31,6 +31,17 @@ let DisplayableComponent = React.createClass({
         widgetStyle.transform += rotStr
       }
     }
+    if (this.props.component.skew) {
+      let rotStr = ''
+      this.props.component.skew.y && (rotStr += " skewY(" + this.props.component.skew.y + "rad)")
+      this.props.component.skew.x && (rotStr += " skewX(" + this.props.component.skew.x + "rad)")
+      if(this.props.combinedTransform){
+        componentStyle.transform += rotStr
+      }
+      else{
+        widgetStyle.transform += rotStr
+      }
+    }
     return (
       <div
         {...this.props}

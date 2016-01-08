@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import PositionControl from './controls/position'
 import ScaleControl from './controls/scale'
 import RotateControl from './controls/rotate'
+import SkewControl from './controls/skew'
 import DisplayableComponent from './displayableComponent'
 
 let EditableComponent = React.createClass({
@@ -54,6 +55,12 @@ let EditableComponent = React.createClass({
             idx={this.props.idx}
             component={this.props.component}
             axis="y"
+            onRotateMouseDown={this.props.onRotateMouseDown}
+          />
+          <SkewControl
+            idx={this.props.idx}
+            component={this.props.component}
+            axis="x"
             onRotateMouseDown={this.props.onRotateMouseDown}
           />
         </div>
