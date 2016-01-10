@@ -5,10 +5,14 @@ let TextBox = React.createClass({
   getInitialState: function () {
     return {editable: false}
   },
-  onDoubleClick: function () {
+  onDoubleClick: function (ev) {
     let reactEle = this
     this.setState({editable: true})
-    let editor = window.CKEDITOR.inline(this.refs.editableContent, {
+    if(this.editor){
+      this.editor.destroy()
+      delete this.editor
+    }
+    let editor = this.editor = window.CKEDITOR.inline(this.refs.editableContent, {
       extraPlugins: 'sourcedialog'
     })
     editor.setData(this.props.component.text)
@@ -17,13 +21,17 @@ let TextBox = React.createClass({
       editable.hasFocus = true
     })
     editor.on('blur', function (evt) {
-      setTimeout(()=> this.destroy()
+      setTimeout(()=> {
+        this.destroy()
+        delete reactEle.editor
+      }
         , 0)
       if (this.getData() !== reactEle.props.component.text) {
         reactEle.props.onSelectedWidgetUpdated && reactEle.props.onSelectedWidgetUpdated(reactEle.props.idx, {text: this.getData()})
       }
       reactEle.setState({editable: false})
     })
+    ev.stopPropagation && ev.stopPropagation()
   },
   render: function () {
     return <div
