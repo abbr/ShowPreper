@@ -24,6 +24,7 @@ let EditableComponent = React.createClass({
         className={cmpClass}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
+        editable={true}
       >
         <div className="sp-edit-ctrls">
           <PositionControl

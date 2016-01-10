@@ -5,8 +5,12 @@ let TextBox = React.createClass({
     return <div
       style={this.props.style}
       className={this.props.className}
-      dangerouslySetInnerHTML={{__html: this.props.component.text}}
-    />
+    >
+      <div
+        contentEditable={this.props.editable}
+        dangerouslySetInnerHTML={{__html: this.props.component.text}}
+      />
+    </div>
   }
 })
 module.exports = TextBox

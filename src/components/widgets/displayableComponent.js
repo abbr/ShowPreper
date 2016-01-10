@@ -53,6 +53,7 @@ let DisplayableComponent = React.createClass({
           <Widget
             className="sp-widget"
             component={this.props.component}
+            editable={this.props.editable}
             style={widgetStyle}
           />
         </div>
