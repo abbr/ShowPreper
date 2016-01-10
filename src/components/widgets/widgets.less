@@ -10,46 +10,48 @@
       border: 1pt dotted blue;
     }
   }
-  :first-child{
+  .sp-selected:first-child{
     height: 100%;
   }
   .sp-edit-ctrls{
     visibility: hidden;
     font-size: 14pt;
+    height: 0px;
     .scale{
       position: absolute;
-      right: -12pt;
-      bottom: 1pt;
       cursor: se-resize;
-      transform: rotate(45deg);
+      left: 100%;
+      top: 100%;
+      transform: translate(-13%, -27%) rotate(45deg);
     }
     .rotate-z{
       position: absolute;
-      right: -13pt;
-      top: 30%;
+      right: -16pt;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
     .rotate-x{
       position: absolute;
-      left: -13pt;
-      top: 30%;
+      top: 50%;
+      transform: translate(-114%, -50%);
     }
     .rotate-y{
       position: absolute;
-      top: -17pt;
-      left: 43%;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -84%);
     }
     .skew-x{
       position: absolute;
-      top: -22pt;
+      top: 0;
       font-size: 20pt;
-      transform: rotate(55deg);
+      transform: translate(-8%, -73%) rotate(55deg);
     }
     .skew-y{
       position: absolute;
-      left: -14pt;
       font-size: 20pt;
-      bottom: 12pt;
-      transform: rotate(-35deg);
+      top: 100%;
+      transform: translate(-103%, -69%) rotate(-35deg);
     }
   }
   &.sp-overview-component .sp-edit-ctrls{

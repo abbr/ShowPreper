@@ -1,5 +1,6 @@
 'use strict'
 import React from 'react'
+import lang from 'i18n/lang'
 let TextBox = React.createClass({
   getInitialState: function () {
     return {editable: false}
@@ -31,6 +32,7 @@ let TextBox = React.createClass({
     >
       <div
         contentEditable={this.state.editable}
+        title={this.props.selected?lang.doubleClickEdit:null}
         onDoubleClick={this.props.editable && this.onDoubleClick}
         dangerouslySetInnerHTML={{__html: this.props.component.text}}
         ref="editableContent"

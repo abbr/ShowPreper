@@ -44,4 +44,5 @@ module.exports = {
   show: 'Show',
   handouts: 'Handouts',
   presentation: 'Presentation',
+  doubleClickEdit: 'Double click to edit',
 }
