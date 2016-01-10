@@ -1,14 +1,39 @@
 'use strict'
 import React from 'react'
 let TextBox = React.createClass({
+  getInitialState: function () {
+    return {editable: false}
+  },
+  onDoubleClick: function () {
+    let reactEle = this
+    this.setState({editable: true})
+    let editor = window.CKEDITOR.inline(this.refs.editableContent, {
+      extraPlugins: 'sourcedialog'
+    })
+    editor.setData(this.props.component.text)
+    editor.on('loaded', function () {
+      let editable = editor.editable(this.element)
+      editable.hasFocus = true
+    })
+    editor.on('blur', function (evt) {
+      setTimeout(()=> this.destroy(true)
+        , 0)
+      if (this.getData() !== reactEle.props.component.text) {
+        reactEle.props.onSelectedWidgetUpdated && reactEle.props.onSelectedWidgetUpdated(reactEle.props.idx, {text: this.getData()})
+      }
+      reactEle.setState({editable: false})
+    })
+  },
   render: function () {
     return <div
       style={this.props.style}
       className={this.props.className}
     >
       <div
-        contentEditable={this.props.editable}
+        contentEditable={this.state.editable}
+        onDoubleClick={this.props.editable && this.onDoubleClick}
         dangerouslySetInnerHTML={{__html: this.props.component.text}}
+        ref="editableContent"
       />
     </div>
   }

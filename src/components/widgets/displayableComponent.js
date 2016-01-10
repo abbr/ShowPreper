@@ -52,9 +52,11 @@ let DisplayableComponent = React.createClass({
         >
           <Widget
             className="sp-widget"
+            idx={this.props.idx}
             component={this.props.component}
             editable={this.props.editable}
             style={widgetStyle}
+            onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           />
         </div>
         {this.props.children}
