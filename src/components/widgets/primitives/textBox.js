@@ -16,7 +16,7 @@ let TextBox = React.createClass({
       editable.hasFocus = true
     })
     editor.on('blur', function (evt) {
-      setTimeout(()=> this.destroy(true)
+      setTimeout(()=> this.destroy()
         , 0)
       if (this.getData() !== reactEle.props.component.text) {
         reactEle.props.onSelectedWidgetUpdated && reactEle.props.onSelectedWidgetUpdated(reactEle.props.idx, {text: this.getData()})
