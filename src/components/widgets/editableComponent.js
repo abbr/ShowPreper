@@ -63,6 +63,12 @@ let EditableComponent = React.createClass({
             axis="x"
             onRotateMouseDown={this.props.onRotateMouseDown}
           />
+          <SkewControl
+            idx={this.props.idx}
+            component={this.props.component}
+            axis="y"
+            onRotateMouseDown={this.props.onRotateMouseDown}
+          />
         </div>
       </DisplayableComponent>)
   }

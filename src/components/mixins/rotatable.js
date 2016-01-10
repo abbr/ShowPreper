@@ -24,7 +24,8 @@ exports.onRotateMouseDown = function (ev, idx, _axis, _operation) {
   this._rotatable = rotatable
   rotatable.selectedIdx = idx
   rotatable.axis = axis.toLowerCase()
-  rotatable.operation=operation
+  rotatable.operation = operation
+  rotatable.sign = (operation === 'skew' && rotatable.axis === 'x') ? -1 : 1
   let computedStyle = ReactDOM.findDOMNode(this.refs[idx]).getBoundingClientRect()
   rotatable.cX = computedStyle.left + computedStyle.width / 2
   rotatable.cY = computedStyle.top + computedStyle.height / 2
@@ -47,7 +48,7 @@ exports.onRotateMouseDown = function (ev, idx, _axis, _operation) {
 }
 
 exports.onRotateMouseMove = function (ev) {
-  let deltaRotate = this.computeDeltaRotate(ev)
+  let deltaRotate = this.computeDeltaRotate(ev) * this._rotatable.sign
   this.props.selectedWidgets.forEach(e=> {
     let axis = this._rotatable.axis.toLowerCase()
     let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
@@ -69,7 +70,7 @@ exports.onRotateMouseUp = function (ev) {
   document.body.style.MsUserSelect = ""
   document.removeEventListener('mousemove', this.onRotateMouseMove)
   document.removeEventListener('mouseup', this.onRotateMouseUp)
-  let deltaRotate = this.computeDeltaRotate(ev)
+  let deltaRotate = this.computeDeltaRotate(ev) * this._rotatable.sign
   this.props.selectedWidgets.forEach(e=> {
     let axis = this._rotatable.axis.toLowerCase()
     let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
