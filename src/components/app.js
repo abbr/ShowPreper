@@ -71,8 +71,13 @@ let App = React.createClass({
         widgetIdx = widget.index
         break
     }
-    let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
-    _.merge(selectedWidget, newProps)
+    if(newProps){
+      let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
+      _.merge(selectedWidget, newProps)
+    }
+    else{
+      component.components.splice(widgetIdx, 1)
+    }
     deck.save()
     if (markUndoDesc) {
       deck.markUndo(markUndoDesc)

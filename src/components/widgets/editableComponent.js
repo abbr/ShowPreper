@@ -6,6 +6,7 @@ import PositionControl from './controls/position'
 import ScaleControl from './controls/scale'
 import RotateControl from './controls/rotate'
 import SkewControl from './controls/skew'
+import KillControl from './controls/kill'
 import DisplayableComponent from './displayableComponent'
 
 let EditableComponent = React.createClass({
@@ -69,6 +70,9 @@ let EditableComponent = React.createClass({
             component={this.props.component}
             axis="y"
             onRotateMouseDown={this.props.onRotateMouseDown}
+          />
+          <KillControl
+            onKillMouseDown={this.props.onKillMouseDown}
           />
         </div>
       </DisplayableComponent>)
