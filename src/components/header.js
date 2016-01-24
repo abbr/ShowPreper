@@ -2,6 +2,9 @@
 import React from 'react'
 import lang from 'i18n/lang'
 let Header = React.createClass({
+  createWidget: function (type) {
+    alert(type)
+  },
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
     let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current + 1 < this.props.deck.undoStack.stack.length) ? this.props.deck.undoStack.stack[this.props.deck.undoStack.current + 1].desc : '')
@@ -36,7 +39,8 @@ let Header = React.createClass({
               {icon: 'glyphicon-globe', text: lang.website, type: 'website'},
               {icon: 'glyphicon-star', text: lang.shapes, type: 'shapes'},
             ].map(e =>
-              <button type="button" className="btn btn-default" key={e.type}>
+              <button type="button" className="btn btn-default" key={e.type}
+                      onClick={() => {this.createWidget(e.type)}}>
                 <span className={'glyphicon ' + e.icon}/>
                 <div className="btn-label">
                   {e.text}
@@ -45,45 +49,46 @@ let Header = React.createClass({
             )}
           </div>
           <div className="navbar-right">
-          <ul className="nav navbar-btn sp-view-btns">
-            <li style={this.props.currentView!=='slides'?{}: {display: 'none'}}>
-              <button type="button"
-                      className="btn btn-default"
-                      onClick={()=>this.props.changeView('slides')}
-              >
-                <span className={'glyphicon glyphicon-th-list'}/>
-                <div className="btn-label">
-                  {lang.slides}
-                </div>
-              </button>
-            </li>
-            <li style={this.props.currentView!=='overview' ?{}: {display: 'none'}}>
-              <button type="button"
-                      className="btn btn-default"
-                      onClick={()=>this.props.changeView('overview')}
-              >
-                <span className={'glyphicon glyphicon-th'}/>
-                <div className="btn-label">
-                  {lang.overview}
-                </div>
-              </button>
-            </li>
-          </ul>
-
-          <div className="nav navbar-btn btn-group">
-            <a type="button" className="btn btn-success"  href="./presentation.html" target="_blank">
-              <span className={'glyphicon glyphicon-play'}/>
-              <div>{lang.show}</div>
-            </a>
-            <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span className="caret"></span>
-              <span className="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul className="dropdown-menu">
-              <li><a href="./presentation.html" target="_blank">{lang.presentation}</a></li>
-              <li><a href="./handout.html" target="_blank">{lang.handouts}</a></li>
+            <ul className="nav navbar-btn sp-view-btns">
+              <li style={this.props.currentView!=='slides'?{}: {display: 'none'}}>
+                <button type="button"
+                        className="btn btn-default"
+                        onClick={()=>this.props.changeView('slides')}
+                >
+                  <span className={'glyphicon glyphicon-th-list'}/>
+                  <div className="btn-label">
+                    {lang.slides}
+                  </div>
+                </button>
+              </li>
+              <li style={this.props.currentView!=='overview' ?{}: {display: 'none'}}>
+                <button type="button"
+                        className="btn btn-default"
+                        onClick={()=>this.props.changeView('overview')}
+                >
+                  <span className={'glyphicon glyphicon-th'}/>
+                  <div className="btn-label">
+                    {lang.overview}
+                  </div>
+                </button>
+              </li>
             </ul>
-          </div>
+
+            <div className="nav navbar-btn btn-group">
+              <a type="button" className="btn btn-success" href="./presentation.html" target="_blank">
+                <span className={'glyphicon glyphicon-play'}/>
+                <div>{lang.show}</div>
+              </a>
+              <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                <span className="caret"></span>
+                <span className="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul className="dropdown-menu">
+                <li><a href="./presentation.html" target="_blank">{lang.presentation}</a></li>
+                <li><a href="./handout.html" target="_blank">{lang.handouts}</a></li>
+              </ul>
+            </div>
           </div>
         </div>
         {/*<!-- /.navbar-collapse -->*/}
