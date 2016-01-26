@@ -72,6 +72,10 @@ let App = React.createClass({
         break
     }
     if(newProps){
+      // create new widget
+      if(widgetIdx === component.components.length){
+        component.components.push({})
+      }
       let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
       _.merge(selectedWidget, newProps)
     }
@@ -153,6 +157,7 @@ let App = React.createClass({
               onRedo={this.onRedo}
               changeView={this.changeView}
               currentView={this.state.view}
+              onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
       />
       {Main}
     </div>

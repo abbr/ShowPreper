@@ -3,7 +3,17 @@ import React from 'react'
 import lang from 'i18n/lang'
 let Header = React.createClass({
   createWidget: function (type) {
-    alert(type)
+    let deck = this.props.deck
+    let activeSlide = deck.getActiveSlide()
+    this.props.onSelectedWidgetUpdated(
+      {container: activeSlide, index: activeSlide.components.length},
+      {
+        "type": type,
+        "x": 0,
+        "y": 0,
+        "text": "<div style=\"font-size: 100pt\">ddd</div>"
+      },
+      lang['new'] + ' ' + lang[type])
   },
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
