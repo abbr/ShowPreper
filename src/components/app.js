@@ -15,6 +15,7 @@ let App = React.createClass({
   componentDidMount: function () {
     key.bind('ctrl+z', this.onUndo)
     key.bind('ctrl+y', this.onRedo)
+    key.bind('del', this.deleteWidgets)
     key.bind('left', ()=>this.panBy("x", -1), "keydown")
     key.bind('left', ()=>this.panBy("x", 0, lang.moveComponents), "keyup")
     key.bind('shift+left', ()=>this.panBy("x", -10), "keydown")
@@ -71,15 +72,15 @@ let App = React.createClass({
         widgetIdx = widget.index
         break
     }
-    if(newProps){
+    if (newProps) {
       // create new widget
-      if(widgetIdx === component.components.length){
+      if (widgetIdx === component.components.length) {
         component.components.push({})
       }
       let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
       _.merge(selectedWidget, newProps)
     }
-    else{
+    else {
       component.components.splice(widgetIdx, 1)
     }
     deck.save()
@@ -109,6 +110,32 @@ let App = React.createClass({
     })
   },
 
+  deleteWidgets: function () {
+    let deck = this.state.deck
+    let component
+    switch (this.state.view) {
+      case 'slides':
+        component = deck.getActiveSlide()
+        break
+      case 'overview':
+        component = deck
+        break
+    }
+    let i = component.components.length
+    let hasDeletedSomething = false
+    while (i > 0) {
+      --i
+      let e = component.components[i]
+      if (e.selected) {
+        this.onSelectedWidgetUpdated({
+          container: component,
+          index: i
+        })
+        hasDeletedSomething = true
+      }
+    }
+    hasDeletedSomething && deck.markUndo(lang.delete)
+  },
   panBy: function (axis, delta, markUndoDesc) {
     let deck = this.state.deck
     let component
