@@ -11,7 +11,7 @@ let Header = React.createClass({
         "type": type,
         "x": 0,
         "y": 0,
-        "text": "<div style=\"font-size: 100pt\">ddd</div>"
+        "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">ddx</div>"
       },
       lang['new'] + ' ' + lang[type])
   },
@@ -43,7 +43,7 @@ let Header = React.createClass({
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div className="nav navbar-btn btn-group navbar-left" role="group">
             {[
-              {icon: 'glyphicon-text-width', text: lang.text, type: 'text'},
+              {icon: 'glyphicon-text-width', text: lang.text, type: 'TextBox'},
               {icon: 'glyphicon-picture', text: lang.image, type: 'image'},
               {icon: 'glyphicon-film', text: lang.video, type: 'video'},
               {icon: 'glyphicon-globe', text: lang.website, type: 'website'},
