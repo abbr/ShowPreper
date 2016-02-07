@@ -1,11 +1,11 @@
 var langs = {
-	de: require('./de'),
-	en: require('./en'),
-	es: require('./es'),
-	fr: require('./fr'),
-	nl: require('./nl'),
-	ru: require('./ru'),
-	zh: require('./zh')
+  de: require('./de'),
+  en: require('./en'),
+  es: require('./es'),
+  fr: require('./fr'),
+  nl: require('./nl'),
+  ru: require('./ru'),
+  zh: require('./zh')
 }
 
 var lang = window.navigator.language || window.navigator.userLanguage

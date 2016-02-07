@@ -134,7 +134,12 @@ let App = React.createClass({
         hasDeletedSomething = true
       }
     }
-    hasDeletedSomething && deck.markUndo(lang.delete)
+    if(hasDeletedSomething){
+      deck.markUndo(lang.delete)
+      this.setState({
+        deck: deck
+      })
+    }
   },
   panBy: function (axis, delta, markUndoDesc) {
     let deck = this.state.deck
