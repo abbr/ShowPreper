@@ -32,11 +32,11 @@ var WellSlide = React.createClass({
       )
     })
     return (
-      <div
-        className={classNames("sp-well-slide"
-        , {selected: this.props.deck.activeSlide===this.props.index})}
-        onClick={this._clicked}>
+      <div className="sp-well-slide-container"
+           onClick={this._clicked}>
         <div
+          className={classNames("sp-well-slide",
+          {"sp-selected": this.props.deck.activeSlide===this.props.index})}
           style={this.state.scaleStyle}>
           {componentsView}
         </div>
