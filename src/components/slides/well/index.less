@@ -1,20 +1,31 @@
 .sp-theme-dark .sp-slide-well {
-	background: #34323a;
+  background: #34323a;
 }
 
-.sp-well-slide-container {
-	width: 140px;
-	height: 100px;
-	background: white;
-	margin: 10px auto;
-  overflow: hidden;
-  position: relative;
-  .sp-well-slide{
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    &.sp-selected {
-      border: 1px solid orange;
+.sp-well-slide-wrapper {
+
+  .sp-well-slide-creator {
+    text-align: center;
+    visibility: hidden;
+  }
+  &:hover .sp-well-slide-creator {
+    visibility: visible;
+  }
+  .sp-well-slide-container {
+    width: 140px;
+    height: 100px;
+    background: white;
+    margin: 10px auto;
+    overflow: hidden;
+    position: relative;
+    .sp-well-slide {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      &.sp-selected {
+        border: 1px solid orange;
+      }
     }
   }
 }
+
 
