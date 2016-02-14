@@ -109,7 +109,18 @@ let App = React.createClass({
       deck: deck
     })
   },
-
+  onSlideMoved: function (from, to) {
+    let deck = this.state.deck
+    let slides = deck.getSlides()
+    let indexOfFrom = deck.components.indexOf(slides[from])
+    let indexOfTo = deck.components.indexOf(slides[to])
+    let slidesBeingMoved = deck.components.splice(indexOfFrom, 1)
+    deck.components.splice(indexOfTo, 0, slidesBeingMoved[0])
+    deck.save()
+    this.setState({
+      deck: deck
+    })
+  },
   deleteWidgets: function () {
     let deck = this.state.deck
     let component
@@ -134,7 +145,7 @@ let App = React.createClass({
         hasDeletedSomething = true
       }
     }
-    if(hasDeletedSomething){
+    if (hasDeletedSomething) {
       deck.markUndo(lang.delete)
       this.setState({
         deck: deck
@@ -169,7 +180,9 @@ let App = React.createClass({
       case 'slides':
         Main = <Slides deck={this.state.deck}
                        onSlideClicked={this.onSlideClicked}
-                       onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}/>
+                       onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
+                       onSlideMoved={this.onSlideMoved}
+        />
         break;
       case 'overview':
         let selectedWidgets = this.state.deck.components.reduce((pv, e, i, a)=> {

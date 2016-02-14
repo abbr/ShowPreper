@@ -8,7 +8,10 @@ import './index.less'
 let Main = React.createClass({
   render: function () {
     return <div className="sp-slides">
-      <SlideWell onSlideClicked={this.props.onSlideClicked} deck={this.props.deck}/>
+      <SlideWell onSlideClicked={this.props.onSlideClicked}
+                 deck={this.props.deck}
+                 onSlideMoved={this.props.onSlideMoved}
+      />
       <SlideEditor onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
                    deck={this.props.deck}/>
     </div>

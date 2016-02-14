@@ -32,7 +32,9 @@ var WellSlide = React.createClass({
       )
     })
     return (
-      <div className="sp-well-slide-wrapper">
+      <div className="sp-well-slide-wrapper"
+           data-sortable={this.props.index}
+      >
         <div className="sp-well-slide-container"
              onClick={this._clicked}>
           <div
