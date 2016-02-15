@@ -22,7 +22,6 @@
       ],
       "type": "Slide",
       "z": 0,
-      "impScale": 3,
       "selected": true
     },
     {
@@ -59,7 +58,6 @@
       ],
       "type": "Slide",
       "z": 0,
-      "impScale": 3,
       "rotate": {
         "x": 0.76,
         "y": 0.74,
