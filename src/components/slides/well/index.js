@@ -37,6 +37,7 @@ var SlideWell = React.createClass({
           key={slide.id || index}
           index={index}
           onSlideClicked={this.props.onSlideClicked}
+          onNewWidget={this.props.onNewWidget}
         />
       )
     })

@@ -10,6 +10,7 @@ let Main = React.createClass({
     return <div className="sp-slides">
       <SlideWell onSlideClicked={this.props.onSlideClicked}
                  deck={this.props.deck}
+                 onNewWidget={this.props.onNewWidget}
                  onSlideMoved={this.props.onSlideMoved}
       />
       <SlideEditor onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}

@@ -59,6 +59,18 @@ let App = React.createClass({
       deck: deck
     })
   },
+  onNewWidget: function (container, index, newProps, markUndoDesc) {
+    let startIdx = (Number.isInteger(index)) ? index : (container.components.length - 1)
+    container.components.splice(startIdx, 0, newProps || {})
+    let deck = this.state.deck
+    deck.save()
+    if (markUndoDesc) {
+      deck.markUndo(markUndoDesc)
+    }
+    this.setState({
+      deck: deck
+    })
+  },
   onSelectedWidgetUpdated: function (widget, newProps, markUndoDesc) {
     let component, widgetIdx
     let deck = this.state.deck
@@ -181,6 +193,7 @@ let App = React.createClass({
         Main = <Slides deck={this.state.deck}
                        onSlideClicked={this.onSlideClicked}
                        onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
+                       onNewWidget={this.onNewWidget}
                        onSlideMoved={this.onSlideMoved}
         />
         break;
