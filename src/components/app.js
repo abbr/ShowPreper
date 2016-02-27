@@ -60,7 +60,7 @@ let App = React.createClass({
     })
   },
   onNewWidget: function (container, index, newProps, markUndoDesc) {
-    let startIdx = (Number.isInteger(index)) ? index : (container.components.length - 1)
+    let startIdx = (Number.isInteger(index)) ? index : container.components.length
     container.components.splice(startIdx, 0, newProps || {})
     let deck = this.state.deck
     deck.save()
@@ -85,10 +85,6 @@ let App = React.createClass({
         break
     }
     if (newProps) {
-      // create new widget
-      if (widgetIdx === component.components.length) {
-        component.components.push({})
-      }
       let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
       _.merge(selectedWidget, newProps)
     }
@@ -215,7 +211,7 @@ let App = React.createClass({
               onRedo={this.onRedo}
               changeView={this.changeView}
               currentView={this.state.view}
-              onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
+              onNewWidget={this.onNewWidget}
       />
       {Main}
     </div>

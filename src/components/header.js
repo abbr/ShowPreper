@@ -5,8 +5,7 @@ let Header = React.createClass({
   createWidget: function (type) {
     let deck = this.props.deck
     let activeSlide = deck.getActiveSlide()
-    this.props.onSelectedWidgetUpdated(
-      {container: activeSlide, index: activeSlide.components.length},
+    this.props.onNewWidget(activeSlide, null,
       {
         "type": type,
         "x": 0,
