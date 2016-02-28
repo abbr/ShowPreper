@@ -22,13 +22,6 @@ var WellSlide = React.createClass({
   _clicked: function () {
     this.props.onSlideClicked(this.props.index)
   },
-  newSlide: function () {
-    this.props.onNewWidget(this.props.deck, this.props.index + 1, {
-      "components": [],
-      "type": "Slide",
-      "z": 0
-    })
-  },
   render: function () {
     let componentsView = this.props.model.components.map((component, index) => {
       return (
@@ -39,9 +32,6 @@ var WellSlide = React.createClass({
       )
     })
     return (
-      <div className="sp-well-slide-wrapper"
-           data-sortable={this.props.index}
-      >
         <div className="sp-well-slide-container"
              onClick={this._clicked}>
           <div
@@ -51,10 +41,6 @@ var WellSlide = React.createClass({
             {componentsView}
           </div>
         </div>
-        <div className="sp-well-slide-creator"
-             onClick={this.newSlide}>++++
-        </div>
-      </div>
     )
   }
 })
