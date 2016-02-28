@@ -12,6 +12,7 @@ let Main = React.createClass({
                  deck={this.props.deck}
                  onNewWidget={this.props.onNewWidget}
                  onSlideMoved={this.props.onSlideMoved}
+                 onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
       />
       <SlideEditor onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
                    deck={this.props.deck}/>

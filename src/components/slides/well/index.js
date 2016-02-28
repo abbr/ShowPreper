@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 var WellSlide = require('./wellSlide')
 import 'jquery-ui/jquery-ui.js'
 import 'jquery-ui/themes/smoothness/jquery-ui.min.css'
+import lang from 'i18n/lang'
 
 require('./index.less')
 
@@ -37,7 +38,11 @@ var SlideWell = React.createClass({
       })
     }
   },
-
+  deleteSlide: function (index) {
+    return () => {
+      this.props.onSelectedWidgetUpdated({container: this.props.deck, index: index}, null, lang.delete)
+    }
+  },
   render: function () {
     var slides = this.props.deck.getSlides().map((slide, index) => {
       return (
@@ -45,6 +50,8 @@ var SlideWell = React.createClass({
              data-sortable={this.props.index}
              key={slide.id || index}
         >
+          <div className="sp-well-slide-killer"
+               onClick={this.deleteSlide(index)}>xxxx</div>
           <WellSlide
             deck={this.props.deck}
             model={slide}
