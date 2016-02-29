@@ -40,39 +40,44 @@ let OperatingTable = React.createClass({
     window.removeEventListener('resize', this._resized)
   },
   render: function () {
-    let slide = this.props.deck.getActiveSlide()
-    let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
-      if (e.selected) pv.push(i)
-      return pv
-    }, [])
-    let componentsView = slide.components.map((component, index) => {
+    try {
+      let slide = this.props.deck.getActiveSlide()
+      let selectedWidgets = slide.components.reduce((pv, e, i, a)=> {
+        if (e.selected) pv.push(i)
+        return pv
+      }, [])
+      let componentsView = slide.components.map((component, index) => {
+        return (
+          <EditableComponent
+            component={component}
+            container={slide}
+            onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+            key={index}
+            idx={index}
+            ref={index}
+            scale={this.state.scale}
+            selected={selectedWidgets.indexOf(index) >= 0}
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
+            onScaleMouseDown={this.onScaleMouseDown}
+            onRotateMouseDown={this.onRotateMouseDown}
+            onKillMouseDown={this.onKillMouseDown}
+          />
+        )
+      })
       return (
-        <EditableComponent
-          component={component}
-          container={slide}
-          onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
-          key={index}
-          idx={index}
-          ref={index}
-          scale={this.state.scale}
-          selected={selectedWidgets.indexOf(index) >= 0}
-          onMouseDown={this.onMouseDown}
-          onMouseUp={this.onMouseUp}
-          onScaleMouseDown={this.onScaleMouseDown}
-          onRotateMouseDown={this.onRotateMouseDown}
-          onKillMouseDown={this.onKillMouseDown}
-        />
-      )
-    })
-    return (
-      <div className="sp-operating-table"
-           onMouseDown={this.onSelectionMouseDown}
-      >
-        <div className="sp-ot-slide" style={this.state.scaleStyle}>
-          {componentsView}
+        <div className="sp-operating-table"
+             onMouseDown={this.onSelectionMouseDown}
+        >
+          <div className="sp-ot-slide" style={this.state.scaleStyle}>
+            {componentsView}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    catch (ex) {
+      return <div/>
+    }
   }
 })
 

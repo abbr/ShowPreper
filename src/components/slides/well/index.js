@@ -65,6 +65,9 @@ var SlideWell = React.createClass({
       )
     })
     return <div className="sp-well">
+      <div className="sp-well-slide-creator"
+           onClick={this.newSlide(-1)}>++++
+      </div>
       {slides}
     </div>
   }
