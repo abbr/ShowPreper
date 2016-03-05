@@ -14,7 +14,7 @@ require('./operatingTable.less')
 let OperatingTable = React.createClass({
   mixins: [AutoScale, Selectable, Draggable, Scalable, Rotatable, Killable],
   getInitialState: function () {
-    return {}
+    return {draggable: true}
   },
   componentWillMount: function () {
     this.mouseDownHdlrs = []
@@ -35,6 +35,9 @@ let OperatingTable = React.createClass({
   },
   onMouseDown: function () {
     this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
+  },
+  setDraggable: function(draggable){
+    this.setState({draggable: draggable})
   },
   componentWillUnmount: function () {
     window.removeEventListener('resize', this._resized)
@@ -62,6 +65,7 @@ let OperatingTable = React.createClass({
             onScaleMouseDown={this.onScaleMouseDown}
             onRotateMouseDown={this.onRotateMouseDown}
             onKillMouseDown={this.onKillMouseDown}
+            setDraggable={this.setDraggable}
           />
         )
       })

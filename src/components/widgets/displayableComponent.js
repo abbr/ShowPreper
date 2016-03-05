@@ -54,6 +54,7 @@ let DisplayableComponent = React.createClass({
             {...this.props}
             className="sp-widget"
             style={widgetStyle}
+            setDraggable={this.props.setDraggable}
           />
         </div>
         {this.props.children}

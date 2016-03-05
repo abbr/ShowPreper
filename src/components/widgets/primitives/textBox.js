@@ -8,7 +8,8 @@ let TextBox = React.createClass({
   onDoubleClick: function (ev) {
     let reactEle = this
     this.setState({editable: true})
-    if(this.editor){
+    this.props.setDraggable(false)
+    if (this.editor) {
       this.editor.destroy()
       delete this.editor
     }
@@ -22,14 +23,15 @@ let TextBox = React.createClass({
     })
     editor.on('blur', function (evt) {
       setTimeout(()=> {
-        this.destroy()
-        delete reactEle.editor
-      }
+          this.destroy()
+          delete reactEle.editor
+        }
         , 0)
       if (this.getData() !== reactEle.props.component.text) {
         reactEle.props.onSelectedWidgetUpdated && reactEle.props.onSelectedWidgetUpdated(reactEle.props.idx, {text: this.getData()})
       }
       reactEle.setState({editable: false})
+      reactEle.props.setDraggable(true)
     })
     ev.stopPropagation && ev.stopPropagation()
   },

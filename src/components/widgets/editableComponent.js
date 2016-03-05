@@ -26,6 +26,7 @@ let EditableComponent = React.createClass({
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         editable={true}
+        setDraggable={this.props.setDraggable}
       >
         <div className="sp-edit-ctrls">
           <PositionControl
