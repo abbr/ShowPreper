@@ -1,6 +1,8 @@
 'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
+import Exporter from 'components/exporter'
+
 let Header = React.createClass({
   createWidget: function (type) {
     let deck = this.props.deck
@@ -39,15 +41,7 @@ let Header = React.createClass({
               <li><a href="#openExport" title={lang.export}>{lang.export}</a>
               </li>
             </ul>
-            <div id="openExport" className="sp-modal-dialog">
-              <div>
-                <a href="#close" title="Close" className="sp-modal-close">X</a>
-                <h2>Modal Box</h2>
-                <p>This is a sample modal box that can be created using the powers of CSS3.</p>
-                <p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or
-                  create a login/register form for users.</p>
-              </div>
-            </div>
+            <Exporter></Exporter>
           </div>
         </div>
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
