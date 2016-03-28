@@ -1,15 +1,16 @@
 'use strict'
 import _ from 'lodash'
-const _spDefaultFileNm = 'default.json'
+const _spDefaultFileNm = 'default'
 import 'babel-polyfill'
 import SampleDeck from "sources/sample.json"
 const DEFAULT_SLIDE_SIZE = {width: 900, height: 700}
 
-let Deck = function () {
+let Deck = function (fn) {
   var defaultDeckObj
+  var _fn = fn || _spDefaultFileNm
   if (typeof(Storage) !== "undefined") {
     try {
-      defaultDeckObj = JSON.parse(localStorage.getItem(_spDefaultFileNm))
+      defaultDeckObj = JSON.parse(localStorage.getItem(_fn))
     }
     catch (ex) {
     }
@@ -29,6 +30,10 @@ let Deck = function () {
       current: -1
     }
   })
+  Object.defineProperty(this, "_fn", {
+    enumerable: false,
+    value: _fn
+  })
   this.markUndo('')
 }
 
@@ -42,7 +47,7 @@ Deck.prototype.activateSlide = function (i) {
 
 Deck.prototype.save = function () {
   if (typeof(Storage) !== "undefined") {
-    localStorage.setItem(_spDefaultFileNm, JSON.stringify(this))
+    localStorage.setItem(this._fn, JSON.stringify(this))
   }
 }
 

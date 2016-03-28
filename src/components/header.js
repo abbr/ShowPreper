@@ -41,7 +41,7 @@ let Header = React.createClass({
               <li><a href="#openExport" title={lang.export}>{lang.export}</a>
               </li>
             </ul>
-            <Exporter></Exporter>
+            <Exporter deck={this.props.deck}></Exporter>
           </div>
         </div>
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
