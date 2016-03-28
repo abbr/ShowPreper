@@ -25,14 +25,14 @@ let Header = React.createClass({
           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
                   data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
+            <span className="icon-bar"/>
+            <span className="icon-bar"/>
+            <span className="icon-bar"/>
           </button>
           <div className="dropdown">
             <a href="#" className="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button btn-default"
                aria-haspopup="true"
-               aria-expanded="false">ShowPreper<span className="caret"></span></a>
+               aria-expanded="false">ShowPreper<span className="caret"/></a>
             <ul className="dropdown-menu">
               <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>{lang.undo}<span
                 className="badge">Ctrl-z</span></a></li>
@@ -41,7 +41,7 @@ let Header = React.createClass({
               <li><a href="#openExport" title={lang.export}>{lang.export}</a>
               </li>
             </ul>
-            <Exporter deck={this.props.deck}></Exporter>
+            <Exporter deck={this.props.deck}/>
           </div>
         </div>
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -95,7 +95,7 @@ let Header = React.createClass({
               </a>
               <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
-                <span className="caret"></span>
+                <span className="caret"/>
                 <span className="sr-only">Toggle Dropdown</span>
               </button>
               <ul className="dropdown-menu">

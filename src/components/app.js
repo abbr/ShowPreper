@@ -171,7 +171,7 @@ let App = React.createClass({
         component = deck
         break
     }
-    let selectedWidgets = component.components.reduce((pv, e, i, a)=> {
+    let selectedWidgets = component.components.reduce((pv, e, i)=> {
       if (e.selected) pv.push(i)
       return pv
     }, [])
@@ -194,7 +194,7 @@ let App = React.createClass({
         />
         break;
       case 'overview':
-        let selectedWidgets = this.state.deck.components.reduce((pv, e, i, a)=> {
+        let selectedWidgets = this.state.deck.components.reduce((pv, e, i)=> {
           if (e.selected) pv.push(i)
           return pv
         }, [])

@@ -85,7 +85,7 @@ Deck.prototype.getSlideBoundingBox = function (e) {
 }
 
 Deck.prototype.getDefaultDeckBoundingBox = function () {
-  return this.getSlides().reduce((pv, e, i, a) => {
+  return this.getSlides().reduce((pv, e) => {
     let bb = this.getSlideBoundingBox(e)
     pv = pv || {top: bb.top, right: bb.right, bottom: bb.bottom, left: bb.left}
     return {
