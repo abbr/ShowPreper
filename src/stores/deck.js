@@ -1,28 +1,25 @@
 'use strict'
-import _ from 'lodash'
+import _ from "lodash";
+import "babel-polyfill";
+import SampleDeck from "sources/sample.json";
 const _spDefaultFileNm = 'default'
-import 'babel-polyfill'
-import SampleDeck from "sources/sample.json"
 const DEFAULT_SLIDE_SIZE = {width: 900, height: 700}
 
 let Deck = function (fn, props) {
-  var defaultDeckObj = props
+  var savedDeckObj
   var _fn = fn || _spDefaultFileNm
   if (typeof(Storage) !== "undefined") {
     try {
-      defaultDeckObj = defaultDeckObj || JSON.parse(localStorage.getItem(_fn))
+      savedDeckObj = JSON.parse(localStorage.getItem(_fn))
     }
     catch (ex) {
     }
   }
-  if (defaultDeckObj && typeof(defaultDeckObj) === 'object') {
-    _.assign(this, defaultDeckObj)
-  }
-  else {
-    _.assign(this, SampleDeck)
+  let deckObj = props || savedDeckObj || SampleDeck
+  _.assign(this, deckObj)
+  if (deckObj !== savedDeckObj) {
     this.save()
   }
-
   Object.defineProperty(this, "undoStack", {
     enumerable: false,
     value: {

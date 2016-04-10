@@ -1,9 +1,12 @@
 'use strict'
 import React from "react";
+import ReactDOM from "react-dom";
 
 let Importer = React.createClass({
   click: function () {
-    this.refs.fileUploader.click()
+    let domEle = ReactDOM.findDOMNode(this)
+    domEle.value = null
+    domEle.click()
   },
   onChange: function (e) {
     let file = e.target.files[0]
@@ -12,13 +15,13 @@ let Importer = React.createClass({
       let reader = new FileReader()
       reader.onload = function (e) {
         // TODO parse files
-        this.props.onNewDeck(file.name, e.target.result)
+        this.props.onNewDeck(file.name, JSON.parse(e.target.result))
       }.bind(this)
       reader.readAsText(file)
     }
   },
   render: function () {
-    return <input type="file" style={{display: "none"}} ref="fileUploader" onChange={this.onChange}></input>
+    return <input type="file" style={{display: "none"}} onChange={this.onChange}></input>
   }
 })
 module.exports = Importer
