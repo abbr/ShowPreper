@@ -99,7 +99,13 @@ let App = React.createClass({
       deck: deck
     })
   },
-
+  onNewDeck: function(nm, props){
+    let deck = new DeckStore.Deck(nm,props)
+    deck.save()
+    this.setState({
+      deck: deck
+    })
+  },
   onUndo: function () {
     let deck = this.state.deck
     deck.undo()
@@ -212,6 +218,7 @@ let App = React.createClass({
               changeView={this.changeView}
               currentView={this.state.view}
               onNewWidget={this.onNewWidget}
+              onNewDeck = {this.onNewDeck}
       />
       {Main}
     </div>

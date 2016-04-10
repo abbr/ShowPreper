@@ -5,12 +5,12 @@ import 'babel-polyfill'
 import SampleDeck from "sources/sample.json"
 const DEFAULT_SLIDE_SIZE = {width: 900, height: 700}
 
-let Deck = function (fn) {
-  var defaultDeckObj
+let Deck = function (fn, props) {
+  var defaultDeckObj = props
   var _fn = fn || _spDefaultFileNm
   if (typeof(Storage) !== "undefined") {
     try {
-      defaultDeckObj = JSON.parse(localStorage.getItem(_fn))
+      defaultDeckObj = defaultDeckObj || JSON.parse(localStorage.getItem(_fn))
     }
     catch (ex) {
     }
@@ -97,7 +97,7 @@ Deck.prototype.getDefaultDeckBoundingBox = function () {
   }, null)
 }
 
-
+exports.Deck = Deck
 exports.getDefaultDeck = function () {
   return new Deck()
 }

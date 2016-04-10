@@ -2,6 +2,7 @@
 import React from 'react'
 import lang from 'i18n/lang'
 import Exporter from 'components/exporter'
+import Importer from 'components/importer'
 
 let Header = React.createClass({
   createWidget: function (type) {
@@ -15,6 +16,9 @@ let Header = React.createClass({
         "text": "<div style=\"font-family: Hammersmith One;font-size: 100pt\">ddx</div>"
       },
       lang['new'] + ' ' + lang[type])
+  },
+  onImport: function () {
+    this.refs.importer.click()
   },
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
@@ -40,8 +44,11 @@ let Header = React.createClass({
                 className="badge">Ctrl-y</span></a></li>
               <li><a href="#openExport" title={lang.export}>{lang.export}</a>
               </li>
+              <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
+              </li>
             </ul>
             <Exporter deck={this.props.deck}/>
+            <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
           </div>
         </div>
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
