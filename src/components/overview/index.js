@@ -9,6 +9,9 @@ import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
 let Overview = React.createClass({
   mixins: [AutoScale, Selectable, Draggable, Scalable, Rotatable],
+  getInitialState: function () {
+    return {draggable: true}
+  },
   componentWillMount: function () {
     this.mouseDownHdlrs = []
     this.mouseUpHdlrs = []
@@ -16,9 +19,6 @@ let Overview = React.createClass({
   componentDidMount: function () {
     this._resized()
     window.addEventListener('resize', this._resized)
-  },
-  getInitialState: function () {
-    return {}
   },
   componentWillUnmount: function () {
     window.removeEventListener('resize', this._resized)
