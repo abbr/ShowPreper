@@ -2,7 +2,8 @@
 import _ from "lodash";
 import "babel-polyfill";
 import SampleDeck from "sources/sample.json";
-const _spDefaultFileNm = 'default'
+const _spDefaultFileNm = 'default.json'
+const _spDefaultDeck = '_defaultDeck'
 const DEFAULT_SLIDE_SIZE = {width: 900, height: 700}
 
 let Deck = function (fn, props) {
@@ -17,9 +18,6 @@ let Deck = function (fn, props) {
   }
   let deckObj = props || savedDeckObj || SampleDeck
   _.assign(this, deckObj)
-  if (deckObj !== savedDeckObj) {
-    this.save()
-  }
   Object.defineProperty(this, "undoStack", {
     enumerable: false,
     value: {
@@ -31,6 +29,9 @@ let Deck = function (fn, props) {
     enumerable: false,
     value: _fn
   })
+  if (deckObj !== savedDeckObj) {
+    this.save()
+  }
   this.markUndo('')
 }
 
@@ -44,6 +45,7 @@ Deck.prototype.activateSlide = function (i) {
 
 Deck.prototype.save = function () {
   if (typeof(Storage) !== "undefined") {
+    localStorage.setItem(_spDefaultDeck, this._fn)
     localStorage.setItem(this._fn, JSON.stringify(this))
   }
 }
@@ -93,8 +95,11 @@ Deck.prototype.getDefaultDeckBoundingBox = function () {
     }
   }, null)
 }
-
 exports.Deck = Deck
 exports.getDefaultDeck = function () {
-  return new Deck()
+  let _fn = _spDefaultFileNm
+  if (typeof(Storage) !== "undefined") {
+    _fn = localStorage.getItem(_spDefaultDeck) || _spDefaultFileNm
+  }
+  return new Deck(_fn)
 }
