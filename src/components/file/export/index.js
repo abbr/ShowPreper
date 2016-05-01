@@ -1,6 +1,5 @@
 'use strict'
 import React from 'react'
-import './index.less'
 
 let Exporter = React.createClass({
   render: function () {

@@ -3,6 +3,8 @@ import React from 'react'
 import lang from 'i18n/lang'
 import Exporter from 'components/file/export'
 import Importer from 'components/file/import'
+import FileOpener from 'components/file/open'
+import './header.less'
 
 let Header = React.createClass({
   createWidget: function (type) {
@@ -42,11 +44,14 @@ let Header = React.createClass({
                 className="badge">Ctrl-z</span></a></li>
               <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>{lang.redo}<span
                 className="badge">Ctrl-y</span></a></li>
+              <li><a href="#fileOpen" title={lang.open}>{lang.open}</a>
+              </li>
               <li><a href="#openExport" title={lang.export}>{lang.export}</a>
               </li>
               <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
               </li>
             </ul>
+            <FileOpener deck={this.props.deck}/>
             <Exporter deck={this.props.deck}/>
             <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
           </div>
