@@ -1,8 +1,8 @@
 'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
-import Exporter from 'components/exporter'
-import Importer from 'components/importer'
+import Exporter from 'components/file/export'
+import Importer from 'components/file/import'
 
 let Header = React.createClass({
   createWidget: function (type) {
