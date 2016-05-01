@@ -51,7 +51,7 @@ let Header = React.createClass({
               <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
               </li>
             </ul>
-            <FileOpener deck={this.props.deck}/>
+            <FileOpener onNewDeck={this.props.onNewDeck}/>
             <Exporter deck={this.props.deck}/>
             <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
           </div>

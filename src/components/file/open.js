@@ -1,5 +1,5 @@
 'use strict'
-import React from "react"
+import React from 'react'
 import FileEntry from './entry'
 
 let FileOpener = React.createClass({
@@ -10,6 +10,7 @@ let FileOpener = React.createClass({
         keys.push(<FileEntry
           name={key}
           key={key}
+          onNewDeck={this.props.onNewDeck}
         />)
       }
     }
