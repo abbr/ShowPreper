@@ -21,7 +21,7 @@ let Importer = React.createClass({
     }
   },
   render: function () {
-    return <input type="file" style={{display: "none"}} onChange={this.onChange}></input>
+    return <input type="file" style={{display: "none"}} accept=".spj" onChange={this.onChange}></input>
   }
 })
 module.exports = Importer
