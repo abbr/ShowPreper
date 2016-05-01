@@ -6,7 +6,7 @@ module.exports = {
   removeSlide: 'Удалить слайд',
   slides: 'Слайды',
   overview: 'Эффекты',
-  open: 'Открыть',
+  open: 'Открыть...',
   save: 'Сохранить',
   saveAs: 'Сохранить как...',
   'new': 'Создать',

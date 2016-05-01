@@ -6,7 +6,7 @@ module.exports = {
   removeSlide: 'Dia verwijderen',
   slides: 'Dia\'s',
   overview: 'Overzicht',
-  open: 'Openen',
+  open: 'Openen...',
   save: 'Opslaan',
   save_as: 'Opslaan als...',
   'new': 'Nieuw',

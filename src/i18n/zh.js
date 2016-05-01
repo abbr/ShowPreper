@@ -6,7 +6,7 @@ module.exports = {
   removeSlide: '删除课件页',
   slides: '课件页',
   overview: '全局视图',
-  open: '打开',
+  open: '打开...',
   save: '保存',
   saveAs: '另存为...',
   'new': '新建',

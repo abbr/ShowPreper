@@ -6,7 +6,7 @@ module.exports = {
   removeSlide: 'Supprimer la diapo',
   slides: 'Diapos',
   overview: 'Vue d\'ensemble',
-  open: 'Ouvrir',
+  open: 'Ouvrir...',
   save: 'Enregistrer',
   saveAs: 'Enregistrer sous...',
   'new': 'Nouveau',

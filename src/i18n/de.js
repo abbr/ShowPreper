@@ -6,7 +6,7 @@ module.exports = {
   removeSlide: 'Folie entfernen',
   slides: 'Folien',
   overview: 'Übersicht',
-  open: 'Öffnen',
+  open: 'Öffnen...',
   save: 'Speichern',
   saveAs: 'Speichern als...',
   'new': 'Neu',

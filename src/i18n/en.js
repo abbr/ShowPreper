@@ -6,7 +6,7 @@ module.exports = {
   removeSlide: 'Remove Slide',
   slides: 'Slides',
   overview: 'Overview',
-  open: 'Open',
+  open: 'Open...',
   save: 'Save',
   saveAs: 'Save as...',
   'new': 'New',
