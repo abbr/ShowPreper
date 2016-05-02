@@ -15,14 +15,28 @@ let FileSaveAs = React.createClass({
       this.refs.errorMsg.innerHTML = ''
     }
   },
+  onOk: function () {
+    this.props.onNewDeck(this.refs.fname.value + '.spj', this.props.deck)
+  },
   render: function () {
     return <div id="fileSaveAs" className="sp-modal-dialog">
       <div>
         <a href="#close" title="Close" className="sp-modal-close">X</a>
         <h2>Save As ...</h2>
         <input type="text" name="fname" onChange={this.onChange}
-               defaultValue={this.props.deck._fn.replace(/\.spj$/,'')}></input>.spj
+               defaultValue={this.props.deck._fn.replace(/\.spj$/,'')} ref="fname"></input>.spj
         <div style={{color: 'red'}} ref="errorMsg"></div>
+        <a
+          className="btn btn-primary"
+          onClick={this.onOk}
+          href="#close"
+        >{lang.btnOk}
+        </a>
+        <a
+          href="#close"
+          className="btn btn-primary"
+        >{lang.btnCancel}
+        </a>
       </div>
     </div>
   }
