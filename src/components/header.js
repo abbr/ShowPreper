@@ -55,7 +55,9 @@ let Header = React.createClass({
               </li>
             </ul>
             <FileOpener onNewDeck={this.props.onNewDeck}/>
-            <FileSaveAs onNewDeck={this.props.onNewDeck}/>
+            <FileSaveAs
+              onNewDeck={this.props.onNewDeck}
+              deck={this.props.deck}/>
             <Exporter deck={this.props.deck}/>
             <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
           </div>

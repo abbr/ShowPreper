@@ -45,4 +45,6 @@ module.exports = {
   handouts: 'Handouts',
   presentation: 'Presentation',
   doubleClickEdit: 'Double click to edit',
+  duplicatedFileNameErr: 'Duplicated file name. If you click OK, old file will be overwritten.',
+  emptyFileNameErr: 'File name cannot be empty.',
 }
