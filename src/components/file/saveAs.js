@@ -16,6 +16,7 @@ let FileSaveAs = React.createClass({
     }
   },
   onOk: function () {
+    // TODO: delete duplicated file if exists
     this.props.onNewDeck(this.refs.fname.value + '.spj', this.props.deck)
   },
   render: function () {
