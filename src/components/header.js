@@ -4,6 +4,7 @@ import lang from 'i18n/lang'
 import Exporter from 'components/file/export'
 import Importer from 'components/file/import'
 import FileOpener from 'components/file/open'
+import FileSaveAs from 'components/file/saveAs'
 import './header.less'
 
 let Header = React.createClass({
@@ -46,12 +47,15 @@ let Header = React.createClass({
                 className="badge">Ctrl-y</span></a></li>
               <li><a href="#fileOpen" title={lang.open}>{lang.open}</a>
               </li>
+              <li><a href="#fileSaveAs" title={lang.saveAs}>{lang.saveAs}</a>
+              </li>
               <li><a href="#openExport" title={lang.export}>{lang.export}</a>
               </li>
               <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
               </li>
             </ul>
             <FileOpener onNewDeck={this.props.onNewDeck}/>
+            <FileSaveAs onNewDeck={this.props.onNewDeck}/>
             <Exporter deck={this.props.deck}/>
             <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
           </div>
