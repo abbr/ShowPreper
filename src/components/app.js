@@ -12,6 +12,12 @@ import DeckStore from 'stores/deck'
 import _ from 'lodash'
 let key = require('mousetrap')
 let App = React.createClass({
+  setDocTitle: t => {
+    document.title = "ShowPreper - " + t
+  },
+  componentWillMount: function () {
+    this.setDocTitle(this.state.deck._fn)
+  },
   componentDidMount: function () {
     key.bind('ctrl+z', this.onUndo)
     key.bind('ctrl+y', this.onRedo)
@@ -99,8 +105,8 @@ let App = React.createClass({
       deck: deck
     })
   },
-  onNewDeck: function(nm, props){
-    let deck = new DeckStore.Deck(nm,props)
+  onNewDeck: function (nm, props) {
+    let deck = new DeckStore.Deck(nm, props)
     deck.save()
     this.setState({
       deck: deck
@@ -187,7 +193,11 @@ let App = React.createClass({
       this.onSelectedWidgetUpdated({container: component, index: e}, newProp, markUndoDesc)
     })
   },
-
+  componentWillUpdate: function (nextProps, nextState) {
+    if (nextState.deck._fn !== this.state.deck._fn) {
+      this.setDocTitle(nextState.deck._fn)
+    }
+  },
   render: function () {
     var Main
     switch (this.state.view) {
@@ -218,7 +228,7 @@ let App = React.createClass({
               changeView={this.changeView}
               currentView={this.state.view}
               onNewWidget={this.onNewWidget}
-              onNewDeck = {this.onNewDeck}
+              onNewDeck={this.onNewDeck}
       />
       {Main}
     </div>
