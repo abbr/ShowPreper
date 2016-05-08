@@ -7,7 +7,7 @@ let FileOpener = React.createClass({
     let keys = []
     for (var key in localStorage) {
       if (key.endsWith('.spj')) {
-        keys.push(<OpenFileEntry
+        keys.push(<OpenEntry
           name={key}
           key={key}
           onNewDeck={this.props.onNewDeck}

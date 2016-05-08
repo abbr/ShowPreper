@@ -23,6 +23,9 @@ let Header = React.createClass({
   onImport: function () {
     this.refs.importer.click()
   },
+  onDelete: function(){
+    alert('here')
+  },
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
     let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current + 1 < this.props.deck.undoStack.stack.length) ? this.props.deck.undoStack.stack[this.props.deck.undoStack.current + 1].desc : '')
@@ -52,6 +55,8 @@ let Header = React.createClass({
               <li><a href="#openExport" title={lang.export}>{lang.export}</a>
               </li>
               <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
+              </li>
+              <li><a href="#" onClick={this.onDelete} title={lang.delete}>{lang.delete}</a>
               </li>
             </ul>
             <FileOpener onNewDeck={this.props.onNewDeck}/>
