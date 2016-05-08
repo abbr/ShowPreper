@@ -23,7 +23,7 @@ let FileSaveAs = React.createClass({
     this.setState({fn: newName})
   },
   onOk: function () {
-    this.props.onNewDeck(this.refs.fname.value + '.spj', this.props.deck)
+    this.props.onNewDeck(this.state.fn, this.props.deck)
   },
   componentWillReceiveProps: function (nextProps) {
     if (nextProps.deck._fn !== this.props.deck._fn) {
@@ -38,8 +38,8 @@ let FileSaveAs = React.createClass({
       <div>
         <a href="#close" title="Close" className="sp-modal-close">X</a>
         <h2>Save As ...</h2>
-        <input type="text" name="fname" onChange={this.onChange}
-               value={this.state.fn.replace(/\.spj$/,'')} ref="fname"></input>.spj
+        <input type="text" onChange={this.onChange}
+               value={this.state.fn.replace(/\.spj$/,'')}></input>.spj
         <div style={{color: 'red'}}>{this.state.errMsg}</div>
         <a
           className="btn btn-primary"
