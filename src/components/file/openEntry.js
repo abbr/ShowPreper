@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 
-let OpenFileEntry = React.createClass({
+let OpenEntry = React.createClass({
   onOpen: function () {
     this.props.onNewDeck(this.props.name)
   },
@@ -9,4 +9,4 @@ let OpenFileEntry = React.createClass({
     return <div><a href="#" onClick={this.onOpen}>{this.props.name}</a></div>
   }
 })
-module.exports = OpenFileEntry
+module.exports = OpenEntry

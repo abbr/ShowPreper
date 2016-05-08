@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import OpenFileEntry from './openFileEntry'
+import OpenEntry from './openEntry'
 
 let FileOpener = React.createClass({
   render: function () {
