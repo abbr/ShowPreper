@@ -56,7 +56,7 @@ let Header = React.createClass({
               </li>
               <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
               </li>
-              <li><a href="#" onClick={this.onDelete} title={lang.delete}>{lang.delete}</a>
+              <li><a href="#" onClick={this.onDelete} title={lang.delete} style={{color: 'red'}}>{lang.delete}</a>
               </li>
             </ul>
             <FileOpener onNewDeck={this.props.onNewDeck}/>
