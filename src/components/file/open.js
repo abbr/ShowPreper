@@ -1,13 +1,13 @@
 'use strict'
 import React from 'react'
-import FileEntry from './entry'
+import OpenFileEntry from './openFileEntry'
 
 let FileOpener = React.createClass({
   render: function () {
     let keys = []
     for (var key in localStorage) {
       if (key.endsWith('.spj')) {
-        keys.push(<FileEntry
+        keys.push(<OpenFileEntry
           name={key}
           key={key}
           onNewDeck={this.props.onNewDeck}
