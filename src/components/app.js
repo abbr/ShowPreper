@@ -112,6 +112,14 @@ let App = React.createClass({
       deck: deck
     })
   },
+  onDeleteDeck: function () {
+    this.state.deck.delete()
+    let deck = DeckStore.getDefaultDeck()
+    deck.save()
+    this.setState({
+      deck: deck
+    })
+  },
   onUndo: function () {
     let deck = this.state.deck
     deck.undo()
@@ -229,6 +237,7 @@ let App = React.createClass({
               currentView={this.state.view}
               onNewWidget={this.onNewWidget}
               onNewDeck={this.onNewDeck}
+              onDeleteDeck={this.onDeleteDeck}
       />
       {Main}
     </div>

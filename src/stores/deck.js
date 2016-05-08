@@ -1,7 +1,7 @@
 'use strict'
-import _ from "lodash";
-import "babel-polyfill";
-import SampleDeck from "sources/sample.spj";
+import _ from 'lodash'
+import 'babel-polyfill'
+import SampleDeck from 'sources/sample.spj'
 const _spDefaultFileNm = 'default.spj'
 const _spDefaultDeck = '_defaultDeck'
 const DEFAULT_SLIDE_SIZE = {width: 900, height: 700}
@@ -16,7 +16,7 @@ let Deck = function (fn, props) {
     catch (ex) {
     }
   }
-  let deckObj = props || savedDeckObj || SampleDeck
+  let deckObj = props || savedDeckObj || _.cloneDeep(SampleDeck)
   _.assign(this, deckObj)
   Object.defineProperty(this, "undoStack", {
     enumerable: false,
@@ -41,6 +41,17 @@ Deck.prototype.getActiveSlide = function () {
 
 Deck.prototype.activateSlide = function (i) {
   this.activeSlide = i
+}
+
+Deck.prototype.delete = function () {
+  try {
+    localStorage.removeItem(this._fn)
+    if (localStorage.getItem(_spDefaultDeck) === this._fn) {
+      localStorage.removeItem(_spDefaultDeck)
+    }
+  }
+  catch (e) {
+  }
 }
 
 Deck.prototype.save = function () {

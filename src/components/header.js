@@ -24,7 +24,7 @@ let Header = React.createClass({
     this.refs.importer.click()
   },
   onDelete: function(){
-    alert('here')
+    this.props.onDeleteDeck()
   },
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
