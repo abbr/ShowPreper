@@ -50,4 +50,5 @@ module.exports = {
   emptyFileNameErr: 'File name cannot be empty.',
   btnOk: 'Ok',
   btnCancel: 'Cancel',
+  triClickEdt: 'tripple click to select & edit',
 }

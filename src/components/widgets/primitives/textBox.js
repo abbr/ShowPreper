@@ -10,8 +10,7 @@ let TextBox = React.createClass({
     this.setState({editable: true})
     this.props.setDraggable(false)
     if (this.editor) {
-      this.editor.destroy()
-      delete this.editor
+      return
     }
     let editor = this.editor = window.CKEDITOR.inline(this.refs.editableContent, {
       extraPlugins: 'sourcedialog'
