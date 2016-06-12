@@ -2,10 +2,10 @@
 
 var React = require('react')
 import ReactDOM from 'react-dom'
-var WellSlide = require('./wellSlide')
 import 'jquery-ui/jquery-ui.js'
 import 'jquery-ui/themes/smoothness/jquery-ui.min.css'
 import lang from 'i18n/lang'
+var WellSlide = require('./wellSlide')
 
 require('./index.less')
 
@@ -51,7 +51,8 @@ var SlideWell = React.createClass({
              key={slide.id || index}
         >
           <div className="sp-well-slide-killer"
-               onClick={this.deleteSlide(index)}>xxxx</div>
+               onClick={this.deleteSlide(index)}>xxxx
+          </div>
           <WellSlide
             deck={this.props.deck}
             model={slide}
@@ -59,14 +60,18 @@ var SlideWell = React.createClass({
             onSlideClicked={this.props.onSlideClicked}
           />
           <div className="sp-well-slide-creator"
-               onClick={this.newSlide(index)}>++++
+          ><span className='glyphicon glyphicon-plus btn-success'
+                 onClick={this.newSlide(index)}
+          ></span>
           </div>
         </div>
       )
     })
     return <div className="sp-well">
       <div className="sp-well-slide-creator"
-           onClick={this.newSlide(-1)}>++++
+      ><span className='glyphicon glyphicon-plus btn-success'
+             onClick={this.newSlide(-1)}
+      ></span>
       </div>
       {slides}
     </div>
