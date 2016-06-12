@@ -11,7 +11,7 @@ require('./index.less')
 
 var SlideWell = React.createClass({
   componentDidMount() {
-    this.domItems = jQuery(ReactDOM.findDOMNode(this))
+    this.domItems = jQuery(ReactDOM.findDOMNode(this.refs['slides']))
     this.domItems.sortable({
       placeholder: "sp-ui-state-highlight",
       tolerance: "pointer",
@@ -68,12 +68,14 @@ var SlideWell = React.createClass({
       )
     })
     return <div className="sp-well">
-      <div className="sp-well-slide-creator"
-      ><span className='glyphicon glyphicon-plus btn-success'
-             onClick={this.newSlide(-1)}
-      ></span>
+      <div className="sp-well-slide-creator">
+        <span className='glyphicon glyphicon-plus btn-success'
+              onClick={this.newSlide(-1)}
+        ></span>
       </div>
-      {slides}
+      <div ref="slides">
+        {slides}
+      </div>
     </div>
   }
 })
