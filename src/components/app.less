@@ -26,14 +26,24 @@ body {
         .sp-view-btns li button {
           width: 70pt;
         }
-        .btn-group > .btn+.dropdown-toggle{
+        .btn-group > .btn + .dropdown-toggle {
           padding: 16px 8px;
         }
-        .navbar-right > *{
+        .navbar-right > * {
           display: inline-block;
           margin-left: 10px;
         }
       }
     }
+  }
+}
+
+.centered-child {
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

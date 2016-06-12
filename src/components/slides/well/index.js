@@ -60,7 +60,7 @@ var SlideWell = React.createClass({
             onSlideClicked={this.props.onSlideClicked}
           />
           <div className="sp-well-slide-creator"
-          ><span className='glyphicon glyphicon-plus btn-success'
+          ><span className='glyphicon glyphicon-plus btn-success centered-child'
                  onClick={this.newSlide(index)}
           ></span>
           </div>
@@ -69,7 +69,7 @@ var SlideWell = React.createClass({
     })
     return <div className="sp-well">
       <div className="sp-well-slide-creator">
-        <span className='glyphicon glyphicon-plus btn-success'
+        <span className='glyphicon glyphicon-plus btn-success centered-child'
               onClick={this.newSlide(-1)}
         ></span>
       </div>
