@@ -50,18 +50,20 @@ var SlideWell = React.createClass({
              data-sortable={this.props.index}
              key={slide.id || index}
         >
-          <div className="sp-well-slide-killer"
-               onClick={this.deleteSlide(index)}>xxxx
-          </div>
           <WellSlide
             deck={this.props.deck}
             model={slide}
             index={index}
             onSlideClicked={this.props.onSlideClicked}
-          />
+          >
+            <div className="sp-well-slide-killer"
+                 onClick={this.deleteSlide(index)}>
+              <span className="glyphicon glyphicon-remove-sign" title={lang.delete}></span>
+            </div>
+          </WellSlide>
           <div className="sp-well-slide-creator"
           ><span className='glyphicon glyphicon-plus btn-success centered-child'
-                 onClick={this.newSlide(index)}
+                 onClick={this.newSlide(index)} title={lang.new}
           ></span>
           </div>
         </div>
@@ -70,7 +72,7 @@ var SlideWell = React.createClass({
     return <div className="sp-well">
       <div className="sp-well-slide-creator">
         <span className='glyphicon glyphicon-plus btn-success centered-child'
-              onClick={this.newSlide(-1)}
+              onClick={this.newSlide(-1)} title={lang.new}
         ></span>
       </div>
       <div ref="slides">

@@ -1,52 +1,62 @@
-.sp-theme-dark .sp-slide-well {
-  background: #34323a;
-}
-
-.sp-ui-state-highlight {
-  height: 140px;
-  border: red solid 1px;
-}
-
-.sp-well-slide-creator {
-  text-align: center;
-  span{
-    width: 40px;
-    height: 20px;
-    background: linear-gradient(#62c462, #51a351);
+.sp-well {
+  .sp-ui-state-highlight {
+    height: 140px;
+    border: red solid 1px;
   }
-}
-.sp-well-slide-wrapper {
-  position: relative;
-  .sp-well-slide-killer{
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+
   .sp-well-slide-creator {
-    visibility: hidden;
+    cursor: pointer;
+    text-align: center;
+    span {
+      width: 40px;
+      height: 20px;
+      background: linear-gradient(#62c462, #51a351);
+    }
   }
-  &:hover .sp-well-slide-creator {
-    visibility: visible;
-  }
-  .sp-well-slide-container {
-    width: 140px;
-    height: 100px;
-    background: white;
-    margin: 10px auto;
-    overflow: hidden;
+
+  .sp-well-slide-wrapper {
     position: relative;
-    &:hover:active ~ .sp-well-slide-creator {
+
+    .sp-well-slide-killer {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      cursor: pointer;
+      z-index: 100;
+      visibility: hidden;
+      .glyphicon {
+        color: red;
+        font-size: 100px;
+      }
+    }
+    .sp-well-slide-creator {
       visibility: hidden;
     }
+    &:hover .sp-well-slide-creator {
+      visibility: visible;
+    }
+    &:hover .sp-well-slide-killer {
+      visibility: visible;
+    }
 
-    .sp-well-slide {
-      box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      &.sp-selected {
-        border: 1px solid orange;
+    .sp-well-slide-container {
+      width: 140px;
+      height: 100px;
+      background: white;
+      margin: 10px auto;
+      overflow: hidden;
+      position: relative;
+      &:hover:active ~ .sp-well-slide-creator {
+        visibility: hidden;
+      }
+
+      .sp-well-slide {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        &.sp-selected {
+          border: 1px solid orange;
+        }
       }
     }
   }
 }
-
-
