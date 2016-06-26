@@ -69,21 +69,21 @@ let Header = React.createClass({
         </div>
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div className="nav navbar-btn btn-group navbar-left" role="group">
-            {[
-              {icon: 'glyphicon-text-width', text: lang.text, type: 'TextBox'},
-              {icon: 'glyphicon-picture', text: lang.image, type: 'image'},
-              {icon: 'glyphicon-film', text: lang.video, type: 'video'},
-              {icon: 'glyphicon-globe', text: lang.website, type: 'website'},
-              {icon: 'glyphicon-star', text: lang.shapes, type: 'shapes'},
-            ].map(e =>
-              <button type="button" className="btn btn-default" key={e.type}
-                      onClick={() => {this.createWidget(e.type)}}>
-                <span className={'glyphicon ' + e.icon}/>
+              <button type="button" className="btn btn-default"
+                      onClick={() => {this.createWidget('TextBox')}}>
+                <span className={'glyphicon glyphicon-text-width'}/>&nbsp;
+                <span className={'glyphicon glyphicon-picture'}/>&nbsp;
+                <span className={'glyphicon glyphicon-globe'}/>
                 <div className="btn-label">
-                  {e.text}
+                  {lang.insertObject}
                 </div>
               </button>
-            )}
+              <button type="button" className="btn btn-default">
+                <span className={'glyphicon glyphicon-text-background'}/>
+                <div className="btn-label">
+                  {lang.setBackground}
+                </div>
+              </button>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">
