@@ -5,6 +5,7 @@ import 'impress.js'
 import './presentation.less'
 import DeckStore from 'stores/deck'
 import AutoScale from 'components/mixins/autoScale'
+import _ from 'lodash'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 
 let Presentation = React.createClass({
@@ -12,6 +13,9 @@ let Presentation = React.createClass({
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck()
   }),
+  componentWillMount: function () {
+    _.merge(document.body.style, this.state.deck.background)
+  },
   componentDidMount: function () {
     if ("ontouchstart" in document.documentElement) {
       document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>"

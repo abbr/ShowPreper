@@ -80,5 +80,9 @@
   ],
   "activeSlide": 0,
   "slideWidth": 640,
-  "slideHeight": 480
+  "slideHeight": 480,
+  "background": {
+    "backgroundColor": "rgb(215, 215, 215)",
+    "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
+  }
 }

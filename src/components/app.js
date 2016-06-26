@@ -49,7 +49,8 @@ let App = React.createClass({
   },
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(),
-    view: 'slides'
+    view: 'slides',
+    deckBackground: DeckStore.getDefaultDeck().background || {},
   }),
   changeView: function (newView) {
     this.setState({
@@ -227,6 +228,7 @@ let App = React.createClass({
           component={this.state.deck}
           selectedWidgets={selectedWidgets}
           onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
+          deckBackground={this.state.deckBackground}
         />
     }
     return <div className="sp-container">
@@ -238,6 +240,7 @@ let App = React.createClass({
               onNewWidget={this.onNewWidget}
               onNewDeck={this.onNewDeck}
               onDeleteDeck={this.onDeleteDeck}
+              deckBackground={this.state.deckBackground}
       />
       {Main}
     </div>

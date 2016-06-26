@@ -100,7 +100,7 @@ let Overview = React.createClass({
     return (
       <div
         onMouseDown={this.onSelectionMouseDown}
-        className="sp-overview">
+        className="sp-overview" style={this.props.deckBackground}>
         <span className='glyphicon glyphicon-zoom-in'
               onMouseDown={this.zoomIn}
               onMouseUp={this.stopZoomIn}
