@@ -8,8 +8,7 @@ let DisplayableComponent = React.createClass({
     const WidgetFactory = require('./widgetFactory')
     let Widget = WidgetFactory(this.props.component)
 
-    let widgetStyle = {transform: ''}
-    let componentStyle = _.merge({transform: ''}, this.props.componentStyle || {})
+    let widgetStyle = _.merge({transform: ''}, this.props.componentStyle || {}), componentStyle = {transform: ''}
 
     let translate3D = {}
     translate3D.x = this.props.component.x || 0
@@ -51,6 +50,7 @@ let DisplayableComponent = React.createClass({
         style={componentStyle}>
         <div
           className={this.props.className}
+          style={{height: '100%'}}
         >
           <Widget
             {...this.props}
