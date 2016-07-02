@@ -14,7 +14,7 @@ let Presentation = React.createClass({
     deck: DeckStore.getDefaultDeck()
   }),
   componentWillMount: function () {
-    _.merge(document.body.style, this.state.deck.background)
+    _.merge(document.body.style, this.state.deck.style)
   },
   componentDidMount: function () {
     if ("ontouchstart" in document.documentElement) {
@@ -41,7 +41,7 @@ let Presentation = React.createClass({
           data-rotate-z={(component.rotate&&component.rotate.z)?component.rotate.z*180/Math.PI:0}
           data-scale={component.scale?Math.max(component.scale.x,component.scale.y):1}
           component={component}
-          componentStyle={this.state.deck.slideDefaultBackground||{}}
+          componentStyle={this.state.deck.slideDefaultStyle||{}}
           container={this.state.deck}
           key={index}
           idx={index}

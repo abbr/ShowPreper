@@ -55,7 +55,7 @@ var SlideWell = React.createClass({
             model={slide}
             index={index}
             onSlideClicked={this.props.onSlideClicked}
-            slideDefaultBackground={this.props.slideDefaultBackground}
+            slideDefaultStyle={this.props.slideDefaultStyle}
           >
             <div className="sp-well-slide-killer"
                  onClick={this.deleteSlide(index)}>

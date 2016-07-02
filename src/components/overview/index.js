@@ -81,7 +81,7 @@ let Overview = React.createClass({
       }
       return (
         <EditableComponent
-          componentStyle = {this.props.deck.slideDefaultBackground||{}}
+          componentStyle = {this.props.deck.slideDefaultStyle||{}}
           className="sp-overview-component"
           component={component}
           container={this.props.deck}
@@ -101,7 +101,7 @@ let Overview = React.createClass({
     return (
       <div
         onMouseDown={this.onSelectionMouseDown}
-        className="sp-overview" style={this.props.deckBackground}>
+        className="sp-overview" style={this.props.deckStyle}>
         <span className='glyphicon glyphicon-zoom-in'
               onMouseDown={this.zoomIn}
               onMouseUp={this.stopZoomIn}

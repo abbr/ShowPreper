@@ -50,8 +50,8 @@ let App = React.createClass({
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(),
     view: 'slides',
-    deckBackground: DeckStore.getDefaultDeck().background || {},
-    slideDefaultBackground: DeckStore.getDefaultDeck().slideDefaultBackground || {}
+    deckStyle: DeckStore.getDefaultDeck().style || {},
+    slideDefaultStyle: DeckStore.getDefaultDeck().slideDefaultStyle || {}
   }),
   changeView: function (newView) {
     this.setState({
@@ -217,7 +217,7 @@ let App = React.createClass({
                        onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
                        onNewWidget={this.onNewWidget}
                        onSlideMoved={this.onSlideMoved}
-                       slideDefaultBackground={this.state.slideDefaultBackground}
+                       slideDefaultStyle={this.state.slideDefaultStyle}
         />
         break;
       case 'overview':
@@ -230,7 +230,7 @@ let App = React.createClass({
           component={this.state.deck}
           selectedWidgets={selectedWidgets}
           onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
-          deckBackground={this.state.deckBackground}
+          deckStyle={this.state.deckStyle}
         />
     }
     return <div className="sp-container">
@@ -242,8 +242,8 @@ let App = React.createClass({
               onNewWidget={this.onNewWidget}
               onNewDeck={this.onNewDeck}
               onDeleteDeck={this.onDeleteDeck}
-              deckBackground={this.state.deckBackground}
-              slideDefaultBackground={this.state.slideDefaultBackground}
+              deckStyle={this.state.deckStyle}
+              slideDefaultStyle={this.state.slideDefaultStyle}
       />
       {Main}
     </div>
