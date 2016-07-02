@@ -73,7 +73,7 @@ let OperatingTable = React.createClass({
         <div className="sp-operating-table"
              onMouseDown={this.onSelectionMouseDown}
         >
-          <div className="sp-ot-slide" style={_.merge({},this.state.scaleStyle,this.props.slideDefaultStyle)}>
+          <div className="sp-ot-slide" style={_.merge({},this.state.scaleStyle,this.props.defaultSlideStyle)}>
             {componentsView}
           </div>
         </div>

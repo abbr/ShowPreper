@@ -38,7 +38,7 @@ var WellSlide = React.createClass({
         <div
           className={classNames("sp-well-slide",
           {"sp-selected": this.props.deck.activeSlide===this.props.index})}
-          style={_.merge({},this.state.scaleStyle, this.props.slideDefaultStyle)}>
+          style={_.merge({},this.state.scaleStyle, this.props.defaultSlideStyle)}>
           {this.props.children}
           {componentsView}
         </div>

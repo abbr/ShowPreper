@@ -81,7 +81,7 @@ let Overview = React.createClass({
       }
       return (
         <EditableComponent
-          componentStyle = {this.props.deck.slideDefaultStyle||{}}
+          componentStyle = {this.props.deck.defaultSlideStyle||{}}
           className="sp-overview-component"
           component={component}
           container={this.props.deck}
