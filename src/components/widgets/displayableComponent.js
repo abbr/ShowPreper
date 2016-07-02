@@ -22,9 +22,9 @@ let DisplayableComponent = React.createClass({
     componentStyle.transform += " scale(" + scaleX + "," + scaleY + ")"
     if (this.props.component.rotate) {
       let rotStr = ''
-      this.props.component.rotate.z && (rotStr += " rotateZ(" + this.props.component.rotate.z + "rad)")
-      this.props.component.rotate.y && (rotStr += " rotateY(" + this.props.component.rotate.y + "rad)")
       this.props.component.rotate.x && (rotStr += " rotateX(" + this.props.component.rotate.x + "rad)")
+      this.props.component.rotate.y && (rotStr += " rotateY(" + this.props.component.rotate.y + "rad)")
+      this.props.component.rotate.z && (rotStr += " rotateZ(" + this.props.component.rotate.z + "rad)")
       if (this.props.combinedTransform) {
         componentStyle.transform += rotStr
       }
@@ -42,6 +42,12 @@ let DisplayableComponent = React.createClass({
       else {
         widgetStyle.transform += rotStr
       }
+    }
+    if (widgetStyle.transform === '') {
+      delete widgetStyle.transform
+    }
+    if (componentStyle.transform === '') {
+      delete componentStyle.transform
     }
     return (
       <div
