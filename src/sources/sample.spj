@@ -84,5 +84,9 @@
   "background": {
     "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
+  },
+  "slideDefaultBackground": {
+    "backgroundColor": "rgb(215, 215, 215)",
+    "background": "radial-gradient(#f00, #fff)"
   }
 }

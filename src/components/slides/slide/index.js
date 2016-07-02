@@ -11,11 +11,10 @@ let SlideEditor = React.createClass({
         return pv
       }, [])
       return <div className="sp-slide">
-        <OperatingTable
-          onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+        <OperatingTable {...this.props}
           component={component}
           selectedWidgets={selectedWidgets}
-          deck={this.props.deck}/>
+        />
       </div>
     }
     catch (ex) {

@@ -51,6 +51,7 @@ let App = React.createClass({
     deck: DeckStore.getDefaultDeck(),
     view: 'slides',
     deckBackground: DeckStore.getDefaultDeck().background || {},
+    slideDefaultBackground: DeckStore.getDefaultDeck().slideDefaultBackground || {}
   }),
   changeView: function (newView) {
     this.setState({
@@ -216,6 +217,7 @@ let App = React.createClass({
                        onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
                        onNewWidget={this.onNewWidget}
                        onSlideMoved={this.onSlideMoved}
+                       slideDefaultBackground={this.state.slideDefaultBackground}
         />
         break;
       case 'overview':
@@ -241,6 +243,7 @@ let App = React.createClass({
               onNewDeck={this.onNewDeck}
               onDeleteDeck={this.onDeleteDeck}
               deckBackground={this.state.deckBackground}
+              slideDefaultBackground={this.state.slideDefaultBackground}
       />
       {Main}
     </div>

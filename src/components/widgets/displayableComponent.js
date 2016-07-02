@@ -1,13 +1,15 @@
 'use strict'
 import React from 'react'
 import classNames from 'classnames'
+let _ = require('lodash')
 
 let DisplayableComponent = React.createClass({
   render: function () {
     const WidgetFactory = require('./widgetFactory')
     let Widget = WidgetFactory(this.props.component)
 
-    let widgetStyle = {transform: ''}, componentStyle = {transform: ''}
+    let widgetStyle = {transform: ''}
+    let componentStyle = _.merge({transform: ''}, this.props.componentStyle || {})
 
     let translate3D = {}
     translate3D.x = this.props.component.x || 0
@@ -24,10 +26,10 @@ let DisplayableComponent = React.createClass({
       this.props.component.rotate.z && (rotStr += " rotateZ(" + this.props.component.rotate.z + "rad)")
       this.props.component.rotate.y && (rotStr += " rotateY(" + this.props.component.rotate.y + "rad)")
       this.props.component.rotate.x && (rotStr += " rotateX(" + this.props.component.rotate.x + "rad)")
-      if(this.props.combinedTransform){
+      if (this.props.combinedTransform) {
         componentStyle.transform += rotStr
       }
-      else{
+      else {
         widgetStyle.transform += rotStr
       }
     }
@@ -35,10 +37,10 @@ let DisplayableComponent = React.createClass({
       let rotStr = ''
       this.props.component.skew.y && (rotStr += " skewY(" + this.props.component.skew.y + "rad)")
       this.props.component.skew.x && (rotStr += " skewX(" + this.props.component.skew.x + "rad)")
-      if(this.props.combinedTransform){
+      if (this.props.combinedTransform) {
         componentStyle.transform += rotStr
       }
-      else{
+      else {
         widgetStyle.transform += rotStr
       }
     }

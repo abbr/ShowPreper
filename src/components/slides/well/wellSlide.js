@@ -1,6 +1,7 @@
 'use strict'
 
 var React = require('react')
+let _ = require('lodash')
 var DisplayableComponent = require('components/widgets/displayableComponent')
 import AutoScale from 'components/mixins/autoScale'
 import classNames from 'classnames'
@@ -37,7 +38,7 @@ var WellSlide = React.createClass({
         <div
           className={classNames("sp-well-slide",
           {"sp-selected": this.props.deck.activeSlide===this.props.index})}
-          style={this.state.scaleStyle}>
+          style={_.merge({},this.state.scaleStyle, this.props.slideDefaultBackground)}>
           {this.props.children}
           {componentsView}
         </div>

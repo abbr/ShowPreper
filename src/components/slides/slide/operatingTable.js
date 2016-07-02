@@ -2,7 +2,7 @@
 
 let React = require('react')
 let _ = require('lodash')
-import EditableComponent  from 'components/widgets/editableComponent'
+import EditableComponent from 'components/widgets/editableComponent'
 import AutoScale from 'components/mixins/autoScale'
 import Draggable from 'components/mixins/draggable'
 import Scalable from 'components/mixins/scalable'
@@ -36,7 +36,7 @@ let OperatingTable = React.createClass({
   onMouseDown: function () {
     this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
   },
-  setDraggable: function(draggable){
+  setDraggable: function (draggable) {
     this.setState({draggable: draggable})
   },
   componentWillUnmount: function () {
@@ -73,7 +73,7 @@ let OperatingTable = React.createClass({
         <div className="sp-operating-table"
              onMouseDown={this.onSelectionMouseDown}
         >
-          <div className="sp-ot-slide" style={this.state.scaleStyle}>
+          <div className="sp-ot-slide" style={_.merge({},this.state.scaleStyle,this.props.slideDefaultBackground)}>
             {componentsView}
           </div>
         </div>
