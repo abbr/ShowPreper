@@ -16,14 +16,14 @@ let Header = React.createClass({
         "type": type,
         "x": 0,
         "y": 0,
-        "text": "<div style=\"font-family: Hammersmith One;font-size: 30pt\">("+lang['triClickEdt']+")</div>"
+        "text": "<div style=\"font-family: Hammersmith One;font-size: 30pt\">(" + lang['triClickEdt'] + ")</div>"
       },
       lang['new'] + ' ' + lang[type])
   },
   onImport: function () {
     this.refs.importer.click()
   },
-  onDelete: function(){
+  onDelete: function () {
     this.props.onDeleteDeck()
   },
   render: function () {
@@ -33,7 +33,7 @@ let Header = React.createClass({
       <div className="container-fluid">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
-                  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  data-target="#sp-navbar-collapse-1" aria-expanded="false">
             <span className="sr-only">Toggle navigation</span>
             <span className="icon-bar"/>
             <span className="icon-bar"/>
@@ -67,23 +67,32 @@ let Header = React.createClass({
             <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
           </div>
         </div>
-        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div className="collapse navbar-collapse" id="sp-navbar-collapse-1">
           <div className="nav navbar-btn btn-group navbar-left" role="group">
-              <button type="button" className="btn btn-default"
-                      onClick={() => {this.createWidget('TextBox')}}>
-                <span className={'glyphicon glyphicon-text-width'}/>&nbsp;
-                <span className={'glyphicon glyphicon-picture'}/>&nbsp;
-                <span className={'glyphicon glyphicon-globe'}/>
-                <div className="btn-label">
-                  {lang.insertObject}
-                </div>
-              </button>
-              <button type="button" className="btn btn-default">
+            <button type="button" className="btn btn-default"
+                    onClick={() => {this.createWidget('TextBox')}}>
+              <span className={'glyphicon glyphicon-text-width'}/>&nbsp;
+              <span className={'glyphicon glyphicon-picture'}/>&nbsp;
+              <span className={'glyphicon glyphicon-globe'}/>
+              <div className="btn-label">
+                {lang.insertObject}
+              </div>
+            </button>
+            <div className="dropdown" id="sp-navbar-style">
+              <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <span className={'glyphicon glyphicon-text-background'}/>
                 <div className="btn-label">
-                  {lang.setBackground}
+                  {lang.setBackground}<span className="caret"/>
                 </div>
               </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">

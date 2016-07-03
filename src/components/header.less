@@ -1,3 +1,9 @@
+.sp-header {
+  #sp-navbar-style {
+    display: inline-block;
+  }
+}
+
 .sp-modal-dialog {
   position: fixed;
   font-family: Arial, Helvetica, sans-serif;
@@ -5,13 +11,13 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 99999;
-  opacity:0;
+  opacity: 0;
   transition: opacity 400ms ease-in;
   pointer-events: none;
-  &:target{
-    opacity:1;
+  &:target {
+    opacity: 1;
     pointer-events: auto;
   }
   > div {
@@ -35,6 +41,8 @@
     font-weight: bold;
     border-radius: 12px;
     box-shadow: 1px 1px 3px #000;
-    &:hover { background: #00d9ff; }
+    &:hover {
+      background: #00d9ff;
+    }
   }
 }
