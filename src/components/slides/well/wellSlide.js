@@ -24,7 +24,7 @@ var WellSlide = React.createClass({
     this.props.onSlideClicked(this.props.index)
   },
   render: function () {
-    let componentsView = this.props.model.components.map((component, index) => {
+    let componentsView = this.props.component.components.map((component, index) => {
       return (
         <DisplayableComponent
           component={component}
@@ -38,7 +38,7 @@ var WellSlide = React.createClass({
         <div
           className={classNames("sp-well-slide",
           {"sp-selected": this.props.deck.activeSlide===this.props.index})}
-          style={_.merge({},this.state.scaleStyle, this.props.defaultSlideStyle)}>
+          style={_.merge({},this.state.scaleStyle, this.props.selectedSlideStyle || this.props.component.style || this.props.defaultSlideStyle)}>
           {this.props.children}
           {componentsView}
         </div>

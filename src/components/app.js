@@ -51,7 +51,8 @@ let App = React.createClass({
     deck: DeckStore.getDefaultDeck(),
     view: 'slides',
     deckStyle: DeckStore.getDefaultDeck().style || {},
-    defaultSlideStyle: DeckStore.getDefaultDeck().defaultSlideStyle || {}
+    defaultSlideStyle: DeckStore.getDefaultDeck().defaultSlideStyle || {},
+    selectedSlideStyle:null
   }),
   changeView: function (newView) {
     this.setState({
@@ -218,6 +219,7 @@ let App = React.createClass({
                        onNewWidget={this.onNewWidget}
                        onSlideMoved={this.onSlideMoved}
                        defaultSlideStyle={this.state.defaultSlideStyle}
+                       selectedSlideStyle={this.state.selectedSlideStyle}
         />
         break;
       case 'overview':
@@ -244,6 +246,7 @@ let App = React.createClass({
               onDeleteDeck={this.onDeleteDeck}
               deckStyle={this.state.deckStyle}
               defaultSlideStyle={this.state.defaultSlideStyle}
+              selectedSlideStyle={this.state.selectedSlideStyle}
       />
       {Main}
     </div>
