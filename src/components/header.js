@@ -5,6 +5,7 @@ import Exporter from 'components/file/export'
 import Importer from 'components/file/import'
 import FileOpener from 'components/file/open'
 import FileSaveAs from 'components/file/saveAs'
+import QuickStyler from 'components/styler/quick'
 import './header.less'
 
 let Header = React.createClass({
@@ -68,7 +69,7 @@ let Header = React.createClass({
           </div>
         </div>
         <div className="collapse navbar-collapse" id="sp-navbar-collapse-1">
-          <div className="nav navbar-btn btn-group navbar-left" role="group">
+          <div className="nav navbar-btn navbar-left">
             <button type="button" className="btn btn-default"
                     onClick={() => {this.createWidget('TextBox')}}>
               <span className={'glyphicon glyphicon-text-width'}/>&nbsp;
@@ -85,13 +86,14 @@ let Header = React.createClass({
                   {lang.setAppearance}<span className="caret"/>
                 </div>
               </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">Default slides</a></li>
-                  <li><a href="#">This slide</a></li>
-                  <li><a href="#">Selected slides</a></li>
-                  <li><a href="#">Entire presentation</a></li>
-                </ul>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Default slides</a></li>
+                <li><a href="#">This slide</a></li>
+                <li><a href="#">Selected slides</a></li>
+                <li><a href="#">Entire presentation</a></li>
+              </ul>
             </div>
+            <QuickStyler></QuickStyler>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">

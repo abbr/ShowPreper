@@ -1,6 +1,27 @@
-.sp-header {
-  #sp-navbar-style {
-    display: inline-block;
+#app{
+  .sp-container{
+    .sp-header {
+      &.navbar {
+        margin-bottom: 0px;
+        .navbar-header .dropdown {
+          float: left;
+          .badge {
+            position: absolute;
+            right: 5px;
+          }
+        }
+        .sp-view-btns li button {
+          width: 70pt;
+        }
+        .btn-group > .btn + .dropdown-toggle {
+          padding: 16px 8px;
+        }
+        .navbar-right > *, .navbar-left > * {
+          display: inline-block;
+          margin-left: 10px;
+        }
+      }
+    }
   }
 }
 
