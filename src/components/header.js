@@ -86,11 +86,10 @@ let Header = React.createClass({
                 </div>
               </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator"></li>
-                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">Default slides</a></li>
+                  <li><a href="#">This slide</a></li>
+                  <li><a href="#">Selected slides</a></li>
+                  <li><a href="#">Entire presentation</a></li>
                 </ul>
             </div>
           </div>

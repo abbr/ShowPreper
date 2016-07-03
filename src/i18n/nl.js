@@ -50,6 +50,6 @@ module.exports = {
   btnOk: 'Ok',
   btnCancel: 'Cancel',
   triClickEdt: 'tripple click to select & edit',
-  insertObject: 'Insert Object',
-  setAppearance: 'Set Appearance',
+  insertObject: 'Insert object',
+  setAppearance: 'Set appearance',
 }
