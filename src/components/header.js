@@ -81,9 +81,9 @@ let Header = React.createClass({
             </button>
             <div className="dropdown" id="sp-navbar-style">
               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <span className={'glyphicon glyphicon-text-background'}/>
+                <div>{lang.setAppearance}</div>
                 <div className="btn-label">
-                  {lang.setAppearance}<span className="caret"/>
+                  Default slides<span className="caret"/>
                 </div>
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
