@@ -82,7 +82,7 @@ let Header = React.createClass({
               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <span className={'glyphicon glyphicon-text-background'}/>
                 <div className="btn-label">
-                  {lang.setBackground}<span className="caret"/>
+                  {lang.setAppearance}<span className="caret"/>
                 </div>
               </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">

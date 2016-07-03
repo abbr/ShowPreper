@@ -51,5 +51,5 @@ module.exports = {
   btnCancel: 'Cancel',
   triClickEdt: 'tripple click to select & edit',
   insertObject: 'Insert Object',
-  setBackground: 'Set Background',
+  setAppearance: 'Set Appearance',
 }
