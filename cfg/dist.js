@@ -6,11 +6,14 @@ var baseConfig = require('./base');
 
 // Add needed plugins here
 var BowerWebpackPlugin = require('bower-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var config = _.merge({
+var config = _.mergeWith({
   entry: {
     app: path.join(__dirname, '../src/components/run'),
-    presentation: './src/components/show/presentation',
+    presentation: path.join(__dirname, '../src/components/show/presentation'),
+    polyfill: 'babel-polyfill',
   },
   cache: false,
   devtool: 'sourcemap',
@@ -25,9 +28,19 @@ var config = _.merge({
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.join(__dirname, '..'),
+      verbose: true,
+      dry: false
+    }),
+    new CopyWebpackPlugin([{from: 'src/favicon.ico', to: '../'}]),
   ]
-}, baseConfig);
+}, baseConfig, function (objValue, srcValue) {
+  if (_.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
 
 config.module.loaders.push({
   test: /\.(js|jsx)$/,

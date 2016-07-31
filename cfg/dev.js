@@ -7,12 +7,13 @@ var baseConfig = require('./base');
 // Add needed plugins here
 var BowerWebpackPlugin = require('bower-webpack-plugin');
 
-var config = _.merge({
+var config = _.mergeWith({
   entry: {
     devserver: 'webpack-dev-server/client?http://127.0.0.1:' +baseConfig.port,
     hot: 'webpack/hot/only-dev-server',
     app: './src/components/run',
     presentation: './src/components/show/presentation',
+    polyfill: 'babel-polyfill',
   },
   cache: true,
   devtool: 'inline-source-map',
@@ -23,7 +24,11 @@ var config = _.merge({
       searchResolveModulesDirectories: false
     })
   ]
-}, baseConfig);
+}, baseConfig, function(objValue, srcValue) {
+  if (_.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+});
 
 // Add needed loaders
 config.module.loaders.push({

@@ -1,6 +1,5 @@
 'use strict'
 import _ from 'lodash'
-import 'babel-polyfill'
 import SampleDeck from 'sources/sample.spj'
 const _spDefaultFileNm = 'default.spj'
 const _spDefaultDeck = '_defaultDeck'

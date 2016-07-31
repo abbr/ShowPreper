@@ -2,16 +2,19 @@ var path = require('path');
 var port = process.env.port || 8000;
 var srcPath = path.join(__dirname, '/../src');
 var publicPath = '/assets/';
+var HtmlWebpackPlugin = require("html-webpack-plugin")
+
 module.exports = {
   port: port,
   debug: true,
+  context: path.join(__dirname, '..'),
   output: {
     path: path.join(__dirname, '/../dist/assets'),
     filename: '[name].js',
     publicPath: publicPath
   },
   devServer: {
-    contentBase: './src/',
+    contentBase: './dist/',
     historyApiFallback: true,
     hot: true,
     port: port,
@@ -80,5 +83,20 @@ module.exports = {
   },
   postcss: function () {
     return [];
-  }
+  },
+  plugins: [new HtmlWebpackPlugin(
+      {
+        template: path.join(__dirname, '../src/', 'index.html'),
+        filename: '../index.html',
+        excludeChunks: ['presentation']
+      }
+    ),
+    new HtmlWebpackPlugin(
+      {
+        template: path.join(__dirname, '../src/', 'presentation.html'),
+        filename: '../presentation.html',
+        excludeChunks: ['app']
+      }
+    )
+  ]
 };
