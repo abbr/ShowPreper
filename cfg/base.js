@@ -19,7 +19,10 @@ module.exports = {
     hot: true,
     port: port,
     publicPath: publicPath,
-    noInfo: false
+    info: true,
+    watchOptions: {
+      poll: 1000,
+    },
   },
   resolve: {
     extensions: [
