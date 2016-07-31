@@ -2,6 +2,8 @@ var path = require('path')
 var port = process.env.port || 8000
 var srcPath = path.join(__dirname, '/../src')
 var HtmlWebpackPlugin = require("html-webpack-plugin")
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+
 module.exports = {
   port: port,
   debug: true,
@@ -91,6 +93,7 @@ module.exports = {
         filename: 'presentation.html',
         excludeChunks: ['app']
       }
-    )
+    ),
+    new CopyWebpackPlugin([{from: 'src/favicon.ico'}]),
   ]
 }

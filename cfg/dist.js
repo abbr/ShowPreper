@@ -1,11 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
-var baseConfig = require('./base')
-
 // Add needed plugins here
 var BowerWebpackPlugin = require('bower-webpack-plugin')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 var config = {
   output: {
@@ -37,7 +34,6 @@ var config = {
       verbose: true,
       dry: false
     }),
-    new CopyWebpackPlugin([{from: 'src/favicon.ico'}]),
   ]
 }
 
