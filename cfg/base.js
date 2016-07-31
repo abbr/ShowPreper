@@ -1,29 +1,19 @@
-var path = require('path');
-var port = process.env.port || 8000;
-var srcPath = path.join(__dirname, '/../src');
-var publicPath = '/assets/';
+var path = require('path')
+var port = process.env.port || 8000
+var srcPath = path.join(__dirname, '/../src')
 var HtmlWebpackPlugin = require("html-webpack-plugin")
-
 module.exports = {
   port: port,
   debug: true,
   context: path.join(__dirname, '..'),
   output: {
-    path: path.join(__dirname, '/../dist/assets'),
+    path: path.join(__dirname, '/../dist'),
     filename: '[name].js',
-    publicPath: publicPath
   },
-  devServer: {
-    contentBase: './dist/',
-    historyApiFallback: true,
-    hot: true,
-    port: port,
-    inline: true,
-    publicPath: publicPath,
-    info: true,
-    watchOptions: {
-      poll: 1000,
-    },
+  entry: {
+    app: [path.join(__dirname, '../src/components/run')],
+    presentation: path.join(__dirname, '../src/components/show/presentation'),
+    polyfill: 'babel-polyfill',
   },
   resolve: {
     extensions: [
@@ -86,21 +76,21 @@ module.exports = {
     ]
   },
   postcss: function () {
-    return [];
+    return []
   },
   plugins: [new HtmlWebpackPlugin(
-      {
-        template: path.join(__dirname, '../src/', 'index.html'),
-        filename: '../index.html',
-        excludeChunks: ['presentation']
-      }
-    ),
+    {
+      template: path.join(__dirname, '../src/', 'index.html'),
+      filename: 'index.html',
+      excludeChunks: ['presentation']
+    }
+  ),
     new HtmlWebpackPlugin(
       {
         template: path.join(__dirname, '../src/', 'presentation.html'),
-        filename: '../presentation.html',
+        filename: 'presentation.html',
         excludeChunks: ['app']
       }
     )
   ]
-};
+}

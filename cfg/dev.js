@@ -1,19 +1,26 @@
-var path = require('path');
-var webpack = require('webpack');
-var _ = require('lodash');
-
-var baseConfig = require('./base');
+var path = require('path')
+var webpack = require('webpack')
+var baseConfig = require('./base')
 
 // Add needed plugins here
-var BowerWebpackPlugin = require('bower-webpack-plugin');
+var BowerWebpackPlugin = require('bower-webpack-plugin')
 
-var config = _.mergeWith({
-  entry: {
-    app: ['./src/components/run'],
-    presentation: './src/components/show/presentation',
-    polyfill: 'babel-polyfill',
+var config = {
+  module: {
+    loaders: [{
+      test: /\.(js|jsx)$/,
+      loader: 'react-hot!babel-loader',
+      include: path.join(__dirname, '/../src')
+    }]
   },
-  cache: true,
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    port: baseConfig.port,
+    inline: true,
+    info: true,
+  },
+  cache: false,
   devtool: 'inline-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -22,17 +29,6 @@ var config = _.mergeWith({
       searchResolveModulesDirectories: false
     })
   ]
-}, baseConfig, function(objValue, srcValue) {
-  if (_.isArray(objValue)) {
-    return objValue.concat(srcValue);
-  }
-});
+}
 
-// Add needed loaders
-config.module.loaders.push({
-  test: /\.(js|jsx)$/,
-  loader: 'react-hot!babel-loader',
-  include: path.join(__dirname, '/../src')
-});
-
-module.exports = config;
+module.exports = config

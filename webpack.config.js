@@ -1,21 +1,22 @@
-'use strict';
+'use strict'
 
-var path = require('path');
-var args = require('minimist')(process.argv.slice(2));
+var path = require('path')
+var args = require('minimist')(process.argv.slice(2))
+var _ = require('lodash')
 
 // List of allowed environments
-var allowedEnvs = ['dev', 'dist', 'test'];
+var allowedEnvs = ['dev', 'dist', 'test']
 
 // Set the correct environment
-var env;
-if(args._.length > 0 && args._.indexOf('start') !== -1) {
-  env = 'test';
+var env
+if (args._.length > 0 && args._.indexOf('start') !== -1) {
+  env = 'test'
 } else if (args.env) {
-  env = args.env;
+  env = args.env
 } else {
-  env = 'dev';
+  env = 'dev'
 }
-process.env.REACT_WEBPACK_ENV = env;
+process.env.REACT_WEBPACK_ENV = env
 
 // Get available configurations
 var configs = {
@@ -23,7 +24,7 @@ var configs = {
   dev: require(path.join(__dirname, 'cfg/dev')),
   dist: require(path.join(__dirname, 'cfg/dist')),
   test: require(path.join(__dirname, 'cfg/test'))
-};
+}
 
 /**
  * Get an allowed environment
@@ -31,8 +32,8 @@ var configs = {
  * @return {String}
  */
 function getValidEnv(env) {
-  var isValid = env && env.length > 0 && allowedEnvs.indexOf(env) !== -1;
-  return isValid ? env : 'dev';
+  var isValid = env && env.length > 0 && allowedEnvs.indexOf(env) !== -1
+  return isValid ? env : 'dev'
 }
 
 /**
@@ -41,8 +42,12 @@ function getValidEnv(env) {
  * @return {Object} Webpack config
  */
 function buildConfig(env) {
-  var usedEnv = getValidEnv(env);
-  return configs[usedEnv];
+  var usedEnv = getValidEnv(env)
+  return _.mergeWith(configs['base'], configs[usedEnv], function (objValue, srcValue) {
+    if (_.isArray(objValue)) {
+      return objValue.concat(srcValue)
+    }
+  })
 }
 
-module.exports = buildConfig(env);
+module.exports = buildConfig(env)

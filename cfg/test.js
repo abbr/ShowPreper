@@ -1,8 +1,8 @@
-var path = require('path');
-var srcPath = path.join(__dirname, '/../src/');
+var path = require('path')
+var srcPath = path.join(__dirname, '/../src/')
 
 // Add needed plugins here
-var BowerWebpackPlugin = require('bower-webpack-plugin');
+var BowerWebpackPlugin = require('bower-webpack-plugin')
 
 module.exports = {
   devtool: 'eval',
@@ -48,4 +48,4 @@ module.exports = {
       searchResolveModulesDirectories: false
     })
   ]
-};
+}
