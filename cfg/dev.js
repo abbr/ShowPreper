@@ -9,7 +9,7 @@ var BowerWebpackPlugin = require('bower-webpack-plugin');
 
 var config = _.mergeWith({
   entry: {
-    app: './src/components/run',
+    app: ['./src/components/run'],
     presentation: './src/components/show/presentation',
     polyfill: 'babel-polyfill',
   },

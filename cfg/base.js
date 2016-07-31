@@ -18,6 +18,7 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     port: port,
+    inline: true,
     publicPath: publicPath,
     info: true,
     watchOptions: {
