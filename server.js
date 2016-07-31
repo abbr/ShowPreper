@@ -3,8 +3,6 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
 var open = require('open');
-config.entry.app.unshift('webpack-dev-server/client?http://localhost:' + config.port + '/');
-
 new WebpackDevServer(webpack(config), config.devServer)
   .listen(config.port, 'localhost', function (err) {
     if (err) {

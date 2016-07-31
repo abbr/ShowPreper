@@ -6,6 +6,10 @@ var baseConfig = require('./base')
 var BowerWebpackPlugin = require('bower-webpack-plugin')
 
 var config = {
+  entry: {
+    app: ['webpack-dev-server/client?http://localhost:' + baseConfig.port + '/'
+      , 'webpack/hot/dev-server']
+  },
   module: {
     loaders: [{
       test: /\.(js|jsx)$/,
