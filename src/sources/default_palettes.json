@@ -1,0 +1,9 @@
+[
+  {
+    "backgroundColor": "rgb(215, 215, 215)",
+    "background": "radial-gradient(#f00, #fff)"
+  },
+  {
+    "backgroundColor": "transparent"
+  }
+]
