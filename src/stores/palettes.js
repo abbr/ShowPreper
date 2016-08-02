@@ -12,7 +12,7 @@ let Palettes = function () {
     catch (ex) {
     }
   }
-  _.assign(this, savedPalettes || _.cloneDeep(DefaultPalettes))
+  _.assign(this, savedPalettes || _.clone(DefaultPalettes))
 }
 
 Palettes.prototype.save = function () {
