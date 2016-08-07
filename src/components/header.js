@@ -28,7 +28,7 @@ let Header = React.createClass({
     this.props.onDeleteDeck()
   },
   getInitialState: () => ({
-    selectedStyleTarget: 'defaultSlides'
+    selectedStyleTarget: 'defaultSlide'
   }),
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
@@ -93,8 +93,8 @@ let Header = React.createClass({
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><a onClick={()=> {
-                  this.setState({selectedStyleTarget: 'defaultSlides'})
-                }}>{lang.defaultSlides}</a></li>
+                  this.setState({selectedStyleTarget: 'defaultSlide'})
+                }}>{lang.defaultSlide}</a></li>
                 <li><a onClick={()=> {
                   this.setState({selectedStyleTarget: 'thisSlide'})
                 }}>{lang.thisSlide}</a></li>
@@ -106,7 +106,12 @@ let Header = React.createClass({
                 }}>{lang.entirePresentation}</a></li>
               </ul>
             </div>
-            <QuickStyler target={this.state.selectedStyleTarget}></QuickStyler>
+            <QuickStyler selectedStyleTarget={this.state.selectedStyleTarget}
+                         deckStyle={this.props.deckStyle}
+                         defaultSlideStyle={this.props.defaultSlideStyle}
+                         selectedSlideStyle={this.props.selectedSlideStyle}
+                         setTargetStyle = {this.props.setTargetStyle}
+            ></QuickStyler>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">

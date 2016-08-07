@@ -53,7 +53,7 @@ module.exports = {
   triClickEdt: 'tripple click to select & edit',
   insertObject: 'Insert object',
   setAppearance: 'Set appearance for',
-  defaultSlides: 'default slides',
+  defaultSlide: 'default slides',
   thisSlide: 'this slide',
   selectedSlides: 'selected slides',
   entirePresentation: 'entire presentation',

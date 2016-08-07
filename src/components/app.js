@@ -209,6 +209,11 @@ let App = React.createClass({
       this.setDocTitle(nextState.deck._fn)
     }
   },
+  setTargetStyle: function(target, style){
+    let tmp = {}
+    tmp[target] = style
+    this.setState(tmp)
+  },
   render: function () {
     var Main
     switch (this.state.view) {
@@ -247,6 +252,7 @@ let App = React.createClass({
               deckStyle={this.state.deckStyle}
               defaultSlideStyle={this.state.defaultSlideStyle}
               selectedSlideStyle={this.state.selectedSlideStyle}
+              setTargetStyle = {this.setTargetStyle}
       />
       {Main}
     </div>
