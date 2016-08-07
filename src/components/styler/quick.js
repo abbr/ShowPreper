@@ -4,19 +4,31 @@ import './quick.less'
 import Palettes from 'stores/palettes'
 import _ from 'lodash'
 let QuickStyler = React.createClass({
-  onMouseOver: function (idx) {
+  onMouseEvent: function (evt, idx) {
     let p = new Palettes()
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
-        this.props.setTargetStyle('defaultSlideStyle', p[idx])
+        if (evt.type === 'mouseover')
+          this.props.setTargetStyle('defaultSlideStyle', p[idx])
+        else {
+          this.props.setTargetStyle('defaultSlideStyle', this.props.deck.defaultSlideStyle)
+        }
         break;
       case 'thisSlide':
         break;
       case 'selectedSlides':
-        this.props.setTargetStyle('selectedSlideStyle', p[idx])
+        if (evt.type === 'mouseover')
+          this.props.setTargetStyle('selectedSlideStyle', p[idx])
+        else {
+          this.props.setTargetStyle('selectedSlideStyle', null)
+        }
         break;
       case 'entirePresentation':
-        this.props.setTargetStyle('deckStyle', p[idx])
+        if (evt.type === 'mouseover')
+          this.props.setTargetStyle('deckStyle', p[idx])
+        else {
+          this.props.setTargetStyle('deckStyle', this.props.deck.style)
+        }
     }
   },
   render: function () {
@@ -24,9 +36,14 @@ let QuickStyler = React.createClass({
     let pDivs = _.map(p, (e, i)=> {
       return <div className="sp-palette"
                   style={e}
-                  onMouseOver={()=> {
-                    this.onMouseOver(i)
+                  onMouseOver={(evt)=> {
+                    this.onMouseEvent(evt, i)
                   } }
+                  onMouseLeave={
+                    (evt)=> {
+                      this.onMouseEvent(evt, i)
+                    }
+                  }
                   key={i}></div>
     })
     return <div id="sp-quick-styler">
