@@ -52,5 +52,9 @@ module.exports = {
   btnCancel: 'Cancel',
   triClickEdt: 'tripple click to select & edit',
   insertObject: 'Insert object',
-  setAppearance: 'Set appearance',
+  setAppearance: 'Set appearance for',
+  defaultSlides: 'default slides',
+  thisSlide: 'this slide',
+  selectedSlides: 'selected slides',
+  entirePresentation: 'entire presentation',
 }

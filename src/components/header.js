@@ -27,6 +27,9 @@ let Header = React.createClass({
   onDelete: function () {
     this.props.onDeleteDeck()
   },
+  getInitialState: () => ({
+    selectedStyleTarget: 'defaultSlides'
+  }),
   render: function () {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
     let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current + 1 < this.props.deck.undoStack.stack.length) ? this.props.deck.undoStack.stack[this.props.deck.undoStack.current + 1].desc : '')
@@ -71,7 +74,9 @@ let Header = React.createClass({
         <div className="collapse navbar-collapse" id="sp-navbar-collapse-1">
           <div className="nav navbar-btn navbar-left">
             <button type="button" className="btn btn-default"
-                    onClick={() => {this.createWidget('TextBox')}}>
+                    onClick={() => {
+                      this.createWidget('TextBox')
+                    }}>
               <span className={'glyphicon glyphicon-text-width'}/>&nbsp;
               <span className={'glyphicon glyphicon-picture'}/>&nbsp;
               <span className={'glyphicon glyphicon-globe'}/>
@@ -83,21 +88,29 @@ let Header = React.createClass({
               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <div>{lang.setAppearance}</div>
                 <div className="btn-label">
-                  Default slides<span className="caret"/>
+                  {lang[this.state.selectedStyleTarget]}<span className="caret"/>
                 </div>
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Default slides</a></li>
-                <li><a href="#">This slide</a></li>
-                <li><a href="#">Selected slides</a></li>
-                <li><a href="#">Entire presentation</a></li>
+                <li><a onClick={()=> {
+                  this.setState({selectedStyleTarget: 'defaultSlides'})
+                }}>{lang.defaultSlides}</a></li>
+                <li><a onClick={()=> {
+                  this.setState({selectedStyleTarget: 'thisSlide'})
+                }}>{lang.thisSlide}</a></li>
+                <li><a onClick={()=> {
+                  this.setState({selectedStyleTarget: 'selectedSlides'})
+                }}>{lang.selectedSlides}</a></li>
+                <li><a onClick={()=> {
+                  this.setState({selectedStyleTarget: 'entirePresentation'})
+                }}>{lang.entirePresentation}</a></li>
               </ul>
             </div>
-            <QuickStyler></QuickStyler>
+            <QuickStyler target={this.state.selectedStyleTarget}></QuickStyler>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">
-              <li style={this.props.currentView!=='slides'?{}: {display: 'none'}}>
+              <li style={this.props.currentView !== 'slides' ? {} : {display: 'none'}}>
                 <button type="button"
                         className="btn btn-default"
                         onClick={()=>this.props.changeView('slides')}
@@ -108,7 +121,7 @@ let Header = React.createClass({
                   </div>
                 </button>
               </li>
-              <li style={this.props.currentView!=='overview' ?{}: {display: 'none'}}>
+              <li style={this.props.currentView !== 'overview' ? {} : {display: 'none'}}>
                 <button type="button"
                         className="btn btn-default"
                         onClick={()=>this.props.changeView('overview')}
