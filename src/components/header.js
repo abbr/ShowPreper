@@ -95,15 +95,15 @@ let Header = React.createClass({
                 <li><a onClick={()=> {
                   this.setState({selectedStyleTarget: 'defaultSlide'})
                 }}>{lang.defaultSlide}</a></li>
-                <li><a onClick={()=> {
+                {(this.props.currentView === 'slides') && <li><a onClick={()=> {
                   this.setState({selectedStyleTarget: 'thisSlide'})
-                }}>{lang.thisSlide}</a></li>
-                <li><a onClick={()=> {
+                }}>{lang.thisSlide}</a></li> }
+                {(this.props.currentView === 'overview') && <li><a onClick={()=> {
                   this.setState({selectedStyleTarget: 'selectedSlides'})
-                }}>{lang.selectedSlides}</a></li>
-                <li><a onClick={()=> {
+                }}>{lang.selectedSlides}</a></li> }
+                {this.props.currentView === 'overview' && <li><a onClick={()=> {
                   this.setState({selectedStyleTarget: 'entirePresentation'})
-                }}>{lang.entirePresentation}</a></li>
+                }}>{lang.entirePresentation}</a></li>}
               </ul>
             </div>
             <QuickStyler selectedStyleTarget={this.state.selectedStyleTarget}
