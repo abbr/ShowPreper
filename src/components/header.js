@@ -120,7 +120,10 @@ let Header = React.createClass({
               <li style={this.props.currentView !== 'slides' ? {} : {display: 'none'}}>
                 <button type="button"
                         className="btn btn-default"
-                        onClick={()=>this.props.changeView('slides')}
+                        onClick={()=> {
+                          this.props.changeView('slides')
+                          this.setState({selectedStyleTarget: 'defaultSlide'})
+                        }}
                 >
                   <span className={'glyphicon glyphicon-th-list'}/>
                   <div className="btn-label">
@@ -131,7 +134,10 @@ let Header = React.createClass({
               <li style={this.props.currentView !== 'overview' ? {} : {display: 'none'}}>
                 <button type="button"
                         className="btn btn-default"
-                        onClick={()=>this.props.changeView('overview')}
+                        onClick={()=> {
+                          this.props.changeView('overview')
+                          this.setState({selectedStyleTarget: 'defaultSlide'})
+                        }}
                 >
                   <span className={'glyphicon glyphicon-th'}/>
                   <div className="btn-label">
