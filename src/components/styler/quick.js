@@ -15,6 +15,11 @@ let QuickStyler = React.createClass({
         }
         break;
       case 'thisSlide':
+        if (evt.type === 'mouseover')
+          this.props.setTargetStyle('thisSlideStyle', p[idx])
+        else {
+          this.props.setTargetStyle('thisSlideStyle', null)
+        }
         break;
       case 'selectedSlides':
         if (evt.type === 'mouseover')
