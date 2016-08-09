@@ -239,6 +239,7 @@ let App = React.createClass({
           selectedWidgets={selectedWidgets}
           onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
           deckStyle={this.state.deckStyle}
+          defaultSlideStyle={this.state.defaultSlideStyle}
           selectedSlideStyle={this.state.selectedSlideStyle}
         />
     }

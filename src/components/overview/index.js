@@ -1,12 +1,12 @@
 'use strict'
 import React from 'react'
 import './index.less'
-var EditableComponent = require('components/widgets/editableComponent')
 import AutoScale from 'components/mixins/autoScale'
 import Draggable from 'components/mixins/draggable'
 import Scalable from 'components/mixins/scalable'
 import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
+var EditableComponent = require('components/widgets/editableComponent')
 let Overview = React.createClass({
   mixins: [AutoScale, Selectable, Draggable, Scalable, Rotatable],
   getInitialState: function () {
@@ -26,7 +26,7 @@ let Overview = React.createClass({
   _resized: function () {
     let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     let newBB = this._scale(bb)
-    if(newBB){
+    if (newBB) {
       this.props.onSelectedWidgetUpdated({container: this.props.deck, index: -1}, {boundingBox: newBB})
     }
   },
@@ -81,7 +81,7 @@ let Overview = React.createClass({
       }
       return (
         <EditableComponent
-          componentStyle = {component.style || this.props.deck.defaultSlideStyle||{}}
+          componentStyle={component.style || this.props.defaultSlideStyle || {}}
           className="sp-overview-component"
           component={component}
           container={this.props.deck}
