@@ -16,7 +16,7 @@ let QuickStyler = React.createClass({
           case 'click':
             this.props.onSelectedWidgetUpdated({
               container: this.props.deck,
-              idx: -1
+              index: -1
             }, {defaultSlideStyle: p[idx]}, lang.setAppearance + ' ' + lang.defaultSlide)
           default:
             this.props.setTargetStyle('defaultSlideStyle', null)
@@ -28,6 +28,10 @@ let QuickStyler = React.createClass({
             this.props.setTargetStyle('thisSlideStyle', p[idx])
             break
           case 'click':
+            this.props.onSelectedWidgetUpdated({
+              container: this.props.deck.getActiveSlide(),
+              index: -1
+            }, {style: p[idx]}, lang.setAppearance + ' ' + lang.thisSlide)
           default:
             this.props.setTargetStyle('thisSlideStyle', null)
         }
