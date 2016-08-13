@@ -42,6 +42,15 @@ let QuickStyler = React.createClass({
             this.props.setTargetStyle('selectedSlideStyle', p[idx])
             break
           case 'click':
+            this.props.deck.components.forEach((e)=> {
+              if (e.selected) {
+                this.props.onSelectedWidgetUpdated({
+                  container: e,
+                  index: -1
+                }, {style: p[idx]})
+              }
+            })
+            this.props.deck.markUndo(lang.setAppearance + ' ' + lang.selectedSlides)
           default:
             this.props.setTargetStyle('selectedSlideStyle', null)
         }
