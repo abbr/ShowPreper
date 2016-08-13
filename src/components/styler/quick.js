@@ -61,8 +61,12 @@ let QuickStyler = React.createClass({
             this.props.setTargetStyle('deckStyle', p[idx])
             break
           case 'click':
+            this.props.onSelectedWidgetUpdated({
+              container: this.props.deck,
+              index: -1
+            }, {style: p[idx]}, lang.setAppearance + ' ' + lang.entirePresentation)
           default:
-            this.props.setTargetStyle('deckStyle', this.props.deck.style)
+            this.props.setTargetStyle('deckStyle', null)
         }
     }
   },
