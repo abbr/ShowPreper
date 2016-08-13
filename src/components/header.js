@@ -113,6 +113,7 @@ let Header = React.createClass({
                          selectedSlideStyle={this.props.selectedSlideStyle}
                          thisSlideStyle={this.props.thisSlideStyle}
                          setTargetStyle={this.props.setTargetStyle}
+                         onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
             ></QuickStyler>
           </div>
           <div className="navbar-right">

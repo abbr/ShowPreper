@@ -50,8 +50,8 @@ let App = React.createClass({
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(),
     view: 'slides',
-    deckStyle: DeckStore.getDefaultDeck().style || {},
-    defaultSlideStyle: DeckStore.getDefaultDeck().defaultSlideStyle || {},
+    deckStyle: null,
+    defaultSlideStyle: null,
     selectedSlideStyle: null,
     thisSlideStyle: null
   }),
@@ -96,7 +96,7 @@ let App = React.createClass({
     }
     if (newProps) {
       let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
-      _.merge(selectedWidget, newProps)
+      _.assign(selectedWidget, newProps)
     }
     else {
       component.components.splice(widgetIdx, 1)
@@ -257,6 +257,7 @@ let App = React.createClass({
               selectedSlideStyle={this.state.selectedSlideStyle}
               thisSlideStyle={this.state.thisSlideStyle}
               setTargetStyle={this.setTargetStyle}
+              onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
       />
       {Main}
     </div>

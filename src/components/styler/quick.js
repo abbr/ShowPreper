@@ -3,36 +3,53 @@ import React from 'react'
 import './quick.less'
 import Palettes from 'stores/palettes'
 import _ from 'lodash'
+import lang from 'i18n/lang'
 let QuickStyler = React.createClass({
   onMouseEvent: function (evt, idx) {
     let p = new Palettes()
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
-        if (evt.type === 'mouseover')
-          this.props.setTargetStyle('defaultSlideStyle', p[idx])
-        else {
-          this.props.setTargetStyle('defaultSlideStyle', this.props.deck.defaultSlideStyle)
+        switch (evt.type) {
+          case 'mouseover':
+            this.props.setTargetStyle('defaultSlideStyle', p[idx])
+            break
+          case 'click':
+            this.props.onSelectedWidgetUpdated({
+              container: this.props.deck,
+              idx: -1
+            }, {defaultSlideStyle: p[idx]}, lang.setAppearance + ' ' + lang.defaultSlide)
+          default:
+            this.props.setTargetStyle('defaultSlideStyle', null)
         }
-        break;
+        break
       case 'thisSlide':
-        if (evt.type === 'mouseover')
-          this.props.setTargetStyle('thisSlideStyle', p[idx])
-        else {
-          this.props.setTargetStyle('thisSlideStyle', null)
+        switch (evt.type) {
+          case 'mouseover':
+            this.props.setTargetStyle('thisSlideStyle', p[idx])
+            break
+          case 'click':
+          default:
+            this.props.setTargetStyle('thisSlideStyle', null)
         }
-        break;
+        break
       case 'selectedSlides':
-        if (evt.type === 'mouseover')
-          this.props.setTargetStyle('selectedSlideStyle', p[idx])
-        else {
-          this.props.setTargetStyle('selectedSlideStyle', null)
+        switch (evt.type) {
+          case 'mouseover':
+            this.props.setTargetStyle('selectedSlideStyle', p[idx])
+            break
+          case 'click':
+          default:
+            this.props.setTargetStyle('selectedSlideStyle', null)
         }
-        break;
+        break
       case 'entirePresentation':
-        if (evt.type === 'mouseover')
-          this.props.setTargetStyle('deckStyle', p[idx])
-        else {
-          this.props.setTargetStyle('deckStyle', this.props.deck.style)
+        switch (evt.type) {
+          case 'mouseover':
+            this.props.setTargetStyle('deckStyle', p[idx])
+            break
+          case 'click':
+          default:
+            this.props.setTargetStyle('deckStyle', this.props.deck.style)
         }
     }
   },
@@ -46,6 +63,11 @@ let QuickStyler = React.createClass({
                   } }
                   onMouseLeave={
                     (evt)=> {
+                      this.onMouseEvent(evt, i)
+                    }
+                  }
+                  onClick={
+                    (evt) => {
                       this.onMouseEvent(evt, i)
                     }
                   }
