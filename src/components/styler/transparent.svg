@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <pattern id="pattern"
-           x="0" y="0" width="12" height="12"
+           x="0" y="0" width="10" height="10"
            patternUnits="userSpaceOnUse">
-    <rect fill="rgba(159, 188, 191, 0.4)" x="0" width="6" height="6" y="0"/>
-    <rect fill="rgba(159, 188, 191, 0.4)" x="6" width="6" height="6" y="6"/>
+    <rect fill="rgba(159, 188, 191, 0.4)" x="0" width="5" height="5" y="0"/>
+    <rect fill="rgba(159, 188, 191, 0.4)" x="5" width="5" height="5" y="5"/>
   </pattern>
   <rect fill="url(#pattern)" x="0" y="0" width="100%" height="100%"/>
 </svg>
