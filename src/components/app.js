@@ -94,12 +94,17 @@ let App = React.createClass({
         widgetIdx = widget.index
         break
     }
-    if (newProps) {
-      let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
-      _.assign(selectedWidget, newProps)
-    }
-    else {
-      component.components.splice(widgetIdx, 1)
+    let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
+    switch (typeof newProps) {
+      case 'object':
+        _.assign(selectedWidget, newProps)
+        break
+      case 'string':
+        delete selectedWidget[newProps]
+        break
+      case undefined:
+        component.components.splice(widgetIdx, 1)
+        break
     }
     deck.save()
     if (markUndoDesc) {

@@ -25,13 +25,24 @@ let QuickStyler = React.createClass({
       case 'thisSlide':
         switch (evt.type) {
           case 'mouseover':
+            if (idx === '8') {
+              p[idx] = this.props.deck.defaultSlideStyle
+            }
             this.props.setTargetStyle('thisSlideStyle', p[idx])
             break
           case 'click':
-            this.props.onSelectedWidgetUpdated({
-              container: this.props.deck.getActiveSlide(),
-              index: -1
-            }, {style: p[idx]}, lang.setAppearance + ' ' + lang.thisSlide)
+            if (idx === '8') {
+              this.props.onSelectedWidgetUpdated({
+                container: this.props.deck.getActiveSlide(),
+                index: -1
+              }, 'style', lang.setAppearance + ' ' + lang.thisSlide)
+            }
+            else {
+              this.props.onSelectedWidgetUpdated({
+                container: this.props.deck.getActiveSlide(),
+                index: -1
+              }, {style: p[idx]}, lang.setAppearance + ' ' + lang.thisSlide)
+            }
           default:
             this.props.setTargetStyle('thisSlideStyle', null)
         }
@@ -72,23 +83,35 @@ let QuickStyler = React.createClass({
   },
   render: function () {
     let p = new Palettes()
+    p[8] = p[9] = {}
+
     let pDivs = _.map(p, (e, i)=> {
-      return <div className="sp-palette"
-                  style={e}
-                  onMouseOver={(evt)=> {
-                    this.onMouseEvent(evt, i)
-                  } }
-                  onMouseLeave={
-                    (evt)=> {
-                      this.onMouseEvent(evt, i)
-                    }
-                  }
-                  onClick={
-                    (evt) => {
-                      this.onMouseEvent(evt, i)
-                    }
-                  }
-                  key={i}></div>
+      let extraCN = ''
+      switch (i) {
+        case "8":
+          extraCN = ' special-style glyphicon glyphicon-remove'
+          break
+        case "9":
+          extraCN = ' special-style glyphicon glyphicon-edit'
+          break
+      }
+      return <div
+        className={"sp-palette" + extraCN}
+        style={e}
+        onMouseOver={(evt)=> {
+          this.onMouseEvent(evt, i)
+        } }
+        onMouseLeave={
+          (evt)=> {
+            this.onMouseEvent(evt, i)
+          }
+        }
+        onClick={
+          (evt) => {
+            this.onMouseEvent(evt, i)
+          }
+        }
+        key={i}></div>
     })
     return <div id="sp-quick-styler">
       {pDivs}
