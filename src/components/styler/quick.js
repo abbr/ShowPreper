@@ -131,7 +131,7 @@ let QuickStyler = React.createClass({
           break
         case "9":
           extraCN = ' special-style glyphicon glyphicon-edit'
-          title = lang.edit
+          title = lang.customizeStyle
           break
       }
       return <div

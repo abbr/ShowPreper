@@ -56,7 +56,7 @@ module.exports = {
   thisSlide: 'this slide',
   selectedSlides: 'selected slides',
   entirePresentation: 'entire presentation',
-  edit: 'Edit',
+  customizeStyle: 'Customize style...',
   removeStyle: 'Remove style',
   setToTransparent: 'Set to transparent',
 }
