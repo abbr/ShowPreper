@@ -4,6 +4,8 @@ import './quick.less'
 import Palettes from 'stores/palettes'
 import _ from 'lodash'
 import lang from 'i18n/lang'
+import Styler from './'
+
 let QuickStyler = React.createClass({
   onMouseEvent: function (evt, idx) {
     let p = new Palettes()
@@ -120,6 +122,11 @@ let QuickStyler = React.createClass({
     let pDivs = _.map(p, (e, i)=> {
       let s = _.clone(e)
       let extraCN = '', title = ''
+      let mouseEvtHdlr = (evt)=> {
+        this.onMouseEvent(evt, i)
+      }
+      let mouseClickHdlr = mouseEvtHdlr
+
       switch (i) {
         case "7":
           s.background = 'url(' + require('./transparent.svg') + ')'
@@ -132,29 +139,24 @@ let QuickStyler = React.createClass({
         case "9":
           extraCN = ' special-style glyphicon glyphicon-edit'
           title = lang.customizeStyle
+          mouseEvtHdlr = null
+          mouseClickHdlr = (evt) => {
+            $('#sp-styler-modal').modal('show')
+          }
           break
       }
       return <div
         className={"sp-palette" + extraCN}
         style={s}
         title={title}
-        onMouseOver={(evt)=> {
-          this.onMouseEvent(evt, i)
-        } }
-        onMouseLeave={
-          (evt)=> {
-            this.onMouseEvent(evt, i)
-          }
-        }
-        onClick={
-          (evt) => {
-            this.onMouseEvent(evt, i)
-          }
-        }
+        onMouseOver={mouseEvtHdlr}
+        onMouseLeave={mouseEvtHdlr}
+        onClick={mouseClickHdlr}
         key={i}></div>
     })
     return <div id="sp-quick-styler">
       {pDivs}
+      <Styler></Styler>
     </div>
   }
 })
