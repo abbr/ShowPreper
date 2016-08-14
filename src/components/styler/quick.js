@@ -123,10 +123,11 @@ let QuickStyler = React.createClass({
       switch (i) {
         case "7":
           s.background = 'url(' + require('./transparent.svg') + ')'
+          title = lang.setToTransparent
           break
         case "8":
           extraCN = ' special-style glyphicon glyphicon-remove'
-          title = lang.delete
+          title = lang.removeStyle
           break
         case "9":
           extraCN = ' special-style glyphicon glyphicon-edit'
