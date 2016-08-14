@@ -119,21 +119,24 @@ let QuickStyler = React.createClass({
     p[8] = p[9] = {}
     let pDivs = _.map(p, (e, i)=> {
       let s = _.clone(e)
-      let extraCN = ''
+      let extraCN = '', title = ''
       switch (i) {
         case "7":
           s.background = 'url(' + require('./transparent.svg') + ')'
           break
         case "8":
           extraCN = ' special-style glyphicon glyphicon-remove'
+          title = lang.delete
           break
         case "9":
           extraCN = ' special-style glyphicon glyphicon-edit'
+          title = lang.edit
           break
       }
       return <div
         className={"sp-palette" + extraCN}
         style={s}
+        title={title}
         onMouseOver={(evt)=> {
           this.onMouseEvent(evt, i)
         } }
