@@ -61,15 +61,26 @@ let QuickStyler = React.createClass({
       case 'selectedSlides':
         switch (evt.type) {
           case 'mouseover':
+            if (idx === '8') {
+              p[idx] = this.props.deck.defaultSlideStyle
+            }
             this.props.setTargetStyle('selectedSlideStyle', p[idx])
             break
           case 'click':
             this.props.deck.components.forEach((e)=> {
               if (e.selected) {
-                this.props.onSelectedWidgetUpdated({
-                  container: e,
-                  index: -1
-                }, {style: p[idx]})
+                if (idx === '8') {
+                  this.props.onSelectedWidgetUpdated({
+                    container: e,
+                    index: -1
+                  }, 'style')
+                }
+                else {
+                  this.props.onSelectedWidgetUpdated({
+                    container: e,
+                    index: -1
+                  }, {style: p[idx]})
+                }
               }
             })
             this.props.deck.markUndo(lang.setAppearance + ' ' + lang.selectedSlides)
