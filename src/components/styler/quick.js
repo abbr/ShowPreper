@@ -11,13 +11,24 @@ let QuickStyler = React.createClass({
       case 'defaultSlide':
         switch (evt.type) {
           case 'mouseover':
+            if (idx === '8') {
+              p[idx] = {}
+            }
             this.props.setTargetStyle('defaultSlideStyle', p[idx])
             break
           case 'click':
-            this.props.onSelectedWidgetUpdated({
-              container: this.props.deck,
-              index: -1
-            }, {defaultSlideStyle: p[idx]}, lang.setAppearance + ' ' + lang.defaultSlide)
+            if (idx === '8') {
+              this.props.onSelectedWidgetUpdated({
+                container: this.props.deck,
+                index: -1
+              }, 'defaultSlideStyle', lang.setAppearance + ' ' + lang.defaultSlide)
+            }
+            else {
+              this.props.onSelectedWidgetUpdated({
+                container: this.props.deck,
+                index: -1
+              }, {defaultSlideStyle: p[idx]}, lang.setAppearance + ' ' + lang.defaultSlide)
+            }
           default:
             this.props.setTargetStyle('defaultSlideStyle', null)
         }
