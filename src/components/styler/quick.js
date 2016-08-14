@@ -91,13 +91,24 @@ let QuickStyler = React.createClass({
       case 'entirePresentation':
         switch (evt.type) {
           case 'mouseover':
+            if (idx === '8') {
+              p[idx] = {}
+            }
             this.props.setTargetStyle('deckStyle', p[idx])
             break
           case 'click':
-            this.props.onSelectedWidgetUpdated({
-              container: this.props.deck,
-              index: -1
-            }, {style: p[idx]}, lang.setAppearance + ' ' + lang.entirePresentation)
+            if (idx === '8') {
+              this.props.onSelectedWidgetUpdated({
+                container: this.props.deck,
+                index: -1
+              }, 'style', lang.setAppearance + ' ' + lang.entirePresentation)
+            }
+            else {
+              this.props.onSelectedWidgetUpdated({
+                container: this.props.deck,
+                index: -1
+              }, {style: p[idx]}, lang.setAppearance + ' ' + lang.entirePresentation)
+            }
           default:
             this.props.setTargetStyle('deckStyle', null)
         }
