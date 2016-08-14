@@ -117,10 +117,13 @@ let QuickStyler = React.createClass({
   render: function () {
     let p = new Palettes()
     p[8] = p[9] = {}
-
     let pDivs = _.map(p, (e, i)=> {
+      let s = _.clone(e)
       let extraCN = ''
       switch (i) {
+        case "7":
+          s.background = 'url(' + require('./transparent.svg') + ')'
+          break
         case "8":
           extraCN = ' special-style glyphicon glyphicon-remove'
           break
@@ -130,7 +133,7 @@ let QuickStyler = React.createClass({
       }
       return <div
         className={"sp-palette" + extraCN}
-        style={e}
+        style={s}
         onMouseOver={(evt)=> {
           this.onMouseEvent(evt, i)
         } }
