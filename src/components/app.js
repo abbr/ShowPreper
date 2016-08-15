@@ -248,7 +248,7 @@ let App = React.createClass({
           selectedSlideStyle={this.state.selectedSlideStyle}
         />
     }
-    return <div className="sp-container">
+    return <div className="sp-main-container">
       <Header deck={this.state.deck}
               onUndo={this.onUndo}
               onRedo={this.onRedo}
