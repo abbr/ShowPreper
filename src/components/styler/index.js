@@ -23,6 +23,22 @@ export default React.createClass({
                 id="sp-styler-model-label">{lang.setAppearance} {lang[this.props.selectedStyleTarget]}</h4>
           </div>
           <div className="modal-body">
+            <ul className="nav nav-tabs">
+              <li className="active"><a data-toggle="tab" href="#spStylerTabBackground">Home</a></li>
+              <li><a data-toggle="tab" href="#spStylerTabBorder">Menu 1</a></li>
+            </ul>
+            <div className="tab-content">
+              <div id="spStylerTabBackground" className="tab-pane fade in active">
+                <h3>HOME</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                  labore et dolore magna aliqua.</p>
+              </div>
+              <div id="spStylerTabBorder" className="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.</p>
+              </div>
+            </div>
             <input id='colorpicker'/>
           </div>
           <div className="modal-footer">
@@ -32,5 +48,6 @@ export default React.createClass({
         </div>
       </div>
     </div>
+
   }
 })
