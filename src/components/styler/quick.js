@@ -156,7 +156,7 @@ let QuickStyler = React.createClass({
     })
     return <div id="sp-quick-styler">
       {pDivs}
-      <Styler></Styler>
+      <Styler selectedStyleTarget={this.props.selectedStyleTarget}></Styler>
     </div>
   }
 })

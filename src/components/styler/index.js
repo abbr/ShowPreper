@@ -1,6 +1,7 @@
 import React from 'react'
 import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
+import lang from 'i18n/lang'
 export default React.createClass({
   componentDidMount: function () {
     $("#sp-styler-modal").draggable({
@@ -18,7 +19,8 @@ export default React.createClass({
           <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
               aria-hidden="true">&times;</span></button>
-            <h4 className="modal-title" id="sp-styler-model-label">Modal title</h4>
+            <h4 className="modal-title"
+                id="sp-styler-model-label">{lang.setAppearance} {lang[this.props.selectedStyleTarget]}</h4>
           </div>
           <div className="modal-body">
             <input id='colorpicker'/>
