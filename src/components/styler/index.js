@@ -24,17 +24,17 @@ export default React.createClass({
           </div>
           <div className="modal-body">
             <ul className="nav nav-tabs">
-              <li className="active"><a data-toggle="tab" href="#spStylerTabBackground">Home</a></li>
-              <li><a data-toggle="tab" href="#spStylerTabBorder">Menu 1</a></li>
+              <li className="active"><a data-toggle="tab" href="#spStylerTabBackground">{lang.background}</a></li>
+              <li><a data-toggle="tab" href="#spStylerTabBorder">{lang.border}</a></li>
             </ul>
             <div className="tab-content">
               <div id="spStylerTabBackground" className="tab-pane fade in active">
-                <h3>HOME</h3>
+                <h3>{lang.background}</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                   labore et dolore magna aliqua.</p>
               </div>
               <div id="spStylerTabBorder" className="tab-pane fade">
-                <h3>Menu 1</h3>
+                <h3>{lang.border}</h3>
                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                   consequat.</p>
               </div>

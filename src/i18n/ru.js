@@ -60,4 +60,5 @@ module.exports = {
   customizeStyle: 'Customize style...',
   removeStyle: 'Remove style',
   setToTransparent: 'Set to transparent',
+  border: 'Border',
 }
