@@ -15,6 +15,21 @@ export default React.createClass({
     })
   },
   render: function () {
+    let s
+    switch (this.props.selectedStyleTarget) {
+      case 'defaultSlide':
+        s = this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle
+        break
+      case 'thisSlide':
+        s = this.props.thisSlideStyle || this.props.deck.getActiveSlide().style
+        break
+      case 'selectedSlides':
+        s = this.props.selectedSlideStyle
+        break
+      case 'entirePresentation':
+        s = this.props.deckStyle || this.props.deck.style
+        break
+    }
     return <div className="modal fade" id="sp-styler-modal" tabIndex="-1" role="dialog"
                 aria-labelledby="sp-styler-modal-label">
       <div className="modal-dialog" role="document">
@@ -28,7 +43,8 @@ export default React.createClass({
           <div className="modal-body">
             <div className="row">
               <div className="col-md-4">
-                <div className="sp-styler-preview"></div>
+                <div className="sp-styler-preview"
+                     style={s}></div>
               </div>
               <div className="col-md-8">
                 <ul className="nav nav-tabs">
