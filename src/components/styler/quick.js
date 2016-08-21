@@ -156,7 +156,15 @@ let QuickStyler = React.createClass({
     })
     return <div id="sp-quick-styler">
       {pDivs}
-      <Styler selectedStyleTarget={this.props.selectedStyleTarget}></Styler>
+      <Styler selectedStyleTarget={this.props.selectedStyleTarget}
+              deckStyle={this.props.deckStyle}
+              deck={this.props.deck}
+              defaultSlideStyle={this.props.defaultSlideStyle}
+              selectedSlideStyle={this.props.selectedSlideStyle}
+              thisSlideStyle={this.props.thisSlideStyle}
+              setTargetStyle={this.props.setTargetStyle}
+              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+      ></Styler>
     </div>
   }
 })
