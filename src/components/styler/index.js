@@ -24,7 +24,20 @@ export default React.createClass({
         s = this.props.thisSlideStyle || this.props.deck.getActiveSlide().style
         break
       case 'selectedSlides':
-        s = this.props.selectedSlideStyle
+        let commonStyle
+        this.props.deck.components.forEach((e) => {
+          if (!e.selected) {
+            return
+          }
+          let thisSlideStyle = e.style || this.props.deck.defaultSlideStyle
+          if (commonStyle === undefined) {
+            commonStyle = thisSlideStyle
+          }
+          else if (commonStyle !== thisSlideStyle) {
+            commonStyle = null
+          }
+        })
+        s = this.props.selectedSlideStyle || commonStyle
         break
       case 'entirePresentation':
         s = this.props.deckStyle || this.props.deck.style
