@@ -3,6 +3,7 @@ import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import lang from 'i18n/lang'
 import './index.less'
+import _ from 'lodash'
 export default React.createClass({
   componentDidMount: function () {
     $("#sp-styler-modal").draggable({
@@ -15,7 +16,7 @@ export default React.createClass({
     })
   },
   render: function () {
-    let s
+    let s, sDisp
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
         s = this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle
@@ -43,6 +44,18 @@ export default React.createClass({
         s = this.props.deckStyle || this.props.deck.style
         break
     }
+    sDisp = _.reduce(s, (p, e, k)=> {
+      var capitalLtrs = k.match(/([A-Z])/)
+      if (capitalLtrs) {
+        for (let i = 1; i < capitalLtrs.length; i++) {
+          let capitalLtr = capitalLtrs[i]
+          let lowerLtr = capitalLtr.toLowerCase()
+          k = k.replace(capitalLtr, '-' + lowerLtr)
+        }
+      }
+      p.push(<div key={p.length}>{k}: {e}</div>)
+      return p
+    }, [])
     return <div className="modal fade" id="sp-styler-modal" tabIndex="-1" role="dialog"
                 aria-labelledby="sp-styler-modal-label">
       <div className="modal-dialog" role="document">
@@ -58,6 +71,7 @@ export default React.createClass({
               <div className="col-md-4">
                 <div className="sp-styler-preview"
                      style={s}></div>
+                <div>{sDisp}</div>
               </div>
               <div className="col-md-8">
                 <ul className="nav nav-tabs">
