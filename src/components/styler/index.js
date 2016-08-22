@@ -71,9 +71,13 @@ export default React.createClass({
               <div className="col-md-4">
                 <div className="sp-styler-preview"
                      style={s}></div>
-                <div>{sDisp}</div>
               </div>
               <div className="col-md-8">
+                {sDisp}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-12">
                 <ul className="nav nav-tabs">
                   <li className="active"><a data-toggle="tab" href="#spStylerTabBackground">{lang.background}</a></li>
                   <li><a data-toggle="tab" href="#spStylerTabBorder">{lang.border}</a></li>
