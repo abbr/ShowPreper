@@ -16,7 +16,7 @@ export default React.createClass({
     })
   },
   render: function () {
-    let s, sDisp
+    let s, sDisp, attrs = []
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
         s = this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle
@@ -53,6 +53,7 @@ export default React.createClass({
           k = k.replace(capitalLtr, '-' + lowerLtr)
         }
       }
+      attrs.push(k)
       p.push(<div key={p.length}>{k}: {e}</div>)
       return p
     }, [])
@@ -84,9 +85,10 @@ export default React.createClass({
                 </ul>
                 <div className="tab-content">
                   <div id="spStylerTabBackground" className="tab-pane fade in active">
-                    <h3>{lang.background}</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
+                    <input type="checkbox" checked={attrs.indexOf('background-color') >= 0}/>color:
+                    <input id='colorpicker'/>
+                    <p/>
+                    <input type="checkbox"/>gradient
                   </div>
                   <div id="spStylerTabBorder" className="tab-pane fade">
                     <h3>{lang.border}</h3>
@@ -94,7 +96,6 @@ export default React.createClass({
                       consequat.</p>
                   </div>
                 </div>
-                <input id='colorpicker'/>
               </div>
             </div>
           </div>
