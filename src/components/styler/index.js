@@ -15,8 +15,8 @@ export default React.createClass({
       showInput: true,
     })
   },
-  render: function () {
-    let s, sDisp, attrs = []
+  getStyle: function () {
+    let s
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
         s = this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle
@@ -44,6 +44,30 @@ export default React.createClass({
         s = this.props.deckStyle || this.props.deck.style
         break
     }
+    return s
+  },
+  updateStyle: function (newStyleComponent) {
+    let s = this.getStyle()
+    switch (this.props.selectedStyleTarget) {
+      case 'defaultSlide':
+        let temp = _.mergeWith({}, s, newStyleComponent, (ov, sv, k, o, s) => {
+          if (sv === undefined) {
+            delete o[k]
+          }
+        })
+        this.props.setTargetStyle('defaultSlideStyle', temp)
+        break
+      case 'thisSlide':
+        break
+      case 'selectedSlides':
+        break
+      case 'entirePresentation':
+        break
+    }
+  },
+  render: function () {
+    let s, sDisp, attrs = []
+    s = this.getStyle()
     sDisp = _.reduce(s, (p, e, k)=> {
       var capitalLtrs = k.match(/([A-Z])/)
       if (capitalLtrs) {
@@ -85,7 +109,10 @@ export default React.createClass({
                 </ul>
                 <div className="tab-content">
                   <div id="spStylerTabBackground" className="tab-pane fade in active">
-                    <input type="checkbox" checked={attrs.indexOf('background-color') >= 0}/>color:
+                    <input type="checkbox" onChange={(evt)=> {
+                      this.updateStyle({backgroundColor: evt.target.checked ? null : undefined})
+                    }}
+                           checked={attrs.indexOf('background-color') >= 0}/>color:
                     <input id='colorpicker'/>
                     <p/>
                     <input type="checkbox"/>gradient
