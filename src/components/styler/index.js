@@ -41,7 +41,7 @@ export default React.createClass({
         s = this.props.selectedSlideStyle || commonStyle
         break
       case 'entirePresentation':
-        s = this.props.deckStyle || this.props.deck.style
+        s = this.props.entirePresentationStyle || this.props.deck.style
         break
     }
     return s
@@ -53,20 +53,10 @@ export default React.createClass({
         delete o[k]
       }
     })
-    switch (this.props.selectedStyleTarget) {
-      case 'defaultSlide':
-        this.props.setTargetStyle('defaultSlideStyle', targetStyle)
-        break
-      case 'thisSlide':
-        this.props.setTargetStyle('thisSlideStyle', targetStyle)
-        break
-      case 'selectedSlides':
-        this.props.setTargetStyle('selectedSlideStyle', targetStyle)
-        break
-      case 'entirePresentation':
-        this.props.setTargetStyle('deckStyle', targetStyle)
-        break
-    }
+    this.props.setTargetStyle(this.props.selectedStyleTarget + 'Style', targetStyle)
+  },
+  clearStyle: function () {
+    this.props.setTargetStyle(this.props.selectedStyleTarget + 'Style', {})
   },
   render: function () {
     let s, sDisp, attrs = []
@@ -89,7 +79,8 @@ export default React.createClass({
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+            <button type="button" className="close" data-dismiss="modal" onClick={this.clearStyle}
+                    aria-label="Close"><span
               aria-hidden="true">&times;</span></button>
             <h4 className="modal-title"
                 id="sp-styler-modal-label">{lang.setAppearance} {lang[this.props.selectedStyleTarget]}</h4>

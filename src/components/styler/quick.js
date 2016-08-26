@@ -96,7 +96,7 @@ let QuickStyler = React.createClass({
             if (idx === '8') {
               p[idx] = {}
             }
-            this.props.setTargetStyle('deckStyle', p[idx])
+            this.props.setTargetStyle('entirePresentationStyle', p[idx])
             break
           case 'click':
             if (idx === '8') {
@@ -112,7 +112,7 @@ let QuickStyler = React.createClass({
               }, {style: p[idx]}, lang.setAppearance + ' ' + lang.entirePresentation)
             }
           default:
-            this.props.setTargetStyle('deckStyle', null)
+            this.props.setTargetStyle('entirePresentationStyle', null)
         }
     }
   },
@@ -157,7 +157,7 @@ let QuickStyler = React.createClass({
     return <div id="sp-quick-styler">
       {pDivs}
       <Styler selectedStyleTarget={this.props.selectedStyleTarget}
-              deckStyle={this.props.deckStyle}
+              entirePresentationStyle={this.props.entirePresentationStyle}
               deck={this.props.deck}
               defaultSlideStyle={this.props.defaultSlideStyle}
               selectedSlideStyle={this.props.selectedSlideStyle}

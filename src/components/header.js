@@ -107,7 +107,7 @@ let Header = React.createClass({
               </ul>
             </div>
             <QuickStyler selectedStyleTarget={this.state.selectedStyleTarget}
-                         deckStyle={this.props.deckStyle}
+                         entirePresentationStyle={this.props.entirePresentationStyle}
                          deck={this.props.deck}
                          defaultSlideStyle={this.props.defaultSlideStyle}
                          selectedSlideStyle={this.props.selectedSlideStyle}
