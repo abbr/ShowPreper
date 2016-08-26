@@ -48,20 +48,23 @@ export default React.createClass({
   },
   updateStyle: function (newStyleComponent) {
     let s = this.getStyle()
+    let targetStyle = _.mergeWith({}, s, newStyleComponent, (ov, sv, k, o, s) => {
+      if (sv === undefined) {
+        delete o[k]
+      }
+    })
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
-        let temp = _.mergeWith({}, s, newStyleComponent, (ov, sv, k, o, s) => {
-          if (sv === undefined) {
-            delete o[k]
-          }
-        })
-        this.props.setTargetStyle('defaultSlideStyle', temp)
+        this.props.setTargetStyle('defaultSlideStyle', targetStyle)
         break
       case 'thisSlide':
+        this.props.setTargetStyle('thisSlideStyle', targetStyle)
         break
       case 'selectedSlides':
+        this.props.setTargetStyle('selectedSlideStyle', targetStyle)
         break
       case 'entirePresentation':
+        this.props.setTargetStyle('deckStyle', targetStyle)
         break
     }
   },
