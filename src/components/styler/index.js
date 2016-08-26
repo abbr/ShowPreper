@@ -20,7 +20,7 @@ export default React.createClass({
       showInput: true,
       allowEmpty: true,
       change: function (tinycolor) {
-        that.updateStyle({backgroundColor: tinycolor && tinycolor.toHexString(true)})
+        that.updateStyle({backgroundColor: tinycolor && tinycolor.toRgbString()})
       },
     })
   },
