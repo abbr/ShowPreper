@@ -99,8 +99,9 @@ export default React.createClass({
           <div className="modal-body">
             <div className="row">
               <div className="col-md-4">
+                <div className="sp-styler-transparent-marker">
                 <div className="sp-styler-preview"
-                     style={s}></div>
+                     style={s}></div></div>
               </div>
               <div className="col-md-8">
                 {sDisp}
@@ -120,7 +121,10 @@ export default React.createClass({
                            checked={attrs.indexOf('background-color') >= 0}/>color:
                     <input id='colorpicker'/>
                     <p/>
-                    <input type="checkbox"/>gradient
+                    <input type="checkbox" onChange={(evt)=> {
+                      this.updateStyle({background: evt.target.checked ? null : undefined})
+                    }}
+                           checked={attrs.indexOf('background') >= 0}/>gradient
                   </div>
                   <div id="spStylerTabBorder" className="tab-pane fade">
                     <h3>{lang.border}</h3>
