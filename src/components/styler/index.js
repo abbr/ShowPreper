@@ -10,13 +10,20 @@ export default React.createClass({
     $("#sp-styler-modal").draggable({
       handle: ".modal-header"
     })
-    $("#colorpicker").spectrum({
-      color: "#f00",
-      showAlpha: true,
-      showInput: true,
-    })
     $('#sp-styler-modal').on('hide.bs.modal', function (e) {
       that.props.setTargetStyle(that.props.selectedStyleTarget + 'Style', null)
+    })
+    $('#sp-styler-modal').on('show.bs.modal', function (e) {
+      let s = that.getStyle()
+      $("#colorpicker").spectrum({
+        color: s.backgroundColor,
+        showAlpha: true,
+        showInput: true,
+        allowEmpty: true,
+        change: function (tinycolor) {
+          that.updateStyle({backgroundColor: tinycolor && tinycolor.toHexString(true)})
+        },
+      })
     })
   },
   getStyle: function () {
