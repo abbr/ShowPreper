@@ -6,6 +6,7 @@ import './index.less'
 import _ from 'lodash'
 export default React.createClass({
   componentDidMount: function () {
+    let that = this
     $("#sp-styler-modal").draggable({
       handle: ".modal-header"
     })
@@ -13,6 +14,9 @@ export default React.createClass({
       color: "#f00",
       showAlpha: true,
       showInput: true,
+    })
+    $('#sp-styler-modal').on('hide.bs.modal', function (e) {
+      that.props.setTargetStyle(that.props.selectedStyleTarget + 'Style', null)
     })
   },
   getStyle: function () {
@@ -38,7 +42,7 @@ export default React.createClass({
             commonStyle = null
           }
         })
-        s = this.props.selectedSlideStyle || commonStyle
+        s = this.props.selectedSlidesStyle || commonStyle
         break
       case 'entirePresentation':
         s = this.props.entirePresentationStyle || this.props.deck.style
@@ -54,9 +58,6 @@ export default React.createClass({
       }
     })
     this.props.setTargetStyle(this.props.selectedStyleTarget + 'Style', targetStyle)
-  },
-  clearStyle: function () {
-    this.props.setTargetStyle(this.props.selectedStyleTarget + 'Style', {})
   },
   render: function () {
     let s, sDisp, attrs = []
@@ -79,7 +80,7 @@ export default React.createClass({
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <button type="button" className="close" data-dismiss="modal" onClick={this.clearStyle}
+            <button type="button" className="close" data-dismiss="modal"
                     aria-label="Close"><span
               aria-hidden="true">&times;</span></button>
             <h4 className="modal-title"

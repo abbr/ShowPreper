@@ -52,7 +52,7 @@ let App = React.createClass({
     view: 'slides',
     entirePresentationStyle: null,
     defaultSlideStyle: null,
-    selectedSlideStyle: null,
+    selectedSlidesStyle: null,
     thisSlideStyle: null
   }),
   changeView: function (newView) {
@@ -245,7 +245,7 @@ let App = React.createClass({
           onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
           entirePresentationStyle={this.state.entirePresentationStyle}
           defaultSlideStyle={this.state.defaultSlideStyle}
-          selectedSlideStyle={this.state.selectedSlideStyle}
+          selectedSlidesStyle={this.state.selectedSlidesStyle}
         />
     }
     return <div className="sp-main-container">
@@ -259,7 +259,7 @@ let App = React.createClass({
               onDeleteDeck={this.onDeleteDeck}
               entirePresentationStyle={this.state.entirePresentationStyle}
               defaultSlideStyle={this.state.defaultSlideStyle}
-              selectedSlideStyle={this.state.selectedSlideStyle}
+              selectedSlidesStyle={this.state.selectedSlidesStyle}
               thisSlideStyle={this.state.thisSlideStyle}
               setTargetStyle={this.setTargetStyle}
               onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}

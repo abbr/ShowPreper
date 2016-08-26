@@ -66,7 +66,7 @@ let QuickStyler = React.createClass({
             if (idx === '8') {
               p[idx] = this.props.deck.defaultSlideStyle
             }
-            this.props.setTargetStyle('selectedSlideStyle', p[idx])
+            this.props.setTargetStyle('selectedSlidesStyle', p[idx])
             break
           case 'click':
             this.props.deck.components.forEach((e)=> {
@@ -87,7 +87,7 @@ let QuickStyler = React.createClass({
             })
             this.props.deck.markUndo(lang.setAppearance + ' ' + lang.selectedSlides)
           default:
-            this.props.setTargetStyle('selectedSlideStyle', null)
+            this.props.setTargetStyle('selectedSlidesStyle', null)
         }
         break
       case 'entirePresentation':
@@ -160,7 +160,7 @@ let QuickStyler = React.createClass({
               entirePresentationStyle={this.props.entirePresentationStyle}
               deck={this.props.deck}
               defaultSlideStyle={this.props.defaultSlideStyle}
-              selectedSlideStyle={this.props.selectedSlideStyle}
+              selectedSlidesStyle={this.props.selectedSlidesStyle}
               thisSlideStyle={this.props.thisSlideStyle}
               setTargetStyle={this.props.setTargetStyle}
               onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}

@@ -81,7 +81,7 @@ let Overview = React.createClass({
       }
       return (
         <EditableComponent
-          componentStyle={((selectedWidgets.indexOf(index) >= 0) ? this.props.selectedSlideStyle : null) || component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle || {}}
+          componentStyle={((selectedWidgets.indexOf(index) >= 0) ? this.props.selectedSlidesStyle : null) || component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle || {}}
           className="sp-overview-component"
           component={component}
           container={this.props.deck}
