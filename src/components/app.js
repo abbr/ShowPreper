@@ -217,8 +217,13 @@ let App = React.createClass({
   },
   setTargetStyle: function (target, style) {
     let tmp = {}
-    tmp[target] = style
-    this.setState(tmp)
+    // have to double apply style because react seems cannot
+    // handle background and background-color together correctly
+    tmp[target] = {}
+    this.setState(tmp, ()=> {
+      tmp[target] = style
+      this.setState(tmp)
+    })
   },
   render: function () {
     var Main
