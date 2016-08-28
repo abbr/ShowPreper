@@ -30,7 +30,7 @@ export default React.createClass({
         type = 'color'
       }
     }
-    return <div>
+    return <div id="sp-color-pattern-editor">
       <input type="radio" onChange={(evt)=> {
         this.props.updateStyle({background: 'rgb()'})
       }}
@@ -46,6 +46,11 @@ export default React.createClass({
         this.props.updateStyle({background: 'radio-gradient()'})
       }}
              checked={type === 'radio-gradient'}/>radio gradient
+      <h1>
+        <svg width="16" height="16">
+          <path id="marker-up" d="M 8 0 L 16 16 L 0 16 z"></path>
+        </svg>
+      </h1>
     </div>
   }
 })
