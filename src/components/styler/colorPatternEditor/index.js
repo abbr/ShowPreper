@@ -47,8 +47,15 @@ export default React.createClass({
       }}
              checked={type === 'radio-gradient'}/>radio gradient
       <h1>
-        <svg width="16" height="16">
-          <path id="marker-up" d="M 8 0 L 16 16 L 0 16 z"></path>
+        <svg width="32" height="32" fill="red">
+          <defs>
+            <filter id="f1" x="0" y="0" width="150%" height="150%">
+              <feOffset result="offOut" in="SourceAlpha" dx="3" dy="3"/>
+              <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2"/>
+              <feBlend in="SourceGraphic" in2="blurOut" mode="normal"/>
+            </filter>
+          </defs>
+          <path id="marker-up" filter="url(#f1)" d="M 8 0 L 16 16 L 0 16 z"></path>
         </svg>
       </h1>
     </div>
