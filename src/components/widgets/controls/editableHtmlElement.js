@@ -23,7 +23,7 @@ let EditableHtmlElement = React.createClass({
     $(ev.target).trigger("blur")
   },
   render: function () {
-    var { eleNm, ...otherProps } = this.props
+    var {eleNm, idx, ...otherProps} = this.props
     otherProps.contentEditable = this.state.contentEditable
     otherProps.onMouseDown = this.onMouseDown
     otherProps.onBlur = this.onBlur

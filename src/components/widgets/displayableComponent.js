@@ -5,26 +5,27 @@ let _ = require('lodash')
 
 let DisplayableComponent = React.createClass({
   render: function () {
+    const {component, ...rest} = this.props
     const WidgetFactory = require('./widgetFactory')
-    let Widget = WidgetFactory(this.props.component)
+    let Widget = WidgetFactory(component)
 
-    let widgetStyle = _.merge({transform: ''}, this.props.componentStyle || {}), componentStyle = {transform: ''}
+    let widgetStyle = _.merge({transform: ''}, componentStyle || {}), componentStyle = {transform: ''}
 
     let translate3D = {}
-    translate3D.x = this.props.component.x || 0
-    translate3D.y = this.props.component.y || 0
-    translate3D.z = this.props.component.z || 0
+    translate3D.x = component.x || 0
+    translate3D.y = component.y || 0
+    translate3D.z = component.z || 0
     componentStyle.transform += ' translate3d(' + translate3D.x + 'px,' + translate3D.y + 'px,' + translate3D.z + 'px)'
-    this.props.component.width && (componentStyle.width = this.props.component.width)
-    this.props.component.height && (componentStyle.height = this.props.component.height)
-    let scaleX = (this.props.component.scale && this.props.component.scale.x) || 1
-    let scaleY = (this.props.component.scale && this.props.component.scale.y) || 1
+    component.width && (componentStyle.width = component.width)
+    component.height && (componentStyle.height = component.height)
+    let scaleX = (component.scale && component.scale.x) || 1
+    let scaleY = (component.scale && component.scale.y) || 1
     componentStyle.transform += " scale(" + scaleX + "," + scaleY + ")"
-    if (this.props.component.rotate) {
+    if (component.rotate) {
       let rotStr = ''
-      this.props.component.rotate.x && (rotStr += " rotateX(" + this.props.component.rotate.x + "rad)")
-      this.props.component.rotate.y && (rotStr += " rotateY(" + this.props.component.rotate.y + "rad)")
-      this.props.component.rotate.z && (rotStr += " rotateZ(" + this.props.component.rotate.z + "rad)")
+      component.rotate.x && (rotStr += " rotateX(" + component.rotate.x + "rad)")
+      component.rotate.y && (rotStr += " rotateY(" + component.rotate.y + "rad)")
+      component.rotate.z && (rotStr += " rotateZ(" + component.rotate.z + "rad)")
       if (this.props.combinedTransform) {
         componentStyle.transform += rotStr
       }
@@ -32,10 +33,10 @@ let DisplayableComponent = React.createClass({
         widgetStyle.transform += rotStr
       }
     }
-    if (this.props.component.skew) {
+    if (component.skew) {
       let rotStr = ''
-      this.props.component.skew.y && (rotStr += " skewY(" + this.props.component.skew.y + "rad)")
-      this.props.component.skew.x && (rotStr += " skewX(" + this.props.component.skew.x + "rad)")
+      component.skew.y && (rotStr += " skewY(" + component.skew.y + "rad)")
+      component.skew.x && (rotStr += " skewX(" + component.skew.x + "rad)")
       if (this.props.combinedTransform) {
         componentStyle.transform += rotStr
       }
@@ -51,8 +52,8 @@ let DisplayableComponent = React.createClass({
     }
     return (
       <div
-        {...this.props}
-        className={classNames("sp-component", this.props.ownClassName,this.props.className)}
+        {...this.rest}
+        className={classNames("sp-component", this.props.ownClassName, this.props.className)}
         style={componentStyle}>
         <div
           className={this.props.className}
