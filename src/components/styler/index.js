@@ -4,6 +4,8 @@ import 'spectrum-colorpicker/spectrum.css'
 import lang from 'i18n/lang'
 import './index.less'
 import _ from 'lodash'
+import ColorPatternEditor from './colorPatternEditor'
+
 export default React.createClass({
   componentDidMount: function () {
     let that = this
@@ -13,21 +15,6 @@ export default React.createClass({
     $('#sp-styler-modal').on('hide.bs.modal', function (e) {
       that.props.setTargetStyle(that.props.selectedStyleTarget + 'Style', null)
     })
-    let s = that.getStyle()
-    $("#colorpicker").spectrum({
-      color: s.backgroundColor,
-      showAlpha: true,
-      showInput: true,
-      allowEmpty: true,
-      change: function (tinycolor) {
-        that.updateStyle({backgroundColor: tinycolor && tinycolor.toRgbString()})
-      },
-    })
-  },
-  componentDidUpdate: function () {
-    let that = this
-    let s = that.getStyle()
-    $("#colorpicker").spectrum("set", s.backgroundColor)
   },
   getStyle: function () {
     let s
@@ -100,8 +87,9 @@ export default React.createClass({
             <div className="row">
               <div className="col-md-4">
                 <div className="sp-styler-transparent-marker">
-                <div className="sp-styler-preview"
-                     style={s}></div></div>
+                  <div className="sp-styler-preview"
+                       style={s}></div>
+                </div>
               </div>
               <div className="col-md-8">
                 {sDisp}
@@ -115,16 +103,10 @@ export default React.createClass({
                 </ul>
                 <div className="tab-content">
                   <div id="spStylerTabBackground" className="tab-pane fade in active">
-                    <input type="checkbox" onChange={(evt)=> {
-                      this.updateStyle({backgroundColor: evt.target.checked ? null : undefined})
-                    }}
-                           checked={attrs.indexOf('background-color') >= 0}/>color:
-                    <input id='colorpicker'/>
-                    <p/>
-                    <input type="checkbox" onChange={(evt)=> {
-                      this.updateStyle({background: evt.target.checked ? null : undefined})
-                    }}
-                           checked={attrs.indexOf('background') >= 0}/>gradient
+                    <ColorPatternEditor
+                      currentStyle={s.background}
+                      updateStyle={this.updateStyle}
+                    ></ColorPatternEditor>
                   </div>
                   <div id="spStylerTabBorder" className="tab-pane fade">
                     <h3>{lang.border}</h3>
