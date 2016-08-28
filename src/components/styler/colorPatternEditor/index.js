@@ -10,7 +10,7 @@ export default React.createClass({
       showInput: true,
       allowEmpty: true,
       change: function (tinycolor) {
-        that.updateStyle({background: tinycolor && tinycolor.toRgbString()})
+        that.props.updateStyle({background: tinycolor && tinycolor.toRgbString()})
       },
     })
   },
@@ -20,13 +20,13 @@ export default React.createClass({
   render: function () {
     let type
     if (this.props.currentStyle) {
-      if (this.props.currentStyle.match(/radial-gradient/)) {
+      if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radio-gradient'
       }
-      else if (this.props.currentStyle.match(/linear-gradient/)) {
+      else if (this.props.currentStyle.match(/^linear-gradient/)) {
         type = 'linear-gradient'
       }
-      else if (this.props.currentStyle.match(/rgba?\(/)) {
+      else if (this.props.currentStyle.match(/^(rgba?\(|transparent)/)) {
         type = 'color'
       }
     }

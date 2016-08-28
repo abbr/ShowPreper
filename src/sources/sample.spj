@@ -23,8 +23,7 @@
       "type": "Slide",
       "z": 0,
       "style": {
-        "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))",
-        "backgroundColor": "rgb(215, 215, 215)"
+        "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
       },
       "selected": true
     },
@@ -86,11 +85,9 @@
   "slideWidth": 640,
   "slideHeight": 480,
   "style": {
-    "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))",
-    "backgroundColor": "rgb(215, 215, 215)"
+    "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
   },
   "defaultSlideStyle": {
-    "background": "radial-gradient(#f00, #fff)",
-    "backgroundColor": "rgb(215, 215, 215)"
+    "background": "radial-gradient(#f00, #fff)"
   }
 }

@@ -1,36 +1,29 @@
 [
   {
-    "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(#f00, #fff)",
     "border": "1px solid rgba(0, 0, 0, .3)",
     "borderRadius": "10px",
     "boxShadow": "0 2px 6px rgba(0, 0, 0, .1)"
   },
   {
-    "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(#0f0, #fff)"
   },
   {
-    "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(#00f, #fff)"
   },
   {
-    "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(#f77, #fff)"
   },
   {
-    "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(#7f7, #fff)"
   },
   {
-    "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(#77f, #fff)"
   },
   {
-    "backgroundColor": "rgb(215, 215, 215)",
     "background": "radial-gradient(#b89, #fff)"
   },
   {
-    "backgroundColor": "transparent"
+    "background": "rgba(0, 0, 0, 0)"
   }
 ]
