@@ -15,7 +15,10 @@ module.exports = {
   entry: {
     app: [path.join(__dirname, '../src/components/run')],
     presentation: path.join(__dirname, '../src/components/show/presentation'),
-    polyfill: 'babel-polyfill',
+    vendors: [
+      "webpack-material-design-icons",
+      'babel-polyfill'
+    ],
   },
   resolve: {
     extensions: [
