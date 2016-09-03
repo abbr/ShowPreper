@@ -6,9 +6,10 @@ export default React.createClass({
            aria-labelledby="title">
         <title>marker up</title>
         <defs>
+          <ref id="paramX" param="x" default="3"/>
           <filter id="f1" x="0" y="0" width="150%" height="150%">
-            <feOffset result="offOut" in="SourceAlpha" dx="3" dy="3"/>
-            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2"/>
+            <feOffset result="offOut" in="SourceAlpha" dx={this.props.down ? 1 : 3} dy={this.props.down ? 1 : 3}/>
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation={this.props.down ? 1 : 2}/>
             <feBlend in="SourceGraphic" in2="blurOut" mode="normal"/>
           </filter>
         </defs>
