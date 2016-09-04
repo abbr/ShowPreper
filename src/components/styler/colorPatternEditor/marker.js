@@ -16,7 +16,9 @@ export default React.createClass({
           <path id="up" filter="url(#f1)" d="M 8 0 L 16 16 L 0 16 z"></path>
           <path id="down" filter="url(#f1)" d="M 0 0 L 16 0 L 8 16 z"></path>
         </defs>
-        <use xlinkHref={this.props.down ? '#down' : '#up'}></use>
+        <use xlinkHref={this.props.down ? '#down' : '#up'} onClick={()=> {
+          alert('here')
+        }} style={{cursor: 'pointer'}}></use>
       </svg>
     )
   }
