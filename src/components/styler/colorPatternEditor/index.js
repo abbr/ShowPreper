@@ -102,6 +102,7 @@ export default React.createClass({
                 <div className="sp-gradient-panel-base">
                   <div className="sp-gradient-panel"></div>
                 </div>
+                <Marker/>
               </div>
             </div>
           </div>
