@@ -97,7 +97,12 @@ export default React.createClass({
                className="panel-collapse collapse in" role="tabpanel"
                aria-labelledby="headingThree">
             <div className="panel-body">
-              <Marker down pressed/>
+              <div className="sp-gradient-panel-container">
+                <Marker down pressed/>
+                <div className="sp-color-panel-base">
+                  <div className="sp-color-panel"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
