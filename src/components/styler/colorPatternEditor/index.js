@@ -2,7 +2,7 @@ import React from 'react'
 import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import './index.less'
-import MarkerUp from './markerUp'
+import Marker from './marker'
 
 export default React.createClass({
   componentDidMount: function () {
@@ -94,7 +94,7 @@ export default React.createClass({
                className="panel-collapse collapse in" role="tabpanel"
                aria-labelledby="headingThree">
             <div className="panel-body">
-              <MarkerUp/>
+              <Marker down pressed/>
             </div>
           </div>
         </div>
