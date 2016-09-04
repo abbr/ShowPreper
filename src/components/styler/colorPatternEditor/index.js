@@ -99,8 +99,8 @@ export default React.createClass({
             <div className="panel-body">
               <div className="sp-gradient-panel-container">
                 <Marker down pressed/>
-                <div className="sp-color-panel-base">
-                  <div className="sp-color-panel"></div>
+                <div className="sp-gradient-panel-base">
+                  <div className="sp-gradient-panel"></div>
                 </div>
               </div>
             </div>
