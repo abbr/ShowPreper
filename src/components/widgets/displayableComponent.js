@@ -9,7 +9,7 @@ let DisplayableComponent = React.createClass({
     const WidgetFactory = require('./widgetFactory')
     let Widget = WidgetFactory(component)
 
-    let widgetStyle = _.merge({transform: ''}, componentStyle || {}), componentStyle = {transform: ''}
+    let widgetStyle = _.merge({transform: ''}, this.props.componentStyle || {}), componentStyle = {transform: ''}
 
     let translate3D = {}
     translate3D.x = component.x || 0

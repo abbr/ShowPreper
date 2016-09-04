@@ -97,12 +97,18 @@ let App = React.createClass({
     let selectedWidget = (widgetIdx >= 0) ? component.components[widgetIdx] : component
     switch (typeof newProps) {
       case 'object':
-        _.assign(selectedWidget, newProps)
+        if (newProps) {
+          _.assign(selectedWidget, newProps)
+        }
+        // null
+        else {
+          component.components.splice(widgetIdx, 1)
+        }
         break
       case 'string':
         delete selectedWidget[newProps]
         break
-      case undefined:
+      case 'undefined':
         component.components.splice(widgetIdx, 1)
         break
     }
