@@ -1,6 +1,6 @@
 import React from 'react'
 export default React.createClass({
-  render() {
+  render: function () {
     return (
       <svg className="sp-gradient-marker" xmlns="http://www.w3.org/2000/svg"
            width="32" height="32" fill="red"
@@ -16,8 +16,8 @@ export default React.createClass({
           <path id="up" filter="url(#f1)" d="M 8 0 L 16 16 L 0 16 z"></path>
           <path id="down" filter="url(#f1)" d="M 0 0 L 16 0 L 8 16 z"></path>
         </defs>
-        <use xlinkHref={this.props.down ? '#down' : '#up'} onClick={()=> {
-          alert('here')
+        <use xlinkHref={this.props.down ? '#down' : '#up'} onClick={(evt)=> {
+          this.props.onClick(evt, this)
         }} style={{cursor: 'pointer'}}></use>
       </svg>
     )

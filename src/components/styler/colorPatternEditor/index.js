@@ -5,22 +5,31 @@ import './index.less'
 import Marker from './marker'
 
 export default React.createClass({
+  getInitialState: () => ({
+    currentColorMarker: null,
+    currentAlphaMarker: null
+  }),
   componentDidMount: function () {
-    let that = this
     $("#colorpicker").spectrum({
       color: this.props.currentStyle,
       showAlpha: true,
       showInput: true,
       allowEmpty: true,
-      change: function (tinycolor) {
-        that.props.updateStyle({background: tinycolor && tinycolor.toRgbString()})
+      change: (tinycolor) => {
+        this.props.updateStyle({background: tinycolor && tinycolor.toRgbString()})
       },
+    })
+  },
+  onMarkerClick: function (evt, marker) {
+    this.setState({
+      currentColorMarker: marker
     })
   },
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
   },
   render: function () {
+    let that = this
     let type
     if (this.props.currentStyle) {
       if (this.props.currentStyle.match(/^radial-gradient/)) {
@@ -98,11 +107,17 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body">
               <div className="sp-gradient-panel-container">
-                <Marker down pressed/>
+                <Marker down pressed
+                        onClick={this.onMarkerClick}
+                />
                 <div className="sp-gradient-panel-base">
                   <div className="sp-gradient-panel"></div>
                 </div>
-                <Marker/>
+                <Marker
+                  onClick={this.onMarkerClick}
+                  pressed={this.state.currentColorMarker === this.refs.colorMarker}
+                  ref="colorMarker"
+                />
               </div>
             </div>
           </div>
