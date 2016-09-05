@@ -107,13 +107,17 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body">
               <div className="sp-gradient-panel-container">
+                <div className="sp-gradient-marker-panel"></div>
                 <Marker down pressed
+                        style={{top: 0, left: 0}}
                         onClick={this.onMarkerClick}
                 />
                 <div className="sp-gradient-panel-base">
                   <div className="sp-gradient-panel"></div>
                 </div>
+                <div className="sp-gradient-marker-panel"></div>
                 <Marker
+                  style={{top: 56, left: 0}}
                   onClick={this.onMarkerClick}
                   pressed={this.state.currentColorMarker === this.refs.colorMarker}
                   ref="colorMarker"

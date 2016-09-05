@@ -1,10 +1,12 @@
 import React from 'react'
+import _ from 'lodash'
 export default React.createClass({
   render: function () {
+    let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16})
     return (
       <svg className="sp-gradient-marker" xmlns="http://www.w3.org/2000/svg"
            width="32" height="32" viewBox="0 0 32 32" fill="red"
-           style={{marginLeft: -8, marginBottom: -16}}
+           style={s}
            aria-labelledby="title">
         <title>marker</title>
         <defs>
