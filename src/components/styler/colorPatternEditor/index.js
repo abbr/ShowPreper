@@ -9,14 +9,7 @@ export default React.createClass({
     currentColorMarker: null,
     currentAlphaMarker: null
   }),
-  _resized() {
-    $('.sp-gradient-marker-panel').each(function (i, e) {
-      let parentWidth = $(e).parent().width()
-      parentWidth && $(e).width($(e).parent().width() + 24)
-    })
-  },
   componentDidMount() {
-    window.addEventListener('resize', this._resized)
     $("#colorpicker").spectrum({
       color: this.props.currentStyle,
       showAlpha: true,
@@ -38,9 +31,6 @@ export default React.createClass({
   },
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
-  },
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._resized)
   },
   render: function () {
     let that = this
