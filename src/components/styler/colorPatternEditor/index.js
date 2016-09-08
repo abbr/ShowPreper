@@ -29,6 +29,13 @@ export default React.createClass({
       currentColorMarker: marker
     })
   },
+  onMarkerPanelMouseDown: function () {
+    let evt = arguments[0]
+    let x = evt.clientX
+    let panelDomRect = evt.target.getBoundingClientRect()
+    let pct = Math.min(1, (x - panelDomRect.left) / ((panelDomRect.width - 24) || 1))
+    console.log(pct * 100 + '%')
+  },
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
   },
@@ -111,7 +118,7 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body">
               <div className="sp-gradient-panel-container">
-                <div className="sp-gradient-marker-panel">
+                <div className="sp-gradient-marker-panel" onMouseDown={this.onMarkerPanelMouseDown}>
                   <Marker down pressed
                           style={{top: 0, left: 0}}
                           onClick={this.onMarkerClick}
