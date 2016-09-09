@@ -5,7 +5,7 @@ let _ = require('lodash')
 
 let DisplayableComponent = React.createClass({
   render: function () {
-    const {component, container, onSelectedWidgetUpdated, idx, onScaleMouseDown, onRotateMouseDown, onKillMouseDown, setDraggable, editable, componentStyle, ...rest} = this.props
+    const {component, container, onSelectedWidgetUpdated, idx, onScaleMouseDown, onRotateMouseDown, onKillMouseDown, setDraggable, editable, componentStyle, ownClassName, combinedTransform, ...rest} = this.props
     const WidgetFactory = require('./widgetFactory')
     let Widget = WidgetFactory(component)
 
