@@ -41,8 +41,12 @@ export default React.createClass({
   },
   render: function () {
     let that = this
-    let type
+    let type, gradientString
     if (this.props.currentStyle) {
+      let gradientStringMatch = this.props.currentStyle.match(/\((.*)\)/)
+      if (gradientStringMatch) {
+        gradientString = gradientStringMatch[1]
+      }
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
       }
@@ -125,7 +129,8 @@ export default React.createClass({
                   />
                 </div>
                 <div className="sp-gradient-panel-base">
-                  <div className="sp-gradient-panel"></div>
+                  <div className="sp-gradient-panel"
+                       style={{background: 'linear-gradient(to right, ' + gradientString + ')'}}></div>
                 </div>
                 <div className="sp-gradient-marker-panel">
                   <Marker
