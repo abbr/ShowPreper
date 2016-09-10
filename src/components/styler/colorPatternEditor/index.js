@@ -18,9 +18,11 @@ export default React.createClass({
         this.props.updateStyle({background: tinycolor && tinycolor.toRgbString()})
       },
     })
-    $(".sp-gradient-marker").draggable({
-      axis: 'x',
-      containment: 'parent'
+    $(".sp-gradient-marker").each(function (i, e) {
+      $(e).draggable({
+        axis: 'x',
+        containment: 'parent'
+      })
     })
   },
   onMarkerClick: function (evt, marker) {

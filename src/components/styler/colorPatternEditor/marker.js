@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 export default React.createClass({
   render: function () {
-    let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16})
+    let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16, marginRight: -24})
     return (
       <div className="sp-gradient-marker" style={s} onMouseDown={(evt)=> {
         evt.stopPropagation()
