@@ -41,11 +41,32 @@ export default React.createClass({
   },
   render: function () {
     let that = this
-    let type, gradientString
+    let type, gradientString, gradientArr
     if (this.props.currentStyle) {
       let gradientStringMatch = this.props.currentStyle.match(/\((.*)\)/)
       if (gradientStringMatch) {
         gradientString = gradientStringMatch[1]
+        gradientArr = gradientString.split(',')
+        gradientArr = gradientArr.map(function (e, i, a) {
+          let ret = {}
+          let colorPosArr = e.trim().split(' ')
+          let c = colorPosArr[0]
+          let p
+          if (colorPosArr.length > 1) {
+            p = Number(colorPosArr[1].trim().replace('%', ''))
+          }
+          else {
+            if (i == 0) {
+              p = 0
+            }
+            else if (i === (a.length - 1)) {
+              p = 100
+            }
+          }
+          ret.c = c
+          ret.p = p
+          return ret
+        })
       }
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
