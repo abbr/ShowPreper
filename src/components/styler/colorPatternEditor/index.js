@@ -6,8 +6,7 @@ import Marker from './marker'
 
 export default React.createClass({
   getInitialState: () => ({
-    currentColorMarker: null,
-    currentAlphaMarker: null
+    currentColorMarker: null
   }),
   componentDidMount() {
     $("#colorpicker").spectrum({
@@ -41,7 +40,7 @@ export default React.createClass({
   },
   render: function () {
     let that = this
-    let type, gradientString, gradientArr
+    let type, gradientString, gradientArr, gradientMarkers
     if (this.props.currentStyle) {
       let gradientStringMatch = this.props.currentStyle.match(/\((.*)\)/)
       if (gradientStringMatch) {
@@ -70,6 +69,15 @@ export default React.createClass({
       }
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
+        gradientMarkers = gradientArr.map((e, i) => {
+          return <Marker
+            key={i}
+            style={{top: 0, left: 0}}
+            onClick={this.onMarkerClick}
+            pressed={this.state.currentColorMarker === this.refs['colorMarker' + i]}
+            ref={'colorMarker' + i}
+          />
+        })
       }
       else if (this.props.currentStyle.match(/^linear-gradient/)) {
         type = 'linear-gradient'
@@ -145,15 +153,12 @@ export default React.createClass({
               <div className="sp-gradient-panel-container">
                 <div className="sp-gradient-panel-base">
                   <div className="sp-gradient-panel"
+                       ref="gradientPanel"
                        style={{background: 'linear-gradient(to right, ' + gradientString + ')'}}></div>
                 </div>
-                <div className="sp-gradient-marker-panel" onMouseDown={this.onMarkerPanelMouseDown}>
-                  <Marker
-                    style={{top: 0, left: 0}}
-                    onClick={this.onMarkerClick}
-                    pressed={this.state.currentColorMarker === this.refs.colorMarker}
-                    ref="colorMarker"
-                  />
+                <div className="sp-gradient-marker-panel"
+                     onMouseDown={this.onMarkerPanelMouseDown}>
+                  {gradientMarkers}
                 </div>
               </div>
             </div>
