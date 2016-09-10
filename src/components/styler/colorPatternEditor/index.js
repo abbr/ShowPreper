@@ -143,17 +143,11 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body">
               <div className="sp-gradient-panel-container">
-                <div className="sp-gradient-marker-panel" onMouseDown={this.onMarkerPanelMouseDown}>
-                  <Marker down pressed
-                          style={{top: 0, left: 0}}
-                          onClick={this.onMarkerClick}
-                  />
-                </div>
                 <div className="sp-gradient-panel-base">
                   <div className="sp-gradient-panel"
                        style={{background: 'linear-gradient(to right, ' + gradientString + ')'}}></div>
                 </div>
-                <div className="sp-gradient-marker-panel">
+                <div className="sp-gradient-marker-panel" onMouseDown={this.onMarkerPanelMouseDown}>
                   <Marker
                     style={{top: 0, left: 0}}
                     onClick={this.onMarkerClick}
