@@ -1,13 +1,15 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import Draggable from '../../mixins/draggable'
 export default React.createClass({
   mixins: [Draggable(function () {
       return [this]
     }, function (e) {
+      let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
       return {
-        x: 0,
-        y: 0
+        x: (bb && bb.left) || 0,
+        y: (bb && bb.top) || 0
       }
     },
     function (e, x, y) {
