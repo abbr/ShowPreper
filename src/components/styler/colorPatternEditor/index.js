@@ -34,35 +34,43 @@ export default React.createClass({
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
   },
+  parseGradientString: function () {
+    let gradientString, gradientArr
+    let gradientStringMatch = this.props.currentStyle.match(/-gradient\((.*)\)/)
+    if (!gradientStringMatch) {
+      return {}
+    }
+    gradientString = gradientStringMatch[1]
+    gradientArr = gradientString.split(',')
+    gradientArr = gradientArr.map(function (e, i, a) {
+      let ret = {}
+      let colorPosArr = e.trim().split(' ')
+      let c = colorPosArr[0]
+      let p
+      if (colorPosArr.length > 1) {
+        p = Number(colorPosArr[1].trim().replace('%', ''))
+      }
+      else {
+        if (i == 0) {
+          p = 0
+        }
+        else if (i === (a.length - 1)) {
+          p = 100
+        }
+      }
+      ret.c = c
+      ret.p = p
+      return ret
+    })
+    return {gradientString: gradientString, gradientArr: gradientArr}
+  },
   render: function () {
     let that = this
     let type, gradientString, gradientArr, gradientMarkers
     if (this.props.currentStyle) {
-      let gradientStringMatch = this.props.currentStyle.match(/\((.*)\)/)
-      if (gradientStringMatch) {
-        gradientString = gradientStringMatch[1]
-        gradientArr = gradientString.split(',')
-        gradientArr = gradientArr.map(function (e, i, a) {
-          let ret = {}
-          let colorPosArr = e.trim().split(' ')
-          let c = colorPosArr[0]
-          let p
-          if (colorPosArr.length > 1) {
-            p = Number(colorPosArr[1].trim().replace('%', ''))
-          }
-          else {
-            if (i == 0) {
-              p = 0
-            }
-            else if (i === (a.length - 1)) {
-              p = 100
-            }
-          }
-          ret.c = c
-          ret.p = p
-          return ret
-        })
-      }
+      let g = this.parseGradientString()
+      gradientString = g.gradientString
+      gradientArr = g.gradientArr
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
         gradientMarkers = gradientArr.map((e, i) => {
