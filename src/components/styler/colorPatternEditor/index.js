@@ -64,6 +64,9 @@ export default React.createClass({
     })
     return {gradientString: gradientString, gradientArr: gradientArr}
   },
+  updateMarkerPosition: function () {
+    console.log('updateMarkerPosition')
+  },
   render: function () {
     let that = this
     let type, gradientString, gradientArr, gradientMarkers
@@ -80,6 +83,7 @@ export default React.createClass({
             onClick={this.onMarkerClick}
             pressed={this.state.currentColorMarker === this.refs['colorMarker' + i]}
             ref={'colorMarker' + i}
+            updateMarkerPosition={this.updateMarkerPosition}
           />
         })
       }
