@@ -9,7 +9,9 @@ import Rotatable from 'components/mixins/rotatable'
 import lang from 'i18n/lang'
 var EditableComponent = require('components/widgets/editableComponent')
 let Overview = React.createClass({
-  mixins: [AutoScale, Selectable, Draggable("this.props.selectedWidgets", function (e, x, y) {
+  mixins: [AutoScale, Selectable, Draggable(function () {
+    return this.props.selectedWidgets
+  }, function (e, x, y) {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
       container: this.props.component,
       index: e

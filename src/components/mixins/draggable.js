@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (selectedWidgetsString, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) {
+module.exports = function (getSelectedWidgets, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) {
   return {
     componentDidMount: function () {
       this.mouseDownHdlrs && this.mouseDownHdlrs.push(this.onDraggableMouseDown)
@@ -22,7 +22,7 @@ module.exports = function (selectedWidgetsString, mouseMoveWidgetUpdateFunction,
       this._draggable = {}
       this._draggable.drags = []
       this._draggable.dragged = false
-      let selectedWidgets = eval(selectedWidgetsString)
+      let selectedWidgets = getSelectedWidgets.bind(this)()
       selectedWidgets.forEach(e => {
         let draggable = {}
         draggable.oleft = this.props.component.components[e].x || 0
@@ -37,7 +37,7 @@ module.exports = function (selectedWidgetsString, mouseMoveWidgetUpdateFunction,
     onDraggableMouseMove: function (ev) {
       let scale = this.state.scale || 1
       this._draggable.dragged = true
-      let selectedWidgets = eval(selectedWidgetsString)
+      let selectedWidgets = getSelectedWidgets.bind(this)()
       selectedWidgets.forEach(e=> {
         let x = this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale)
         let y = this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)
@@ -53,7 +53,7 @@ module.exports = function (selectedWidgetsString, mouseMoveWidgetUpdateFunction,
       document.removeEventListener('mouseup', this.onDraggableMouseUp)
       if (!this._draggable.dragged) return
       let scale = this.state.scale || 1
-      let selectedWidgets = eval(selectedWidgetsString)
+      let selectedWidgets = getSelectedWidgets.bind(this)()
       selectedWidgets.forEach(e=> {
         let x = this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale)
         let y = this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)

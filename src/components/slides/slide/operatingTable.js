@@ -13,7 +13,9 @@ import lang from 'i18n/lang'
 require('./operatingTable.less')
 
 let OperatingTable = React.createClass({
-  mixins: [AutoScale, Selectable, Draggable("this.props.selectedWidgets", function (e, x, y) {
+  mixins: [AutoScale, Selectable, Draggable(function () {
+    return this.props.selectedWidgets
+  }, function (e, x, y) {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
       container: this.props.component,
       index: e
