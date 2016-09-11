@@ -1,6 +1,30 @@
 import React from 'react'
 import _ from 'lodash'
+import Draggable from '../../mixins/draggable'
 export default React.createClass({
+  mixins: [Draggable(function () {
+      return [this]
+    }, function (e) {
+      return {
+        x: 0,
+        y: 0
+      }
+    },
+    function (e, x, y) {
+      this.props.updateMarkerPosition()
+    }, function (e, x, y) {
+      this.props.updateMarkerPosition()
+    })],
+
+  getInitialState: function () {
+    return {draggable: true}
+  },
+  componentWillMount: function () {
+    this.mouseDownHdlrs = []
+  },
+  onMouseDown: function () {
+    this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
+  },
   render: function () {
     let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16, marginRight: -24})
     return (
@@ -28,6 +52,7 @@ export default React.createClass({
             <path id="down-unpressed" filter="url(#unpressed)" d="M 0 0 L 16 0 L 8 16 z"></path>
           </defs>
           <use xlinkHref={(this.props.down ? '#down-' : '#up-') + (this.props.pressed ? 'pressed' : 'unpressed')}
+               onMouseDown={this.onMouseDown}
                onClick={(evt)=> {
                  this.props.onClick(evt, this)
                }} style={{cursor: 'pointer'}}></use>
