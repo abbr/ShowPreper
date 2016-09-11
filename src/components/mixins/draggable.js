@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (getSelectedWidgets, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) {
+module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) {
   return {
     componentDidMount: function () {
       this.mouseDownHdlrs && this.mouseDownHdlrs.push(this.onDraggableMouseDown)
@@ -23,24 +23,24 @@ module.exports = function (getSelectedWidgets, mouseMoveWidgetUpdateFunction, mo
       this._draggable.drags = []
       this._draggable.dragged = false
       let selectedWidgets = getSelectedWidgets.bind(this)()
-      selectedWidgets.forEach(e => {
+      selectedWidgets.forEach((e, i) => {
         let draggable = {}
-        draggable.oleft = this.props.component.components[e].x || 0
-        draggable.otop = this.props.component.components[e].y || 0
+        let p = getInitialWidgetPosition.bind(this, e, i)()
+        draggable.oleft = p.x
+        draggable.otop = p.y
         draggable.ox = ev.pageX
         draggable.oy = ev.pageY
-        this._draggable.drags[e] = draggable
+        this._draggable.drags[i] = draggable
       })
-
       ev.stopPropagation && ev.stopPropagation()
     },
     onDraggableMouseMove: function (ev) {
       let scale = this.state.scale || 1
       this._draggable.dragged = true
       let selectedWidgets = getSelectedWidgets.bind(this)()
-      selectedWidgets.forEach(e=> {
-        let x = this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale)
-        let y = this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)
+      selectedWidgets.forEach((e, i)=> {
+        let x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
+        let y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale)
         mouseMoveWidgetUpdateFunction && mouseMoveWidgetUpdateFunction.bind(this, e, x, y)()
       })
       ev.stopPropagation && ev.stopPropagation()
@@ -54,9 +54,9 @@ module.exports = function (getSelectedWidgets, mouseMoveWidgetUpdateFunction, mo
       if (!this._draggable.dragged) return
       let scale = this.state.scale || 1
       let selectedWidgets = getSelectedWidgets.bind(this)()
-      selectedWidgets.forEach(e=> {
-        let x = this._draggable.drags[e].oleft + Math.round((ev.pageX - this._draggable.drags[e].ox) / scale)
-        let y = this._draggable.drags[e].otop + Math.round((ev.pageY - this._draggable.drags[e].oy) / scale)
+      selectedWidgets.forEach((e, i)=> {
+        let x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
+        let y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale)
         mouseUpWidgetUpdateFunction && mouseUpWidgetUpdateFunction.bind(this, e, x, y)()
       })
       ev.stopPropagation && ev.stopPropagation()

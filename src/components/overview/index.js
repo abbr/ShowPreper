@@ -11,6 +11,11 @@ var EditableComponent = require('components/widgets/editableComponent')
 let Overview = React.createClass({
   mixins: [AutoScale, Selectable, Draggable(function () {
     return this.props.selectedWidgets
+  }, function (e) {
+    return {
+      x: this.props.component.components[e].x || 0,
+      y: this.props.component.components[e].y || 0
+    }
   }, function (e, x, y) {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
       container: this.props.component,

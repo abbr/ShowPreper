@@ -14,25 +14,31 @@ require('./operatingTable.less')
 
 let OperatingTable = React.createClass({
   mixins: [AutoScale, Selectable, Draggable(function () {
-    return this.props.selectedWidgets
-  }, function (e, x, y) {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
-      container: this.props.component,
-      index: e
-    }, {
-      x: x,
-      y: y
-    })
-  }, function (e, x, y) {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+      return this.props.selectedWidgets
+    }, function (e) {
+      return {
+        x: this.props.component.components[e].x || 0,
+        y: this.props.component.components[e].y || 0
+      }
+    },
+    function (e, x, y) {
+      this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
         container: this.props.component,
         index: e
       }, {
         x: x,
         y: y
-      }, lang.moveComponents
-    )
-  }), Scalable, Rotatable, Killable],
+      })
+    }, function (e, x, y) {
+      this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+          container: this.props.component,
+          index: e
+        }, {
+          x: x,
+          y: y
+        }, lang.moveComponents
+      )
+    }), Scalable, Rotatable, Killable],
   getInitialState: function () {
     return {draggable: true}
   },
