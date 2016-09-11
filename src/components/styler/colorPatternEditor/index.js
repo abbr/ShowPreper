@@ -78,7 +78,7 @@ export default React.createClass({
         gradientMarkers = gradientArr.map((e, i) => {
           return <Marker
             key={i}
-            style={{top: 0, left: 0}}
+            style={{top: 0, left: e.p + '%'}}
             onClick={this.onMarkerClick}
             pressed={this.state.currentColorMarker === this.refs['colorMarker' + i]}
             ref={'colorMarker' + i}
