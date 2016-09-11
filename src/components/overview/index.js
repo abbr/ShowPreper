@@ -6,9 +6,27 @@ import Draggable from 'components/mixins/draggable'
 import Scalable from 'components/mixins/scalable'
 import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
+import lang from 'i18n/lang'
 var EditableComponent = require('components/widgets/editableComponent')
 let Overview = React.createClass({
-  mixins: [AutoScale, Selectable, Draggable, Scalable, Rotatable],
+  mixins: [AutoScale, Selectable, Draggable("this.props.selectedWidgets", function (e, x, y) {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+      container: this.props.component,
+      index: e
+    }, {
+      x: x,
+      y: y
+    })
+  }, function (e, x, y) {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+        container: this.props.component,
+        index: e
+      }, {
+        x: x,
+        y: y
+      }, lang.moveComponents
+    )
+  }), Scalable, Rotatable],
   getInitialState: function () {
     return {draggable: true}
   },

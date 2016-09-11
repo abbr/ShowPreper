@@ -9,10 +9,28 @@ import Scalable from 'components/mixins/scalable'
 import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
 import Killable from 'components/mixins/killable'
+import lang from 'i18n/lang'
 require('./operatingTable.less')
 
 let OperatingTable = React.createClass({
-  mixins: [AutoScale, Selectable, Draggable, Scalable, Rotatable, Killable],
+  mixins: [AutoScale, Selectable, Draggable("this.props.selectedWidgets", function (e, x, y) {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+      container: this.props.component,
+      index: e
+    }, {
+      x: x,
+      y: y
+    })
+  }, function (e, x, y) {
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+        container: this.props.component,
+        index: e
+      }, {
+        x: x,
+        y: y
+      }, lang.moveComponents
+    )
+  }), Scalable, Rotatable, Killable],
   getInitialState: function () {
     return {draggable: true}
   },
