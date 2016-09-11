@@ -8,14 +8,6 @@ export default React.createClass({
   getInitialState: () => ({
     currentColorMarker: null
   }),
-  setDraggable: function () {
-    $(".sp-gradient-marker").each(function (i, e) {
-      $(e).draggable({
-        axis: 'x',
-        containment: 'parent'
-      })
-    })
-  },
   componentDidMount() {
     $("#colorpicker").spectrum({
       color: this.props.currentStyle,
@@ -26,7 +18,6 @@ export default React.createClass({
         this.props.updateStyle({background: tinycolor && tinycolor.toRgbString()})
       },
     })
-    this.setDraggable()
   },
   onMarkerClick: function (evt, marker) {
     this.setState({
@@ -42,7 +33,6 @@ export default React.createClass({
   },
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
-    this.setDraggable()
   },
   render: function () {
     let that = this
