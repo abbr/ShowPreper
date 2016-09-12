@@ -13,9 +13,9 @@ export default React.createClass({
       }
     },
     function (e, x, y) {
-      this.props.updateMarkerPosition()
+      this.props.updateMarkerPosition(e.props.index, x, y)
     }, function (e, x, y) {
-      this.props.updateMarkerPosition()
+      this.props.updateMarkerPosition(e.props.index, x, y)
     })],
 
   getInitialState: function () {
