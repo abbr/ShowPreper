@@ -8,14 +8,18 @@ export default React.createClass({
     }, function (e) {
       let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
       return {
-        x: (bb && bb.left) || 0,
+        x: (bb && (bb.left + 8)) || 0,
         y: (bb && bb.top) || 0
       }
     },
     function (e, x, y) {
-      this.props.updateMarkerPosition(e.props.index, x, y)
+      let bb = ReactDOM.findDOMNode(e).parentNode.getBoundingClientRect()
+      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
+      this.props.updateMarkerPosition(e.props.index, x, y, pct)
     }, function (e, x, y) {
-      this.props.updateMarkerPosition(e.props.index, x, y)
+      let bb = ReactDOM.findDOMNode(e).parentNode.getBoundingClientRect()
+      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
+      this.props.updateMarkerPosition(e.props.index, x, y, pct)
     })],
 
   getInitialState: function () {
@@ -28,7 +32,7 @@ export default React.createClass({
     this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
   },
   render: function () {
-    let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16, marginRight: -24})
+    let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16})
     return (
       <div className="sp-gradient-marker" style={s} onMouseDown={(evt)=> {
         evt.stopPropagation()

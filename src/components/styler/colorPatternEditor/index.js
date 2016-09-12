@@ -73,11 +73,12 @@ export default React.createClass({
     let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientString + ')')
     return fullGradientString
   },
-  updateMarkerPosition: function (index, x, y) {
+  updateMarkerPosition: function (index, x, y, pct) {
     let g = this.parseGradientString()
     let gradientArr = g.gradientArr
+    gradientArr[index].p = pct
     let s = this.composeGradientString(gradientArr)
-    console.log('updateMarkerPosition')
+    this.props.updateStyle({background: s})
   },
   render: function () {
     let that = this
