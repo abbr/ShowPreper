@@ -2,11 +2,43 @@ import React from 'react'
 import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import './index.less'
+import Draggable from '../../mixins/draggable'
 import Marker from './marker'
+import ReactDOM from 'react-dom'
 
 export default React.createClass({
+  mixins: [Draggable(function () {
+      return [this.state.draggingMarker]
+    }, function (e) {
+      let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
+      return {
+        x: (bb && (bb.left + 8)) || 0,
+        y: (bb && bb.top) || 0
+      }
+    },
+    function (e, x, y) {
+      let bb = ReactDOM.findDOMNode(e).parentNode.getBoundingClientRect()
+      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
+      this.updateMarkerPosition(e.props.index, x, y, pct)
+    }, function (e, x, y) {
+      let bb = ReactDOM.findDOMNode(e).parentNode.getBoundingClientRect()
+      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
+      this.updateMarkerPosition(e.props.index, x, y, pct)
+    })],
+
+  componentWillMount: function () {
+    this.mouseDownHdlrs = []
+  },
+  onMouseDown: function (evt, marker) {
+    evt.persist()
+    this.setState({draggingMarker: marker}, function () {
+      this.mouseDownHdlrs.forEach(e=>e.apply(this, [evt]))
+    })
+  },
   getInitialState: () => ({
-    currentColorMarker: null
+    draggable: true,
+    currentColorMarker: null,
+    draggingMarker: null
   }),
   componentDidMount() {
     $("#colorpicker").spectrum({
@@ -97,7 +129,7 @@ export default React.createClass({
             onClick={this.onMarkerClick}
             pressed={this.state.currentColorMarker === this.refs['colorMarker' + i]}
             ref={'colorMarker' + i}
-            updateMarkerPosition={this.updateMarkerPosition}
+            onMouseDown={this.onMouseDown}
           />
         })
       }

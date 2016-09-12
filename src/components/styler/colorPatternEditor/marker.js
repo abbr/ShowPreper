@@ -1,36 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import _ from 'lodash'
-import Draggable from '../../mixins/draggable'
 export default React.createClass({
-  mixins: [Draggable(function () {
-      return [this]
-    }, function (e) {
-      let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
-      return {
-        x: (bb && (bb.left + 8)) || 0,
-        y: (bb && bb.top) || 0
-      }
-    },
-    function (e, x, y) {
-      let bb = ReactDOM.findDOMNode(e).parentNode.getBoundingClientRect()
-      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
-      this.props.updateMarkerPosition(e.props.index, x, y, pct)
-    }, function (e, x, y) {
-      let bb = ReactDOM.findDOMNode(e).parentNode.getBoundingClientRect()
-      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
-      this.props.updateMarkerPosition(e.props.index, x, y, pct)
-    })],
-
-  getInitialState: function () {
-    return {draggable: true}
-  },
-  componentWillMount: function () {
-    this.mouseDownHdlrs = []
-  },
-  onMouseDown: function () {
-    this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
-  },
   render: function () {
     let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16})
     return (
@@ -58,7 +28,9 @@ export default React.createClass({
             <path id="down-unpressed" filter="url(#unpressed)" d="M 0 0 L 16 0 L 8 16 z"></path>
           </defs>
           <use xlinkHref={(this.props.down ? '#down-' : '#up-') + (this.props.pressed ? 'pressed' : 'unpressed')}
-               onMouseDown={this.onMouseDown}
+               onMouseDown={(evt)=> {
+                 this.props.onMouseDown(evt, this)
+               }}
                onClick={(evt)=> {
                  this.props.onClick(evt, this)
                }} style={{cursor: 'pointer'}}></use>
