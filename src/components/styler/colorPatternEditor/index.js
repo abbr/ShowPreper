@@ -64,7 +64,19 @@ export default React.createClass({
     })
     return {gradientString: gradientString, gradientArr: gradientArr}
   },
+  composeGradientString: function (gradientArr) {
+    let gradientStringArr = gradientArr.map(function (e) {
+      return e.c + ' ' + e.p + '%'
+    })
+
+    let gradientString = gradientStringArr.join(', ')
+    let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientString + ')')
+    return fullGradientString
+  },
   updateMarkerPosition: function (index, x, y) {
+    let g = this.parseGradientString()
+    let gradientArr = g.gradientArr
+    let s = this.composeGradientString(gradientArr)
     console.log('updateMarkerPosition')
   },
   render: function () {
