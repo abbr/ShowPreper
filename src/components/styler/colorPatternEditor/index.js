@@ -111,10 +111,11 @@ export default React.createClass({
     return mi >= 0 ? this.refs['colorMarker' + mi] : null
   },
   composeGradientString: function (gradientArr) {
-    let gradientStringArr = gradientArr.map(function (e) {
+    let gradientStringArr = gradientArr.sort(function (a, b) {
+      return a.p - b.p
+    }).map(function (e) {
       return e.c + ' ' + e.p + '%'
     })
-
     let gradientString = gradientStringArr.join(', ')
     let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientString + ')')
     return fullGradientString
