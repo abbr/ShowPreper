@@ -20,14 +20,14 @@ export default React.createClass({
     function (e, x, y) {
       let m = this.getMarkerFromAttrs(e)
       let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-      let pct = (Math.min(1, (x - bb.left) / bb.width) * 100).toFixed(2)
+      let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
       this.updateMarkerPosition(e, x, y, pct)
       e.p = pct
       this.setState({draggingMarkerAttrs: e})
     }, function (e, x, y) {
       let m = this.getMarkerFromAttrs(e)
       let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-      let pct = (Math.min(1, (x - bb.left) / bb.width) * 100).toFixed(2)
+      let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
       this.updateMarkerPosition(e, x, y, pct)
       e.p = pct
       this.setState({draggingMarkerAttrs: e})
@@ -66,7 +66,7 @@ export default React.createClass({
     let evt = arguments[0]
     let x = evt.clientX
     let panelDomRect = evt.target.getBoundingClientRect()
-    let pct = Math.min(1, (x - panelDomRect.left) / ((panelDomRect.width - 24) || 1))
+    let pct = Math.max(0, Math.min(1, (x - panelDomRect.left) / ((panelDomRect.width - 24) || 1)))
   },
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
