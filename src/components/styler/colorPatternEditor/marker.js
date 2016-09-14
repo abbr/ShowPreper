@@ -29,7 +29,7 @@ export default React.createClass({
           </defs>
           <use xlinkHref={(this.props.down ? '#down-' : '#up-') + (this.props.pressed ? 'pressed' : 'unpressed')}
                onMouseDown={(evt)=> {
-                 this.props.onMouseDown(evt, this)
+                 this.props.onMouseDown(evt, this.props.attrs)
                }}
                onClick={(evt)=> {
                  this.props.onClick(evt, this)
