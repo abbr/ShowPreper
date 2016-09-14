@@ -10,21 +10,24 @@ export default React.createClass({
   mixins: [Draggable(function () {
       return [this.state.draggingMarkerAttrs]
     }, function (e) {
-      let bb = ReactDOM.findDOMNode(this.getMarkerFromAttrs(e)).getBoundingClientRect()
+      let m = this.getMarkerFromAttrs(e)
+      let bb = ReactDOM.findDOMNode(m).getBoundingClientRect()
       return {
         x: (bb && (bb.left + 8)) || 0,
         y: (bb && bb.top) || 0
       }
     },
     function (e, x, y) {
-      let bb = ReactDOM.findDOMNode(this.getMarkerFromAttrs(e)).parentNode.getBoundingClientRect()
-      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
+      let m = this.getMarkerFromAttrs(e)
+      let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
+      let pct = (Math.min(1, (x - bb.left) / bb.width) * 100).toFixed(2)
       this.updateMarkerPosition(e, x, y, pct)
       e.p = pct
       this.setState({draggingMarkerAttrs: e})
     }, function (e, x, y) {
-      let bb = ReactDOM.findDOMNode(this.getMarkerFromAttrs(e)).parentNode.getBoundingClientRect()
-      let pct = Math.min(1, (x - bb.left) / bb.width) * 100
+      let m = this.getMarkerFromAttrs(e)
+      let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
+      let pct = (Math.min(1, (x - bb.left) / bb.width) * 100).toFixed(2)
       this.updateMarkerPosition(e, x, y, pct)
       e.p = pct
       this.setState({draggingMarkerAttrs: e})
@@ -64,7 +67,6 @@ export default React.createClass({
     let x = evt.clientX
     let panelDomRect = evt.target.getBoundingClientRect()
     let pct = Math.min(1, (x - panelDomRect.left) / ((panelDomRect.width - 24) || 1))
-    console.log(pct * 100 + '%')
   },
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
@@ -101,14 +103,12 @@ export default React.createClass({
   },
   getMarkerFromAttrs: function (attrs) {
     let g = this.parseGradientString()
-    for (let i = 0; i < g.gradientArr.length; i++) {
+    let mi = g.gradientArr.findIndex((x, i) => {
       let e = this.refs['colorMarker' + i]
       let ea = e.props.attrs
-      if (ea.c === attrs.c && ea.p === attrs.p) {
-        return e
-      }
-    }
-    return null
+      return ea.c === attrs.c && Math.abs(ea.p - attrs.p) < 0.001
+    })
+    return mi >= 0 ? this.refs['colorMarker' + mi] : null
   },
   composeGradientString: function (gradientArr) {
     let gradientStringArr = gradientArr.map(function (e) {
@@ -123,7 +123,7 @@ export default React.createClass({
     let g = this.parseGradientString()
     let gradientArr = g.gradientArr
     for (let i = 0; i < gradientArr.length; i++) {
-      if (gradientArr[i].c === attrs.c && gradientArr[i].p === attrs.p) {
+      if (gradientArr[i].c === attrs.c && Math.abs(gradientArr[i].p - attrs.p) < 0.001) {
         gradientArr[i].p = pct
         break
       }
