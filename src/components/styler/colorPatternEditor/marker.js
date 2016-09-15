@@ -4,7 +4,7 @@ export default React.createClass({
   render: function () {
     let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16})
     return (
-      <div className="sp-gradient-marker" style={s} onMouseDown={(evt)=> {
+      <div className="sp-gradient-marker" title="" style={s} onMouseDown={(evt)=> {
         evt.stopPropagation()
       }}>
         <svg xmlns="http://www.w3.org/2000/svg"

@@ -256,7 +256,7 @@ export default React.createClass({
                        ref="gradientPanel"
                        style={{background: 'linear-gradient(to right, ' + gradientString + ')'}}></div>
                 </div>
-                <div className="sp-gradient-marker-panel"
+                <div className="sp-gradient-marker-panel" title="Insert color stop here"
                      onMouseDown={this.onMarkerPanelMouseDown}>
                   {gradientMarkers}
                 </div>
