@@ -80,7 +80,7 @@ export default React.createClass({
       return {}
     }
     gradientString = gradientStringMatch[1]
-    gradientArr = gradientString.split(',')
+    gradientArr = gradientString.match(/((?:rgba.*?\)|#)[^,]*)/g)
     gradientArr = gradientArr.map(function (e, i, a) {
       let ret = {}
       let colorPosArr = e.trim().split(' ')
@@ -141,10 +141,10 @@ export default React.createClass({
       let leftColor = parseColor(gradientArr[leftMarkerIdx].c).rgba
       let rightColor = parseColor(gradientArr[rightMarkerIdx].c).rgba
       let dist = (gradientArr[rightMarkerIdx].p - gradientArr[leftMarkerIdx].p) || 1
-      let ratio = pct / dist
+      let ratio = (pct - gradientArr[leftMarkerIdx].p) / dist
       let newColor = []
       for (let i = 0; i < 4; i++) {
-        newColor[i] = Math.round(leftColor[i] + (rightColor[i] - leftColor[i]) * ratio)
+        newColor[i] = Math.max(0, Math.min(i < 3 ? 255 : 1, Math.round(leftColor[i] + (rightColor[i] - leftColor[i]) * ratio)))
       }
       let newColorStr = 'rgba(' + newColor.join() + ')'
       let newMarker = {c: newColorStr, p: pct}
