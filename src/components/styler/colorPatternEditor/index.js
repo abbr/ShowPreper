@@ -44,7 +44,7 @@ export default React.createClass({
   },
   getInitialState: () => ({
     draggable: true,
-    currentColorMarker: null,
+    pressedMarkerAttrs: null,
     draggingMarkerAttrs: null
   }),
   componentDidMount() {
@@ -58,9 +58,9 @@ export default React.createClass({
       },
     })
   },
-  onMarkerClick: function (evt, marker) {
+  onMarkerClick: function (evt, markerAttrs) {
     this.setState({
-      currentColorMarker: marker
+      pressedMarkerAttrs: markerAttrs
     })
   },
   onMarkerPanelMouseDown: function () {
@@ -163,13 +163,17 @@ export default React.createClass({
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
         gradientMarkers = gradientArr.map((e, i) => {
+          let pressed = false
+          if (this.state.pressedMarkerAttrs && this.state.pressedMarkerAttrs.c === e.c && Math.abs(this.state.pressedMarkerAttrs.p - e.p) < 0.001) {
+            pressed = true
+          }
           return <Marker
             key={i}
             index={i}
             attrs={e}
             style={{top: 0, left: e.p + '%'}}
             onClick={this.onMarkerClick}
-            pressed={this.state.currentColorMarker === this.refs['colorMarker' + i]}
+            pressed={pressed}
             ref={'colorMarker' + i}
             onMouseDown={this.onMouseDown}
           />

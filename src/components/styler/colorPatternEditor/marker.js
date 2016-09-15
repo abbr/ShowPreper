@@ -32,7 +32,7 @@ export default React.createClass({
                  this.props.onMouseDown(evt, this.props.attrs)
                }}
                onClick={(evt)=> {
-                 this.props.onClick(evt, this)
+                 this.props.onClick(evt, this.props.attrs)
                }} style={{cursor: 'pointer'}}></use>
         </svg>
       </div>
