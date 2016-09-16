@@ -6,6 +6,7 @@ import Draggable from '../../mixins/draggable'
 import Marker from './marker'
 import ReactDOM from 'react-dom'
 import parseColor from 'parse-color'
+import _ from 'lodash'
 
 export default React.createClass({
   mixins: [Draggable(function () {
@@ -60,7 +61,7 @@ export default React.createClass({
   },
   onMarkerClick: function (evt, markerAttrs) {
     this.setState({
-      pressedMarkerAttrs: markerAttrs
+      pressedMarkerAttrs: _.isEqual(markerAttrs, this.state.pressedMarkerAttrs) ? null : markerAttrs
     })
   },
   onMarkerPanelMouseDown: function () {
