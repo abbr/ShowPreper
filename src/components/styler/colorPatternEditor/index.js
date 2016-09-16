@@ -83,7 +83,7 @@ export default React.createClass({
     gradientArr = gradientString.match(/((?:rgba?.*?\)|#)[^,]*)/g)
     gradientArr = gradientArr.map(function (e, i, a) {
       let ret = {}
-      let colorPosArr = e.trim().match(/(rgba?.*?\)|[\w#%]+)/g)
+      let colorPosArr = e.trim().match(/(rgba?.*?\)|[\w#\.%]+)/g)
       let c = colorPosArr[0]
       let p
       if (colorPosArr.length > 1) {
