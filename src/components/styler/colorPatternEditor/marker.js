@@ -1,6 +1,20 @@
 import React from 'react'
 import _ from 'lodash'
+import 'spectrum-colorpicker'
+import 'spectrum-colorpicker/spectrum.css'
+
 export default React.createClass({
+  componentDidMount() {
+    $("#markerColorPicker" + this.props.index).spectrum({
+      color: this.props.attrs.c,
+      showAlpha: true,
+      showInput: true,
+      allowEmpty: true
+    })
+  },
+  componentDidUpdate: function () {
+    $("#markerColorPicker" + this.props.index).spectrum("set", this.props.attrs.c)
+  },
   render: function () {
     let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16})
     return (
@@ -35,6 +49,9 @@ export default React.createClass({
                  this.props.onClick(evt, this.props.attrs)
                }} style={{cursor: 'pointer'}}></use>
         </svg>
+        <div style={{display: this.props.pressed ? "block" : "none"}}>
+          <input id={'markerColorPicker' + this.props.index}></input>
+        </div>
       </div>
     )
   }
