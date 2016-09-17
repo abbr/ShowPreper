@@ -24,7 +24,7 @@ export default React.createClass({
       let m = this.getMarkerFromAttrs(e)
       let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
       let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
-      if (Math.abs(y - bb.top) > 20) {
+      if (y - bb.top > 30) {
         pct = null
       }
       this.updateMarkerPosition(e, pct)
@@ -281,15 +281,15 @@ export default React.createClass({
                        ref="gradientPanel"
                        style={{background: 'linear-gradient(to right, ' + gradientString + ')'}}></div>
                 </div>
-                  <div className="sp-gradient-marker-panel" title="Insert color stop here"
-                       onMouseDown={this.onMarkerPanelMouseDown}>
-                    {gradientMarkers}
-                  </div>
+                <div className="sp-gradient-marker-panel" title="Insert color stop here"
+                     onMouseDown={this.onMarkerPanelMouseDown}>
+                  {gradientMarkers}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   }
 })
