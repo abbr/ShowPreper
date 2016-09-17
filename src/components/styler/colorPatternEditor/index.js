@@ -142,7 +142,8 @@ export default React.createClass({
       let ratio = (pct - gradientArr[leftMarkerIdx].p) / dist
       let newColor = []
       for (let i = 0; i < 4; i++) {
-        newColor[i] = Math.max(0, Math.min(i < 3 ? 255 : 1, Math.round(leftColor[i] + (rightColor[i] - leftColor[i]) * ratio)))
+        let decimalVal = leftColor[i] + (rightColor[i] - leftColor[i]) * ratio
+        newColor[i] = Math.max(0, Math.min(i < 3 ? 255 : 1, i < 3 ? Math.round(decimalVal) : decimalVal.toFixed(2)))
       }
       let newColorStr = 'rgba(' + newColor.join() + ')'
       let newMarker = {c: newColorStr, p: pct}
