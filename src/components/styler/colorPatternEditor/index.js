@@ -144,21 +144,27 @@ export default React.createClass({
       }
     }
     else {
-      // inserting marker
-      let rightMarkerIdx = Math.max(0, gradientArr.findIndex((e)=>(e.p > pct)))
-      let leftMarkerIdx = Math.max(0, rightMarkerIdx - 1)
-      let leftColor = parseColor(gradientArr[leftMarkerIdx].c).rgba
-      let rightColor = parseColor(gradientArr[rightMarkerIdx].c).rgba
-      let dist = (gradientArr[rightMarkerIdx].p - gradientArr[leftMarkerIdx].p) || 1
-      let ratio = (pct - gradientArr[leftMarkerIdx].p) / dist
-      let newColor = []
-      for (let i = 0; i < 4; i++) {
-        let decimalVal = leftColor[i] + (rightColor[i] - leftColor[i]) * ratio
-        newColor[i] = Math.max(0, Math.min(i < 3 ? 255 : 1, i < 3 ? Math.round(decimalVal) : decimalVal.toFixed(2)))
+      if (gradientArr.length > 0) {
+        // inserting marker
+        let rightMarkerIdx = Math.max(0, gradientArr.findIndex((e)=>(e.p > pct)))
+        let leftMarkerIdx = Math.max(0, rightMarkerIdx - 1)
+        let leftColor = parseColor(gradientArr[leftMarkerIdx].c).rgba
+        let rightColor = parseColor(gradientArr[rightMarkerIdx].c).rgba
+        let dist = (gradientArr[rightMarkerIdx].p - gradientArr[leftMarkerIdx].p) || 1
+        let ratio = (pct - gradientArr[leftMarkerIdx].p) / dist
+        let newColor = []
+        for (let i = 0; i < 4; i++) {
+          let decimalVal = leftColor[i] + (rightColor[i] - leftColor[i]) * ratio
+          newColor[i] = Math.max(0, Math.min(i < 3 ? 255 : 1, i < 3 ? Math.round(decimalVal) : decimalVal.toFixed(2)))
+        }
+        let newColorStr = 'rgba(' + newColor.join() + ')'
+        let newMarker = {c: newColorStr, p: pct}
+        gradientArr.splice(rightMarkerIdx, 0, newMarker)
       }
-      let newColorStr = 'rgba(' + newColor.join() + ')'
-      let newMarker = {c: newColorStr, p: pct}
-      gradientArr.splice(rightMarkerIdx, 0, newMarker)
+      else {
+        // inserting first marker
+        gradientArr.splice(0, 0, {c: 'rgba(255,255,255,1)', p: pct})
+      }
     }
     let s = this.composeGradientString(gradientArr)
     this.props.updateStyle({background: s})
@@ -275,15 +281,15 @@ export default React.createClass({
                        ref="gradientPanel"
                        style={{background: 'linear-gradient(to right, ' + gradientString + ')'}}></div>
                 </div>
-                <div className="sp-gradient-marker-panel" title="Insert color stop here"
-                     onMouseDown={this.onMarkerPanelMouseDown}>
-                  {gradientMarkers}
+                  <div className="sp-gradient-marker-panel" title="Insert color stop here"
+                       onMouseDown={this.onMarkerPanelMouseDown}>
+                    {gradientMarkers}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   }
 })
