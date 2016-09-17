@@ -55,7 +55,12 @@ export default React.createClass({
                  this.props.onClick(evt, this.props.attrs)
                }} style={{cursor: 'pointer'}}></use>
         </svg>
-        <div style={{display: this.props.pressed ? "block" : "none"}}>
+        <div style={{
+          display: this.props.pressed ? "block" : "none",
+          position: 'relative',
+          width: 50,
+          left: -Math.max(0, this.props.attrs.p - 90) * 3
+        }}>
           <input id={'markerColorPicker' + this.props.index}></input>
         </div>
       </div>
