@@ -9,7 +9,12 @@ export default React.createClass({
       color: this.props.attrs.c,
       showAlpha: true,
       showInput: true,
-      allowEmpty: true
+      allowEmpty: true,
+      change: (tinycolor) => {
+        let c = tinycolor.toRgb()
+        let rgba = 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + c.a + ')'
+        this.props.updateMarkerColor(this.props.attrs, rgba)
+      },
     })
   },
   componentDidUpdate: function () {

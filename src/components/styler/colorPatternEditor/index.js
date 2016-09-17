@@ -104,13 +104,14 @@ export default React.createClass({
     })
     return {gradientString: gradientString, gradientArr: gradientArr}
   },
+  getGradientItemIndexFromAttrs: function (parsedGradientObject, attrs) {
+    return parsedGradientObject.gradientArr.findIndex(x => {
+      return x.c === attrs.c && Math.abs(x.p - attrs.p) < 0.001
+    })
+  },
   getMarkerFromAttrs: function (attrs) {
     let g = this.parseGradientString()
-    let mi = g.gradientArr.findIndex((x, i) => {
-      let e = this.refs['colorMarker' + i]
-      let ea = e.props.attrs
-      return ea.c === attrs.c && Math.abs(ea.p - attrs.p) < 0.001
-    })
+    let mi = this.getGradientItemIndexFromAttrs(g, attrs)
     return mi >= 0 ? this.refs['colorMarker' + mi] : null
   },
   composeGradientString: function (gradientArr) {
@@ -128,12 +129,8 @@ export default React.createClass({
     let gradientArr = g.gradientArr
     if (attrs) {
       // dragging marker
-      for (let i = 0; i < gradientArr.length; i++) {
-        if (gradientArr[i].c === attrs.c && Math.abs(gradientArr[i].p - attrs.p) < 0.001) {
-          gradientArr[i].p = pct
-          break
-        }
-      }
+      let mi = this.getGradientItemIndexFromAttrs(g, attrs)
+      mi >= 0 && (gradientArr[mi].p = pct)
     }
     else {
       // inserting marker
@@ -151,6 +148,14 @@ export default React.createClass({
       let newMarker = {c: newColorStr, p: pct}
       gradientArr.splice(rightMarkerIdx, 0, newMarker)
     }
+    let s = this.composeGradientString(gradientArr)
+    this.props.updateStyle({background: s})
+  },
+  updateMarkerColor: function (attrs, newColor) {
+    let g = this.parseGradientString()
+    let gradientArr = g.gradientArr
+    let gi = this.getGradientItemIndexFromAttrs(g, attrs)
+    gi >= 0 && (gradientArr[gi].c = newColor)
     let s = this.composeGradientString(gradientArr)
     this.props.updateStyle({background: s})
   },
@@ -177,6 +182,7 @@ export default React.createClass({
             pressed={pressed}
             ref={'colorMarker' + i}
             onMouseDown={this.onMouseDown}
+            updateMarkerColor={this.updateMarkerColor}
           />
         })
       }
