@@ -146,8 +146,10 @@ export default React.createClass({
     else {
       if (gradientArr.length > 0) {
         // inserting marker
-        let rightMarkerIdx = Math.max(0, gradientArr.findIndex((e)=>(e.p > pct)))
+        let rightMarkerIdx = gradientArr.findIndex((e)=>(e.p > pct))
+        rightMarkerIdx = rightMarkerIdx < 0 ? gradientArr.length : rightMarkerIdx
         let leftMarkerIdx = Math.max(0, rightMarkerIdx - 1)
+        rightMarkerIdx = Math.min(rightMarkerIdx, gradientArr.length - 1)
         let leftColor = parseColor(gradientArr[leftMarkerIdx].c).rgba
         let rightColor = parseColor(gradientArr[rightMarkerIdx].c).rgba
         let dist = (gradientArr[rightMarkerIdx].p - gradientArr[leftMarkerIdx].p) || 1
