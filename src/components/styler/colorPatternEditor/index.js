@@ -20,13 +20,18 @@ export default React.createClass({
       }
     },
     function (e, x, y) {
+      if (!e) return
       let m = this.getMarkerFromAttrs(e)
       let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
       let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
+      if (Math.abs(y - bb.top) > 20) {
+        pct = null
+      }
       this.updateMarkerPosition(e, pct)
       e.p = pct
-      this.setState({draggingMarkerAttrs: e})
+      this.setState({draggingMarkerAttrs: pct === null ? null : e})
     }, function (e, x, y) {
+      if (!e) return
       let m = this.getMarkerFromAttrs(e)
       let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
       let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
@@ -82,32 +87,32 @@ export default React.createClass({
     }
     gradientString = gradientStringMatch[1]
     gradientArr = gradientString.match(/((?:rgba?.*?\)|#)[^,]*)/g)
-    gradientArr = gradientArr.map(function (e, i, a) {
-      let ret = {}
-      let colorPosArr = e.trim().match(/(rgba?.*?\)|[\w#\.%]+)/g)
-      let c = colorPosArr[0]
-      let p
-      if (colorPosArr.length > 1) {
-        p = Number(colorPosArr[1].trim().replace('%', ''))
-      }
-      else {
-        if (i == 0) {
-          p = 0
+    gradientArr = gradientArr && gradientArr.map(function (e, i, a) {
+        let ret = {}
+        let colorPosArr = e.trim().match(/(rgba?.*?\)|[\w#\.%]+)/g)
+        let c = colorPosArr[0]
+        let p
+        if (colorPosArr.length > 1) {
+          p = Number(colorPosArr[1].trim().replace('%', ''))
         }
-        else if (i === (a.length - 1)) {
-          p = 100
+        else {
+          if (i == 0) {
+            p = 0
+          }
+          else if (i === (a.length - 1)) {
+            p = 100
+          }
         }
-      }
-      ret.c = c
-      ret.p = p
-      return ret
-    })
+        ret.c = c
+        ret.p = p
+        return ret
+      })
     return {gradientString: gradientString, gradientArr: gradientArr}
   },
   getGradientItemIndexFromAttrs: function (parsedGradientObject, attrs) {
-    return parsedGradientObject.gradientArr.findIndex(x => {
-      return x.c === attrs.c && Math.abs(x.p - attrs.p) < 0.001
-    })
+    return parsedGradientObject && parsedGradientObject.gradientArr && parsedGradientObject.gradientArr.findIndex(x => {
+        return x.c === attrs.c && Math.abs(x.p - attrs.p) < 0.001
+      })
   },
   getMarkerFromAttrs: function (attrs) {
     let g = this.parseGradientString()
@@ -126,15 +131,21 @@ export default React.createClass({
   },
   updateMarkerPosition: function (attrs, pct) {
     let g = this.parseGradientString()
-    let gradientArr = g.gradientArr
+    let gradientArr = g.gradientArr || []
     if (attrs) {
-      // dragging marker
       let mi = this.getGradientItemIndexFromAttrs(g, attrs)
-      mi >= 0 && (gradientArr[mi].p = pct)
+      if (pct !== null) {
+        // dragging marker
+        mi >= 0 && (gradientArr[mi].p = pct)
+      }
+      else {
+        // removing marker
+        mi >= 0 && gradientArr.splice(mi, 1)
+      }
     }
     else {
       // inserting marker
-      let rightMarkerIdx = gradientArr.findIndex((e)=>(e.p > pct))
+      let rightMarkerIdx = Math.max(0, gradientArr.findIndex((e)=>(e.p > pct)))
       let leftMarkerIdx = Math.max(0, rightMarkerIdx - 1)
       let leftColor = parseColor(gradientArr[leftMarkerIdx].c).rgba
       let rightColor = parseColor(gradientArr[rightMarkerIdx].c).rgba
@@ -169,23 +180,23 @@ export default React.createClass({
       gradientArr = g.gradientArr
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
-        gradientMarkers = gradientArr.map((e, i) => {
-          let pressed = false
-          if (this.state.pressedMarkerAttrs && this.state.pressedMarkerAttrs.c === e.c && Math.abs(this.state.pressedMarkerAttrs.p - e.p) < 0.001) {
-            pressed = true
-          }
-          return <Marker
-            key={i}
-            index={i}
-            attrs={e}
-            style={{top: 0, left: e.p + '%'}}
-            onClick={this.onMarkerClick}
-            pressed={pressed}
-            ref={'colorMarker' + i}
-            onMouseDown={this.onMouseDown}
-            updateMarkerColor={this.updateMarkerColor}
-          />
-        })
+        gradientMarkers = gradientArr && gradientArr.map((e, i) => {
+            let pressed = false
+            if (this.state.pressedMarkerAttrs && this.state.pressedMarkerAttrs.c === e.c && Math.abs(this.state.pressedMarkerAttrs.p - e.p) < 0.001) {
+              pressed = true
+            }
+            return <Marker
+              key={i}
+              index={i}
+              attrs={e}
+              style={{top: 0, left: e.p + '%'}}
+              onClick={this.onMarkerClick}
+              pressed={pressed}
+              ref={'colorMarker' + i}
+              onMouseDown={this.onMouseDown}
+              updateMarkerColor={this.updateMarkerColor}
+            />
+          })
       }
       else if (this.props.currentStyle.match(/^linear-gradient/)) {
         type = 'linear-gradient'
