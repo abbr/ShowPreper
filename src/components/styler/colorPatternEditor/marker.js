@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
+import parseColor from 'parse-color'
 
 export default React.createClass({
   componentDidMount() {
@@ -27,7 +28,7 @@ export default React.createClass({
         evt.stopPropagation()
       }}>
         <svg xmlns="http://www.w3.org/2000/svg"
-             width="32" height="32" viewBox="0 0 32 32" fill={this.props.attrs.c}
+             width="32" height="32" viewBox="0 0 32 32" fill={'rgb(' + parseColor(this.props.attrs.c).rgb + ')'}
              aria-labelledby="title">
           <title>marker</title>
           <defs>
