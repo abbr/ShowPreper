@@ -208,11 +208,12 @@ export default React.createClass({
   },
   render: function () {
     let that = this
-    let type, gradientString, gradientArr, gradientMarkers
+    let type, gradientString, gradientArr, gradientMarkers, gradientArrString
     if (this.props.currentStyle) {
       let g = this.parseGradientString()
       gradientString = g.gradientString
       gradientArr = g.gradientArr
+      gradientArrString = gradientArr.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
         gradientMarkers = gradientArr && gradientArr.map((e, i) => {
@@ -313,7 +314,7 @@ export default React.createClass({
                 <div className="sp-gradient-panel-base">
                   <div className="sp-gradient-panel"
                        ref="gradientPanel"
-                       style={{background: 'linear-gradient(to right, ' + gradientString + ')'}}></div>
+                       style={{background: 'linear-gradient(to right, ' + gradientArrString + ')'}}></div>
                 </div>
                 <div className="sp-gradient-marker-panel" title="Insert color stop here"
                      onMouseDown={this.onMarkerPanelMouseDown}>
