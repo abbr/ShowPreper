@@ -88,6 +88,6 @@
     "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
   },
   "defaultSlideStyle": {
-    "background": "radial-gradient(#f00, #fff)"
+    "background": "radial-gradient(ellipse 30% 30% at 10px 10px ,#f00, #fff)"
   }
 }

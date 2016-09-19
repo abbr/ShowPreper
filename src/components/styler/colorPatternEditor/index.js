@@ -80,12 +80,20 @@ export default React.createClass({
     $("#colorpicker").spectrum("set", this.props.currentStyle)
   },
   parseGradientString: function () {
-    let gradientString, gradientArr
+    let gradientString, gradientFormatMatch, gradientFormat = {}, gradientArr
     let gradientStringMatch = this.props.currentStyle.match(/-gradient\((.*)\)/)
     if (!gradientStringMatch) {
       return {}
     }
     gradientString = gradientStringMatch[1]
+    gradientFormatMatch = gradientString.match(/(circle|ellipse)\s*(.*?)\s*(?:at\s*(\S*?)\s*(\S*?)\s*)?,/)
+    if (gradientFormatMatch) {
+      gradientFormat.shape = gradientFormatMatch[1]
+      gradientFormat.extent = gradientFormatMatch[2]
+      gradientFormat.position = {}
+      gradientFormat.position.x = gradientFormatMatch[3]
+      gradientFormat.position.y = gradientFormatMatch[4]
+    }
     gradientArr = gradientString.match(/((?:rgba?.*?\)|#)[^,]*)/g)
     gradientArr = gradientArr && gradientArr.map(function (e, i, a) {
         let ret = {}
@@ -277,6 +285,11 @@ export default React.createClass({
                className="panel-collapse collapse in" role="tabpanel"
                aria-labelledby="headingThree">
             <div className="panel-body">
+              <div>Shape:
+                <input type="radio" name="shape" value="circle"/>Circle&nbsp;
+                <input type="radio" name="shape" value="ellipse"/>Ellipse
+              </div>
+              Color Stops:
               <div className="sp-gradient-panel-container">
                 <div className="sp-gradient-panel-base">
                   <div className="sp-gradient-panel"
