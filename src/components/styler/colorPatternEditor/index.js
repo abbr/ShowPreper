@@ -115,7 +115,7 @@ export default React.createClass({
         ret.p = p
         return ret
       })
-    return {gradientString: gradientString, gradientArr: gradientArr}
+    return {gradientString: gradientString, gradientFormat: gradientFormat, gradientArr: gradientArr}
   },
   getGradientItemIndexFromAttrs: function (parsedGradientObject, attrs) {
     return parsedGradientObject && parsedGradientObject.gradientArr && parsedGradientObject.gradientArr.findIndex(x => {
@@ -127,19 +127,38 @@ export default React.createClass({
     let mi = this.getGradientItemIndexFromAttrs(g, attrs)
     return mi >= 0 ? this.refs['colorMarker' + mi] : null
   },
-  composeGradientString: function (gradientArr) {
+  composeGradientString: function () {
+    let gradientFormat, gradientArr
+    if (arguments[0].constructor === Array) {
+      gradientArr = arguments[0]
+    }
+    else {
+      gradientArr = arguments[0].gradientArr
+      gradientFormat = arguments[0].gradientFormat
+    }
+    let gradientFormatString = ''
+    if (gradientFormat) {
+      gradientFormatString = (gradientFormat.shape || '') + ' '
+      gradientFormatString += (gradientFormat.extent || '') + ' '
+      gradientFormatString += (gradientFormat.position && (gradientFormat.position.x !== undefined || gradientFormat.position.y !== undefined)) ? ' at ' : ''
+      gradientFormatString += ((gradientFormat.position && gradientFormat.position.x !== undefined) ? gradientFormat.position.x : '') + ' '
+      gradientFormatString += ((gradientFormat.position && gradientFormat.position.y !== undefined) ? gradientFormat.position.y : '') + ' '
+      gradientFormatString = gradientFormatString.trim()
+      gradientFormatString += ','
+    }
     let gradientStringArr = gradientArr.sort(function (a, b) {
       return a.p - b.p
     }).map(function (e) {
       return e.c + ' ' + e.p + '%'
     })
     let gradientString = gradientStringArr.join(', ')
-    let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientString + ')')
+    let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientFormatString + gradientString + ')')
     return fullGradientString
   },
   updateMarkerPosition: function (attrs, pct) {
     let g = this.parseGradientString()
     let gradientArr = g.gradientArr || []
+    g.gradientArr = gradientArr
     if (attrs) {
       let mi = this.getGradientItemIndexFromAttrs(g, attrs)
       if (pct !== null) {
@@ -176,7 +195,7 @@ export default React.createClass({
         gradientArr.splice(0, 0, {c: 'rgba(255,255,255,1)', p: pct})
       }
     }
-    let s = this.composeGradientString(gradientArr)
+    let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
   updateMarkerColor: function (attrs, newColor) {
@@ -184,7 +203,7 @@ export default React.createClass({
     let gradientArr = g.gradientArr
     let gi = this.getGradientItemIndexFromAttrs(g, attrs)
     gi >= 0 && (gradientArr[gi].c = newColor)
-    let s = this.composeGradientString(gradientArr)
+    let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
   render: function () {
