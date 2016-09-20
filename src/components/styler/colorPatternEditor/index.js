@@ -208,9 +208,10 @@ export default React.createClass({
   },
   render: function () {
     let that = this
-    let type, gradientString, gradientArr, gradientMarkers, gradientArrString
+    let type, gradientString, gradientArr, gradientMarkers, gradientArrString, gradientFormat
     if (this.props.currentStyle) {
       let g = this.parseGradientString()
+      gradientFormat = g.gradientFormat
       gradientString = g.gradientString
       gradientArr = g.gradientArr
       gradientArrString = gradientArr.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
@@ -306,8 +307,10 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body">
               <div>Shape:
-                <input type="radio" name="shape" value="circle"/>Circle&nbsp;
-                <input type="radio" name="shape" value="ellipse"/>Ellipse
+                <input type="radio" name="shape" value="circle"
+                       defaultChecked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle&nbsp;
+                <input type="radio" name="shape" value="ellipse"
+                       defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
               </div>
               Color Stops:
               <div className="sp-gradient-panel-container">
