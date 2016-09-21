@@ -69,6 +69,15 @@ export default React.createClass({
       pressedMarkerAttrs: _.isEqual(markerAttrs, this.state.pressedMarkerAttrs) ? null : markerAttrs
     })
   },
+  onToggleGradientShape: function () {
+    let g = this.parseGradientString()
+    if (g.gradientFormat) {
+      g.gradientFormat.shape = arguments[0].target.value
+      delete g.gradientFormat.extent
+    }
+    let s = this.composeGradientString(g)
+    this.props.updateStyle({background: s})
+  },
   onMarkerPanelMouseDown: function () {
     let evt = arguments[0]
     let x = evt.clientX
@@ -143,7 +152,7 @@ export default React.createClass({
       gradientFormatString += (gradientFormat.position && (gradientFormat.position.x !== undefined || gradientFormat.position.y !== undefined)) ? ' at ' : ''
       gradientFormatString += ((gradientFormat.position && gradientFormat.position.x !== undefined) ? gradientFormat.position.x : '') + ' '
       gradientFormatString += ((gradientFormat.position && gradientFormat.position.y !== undefined) ? gradientFormat.position.y : '') + ' '
-      gradientFormatString = gradientFormatString.trim()
+      gradientFormatString = gradientFormatString.replace(/\s+/g, ' ').trim()
       gradientFormatString += ','
     }
     let gradientStringArr = gradientArr.sort(function (a, b) {
@@ -307,9 +316,9 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body">
               <div>Shape:
-                <input type="radio" name="shape" value="circle"
+                <input type="radio" name="shape" value="circle" onClick={this.onToggleGradientShape}
                        defaultChecked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle&nbsp;
-                <input type="radio" name="shape" value="ellipse"
+                <input type="radio" name="shape" value="ellipse" onClick={this.onToggleGradientShape}
                        defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
               </div>
               Color Stops:
