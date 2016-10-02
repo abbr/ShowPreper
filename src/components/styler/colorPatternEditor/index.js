@@ -217,10 +217,14 @@ export default React.createClass({
   },
   render: function () {
     let that = this
-    let type, gradientString, gradientArr, gradientMarkers, gradientArrString, gradientFormat
+    let type, gradientString, gradientArr, gradientMarkers, gradientArrString, gradientFormat, gradientExtentSelect
     if (this.props.currentStyle) {
       let g = this.parseGradientString()
       gradientFormat = g.gradientFormat
+      gradientExtentSelect = gradientFormat.extent
+      if (gradientExtentSelect.indexOf(' ') >= 0) {
+        gradientExtentSelect = 'percentage...'
+      }
       gradientString = g.gradientString
       gradientArr = g.gradientArr
       gradientArrString = gradientArr.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
@@ -320,6 +324,15 @@ export default React.createClass({
                        defaultChecked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle&nbsp;
                 <input type="radio" name="shape" value="ellipse" onClick={this.onToggleGradientShape}
                        defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
+              </div>
+              <div>Extent:
+                <select name="extent" defaultValue={gradientExtentSelect}>
+                  <option>closest-corner</option>
+                  <option>closest-side</option>
+                  <option>farthest-corner</option>
+                  <option>farthest-side</option>
+                  <option>percentage...</option>
+                </select>
               </div>
               Color Stops:
               <div className="sp-gradient-panel-container">
