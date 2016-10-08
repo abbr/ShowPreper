@@ -11,6 +11,7 @@ export default React.createClass({
       showAlpha: true,
       showInput: true,
       allowEmpty: true,
+      preferredFormat: 'rgb',
       change: (tinycolor) => {
         let c = tinycolor.toRgb()
         let rgba = 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + c.a + ')'

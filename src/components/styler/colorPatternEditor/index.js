@@ -59,6 +59,7 @@ export default React.createClass({
       showAlpha: true,
       showInput: true,
       allowEmpty: true,
+      preferredFormat: 'rgb',
       change: (tinycolor) => {
         this.props.updateStyle({background: tinycolor && tinycolor.toRgbString()})
       },
