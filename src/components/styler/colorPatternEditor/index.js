@@ -78,6 +78,17 @@ export default React.createClass({
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
+  onChangeGradientExtent: function () {
+    let g = this.parseGradientString()
+    if (g.gradientFormat) {
+      g.gradientFormat.extent = arguments[0].target.value
+      if (arguments[0].target.value === 'percentage') {
+        g.gradientFormat.extent = '100% 100%'
+      }
+    }
+    let s = this.composeGradientString(g)
+    this.props.updateStyle({background: s})
+  },
   onMarkerPanelMouseDown: function () {
     let evt = arguments[0]
     let x = evt.clientX
@@ -222,8 +233,8 @@ export default React.createClass({
       let g = this.parseGradientString()
       gradientFormat = g.gradientFormat
       gradientExtentSelect = gradientFormat.extent
-      if (gradientExtentSelect.indexOf(' ') >= 0) {
-        gradientExtentSelect = 'percentage...'
+      if (gradientExtentSelect && gradientExtentSelect.indexOf(' ') >= 0) {
+        gradientExtentSelect = 'percentage'
       }
       gradientString = g.gradientString
       gradientArr = g.gradientArr
@@ -326,12 +337,12 @@ export default React.createClass({
                        defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
               </div>
               <div>Extent:
-                <select name="extent" defaultValue={gradientExtentSelect}>
+                <select name="extent" value={gradientExtentSelect} onChange={this.onChangeGradientExtent}>
                   <option>closest-corner</option>
                   <option>closest-side</option>
                   <option>farthest-corner</option>
                   <option>farthest-side</option>
-                  <option>percentage...</option>
+                  <option value="percentage">percentage...</option>
                 </select>
               </div>
               Color Stops:
