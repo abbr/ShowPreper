@@ -7,6 +7,10 @@ import Marker from './marker'
 import ReactDOM from 'react-dom'
 import parseColor from 'parse-color'
 import _ from 'lodash'
+import 'react-widgets/lib/less/react-widgets.less'
+import NumberPicker from 'react-widgets/lib/NumberPicker'
+import localizer from 'react-widgets/lib/localizers/simple-number'
+localizer()
 
 export default React.createClass({
   mixins: [Draggable(function () {
@@ -74,7 +78,9 @@ export default React.createClass({
     let g = this.parseGradientString()
     if (g.gradientFormat) {
       g.gradientFormat.shape = arguments[0].target.value
-      delete g.gradientFormat.extent
+      if (g.gradientFormat.extent && g.gradientFormat.extent.indexOf('%') >= 0) {
+        g.gradientFormat.extent = 'farthest-corner'
+      }
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
@@ -86,6 +92,16 @@ export default React.createClass({
       if (arguments[0].target.value === 'percentage') {
         g.gradientFormat.extent = '100% 100%'
       }
+    }
+    let s = this.composeGradientString(g)
+    this.props.updateStyle({background: s})
+  },
+  onChangeGradientExtentPct: function (dimension, value) {
+    let g = this.parseGradientString()
+    if (g.gradientFormat && g.gradientFormat.extent) {
+      let xyExtArr = g.gradientFormat.extent.split(' ')
+      xyExtArr[dimension] = value + '%'
+      g.gradientFormat.extent = xyExtArr.join(' ')
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
@@ -229,12 +245,15 @@ export default React.createClass({
   },
   render: function () {
     let that = this
-    let type, gradientString, gradientArr, gradientMarkers, gradientArrString, gradientFormat, gradientExtentSelect
+    let type, gradientString, gradientArr, gradientMarkers, gradientArrString, gradientFormat, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct
     if (this.props.currentStyle) {
       let g = this.parseGradientString()
       gradientFormat = g.gradientFormat
       gradientExtentSelect = gradientFormat.extent
       if (gradientExtentSelect && gradientExtentSelect.indexOf(' ') >= 0) {
+        let xyExtArr = gradientExtentSelect.split(' ')
+        gradientExtentXExtentPct = parseInt(xyExtArr[0])
+        gradientExtentYExtentPct = parseInt(xyExtArr[1])
         gradientExtentSelect = 'percentage'
       }
       gradientString = g.gradientString
@@ -338,13 +357,18 @@ export default React.createClass({
                        defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
               </div>
               <div>Extent:
-                <select name="extent" value={gradientExtentSelect} onChange={this.onChangeGradientExtent}>
+                <select name="extent" value={gradientExtentSelect}
+                        onChange={this.onChangeGradientExtent}>
                   <option>closest-corner</option>
                   <option>closest-side</option>
                   <option>farthest-corner</option>
                   <option>farthest-side</option>
                   <option value="percentage">percentage...</option>
                 </select>
+                x: <NumberPicker value={gradientExtentXExtentPct} min={0}
+                                 onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>%
+                y: <NumberPicker value={gradientExtentYExtentPct} min={0}
+                                 onChange={this.onChangeGradientExtentPct.bind(null, 1)}/>%
               </div>
               Color Stops:
               <div className="sp-gradient-panel-container">
