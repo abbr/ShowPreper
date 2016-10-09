@@ -9,9 +9,16 @@ import parseColor from 'parse-color'
 import _ from 'lodash'
 import 'react-widgets/lib/less/react-widgets.less'
 import NumberPicker from 'react-widgets/lib/NumberPicker'
+import DropdownList from 'react-widgets/lib/DropdownList'
 import localizer from 'react-widgets/lib/localizers/simple-number'
 localizer()
-
+const gradientExtentSelectionArr = [
+  {value: 'closest-corner', text: 'closest-corner'},
+  {value: 'closest-side', text: 'closest-side'},
+  {value: 'farthest-corner', text: 'farthest-corner'},
+  {value: 'farthest-side', text: 'farthest-side'},
+  {value: 'percentage', text: 'percentage...'}
+]
 export default React.createClass({
   mixins: [Draggable(function () {
       return [this.state.draggingMarkerAttrs]
@@ -88,8 +95,8 @@ export default React.createClass({
   onChangeGradientExtent: function () {
     let g = this.parseGradientString()
     if (g.gradientFormat) {
-      g.gradientFormat.extent = arguments[0].target.value
-      if (arguments[0].target.value === 'percentage') {
+      g.gradientFormat.extent = arguments[0].value
+      if (arguments[0].value === 'percentage') {
         g.gradientFormat.extent = '100% 100%'
       }
     }
@@ -357,14 +364,11 @@ export default React.createClass({
                        defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
               </div>
               <div>Extent:
-                <select name="extent" value={gradientExtentSelect}
-                        onChange={this.onChangeGradientExtent}>
-                  <option>closest-corner</option>
-                  <option>closest-side</option>
-                  <option>farthest-corner</option>
-                  <option>farthest-side</option>
-                  <option value="percentage">percentage...</option>
-                </select>
+                <DropdownList data={gradientExtentSelectionArr}
+                              valueField="value" textField="text"
+                              value={gradientExtentSelect}
+                              onChange={this.onChangeGradientExtent}
+                />
                 x: <NumberPicker value={gradientExtentXExtentPct} min={0}
                                  onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>%
                 y: <NumberPicker value={gradientExtentYExtentPct} min={0}
