@@ -193,12 +193,12 @@ export default React.createClass({
       gradientFormatString = gradientFormatString.replace(/\s+/g, ' ').trim()
       gradientFormatString += ','
     }
-    let gradientStringArr = gradientArr.sort(function (a, b) {
+    let gradientStringArr = gradientArr && gradientArr.sort(function (a, b) {
       return a.p - b.p
     }).map(function (e) {
       return e.c + ' ' + e.p + '%'
     })
-    let gradientString = gradientStringArr.join(', ')
+    let gradientString = gradientStringArr && gradientStringArr.join(', ')
     let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientFormatString + gradientString + ')')
     return fullGradientString
   },
@@ -259,18 +259,22 @@ export default React.createClass({
     if (this.props.currentStyle) {
       let g = this.parseGradientString()
       gradientFormat = g.gradientFormat
-      gradientExtentSelect = gradientFormat.extent
-      if (gradientExtentSelect && gradientExtentSelect.indexOf('px') >= 0) {
-        let xyExtArr = gradientExtentSelect.split(' ')
-        gradientExtentXExtentPct = parseInt(xyExtArr[0])
-        if(xyExtArr.length>0){
-          gradientExtentYExtentPct = parseInt(xyExtArr[1])
+      if(gradientFormat){
+        gradientExtentSelect = gradientFormat.extent || 'farthest-corner'
+        if (gradientExtentSelect && gradientExtentSelect.indexOf('px') >= 0) {
+          let xyExtArr = gradientExtentSelect.split(' ')
+          gradientExtentXExtentPct = parseInt(xyExtArr[0])
+          if(xyExtArr.length>0){
+            gradientExtentYExtentPct = parseInt(xyExtArr[1])
+          }
+          gradientExtentSelect = 'length'
         }
-        gradientExtentSelect = 'length'
       }
       gradientString = g.gradientString
       gradientArr = g.gradientArr
-      gradientArrString = gradientArr.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
+      if(gradientArr){
+        gradientArrString = gradientArr.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
+      }
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
         gradientMarkers = gradientArr && gradientArr.map((e, i) => {
