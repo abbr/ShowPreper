@@ -2,15 +2,11 @@ import React from 'react'
 import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import './index.less'
-import Draggable from '../../mixins/draggable'
-import Marker from './marker'
-import ReactDOM from 'react-dom'
-import parseColor from 'parse-color'
-import _ from 'lodash'
 import 'react-widgets/lib/less/react-widgets.less'
 import NumberPicker from 'react-widgets/lib/NumberPicker'
 import DropdownList from 'react-widgets/lib/DropdownList'
 import localizer from 'react-widgets/lib/localizers/simple-number'
+import ColorStops from './colorStops'
 localizer()
 const gradientExtentSelectionArr = [
   {value: 'closest-corner', text: 'closest-corner'},
@@ -20,50 +16,6 @@ const gradientExtentSelectionArr = [
   {value: 'length', text: 'length...'}
 ]
 export default React.createClass({
-  mixins: [Draggable(function () {
-      return [this.state.draggingMarkerAttrs]
-    }, function (e) {
-      let m = this.getMarkerFromAttrs(e)
-      let bb = ReactDOM.findDOMNode(m).getBoundingClientRect()
-      return {
-        x: (bb && (bb.left + 8)) || 0,
-        y: (bb && bb.top) || 0
-      }
-    },
-    function (e, x, y) {
-      if (!e) return
-      let m = this.getMarkerFromAttrs(e)
-      let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-      let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
-      if (y - bb.top > 30) {
-        pct = null
-      }
-      this.updateMarkerPosition(e, pct)
-      e.p = pct
-      this.setState({draggingMarkerAttrs: pct === null ? null : e})
-    }, function (e, x, y) {
-      if (!e) return
-      let m = this.getMarkerFromAttrs(e)
-      let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-      let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
-      this.updateMarkerPosition(e, pct)
-      e.p = pct
-      this.setState({draggingMarkerAttrs: e})
-    })],
-  componentWillMount: function () {
-    this.mouseDownHdlrs = []
-  },
-  onMouseDown: function (evt, markerAttrs) {
-    evt.persist()
-    this.setState({draggingMarkerAttrs: markerAttrs}, function () {
-      this.mouseDownHdlrs.forEach(e=>e.apply(this, [evt]))
-    })
-  },
-  getInitialState: () => ({
-    draggable: true,
-    pressedMarkerAttrs: null,
-    draggingMarkerAttrs: null
-  }),
   componentDidMount() {
     $("#colorpicker").spectrum({
       color: this.props.currentStyle,
@@ -74,11 +26,6 @@ export default React.createClass({
       change: (tinycolor) => {
         this.props.updateStyle({background: tinycolor && tinycolor.toRgbString()})
       },
-    })
-  },
-  onMarkerClick: function (evt, markerAttrs) {
-    this.setState({
-      pressedMarkerAttrs: _.isEqual(markerAttrs, this.state.pressedMarkerAttrs) ? null : markerAttrs
     })
   },
   onToggleGradientShape: function () {
@@ -115,13 +62,6 @@ export default React.createClass({
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
-  },
-  onMarkerPanelMouseDown: function () {
-    let evt = arguments[0]
-    let x = evt.clientX
-    let panelDomRect = evt.target.getBoundingClientRect()
-    let pct = (Math.max(0, Math.min(1, (x - panelDomRect.left) / (panelDomRect.width || 1))) * 100).toFixed(2)
-    this.updateMarkerPosition(null, pct)
   },
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
@@ -164,16 +104,6 @@ export default React.createClass({
       })
     return {gradientString: gradientString, gradientFormat: gradientFormat, gradientArr: gradientArr}
   },
-  getGradientItemIndexFromAttrs: function (parsedGradientObject, attrs) {
-    return parsedGradientObject && parsedGradientObject.gradientArr && parsedGradientObject.gradientArr.findIndex(x => {
-        return x.c === attrs.c && Math.abs(x.p - attrs.p) < 0.001
-      })
-  },
-  getMarkerFromAttrs: function (attrs) {
-    let g = this.parseGradientString()
-    let mi = this.getGradientItemIndexFromAttrs(g, attrs)
-    return mi >= 0 ? this.refs['colorMarker' + mi] : null
-  },
   composeGradientString: function () {
     let gradientFormat, gradientArr
     if (arguments[0].constructor === Array) {
@@ -194,106 +124,32 @@ export default React.createClass({
       gradientFormatString += ','
     }
     let gradientStringArr = gradientArr && gradientArr.sort(function (a, b) {
-      return a.p - b.p
-    }).map(function (e) {
-      return e.c + ' ' + e.p + '%'
-    })
+        return a.p - b.p
+      }).map(function (e) {
+        return e.c + ' ' + e.p + '%'
+      })
     let gradientString = gradientStringArr && gradientStringArr.join(', ')
     let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientFormatString + gradientString + ')')
     return fullGradientString
   },
-  updateMarkerPosition: function (attrs, pct) {
-    let g = this.parseGradientString()
-    let gradientArr = g.gradientArr || []
-    g.gradientArr = gradientArr
-    if (attrs) {
-      let mi = this.getGradientItemIndexFromAttrs(g, attrs)
-      if (pct !== null) {
-        // dragging marker
-        mi >= 0 && (gradientArr[mi].p = pct)
-      }
-      else {
-        // removing marker
-        mi >= 0 && gradientArr.splice(mi, 1)
-      }
-    }
-    else {
-      if (gradientArr.length > 0) {
-        // inserting marker
-        let rightMarkerIdx = gradientArr.findIndex((e)=>(e.p > pct))
-        rightMarkerIdx = rightMarkerIdx < 0 ? gradientArr.length : rightMarkerIdx
-        let leftMarkerIdx = Math.max(0, rightMarkerIdx - 1)
-        rightMarkerIdx = Math.min(rightMarkerIdx, gradientArr.length - 1)
-        let leftColor = parseColor(gradientArr[leftMarkerIdx].c).rgba
-        let rightColor = parseColor(gradientArr[rightMarkerIdx].c).rgba
-        let dist = (gradientArr[rightMarkerIdx].p - gradientArr[leftMarkerIdx].p) || 1
-        let ratio = (pct - gradientArr[leftMarkerIdx].p) / dist
-        let newColor = []
-        for (let i = 0; i < 4; i++) {
-          let decimalVal = leftColor[i] + (rightColor[i] - leftColor[i]) * ratio
-          newColor[i] = Math.max(0, Math.min(i < 3 ? 255 : 1, i < 3 ? Math.round(decimalVal) : decimalVal.toFixed(2)))
-        }
-        let newColorStr = 'rgba(' + newColor.join() + ')'
-        let newMarker = {c: newColorStr, p: pct}
-        gradientArr.splice(rightMarkerIdx, 0, newMarker)
-      }
-      else {
-        // inserting first marker
-        gradientArr.splice(0, 0, {c: 'rgba(255,255,255,1)', p: pct})
-      }
-    }
-    let s = this.composeGradientString(g)
-    this.props.updateStyle({background: s})
-  },
-  updateMarkerColor: function (attrs, newColor) {
-    let g = this.parseGradientString()
-    let gradientArr = g.gradientArr
-    let gi = this.getGradientItemIndexFromAttrs(g, attrs)
-    gi >= 0 && (gradientArr[gi].c = newColor)
-    let s = this.composeGradientString(g)
-    this.props.updateStyle({background: s})
-  },
   render: function () {
-    let that = this
-    let type, gradientString, gradientArr, gradientMarkers, gradientArrString, gradientFormat, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct
+    let type, gradientFormat, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct
     if (this.props.currentStyle) {
       let g = this.parseGradientString()
       gradientFormat = g.gradientFormat
-      if(gradientFormat){
+      if (gradientFormat) {
         gradientExtentSelect = gradientFormat.extent || 'farthest-corner'
         if (gradientExtentSelect && gradientExtentSelect.indexOf('px') >= 0) {
           let xyExtArr = gradientExtentSelect.split(' ')
           gradientExtentXExtentPct = parseInt(xyExtArr[0])
-          if(xyExtArr.length>0){
+          if (xyExtArr.length > 0) {
             gradientExtentYExtentPct = parseInt(xyExtArr[1])
           }
           gradientExtentSelect = 'length'
         }
       }
-      gradientString = g.gradientString
-      gradientArr = g.gradientArr
-      if(gradientArr){
-        gradientArrString = gradientArr.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
-      }
       if (this.props.currentStyle.match(/^radial-gradient/)) {
         type = 'radial-gradient'
-        gradientMarkers = gradientArr && gradientArr.map((e, i) => {
-            let pressed = false
-            if (this.state.pressedMarkerAttrs && this.state.pressedMarkerAttrs.c === e.c && Math.abs(this.state.pressedMarkerAttrs.p - e.p) < 0.001) {
-              pressed = true
-            }
-            return <Marker
-              key={i}
-              index={i}
-              attrs={e}
-              style={{top: 0, left: e.p + '%'}}
-              onClick={this.onMarkerClick}
-              pressed={pressed}
-              ref={'colorMarker' + i}
-              onMouseDown={this.onMouseDown}
-              updateMarkerColor={this.updateMarkerColor}
-            />
-          })
       }
       else if (this.props.currentStyle.match(/^linear-gradient/)) {
         type = 'linear-gradient'
@@ -394,17 +250,10 @@ export default React.createClass({
                 </span>
               </div>
               Color Stops:
-              <div className="sp-gradient-panel-container">
-                <div className="sp-gradient-panel-base">
-                  <div className="sp-gradient-panel"
-                       ref="gradientPanel"
-                       style={{background: 'linear-gradient(to right, ' + gradientArrString + ')'}}></div>
-                </div>
-                <div className="sp-gradient-marker-panel" title="Insert color stop here"
-                     onMouseDown={this.onMarkerPanelMouseDown}>
-                  {gradientMarkers}
-                </div>
-              </div>
+              <ColorStops parseGradientString={this.parseGradientString}
+                          updateStyle={this.props.updateStyle}
+                          composeGradientString={this.composeGradientString}
+              ></ColorStops>
             </div>
           </div>
         </div>
