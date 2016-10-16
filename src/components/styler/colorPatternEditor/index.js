@@ -260,11 +260,13 @@ export default React.createClass({
                 />
                 &nbsp;
                 <AngleInput
-                  className="default-input angle-input"
+                  className="default-input angle-input noselect"
                   onInput={(newAngle)=> {
                     console.log(newAngle)
                   }}
-                ></AngleInput>
+                >
+                  <span className="centered">ddd</span>
+                </AngleInput>
               </div>
               Color Stops:
               <ColorStops parseGradientString={this.parseGradientString}
