@@ -111,7 +111,7 @@ export default React.createClass({
         }
         break
       case 'linear':
-        gradientFormatMatch = gradientString.match(/(.+?),/)
+        gradientFormatMatch = gradientString.match(/(to.+?|.+?deg),/)
         if (gradientFormatMatch) {
           gradientFormat.direction = gradientFormatMatch[1]
           let gradientDegreeMatch = gradientFormat.direction.trim().match(/(.+)deg/)
@@ -251,16 +251,17 @@ export default React.createClass({
           </div>
           <div id="collapseTwo" className="panel-collapse collapse"
                role="tabpanel" aria-labelledby="headingTwo">
-            <div className="panel-body">
-              <div>Direction:
-                <DropdownList data={linearGradientDirectionArr}
+            <div className="panel-body container-fluid">
+              <div className="row">
+                <div className="col-xs-2">Direction:</div>
+                <DropdownList className="col-xs-4" data={linearGradientDirectionArr}
                               valueField="value" textField="text"
                               value={gradientDirection}
                               onChange={this.onChangeGradientDirection}
                 />
-                &nbsp;
+                <div className="col-xs-1"/>
                 <AngleInput
-                  className="default-input angle-input noselect"
+                  className="col-xs-1 default-input angle-input noselect"
                   onInput={(newAngle)=> {
                     console.log(newAngle)
                   }}
@@ -294,28 +295,39 @@ export default React.createClass({
           <div id="collapseThree"
                className="panel-collapse collapse in" role="tabpanel"
                aria-labelledby="headingThree">
-            <div className="panel-body">
-              <div>Shape:
-                <input type="radio" name="shape" value="circle" onClick={this.onToggleGradientShape}
+            <div className="panel-body container-fluid">
+              <div className="row">
+                <div className="col-xs-1">Shape:</div>
+                <input className="col-xs-1" type="radio" name="shape" value="circle"
+                       onClick={this.onToggleGradientShape}
                        defaultChecked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle&nbsp;
-                <input type="radio" name="shape" value="ellipse" onClick={this.onToggleGradientShape}
+                <input className="col-xs-1" type="radio" name="shape" value="ellipse"
+                       onClick={this.onToggleGradientShape}
                        defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
               </div>
-              <div>Extent:
+              <div className="row">
+                <div className="col-xs-2">Extent:</div>
                 <DropdownList data={gradientExtentSelectionArr}
                               valueField="value" textField="text"
                               value={gradientExtentSelect}
                               onChange={this.onChangeGradientExtent}
+                              className="col-xs-3"
                 />
-                <span style={{
-                  display: (gradientFormat && gradientFormat.shape === 'circle' && gradientExtentSelect === 'length') ? 'inline' : 'none'
-                }}>&nbsp;
+                <span
+                  style={{
+                    display: (gradientFormat && gradientFormat.shape === 'circle' && gradientExtentSelect === 'length') ? 'inline' : 'none'
+                  }}
+                  className="col-xs-3"
+                >
                   <NumberPicker value={gradientExtentXExtentPct} min={0}
                                 onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
                 </span>
-                <span style={{
-                  display: (gradientFormat && gradientFormat.shape === 'ellipse' && gradientExtentSelect === 'length') ? 'inline' : 'none'
-                }}>&nbsp;
+                <span
+                  style={{
+                    display: (gradientFormat && gradientFormat.shape === 'ellipse' && gradientExtentSelect === 'length') ? 'inline' : 'none'
+                  }}
+                  className="col-xs-4"
+                >
                   x: <NumberPicker value={gradientExtentXExtentPct} min={0}
                                    onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
                 y: <NumberPicker value={gradientExtentYExtentPct} min={0}
