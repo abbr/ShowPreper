@@ -269,7 +269,8 @@ export default React.createClass({
                 </AngleInput>
               </div>
               Color Stops:
-              <ColorStops parseGradientString={this.parseGradientString}
+              <ColorStops id="sp-linear-color-stops"
+                          parseGradientString={this.parseGradientString}
                           updateStyle={this.props.updateStyle}
                           composeGradientString={this.composeGradientString}
               ></ColorStops>
@@ -322,7 +323,8 @@ export default React.createClass({
                 </span>
               </div>
               Color Stops:
-              <ColorStops parseGradientString={this.parseGradientString}
+              <ColorStops id="sp-radial-color-stops"
+                          parseGradientString={this.parseGradientString}
                           updateStyle={this.props.updateStyle}
                           composeGradientString={this.composeGradientString}
               ></ColorStops>

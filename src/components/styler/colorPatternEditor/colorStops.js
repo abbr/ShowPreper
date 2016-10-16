@@ -141,6 +141,7 @@ export default React.createClass({
           }
           return <Marker
             key={i}
+            panelId={this.props.id}
             index={i}
             attrs={e}
             style={{top: 0, left: e.p + '%'}}

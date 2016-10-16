@@ -6,7 +6,7 @@ import parseColor from 'parse-color'
 
 export default React.createClass({
   componentDidMount() {
-    $("#markerColorPicker" + this.props.index).spectrum({
+    $("#" + this.props.panelId + "-markerColorPicker" + this.props.index).spectrum({
       color: this.props.attrs.c,
       showAlpha: true,
       showInput: true,
@@ -20,7 +20,7 @@ export default React.createClass({
     })
   },
   componentDidUpdate: function () {
-    $("#markerColorPicker" + this.props.index).spectrum("set", this.props.attrs.c)
+    $("#" + this.props.panelId + "-markerColorPicker" + this.props.index).spectrum("set", this.props.attrs.c)
   },
   render: function () {
     let s = _.assign({}, this.props.style, {marginLeft: -8, marginBottom: -16})
@@ -62,7 +62,7 @@ export default React.createClass({
           width: 50,
           left: -Math.max(0, this.props.attrs.p - 90) * 3
         }}>
-          <input id={'markerColorPicker' + this.props.index}></input>
+          <input id={this.props.panelId + '-markerColorPicker' + this.props.index}></input>
         </div>
       </div>
     )
