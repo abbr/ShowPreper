@@ -276,6 +276,7 @@ export default React.createClass({
                   <AngleInput
                     className="col-xs-1 default-input angle-input noselect"
                     onInput={this.onChangeGradientDirectionAngle}
+                    onChange={this.onChangeGradientDirectionAngle}
                     defaultValue={(-parseInt(gradientAngle || 0) + 90 + 360) % 360}
                   >
                     <span className="centered">{gradientAngle}°</span>
