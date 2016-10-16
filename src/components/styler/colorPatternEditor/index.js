@@ -15,6 +15,17 @@ const gradientExtentSelectionArr = [
   {value: 'farthest-side', text: 'farthest-side'},
   {value: 'length', text: 'length...'}
 ]
+const linearGradientDirectionArr = [
+  {value: 'to left', text: 'to left'},
+  {value: 'to right', text: 'to right'},
+  {value: 'to top', text: 'to top'},
+  {value: 'to bottom', text: 'to bottom'},
+  {value: 'to left top', text: 'to left top'},
+  {value: 'to right top', text: 'to right top'},
+  {value: 'to right bottom', text: 'to right bottom'},
+  {value: 'to left bottom', text: 'to left bottom'},
+  {value: 'to angle', text: 'to angle'}
+]
 export default React.createClass({
   componentDidMount() {
     $("#colorpicker").spectrum({
@@ -63,23 +74,50 @@ export default React.createClass({
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
+  onChangeGradientDirection: function () {
+    let g = this.parseGradientString()
+    if (g.gradientFormat) {
+      g.gradientFormat.direction = arguments[0].value
+      if (arguments[0].value === 'to angle') {
+        g.gradientFormat.direction = '0deg'
+      }
+    }
+    let s = this.composeGradientString(g)
+    this.props.updateStyle({background: s})
+  },
+
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
   },
   parseGradientString: function () {
-    let gradientString, gradientFormatMatch, gradientFormat = {}, gradientArr
-    let gradientStringMatch = this.props.currentStyle.match(/-gradient\((.*)\)/)
+    let gradientType, gradientString, gradientFormatMatch, gradientFormat = {}, gradientArr
+    let gradientStringMatch = this.props.currentStyle.match(/(linear|radial)-gradient\((.*)\)/)
     if (!gradientStringMatch) {
       return {}
     }
-    gradientString = gradientStringMatch[1]
-    gradientFormatMatch = gradientString.match(/(circle|ellipse)\s*(.*?)\s*(?:at\s*(\S*?)\s*(\S*?)\s*)?,/)
-    if (gradientFormatMatch) {
-      gradientFormat.shape = gradientFormatMatch[1]
-      gradientFormat.extent = gradientFormatMatch[2]
-      gradientFormat.position = {}
-      gradientFormat.position.x = gradientFormatMatch[3]
-      gradientFormat.position.y = gradientFormatMatch[4]
+    gradientType = gradientStringMatch[1]
+    gradientString = gradientStringMatch[2]
+    switch (gradientType) {
+      case 'radial':
+        gradientFormatMatch = gradientString.match(/(circle|ellipse)\s*(.*?)\s*(?:at\s*(\S*?)\s*(\S*?)\s*)?,/)
+        if (gradientFormatMatch) {
+          gradientFormat.shape = gradientFormatMatch[1]
+          gradientFormat.extent = gradientFormatMatch[2]
+          gradientFormat.position = {}
+          gradientFormat.position.x = gradientFormatMatch[3]
+          gradientFormat.position.y = gradientFormatMatch[4]
+        }
+        break
+      case 'linear':
+        gradientFormatMatch = gradientString.match(/(.+?),/)
+        if (gradientFormatMatch) {
+          gradientFormat.direction = gradientFormatMatch[1]
+          let gradientDegreeMatch = gradientFormat.direction.trim().match(/(.+)deg/)
+          if (gradientDegreeMatch) {
+            gradientFormat.directionAngle = gradientDegreeMatch[1]
+          }
+        }
+        break
     }
     gradientArr = gradientString.match(/((?:rgba?.*?\)|#)[^,]*)/g)
     gradientArr = gradientArr && gradientArr.map(function (e, i, a) {
@@ -102,7 +140,12 @@ export default React.createClass({
         ret.p = p
         return ret
       })
-    return {gradientString: gradientString, gradientFormat: gradientFormat, gradientArr: gradientArr}
+    return {
+      gradientType: gradientType,
+      gradientString: gradientString,
+      gradientFormat: gradientFormat,
+      gradientArr: gradientArr
+    }
   },
   composeGradientString: function () {
     let gradientFormat, gradientArr
@@ -115,13 +158,14 @@ export default React.createClass({
     }
     let gradientFormatString = ''
     if (gradientFormat) {
-      gradientFormatString = (gradientFormat.shape || '') + ' '
+      gradientFormatString = (gradientFormat.direction || '') + ' '
+      gradientFormatString += (gradientFormat.shape || '') + ' '
       gradientFormatString += (gradientFormat.extent || '') + ' '
       gradientFormatString += (gradientFormat.position && (gradientFormat.position.x !== undefined || gradientFormat.position.y !== undefined)) ? ' at ' : ''
       gradientFormatString += ((gradientFormat.position && gradientFormat.position.x !== undefined) ? gradientFormat.position.x : '') + ' '
       gradientFormatString += ((gradientFormat.position && gradientFormat.position.y !== undefined) ? gradientFormat.position.y : '') + ' '
       gradientFormatString = gradientFormatString.replace(/\s+/g, ' ').trim()
-      gradientFormatString += ','
+      gradientFormatString += gradientFormatString.length > 0 ? ',' : ''
     }
     let gradientStringArr = gradientArr && gradientArr.sort(function (a, b) {
         return a.p - b.p
@@ -133,7 +177,7 @@ export default React.createClass({
     return fullGradientString
   },
   render: function () {
-    let type, gradientFormat, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct
+    let type, gradientFormat, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle
     if (this.props.currentStyle) {
       let g = this.parseGradientString()
       gradientFormat = g.gradientFormat
@@ -146,6 +190,11 @@ export default React.createClass({
             gradientExtentYExtentPct = parseInt(xyExtArr[1])
           }
           gradientExtentSelect = 'length'
+        }
+        gradientDirection = gradientFormat.direction
+        if (gradientDirection && gradientDirection.indexOf('deg') >= 0) {
+          gradientDirection = 'to angle'
+          gradientAngle = gradientFormat.directionAngle
         }
       }
       if (this.props.currentStyle.match(/^radial-gradient/)) {
@@ -200,7 +249,33 @@ export default React.createClass({
           </div>
           <div id="collapseTwo" className="panel-collapse collapse"
                role="tabpanel" aria-labelledby="headingTwo">
-            <div className="panel-body">2
+            <div className="panel-body">
+              <div>Direction:
+                <DropdownList data={linearGradientDirectionArr}
+                              valueField="value" textField="text"
+                              value={gradientDirection}
+                              onChange={this.onChangeGradientDirection}
+                />
+                <span style={{
+                  display: (gradientFormat && gradientFormat.shape === 'circle' && gradientExtentSelect === 'length') ? 'inline' : 'none'
+                }}>&nbsp;
+                  <NumberPicker value={gradientExtentXExtentPct} min={0}
+                                onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
+                </span>
+                <span style={{
+                  display: (gradientFormat && gradientFormat.shape === 'ellipse' && gradientExtentSelect === 'length') ? 'inline' : 'none'
+                }}>&nbsp;
+                  x: <NumberPicker value={gradientExtentXExtentPct} min={0}
+                                   onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
+                y: <NumberPicker value={gradientExtentYExtentPct} min={0}
+                                 onChange={this.onChangeGradientExtentPct.bind(null, 1)}/>px
+                </span>
+              </div>
+              Color Stops:
+              <ColorStops parseGradientString={this.parseGradientString}
+                          updateStyle={this.props.updateStyle}
+                          composeGradientString={this.composeGradientString}
+              ></ColorStops>
             </div>
           </div>
         </div>
