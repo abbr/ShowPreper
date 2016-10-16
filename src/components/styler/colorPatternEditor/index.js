@@ -7,6 +7,8 @@ import NumberPicker from 'react-widgets/lib/NumberPicker'
 import DropdownList from 'react-widgets/lib/DropdownList'
 import localizer from 'react-widgets/lib/localizers/simple-number'
 import ColorStops from './colorStops'
+import AngleInput from 'angle-input/react'
+import 'angle-input/angle-input.css'
 localizer()
 const gradientExtentSelectionArr = [
   {value: 'closest-corner', text: 'closest-corner'},
@@ -256,20 +258,13 @@ export default React.createClass({
                               value={gradientDirection}
                               onChange={this.onChangeGradientDirection}
                 />
-                <span style={{
-                  display: (gradientFormat && gradientFormat.shape === 'circle' && gradientExtentSelect === 'length') ? 'inline' : 'none'
-                }}>&nbsp;
-                  <NumberPicker value={gradientExtentXExtentPct} min={0}
-                                onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
-                </span>
-                <span style={{
-                  display: (gradientFormat && gradientFormat.shape === 'ellipse' && gradientExtentSelect === 'length') ? 'inline' : 'none'
-                }}>&nbsp;
-                  x: <NumberPicker value={gradientExtentXExtentPct} min={0}
-                                   onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
-                y: <NumberPicker value={gradientExtentYExtentPct} min={0}
-                                 onChange={this.onChangeGradientExtentPct.bind(null, 1)}/>px
-                </span>
+                &nbsp;
+                <AngleInput
+                  className="default-input angle-input"
+                  onInput={(newAngle)=> {
+                    console.log(newAngle)
+                  }}
+                ></AngleInput>
               </div>
               Color Stops:
               <ColorStops parseGradientString={this.parseGradientString}

@@ -22,6 +22,7 @@
   "keywords": [],
   "author": "Your name here",
   "devDependencies": {
+    "angle-input": "0.0.1",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
