@@ -87,6 +87,14 @@ export default React.createClass({
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
+  onChangeGradientDirectionAngle: function () {
+    let g = this.parseGradientString()
+    if (g.gradientFormat) {
+      g.gradientFormat.direction = (-arguments[0] + 90 + 360) % 360 + 'deg'
+    }
+    let s = this.composeGradientString(g)
+    this.props.updateStyle({background: s})
+  },
 
   componentDidUpdate: function () {
     $("#colorpicker").spectrum("set", this.props.currentStyle)
@@ -260,14 +268,19 @@ export default React.createClass({
                               onChange={this.onChangeGradientDirection}
                 />
                 <div className="col-xs-1"/>
-                <AngleInput
-                  className="col-xs-1 default-input angle-input noselect"
-                  onInput={(newAngle)=> {
-                    console.log(newAngle)
+                <div
+                  style={{
+                    display: (gradientDirection === 'to angle') ? 'inline' : 'none'
                   }}
                 >
-                  <span className="centered">ddd</span>
-                </AngleInput>
+                  <AngleInput
+                    className="col-xs-1 default-input angle-input noselect"
+                    onInput={this.onChangeGradientDirectionAngle}
+                    defaultValue={(-parseInt(gradientAngle || 0) + 90 + 360) % 360}
+                  >
+                    <span className="centered">{gradientAngle}°</span>
+                  </AngleInput>
+                </div>
               </div>
               Color Stops:
               <ColorStops id="sp-linear-color-stops"
