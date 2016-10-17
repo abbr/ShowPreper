@@ -58,7 +58,7 @@ export default React.createClass({
       g.gradientFormat.extent = arguments[0].value
       if (arguments[0].value === 'length') {
         g.gradientFormat.extent = '100px'
-        if (g.gradientFormat.shape === 'ellipse') {
+        if (!g.gradientFormat.shape || g.gradientFormat.shape === 'ellipse') {
           g.gradientFormat.extent += ' 100px'
         }
       }
@@ -168,8 +168,8 @@ export default React.createClass({
     }
     let gradientFormatString = ''
     if (gradientFormat) {
-      gradientFormatString = (gradientFormat.direction || '') + ' '
-      gradientFormatString += (gradientFormat.shape || '') + ' '
+      gradientFormatString = (arguments[0].gradientType === 'linear' && gradientFormat.direction ? gradientFormat.direction : '') + ' '
+      gradientFormatString += (arguments[0].gradientType === 'radial' ? (gradientFormat.shape || 'ellipse') : '') + ' '
       gradientFormatString += (gradientFormat.extent || '') + ' '
       gradientFormatString += (gradientFormat.position && (gradientFormat.position.x !== undefined || gradientFormat.position.y !== undefined)) ? ' at ' : ''
       gradientFormatString += ((gradientFormat.position && gradientFormat.position.x !== undefined) ? gradientFormat.position.x : '') + ' '
