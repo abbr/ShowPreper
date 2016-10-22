@@ -5,6 +5,7 @@ import lang from 'i18n/lang'
 import './index.less'
 import _ from 'lodash'
 import ColorPatternEditor from './colorPatternEditor'
+import Palettes from 'stores/palettes'
 
 export default React.createClass({
   componentDidMount: function () {
@@ -72,6 +73,22 @@ export default React.createClass({
       p.push(<div key={p.length}>{k}: {e}</div>)
       return p
     }, [])
+
+    let p = new Palettes()
+    delete p[7]
+    let pDivs = _.map(p, (e, i)=> {
+      let s = _.clone(e)
+      let extraCN = '', title = ''
+      let mouseEvtHdlr = (evt)=> {
+        console.log(i)
+      }
+      return <div
+        className={"sp-palette" + extraCN}
+        style={s}
+        title={title}
+        onClick={mouseEvtHdlr}
+        key={i}></div>
+    })
     return <div className="modal fade" id="sp-styler-modal" tabIndex="-1" role="dialog"
                 aria-labelledby="sp-styler-modal-label">
       <div className="modal-dialog" role="document">
@@ -118,6 +135,10 @@ export default React.createClass({
             </div>
           </div>
           <div className="modal-footer">
+            <div style={{float: 'left'}}>
+              <div style={{textAlign: 'left'}}>replace palette with this style</div>
+              {pDivs}
+            </div>
             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" className="btn btn-primary">Save changes</button>
           </div>
