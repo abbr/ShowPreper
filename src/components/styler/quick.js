@@ -35,8 +35,8 @@ let QuickStyler = React.createClass({
         })
         s = this.props.selectedSlidesStyle || commonStyle
         break
-      case 'entirePresentation':
-        s = this.props.entirePresentationStyle || this.props.deck.style
+      case 'presentation':
+        s = this.props.presentationStyle || this.props.deck.style
         break
     }
     return s
@@ -135,29 +135,29 @@ let QuickStyler = React.createClass({
             this.props.setTargetStyle('selectedSlidesStyle', null)
         }
         break
-      case 'entirePresentation':
+      case 'presentation':
         switch (evt.type) {
           case 'mouseover':
             if (idx === '8') {
               targetStyle = {}
             }
-            this.props.setTargetStyle('entirePresentationStyle', targetStyle)
+            this.props.setTargetStyle('presentationStyle', targetStyle)
             break
           case 'click':
             if (idx === '8') {
               this.props.onSelectedWidgetUpdated({
                 container: this.props.deck,
                 index: -1
-              }, 'style', lang.setAppearance + ' ' + lang.entirePresentation)
+              }, 'style', lang.setAppearance + ' ' + lang.presentation)
             }
             else {
               this.props.onSelectedWidgetUpdated({
                 container: this.props.deck,
                 index: -1
-              }, {style: targetStyle}, lang.setAppearance + ' ' + lang.entirePresentation)
+              }, {style: targetStyle}, lang.setAppearance + ' ' + lang.presentation)
             }
           default:
-            this.props.setTargetStyle('entirePresentationStyle', null)
+            this.props.setTargetStyle('presentationStyle', null)
         }
     }
   },
@@ -204,7 +204,7 @@ let QuickStyler = React.createClass({
     return <div id="sp-quick-styler">
       {pDivs}
       <Styler selectedStyleTarget={this.props.selectedStyleTarget}
-              entirePresentationStyle={this.props.entirePresentationStyle}
+              presentationStyle={this.props.presentationStyle}
               deck={this.props.deck}
               defaultSlideStyle={this.props.defaultSlideStyle}
               selectedSlidesStyle={this.props.selectedSlidesStyle}

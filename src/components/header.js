@@ -102,12 +102,12 @@ let Header = React.createClass({
                   this.setState({selectedStyleTarget: 'selectedSlides'})
                 }}>{lang.selectedSlides}</a></li> }
                 {this.props.currentView === 'overview' && <li><a onClick={()=> {
-                  this.setState({selectedStyleTarget: 'entirePresentation'})
-                }}>{lang.entirePresentation}</a></li>}
+                  this.setState({selectedStyleTarget: 'presentation'})
+                }}>{lang.presentation}</a></li>}
               </ul>
             </div>
             <QuickStyler selectedStyleTarget={this.state.selectedStyleTarget}
-                         entirePresentationStyle={this.props.entirePresentationStyle}
+                         presentationStyle={this.props.presentationStyle}
                          deck={this.props.deck}
                          defaultSlideStyle={this.props.defaultSlideStyle}
                          selectedSlidesStyle={this.props.selectedSlidesStyle}

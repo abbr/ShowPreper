@@ -50,7 +50,7 @@ let App = React.createClass({
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(),
     view: 'slides',
-    entirePresentationStyle: null,
+    presentationStyle: null,
     defaultSlideStyle: null,
     selectedSlidesStyle: null,
     thisSlideStyle: null
@@ -254,7 +254,7 @@ let App = React.createClass({
           component={this.state.deck}
           selectedWidgets={selectedWidgets}
           onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
-          entirePresentationStyle={this.state.entirePresentationStyle}
+          presentationStyle={this.state.presentationStyle}
           defaultSlideStyle={this.state.defaultSlideStyle}
           selectedSlidesStyle={this.state.selectedSlidesStyle}
         />
@@ -268,7 +268,7 @@ let App = React.createClass({
               onNewWidget={this.onNewWidget}
               onNewDeck={this.onNewDeck}
               onDeleteDeck={this.onDeleteDeck}
-              entirePresentationStyle={this.state.entirePresentationStyle}
+              presentationStyle={this.state.presentationStyle}
               defaultSlideStyle={this.state.defaultSlideStyle}
               selectedSlidesStyle={this.state.selectedSlidesStyle}
               thisSlideStyle={this.state.thisSlideStyle}
