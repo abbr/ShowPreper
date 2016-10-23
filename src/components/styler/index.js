@@ -108,7 +108,13 @@ export default React.createClass({
               {pDivs}
             </div>
             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Save changes</button>
+            <button type="button" className="btn btn-primary"
+                    onClick={(evt)=>{
+                      this.props.updateStyle(evt)
+                      $("#sp-styler-modal").modal('hide')
+                    }}
+            >Save changes
+            </button>
           </div>
         </div>
       </div>

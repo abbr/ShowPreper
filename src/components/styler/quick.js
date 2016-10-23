@@ -48,16 +48,20 @@ let QuickStyler = React.createClass({
     p.save()
     this.setState({palettes: p})
   },
-  onMouseEvent: function (evt, idx) {
+  updateStyle: function (evt, idx) {
     let p = this.state.palettes
+    let targetStyle = this.getStyle()
+    if (idx) {
+      targetStyle = p[idx]
+    }
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
         switch (evt.type) {
           case 'mouseover':
             if (idx === '8') {
-              p[idx] = {}
+              targetStyle = {}
             }
-            this.props.setTargetStyle('defaultSlideStyle', p[idx])
+            this.props.setTargetStyle('defaultSlideStyle', targetStyle)
             break
           case 'click':
             if (idx === '8') {
@@ -70,7 +74,7 @@ let QuickStyler = React.createClass({
               this.props.onSelectedWidgetUpdated({
                 container: this.props.deck,
                 index: -1
-              }, {defaultSlideStyle: p[idx]}, lang.setAppearance + ' ' + lang.defaultSlide)
+              }, {defaultSlideStyle: targetStyle}, lang.setAppearance + ' ' + lang.defaultSlide)
             }
           default:
             this.props.setTargetStyle('defaultSlideStyle', null)
@@ -80,9 +84,9 @@ let QuickStyler = React.createClass({
         switch (evt.type) {
           case 'mouseover':
             if (idx === '8') {
-              p[idx] = this.props.deck.defaultSlideStyle
+              targetStyle = this.props.deck.defaultSlideStyle
             }
-            this.props.setTargetStyle('thisSlideStyle', p[idx])
+            this.props.setTargetStyle('thisSlideStyle', targetStyle)
             break
           case 'click':
             if (idx === '8') {
@@ -95,7 +99,7 @@ let QuickStyler = React.createClass({
               this.props.onSelectedWidgetUpdated({
                 container: this.props.deck.getActiveSlide(),
                 index: -1
-              }, {style: p[idx]}, lang.setAppearance + ' ' + lang.thisSlide)
+              }, {style: targetStyle}, lang.setAppearance + ' ' + lang.thisSlide)
             }
           default:
             this.props.setTargetStyle('thisSlideStyle', null)
@@ -105,9 +109,9 @@ let QuickStyler = React.createClass({
         switch (evt.type) {
           case 'mouseover':
             if (idx === '8') {
-              p[idx] = this.props.deck.defaultSlideStyle
+              targetStyle = this.props.deck.defaultSlideStyle
             }
-            this.props.setTargetStyle('selectedSlidesStyle', p[idx])
+            this.props.setTargetStyle('selectedSlidesStyle', targetStyle)
             break
           case 'click':
             this.props.deck.components.forEach((e)=> {
@@ -122,7 +126,7 @@ let QuickStyler = React.createClass({
                   this.props.onSelectedWidgetUpdated({
                     container: e,
                     index: -1
-                  }, {style: p[idx]})
+                  }, {style: targetStyle})
                 }
               }
             })
@@ -135,9 +139,9 @@ let QuickStyler = React.createClass({
         switch (evt.type) {
           case 'mouseover':
             if (idx === '8') {
-              p[idx] = {}
+              targetStyle = {}
             }
-            this.props.setTargetStyle('entirePresentationStyle', p[idx])
+            this.props.setTargetStyle('entirePresentationStyle', targetStyle)
             break
           case 'click':
             if (idx === '8') {
@@ -150,7 +154,7 @@ let QuickStyler = React.createClass({
               this.props.onSelectedWidgetUpdated({
                 container: this.props.deck,
                 index: -1
-              }, {style: p[idx]}, lang.setAppearance + ' ' + lang.entirePresentation)
+              }, {style: targetStyle}, lang.setAppearance + ' ' + lang.entirePresentation)
             }
           default:
             this.props.setTargetStyle('entirePresentationStyle', null)
@@ -164,7 +168,7 @@ let QuickStyler = React.createClass({
       let s = _.clone(e)
       let extraCN = '', title = ''
       let mouseEvtHdlr = (evt)=> {
-        this.onMouseEvent(evt, i)
+        this.updateStyle(evt, i)
       }
       let mouseClickHdlr = mouseEvtHdlr
 
@@ -204,9 +208,9 @@ let QuickStyler = React.createClass({
               selectedSlidesStyle={this.props.selectedSlidesStyle}
               thisSlideStyle={this.props.thisSlideStyle}
               setTargetStyle={this.props.setTargetStyle}
-              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
               updatePalette={this.updatePalette}
               getStyle={this.getStyle}
+              updateStyle={this.updateStyle}
               palettes={this.state.palettes}
       ></Styler>
     </div>
