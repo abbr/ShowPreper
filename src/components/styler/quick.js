@@ -189,6 +189,8 @@ let QuickStyler = React.createClass({
             $('#sp-styler-modal').modal('show')
           }
           break
+        default:
+          title = 'palette ' + (parseInt(i) + 1)
       }
       return <div
         className={"sp-palette" + extraCN}

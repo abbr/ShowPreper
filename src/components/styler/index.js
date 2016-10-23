@@ -46,12 +46,12 @@ export default React.createClass({
     delete p[7]
     let pDivs = _.map(p, (e, i)=> {
       let s = _.clone(e)
-      let extraCN = '', title = ''
+      let title = 'palette ' + (1 + parseInt(i))
       let mouseEvtHdlr = (evt)=> {
         this.props.updatePalette(i)
       }
       return <div
-        className={"sp-palette" + extraCN}
+        className={"sp-palette"}
         style={s}
         title={title}
         onClick={mouseEvtHdlr}
