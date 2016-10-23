@@ -69,7 +69,9 @@ export default React.createClass({
                 id="sp-styler-modal-label">{lang.setAppearance} {lang[this.props.selectedStyleTarget]}</h4>
           </div>
           <div className="modal-body">
-            <div className="row">
+            <div className="row"
+                 style={{marginBottom: '5px'}}
+            >
               <div className="col-md-4">
                 <div className="sp-styler-transparent-marker">
                   <div className="sp-styler-preview"

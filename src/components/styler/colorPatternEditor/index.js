@@ -311,13 +311,17 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body container-fluid">
               <div className="row">
-                <div className="col-xs-1">Shape:</div>
-                <input className="col-xs-1" type="radio" name="shape" value="circle"
-                       onClick={this.onToggleGradientShape}
-                       defaultChecked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle&nbsp;
-                <input className="col-xs-1" type="radio" name="shape" value="ellipse"
-                       onClick={this.onToggleGradientShape}
-                       defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
+                <div className="col-xs-2">Shape:</div>
+                <div className="col-xs-2">
+                  <input type="radio" name="shape" value="circle"
+                         onClick={this.onToggleGradientShape}
+                         defaultChecked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle
+                </div>
+                <div className="col-xs-2">
+                  <input type="radio" name="shape" value="ellipse"
+                         onClick={this.onToggleGradientShape}
+                         defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
+                </div>
               </div>
               <div className="row">
                 <div className="col-xs-2">Extent:</div>
@@ -325,13 +329,13 @@ export default React.createClass({
                               valueField="value" textField="text"
                               value={gradientExtentSelect}
                               onChange={this.onChangeGradientExtent}
-                              className="col-xs-3"
+                              className="col-xs-4"
                 />
                 <span
                   style={{
                     display: (gradientFormat && gradientFormat.shape === 'circle' && gradientExtentSelect === 'length') ? 'inline' : 'none'
                   }}
-                  className="col-xs-3"
+                  className="col-xs-4"
                 >
                   <NumberPicker value={gradientExtentXExtentPct} min={0}
                                 onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
