@@ -89,7 +89,7 @@ export default React.createClass({
                 <div className="tab-content">
                   <div id="spStylerTabBackground" className="tab-pane fade in active">
                     <ColorPatternEditor
-                      currentStyle={s.background}
+                      currentStyle={s && s.background}
                       updateStyle={this.updateStyle}
                     ></ColorPatternEditor>
                   </div>
@@ -109,11 +109,11 @@ export default React.createClass({
             </div>
             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" className="btn btn-primary"
-                    onClick={(evt)=>{
+                    onClick={(evt)=> {
                       this.props.updateStyle(evt)
                       $("#sp-styler-modal").modal('hide')
                     }}
-            >Save changes
+            >Apply Style
             </button>
           </div>
         </div>
