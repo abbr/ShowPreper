@@ -5,6 +5,7 @@ import lang from 'i18n/lang'
 import './index.less'
 import _ from 'lodash'
 import ColorPatternEditor from './colorPatternEditor'
+import BorderEditor from './borderEditor'
 
 export default React.createClass({
   componentDidMount: function () {
@@ -96,9 +97,10 @@ export default React.createClass({
                     ></ColorPatternEditor>
                   </div>
                   <div id="spStylerTabBorder" className="tab-pane fade">
-                    <h3>{lang.border}</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                      consequat.</p>
+                    <BorderEditor
+                      currentStyle={s}
+                      updateStyle={this.updateStyle}
+                    ></BorderEditor>
                   </div>
                 </div>
               </div>
