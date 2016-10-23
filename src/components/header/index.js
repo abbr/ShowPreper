@@ -6,7 +6,7 @@ import Importer from 'components/file/import'
 import FileOpener from 'components/file/open'
 import FileSaveAs from 'components/file/saveAs'
 import QuickStyler from 'components/styler/quick'
-import './header.less'
+import './index.less'
 
 let Header = React.createClass({
   createWidget: function (type) {
@@ -72,8 +72,13 @@ let Header = React.createClass({
           </div>
         </div>
         <div className="collapse navbar-collapse" id="sp-navbar-collapse-1">
-          <div className="nav navbar-btn navbar-left">
+          <div className="nav navbar-btn navbar-left"
+               style={{display: this.props.deck.components.length === 0 ? 'none' : undefined}}
+          >
             <button type="button" className="btn btn-default"
+                    style={{
+                      display: (this.props.currentView !== 'slides') ? 'none' : undefined
+                    }}
                     onClick={() => {
                       this.createWidget('TextBox')
                     }}>
