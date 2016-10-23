@@ -7,8 +7,49 @@ import lang from 'i18n/lang'
 import Styler from './'
 
 let QuickStyler = React.createClass({
-  onMouseEvent: function (evt, idx) {
+  getInitialState: function () {
+    return {palettes: new Palettes()}
+  },
+  getStyle: function () {
+    let s
+    switch (this.props.selectedStyleTarget) {
+      case 'defaultSlide':
+        s = this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle
+        break
+      case 'thisSlide':
+        s = this.props.thisSlideStyle || this.props.deck.getActiveSlide().style
+        break
+      case 'selectedSlides':
+        let commonStyle
+        this.props.deck.components.forEach((e) => {
+          if (!e.selected) {
+            return
+          }
+          let thisSlideStyle = e.style || this.props.deck.defaultSlideStyle
+          if (commonStyle === undefined) {
+            commonStyle = thisSlideStyle
+          }
+          else if (commonStyle !== thisSlideStyle) {
+            commonStyle = null
+          }
+        })
+        s = this.props.selectedSlidesStyle || commonStyle
+        break
+      case 'entirePresentation':
+        s = this.props.entirePresentationStyle || this.props.deck.style
+        break
+    }
+    return s
+  },
+  updatePalette: function (i) {
+    let s = this.getStyle()
     let p = new Palettes()
+    p[i] = s
+    p.save()
+    this.setState({palettes: p})
+  },
+  onMouseEvent: function (evt, idx) {
+    let p = this.state.palettes
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
         switch (evt.type) {
@@ -117,7 +158,7 @@ let QuickStyler = React.createClass({
     }
   },
   render: function () {
-    let p = new Palettes()
+    let p = _.cloneDeep(this.state.palettes)
     p[8] = p[9] = {}
     let pDivs = _.map(p, (e, i)=> {
       let s = _.clone(e)
@@ -164,6 +205,9 @@ let QuickStyler = React.createClass({
               thisSlideStyle={this.props.thisSlideStyle}
               setTargetStyle={this.props.setTargetStyle}
               onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+              updatePalette={this.updatePalette}
+              getStyle={this.getStyle}
+              palettes={this.state.palettes}
       ></Styler>
     </div>
   }

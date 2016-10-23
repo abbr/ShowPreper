@@ -5,7 +5,6 @@ import lang from 'i18n/lang'
 import './index.less'
 import _ from 'lodash'
 import ColorPatternEditor from './colorPatternEditor'
-import Palettes from 'stores/palettes'
 
 export default React.createClass({
   componentDidMount: function () {
@@ -17,39 +16,8 @@ export default React.createClass({
       that.props.setTargetStyle(that.props.selectedStyleTarget + 'Style', null)
     })
   },
-  getStyle: function () {
-    let s
-    switch (this.props.selectedStyleTarget) {
-      case 'defaultSlide':
-        s = this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle
-        break
-      case 'thisSlide':
-        s = this.props.thisSlideStyle || this.props.deck.getActiveSlide().style
-        break
-      case 'selectedSlides':
-        let commonStyle
-        this.props.deck.components.forEach((e) => {
-          if (!e.selected) {
-            return
-          }
-          let thisSlideStyle = e.style || this.props.deck.defaultSlideStyle
-          if (commonStyle === undefined) {
-            commonStyle = thisSlideStyle
-          }
-          else if (commonStyle !== thisSlideStyle) {
-            commonStyle = null
-          }
-        })
-        s = this.props.selectedSlidesStyle || commonStyle
-        break
-      case 'entirePresentation':
-        s = this.props.entirePresentationStyle || this.props.deck.style
-        break
-    }
-    return s
-  },
   updateStyle: function (newStyleComponent) {
-    let s = this.getStyle()
+    let s = this.props.getStyle()
     let targetStyle = _.mergeWith({}, s, newStyleComponent, (ov, sv, k, o, s) => {
       if (sv === undefined) {
         delete o[k]
@@ -59,7 +27,7 @@ export default React.createClass({
   },
   render: function () {
     let s, sDisp, attrs = []
-    s = this.getStyle()
+    s = this.props.getStyle()
     sDisp = _.reduce(s, (p, e, k)=> {
       var capitalLtrs = k.match(/([A-Z])/)
       if (capitalLtrs) {
@@ -74,13 +42,13 @@ export default React.createClass({
       return p
     }, [])
 
-    let p = new Palettes()
+    let p = _.cloneDeep(this.props.palettes)
     delete p[7]
     let pDivs = _.map(p, (e, i)=> {
       let s = _.clone(e)
       let extraCN = '', title = ''
       let mouseEvtHdlr = (evt)=> {
-        console.log(i)
+        this.props.updatePalette(i)
       }
       return <div
         className={"sp-palette" + extraCN}
