@@ -3,7 +3,6 @@ var webpack = require('webpack')
 var baseConfig = require('./base')
 
 // Add needed plugins here
-var BowerWebpackPlugin = require('bower-webpack-plugin')
 
 var config = {
   entry: {
@@ -28,10 +27,7 @@ var config = {
   devtool: 'inline-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new BowerWebpackPlugin({
-      searchResolveModulesDirectories: false
-    })
+    new webpack.NoErrorsPlugin()
   ]
 }
 

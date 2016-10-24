@@ -22,7 +22,7 @@
   "keywords": [],
   "author": "Your name here",
   "devDependencies": {
-    "angle-input": "0.0.1",
+    "angle-input": "andrejewski/angle-input",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
@@ -31,7 +31,6 @@
     "babel-preset-react": "^6.0.15",
     "bootstrap": "^3.3.6",
     "bootstrap-webpack": "0.0.5",
-    "bower-webpack-plugin": "^0.1.9",
     "chai": "^3.2.0",
     "classnames": "^2.2.1",
     "clean-webpack-plugin": "^0.1.10",

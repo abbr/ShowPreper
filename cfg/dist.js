@@ -1,7 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
 // Add needed plugins here
-var BowerWebpackPlugin = require('bower-webpack-plugin')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
 
 var config = {
@@ -22,9 +21,7 @@ var config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
-    new BowerWebpackPlugin({
-      searchResolveModulesDirectories: false
-    }),
+    new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
