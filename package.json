@@ -16,7 +16,8 @@
     "serve:dist": "node server.js --env=dist",
     "start": "node server.js --env=dev",
     "test": "karma start",
-    "test:watch": "karma start --autoWatch=true --singleRun=false"
+    "test:watch": "karma start --autoWatch=true --singleRun=false",
+    "heroku-postbuild": "npm run dist"
   },
   "repository": "",
   "keywords": [],
