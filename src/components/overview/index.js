@@ -1,15 +1,16 @@
 'use strict'
-import React from 'react'
-import './index.less'
-import AutoScale from 'components/mixins/autoScale'
-import Draggable from 'components/mixins/draggable'
-import Scalable from 'components/mixins/scalable'
-import Selectable from 'components/mixins/selectable'
-import Rotatable from 'components/mixins/rotatable'
-import lang from 'i18n/lang'
+import React from "react";
+import "./index.less";
+import AutoScale from "components/mixins/autoScale";
+import Draggable from "components/mixins/draggable";
+import Scalable from "components/mixins/scalable";
+import Selectable from "components/mixins/selectable";
+import Rotatable from "components/mixins/rotatable";
+import Killable from "components/mixins/killable";
+import lang from "i18n/lang";
 var EditableComponent = require('components/widgets/editableComponent')
 let Overview = React.createClass({
-  mixins: [AutoScale, Selectable, Draggable(function () {
+  mixins: [AutoScale, Selectable, Killable, Draggable(function () {
     return this.props.selectedWidgets
   }, function (e) {
     return {
@@ -119,6 +120,7 @@ let Overview = React.createClass({
           onMouseUp={this.onMouseUp}
           onScaleMouseDown={this.onScaleMouseDown}
           onRotateMouseDown={this.onRotateMouseDown}
+          onKillMouseDown={this.onKillMouseDown}
           onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
         />
       )
