@@ -52,6 +52,15 @@ export default React.createClass({
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
+  onToggleIsRepeating: function (evt) {
+    let g = this.parseGradientString()
+    if (!g) {
+      return
+    }
+    g.isRepeating = evt.target.checked
+    let s = this.composeGradientString(g)
+    this.props.updateStyle({background: s})
+  },
   onChangeGradientExtent: function () {
     let g = this.parseGradientString()
     if (g) {
@@ -164,8 +173,8 @@ export default React.createClass({
     }
     let gradientFormatString = ''
     if (gradientFormat) {
-      gradientFormatString = (arguments[0].type === 'linear' && gradientFormat.direction ? gradientFormat.direction : '') + ' '
-      gradientFormatString += (arguments[0].type === 'radial' ? (gradientFormat.shape || 'ellipse') : '') + ' '
+      gradientFormatString = (gradientFormat.type === 'linear' && gradientFormat.direction ? gradientFormat.direction : '') + ' '
+      gradientFormatString += (gradientFormat.type === 'radial' ? (gradientFormat.shape || 'ellipse') : '') + ' '
       gradientFormatString += (gradientFormat.extent || '') + ' '
       gradientFormatString += (gradientFormat.position && (gradientFormat.position.x !== undefined || gradientFormat.position.y !== undefined)) ? ' at ' : ''
       gradientFormatString += ((gradientFormat.position && gradientFormat.position.x !== undefined) ? gradientFormat.position.x : '') + ' '
@@ -180,10 +189,15 @@ export default React.createClass({
       })
     let gradientString = gradientStringArr && gradientStringArr.join(', ')
     let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientFormatString + gradientString + ')')
+    if (gradientFormat) {
+      fullGradientString = fullGradientString.replace(/(repeating-)?(linear|radial)-gradient/, (match, p1, p2)=>
+        ((gradientFormat.isRepeating ? 'repeating-' : '') + gradientFormat.type + '-gradient')
+      )
+    }
     return fullGradientString
   },
   render: function () {
-    let type, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle,gradientFormat
+    let type, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle, gradientFormat
     if (this.props.currentStyle) {
       gradientFormat = this.parseGradientString()
       if (gradientFormat) {
@@ -256,6 +270,14 @@ export default React.createClass({
                role="tabpanel" aria-labelledby="headingTwo">
             <div className="panel-body container-fluid">
               <div className="row">
+                <div className="col-xs-2">Repeating:</div>
+                <div className="col-xs-1">
+                  <input type="checkbox" name="isRepeating"
+                         onClick={this.onToggleIsRepeating}
+                         defaultChecked={gradientFormat && gradientFormat.isRepeating}/>
+                </div>
+              </div>
+              <div className="row">
                 <div className="col-xs-2">Direction:</div>
                 <DropdownList className="col-xs-4" data={linearGradientDirectionArr}
                               valueField="value" textField="text"
@@ -305,6 +327,14 @@ export default React.createClass({
                className="panel-collapse collapse in" role="tabpanel"
                aria-labelledby="headingThree">
             <div className="panel-body container-fluid">
+              <div className="row">
+                <div className="col-xs-2">Repeating:</div>
+                <div className="col-xs-1">
+                  <input type="checkbox" name="isRepeating"
+                         onClick={this.onToggleIsRepeating}
+                         defaultChecked={gradientFormat && gradientFormat.isRepeating}/>
+                </div>
+              </div>
               <div className="row">
                 <div className="col-xs-2">Shape:</div>
                 <div className="col-xs-2">
