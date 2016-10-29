@@ -187,7 +187,7 @@ export default React.createClass({
       }).map(function (e) {
         return e.c + ' ' + e.p + '%'
       })
-    let gradientString = gradientStringArr && gradientStringArr.join(', ')
+    let gradientString = gradientStringArr ? gradientStringArr.join(', ') : ''
     let fullGradientString = this.props.currentStyle.replace(/-gradient\(.*\)/, '-gradient(' + gradientFormatString + gradientString + ')')
     if (gradientFormat) {
       fullGradientString = fullGradientString.replace(/(repeating-)?(linear|radial)-gradient/, (match, p1, p2)=>
@@ -216,10 +216,10 @@ export default React.createClass({
           gradientAngle = gradientFormat.directionAngle
         }
       }
-      if (this.props.currentStyle.match(/^radial-gradient/)) {
+      if (this.props.currentStyle.match(/^(repeating-)?radial-gradient/)) {
         type = 'radial-gradient'
       }
-      else if (this.props.currentStyle.match(/^linear-gradient/)) {
+      else if (this.props.currentStyle.match(/^(repeating-)?linear-gradient/)) {
         type = 'linear-gradient'
       }
       else if (this.props.currentStyle.match(/^(rgba?\(|transparent)/)) {
@@ -272,7 +272,7 @@ export default React.createClass({
               <div className="row">
                 <div className="col-xs-2">Repeating:</div>
                 <div className="col-xs-1">
-                  <input type="checkbox" name="isRepeating"
+                  <input type="checkbox"
                          onClick={this.onToggleIsRepeating}
                          defaultChecked={gradientFormat && gradientFormat.isRepeating}/>
                 </div>
@@ -330,7 +330,7 @@ export default React.createClass({
               <div className="row">
                 <div className="col-xs-2">Repeating:</div>
                 <div className="col-xs-1">
-                  <input type="checkbox" name="isRepeating"
+                  <input type="checkbox"
                          onClick={this.onToggleIsRepeating}
                          defaultChecked={gradientFormat && gradientFormat.isRepeating}/>
                 </div>
