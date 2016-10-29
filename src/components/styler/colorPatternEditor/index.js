@@ -43,10 +43,10 @@ export default React.createClass({
   },
   onToggleGradientShape: function () {
     let g = this.parseGradientString()
-    if (g.gradientFormat) {
-      g.gradientFormat.shape = arguments[0].target.value
-      if (g.gradientFormat.extent && g.gradientFormat.extent.indexOf('px') >= 0) {
-        g.gradientFormat.extent = 'farthest-corner'
+    if (g) {
+      g.shape = arguments[0].target.value
+      if (g.extent && g.extent.indexOf('px') >= 0) {
+        g.extent = 'farthest-corner'
       }
     }
     let s = this.composeGradientString(g)
@@ -54,12 +54,12 @@ export default React.createClass({
   },
   onChangeGradientExtent: function () {
     let g = this.parseGradientString()
-    if (g.gradientFormat) {
-      g.gradientFormat.extent = arguments[0].value
+    if (g) {
+      g.extent = arguments[0].value
       if (arguments[0].value === 'length') {
-        g.gradientFormat.extent = '100px'
-        if (!g.gradientFormat.shape || g.gradientFormat.shape === 'ellipse') {
-          g.gradientFormat.extent += ' 100px'
+        g.extent = '100px'
+        if (!g.shape || g.shape === 'ellipse') {
+          g.extent += ' 100px'
         }
       }
     }
@@ -68,20 +68,20 @@ export default React.createClass({
   },
   onChangeGradientExtentPct: function (dimension, value) {
     let g = this.parseGradientString()
-    if (g.gradientFormat && g.gradientFormat.extent) {
-      let xyExtArr = g.gradientFormat.extent.split(' ')
+    if (g && g.extent) {
+      let xyExtArr = g.extent.split(' ')
       xyExtArr[dimension] = value + 'px'
-      g.gradientFormat.extent = xyExtArr.join(' ')
+      g.extent = xyExtArr.join(' ')
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
   onChangeGradientDirection: function () {
     let g = this.parseGradientString()
-    if (g.gradientFormat) {
-      g.gradientFormat.direction = arguments[0].value
+    if (g) {
+      g.direction = arguments[0].value
       if (arguments[0].value === 'to angle') {
-        g.gradientFormat.direction = '0deg'
+        g.direction = '0deg'
       }
     }
     let s = this.composeGradientString(g)
@@ -89,8 +89,8 @@ export default React.createClass({
   },
   onChangeGradientDirectionAngle: function () {
     let g = this.parseGradientString()
-    if (g.gradientFormat) {
-      g.gradientFormat.direction = (-arguments[0] + 90 + 360) % 360 + 'deg'
+    if (g) {
+      g.direction = (-arguments[0] + 90 + 360) % 360 + 'deg'
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
@@ -100,14 +100,15 @@ export default React.createClass({
     $("#colorpicker").spectrum("set", this.props.currentStyle)
   },
   parseGradientString: function () {
-    let gradientType, gradientString, gradientFormatMatch, gradientFormat = {}, gradientArr
-    let gradientStringMatch = this.props.currentStyle.match(/(linear|radial)-gradient\((.*)\)/)
+    let gradientString, gradientFormatMatch, gradientFormat = {}
+    let gradientStringMatch = this.props.currentStyle.match(/(repeating-)?(linear|radial)-gradient\((.*)\)/)
     if (!gradientStringMatch) {
       return {}
     }
-    gradientType = gradientStringMatch[1]
-    gradientString = gradientStringMatch[2]
-    switch (gradientType) {
+    gradientFormat.isRepeating = gradientStringMatch[1] !== undefined
+    gradientFormat.type = gradientStringMatch[2]
+    gradientString = gradientStringMatch[3]
+    switch (gradientFormat.type) {
       case 'radial':
         gradientFormatMatch = gradientString.match(/(circle|ellipse)\s*(.*?)\s*(?:at\s*(\S*?)\s*(\S*?)\s*)?,/)
         if (gradientFormatMatch) {
@@ -129,8 +130,8 @@ export default React.createClass({
         }
         break
     }
-    gradientArr = gradientString.match(/((?:rgba?.*?\)|#)[^,]*)/g)
-    gradientArr = gradientArr && gradientArr.map(function (e, i, a) {
+    gradientFormat.colorStops = gradientString.match(/((?:rgba?.*?\)|#)[^,]*)/g)
+    gradientFormat.colorStops = gradientFormat.colorStops && gradientFormat.colorStops.map(function (e, i, a) {
         let ret = {}
         let colorPosArr = e.trim().match(/(rgba?.*?\)|[\w#\.%]+)/g)
         let c = colorPosArr[0]
@@ -150,26 +151,21 @@ export default React.createClass({
         ret.p = p
         return ret
       })
-    return {
-      gradientType: gradientType,
-      gradientString: gradientString,
-      gradientFormat: gradientFormat,
-      gradientArr: gradientArr
-    }
+    return gradientFormat
   },
   composeGradientString: function () {
-    let gradientFormat, gradientArr
+    let gradientFormat, colorStops
     if (arguments[0].constructor === Array) {
-      gradientArr = arguments[0]
+      colorStops = arguments[0]
     }
     else {
-      gradientArr = arguments[0].gradientArr
-      gradientFormat = arguments[0].gradientFormat
+      colorStops = arguments[0].colorStops
+      gradientFormat = arguments[0]
     }
     let gradientFormatString = ''
     if (gradientFormat) {
-      gradientFormatString = (arguments[0].gradientType === 'linear' && gradientFormat.direction ? gradientFormat.direction : '') + ' '
-      gradientFormatString += (arguments[0].gradientType === 'radial' ? (gradientFormat.shape || 'ellipse') : '') + ' '
+      gradientFormatString = (arguments[0].type === 'linear' && gradientFormat.direction ? gradientFormat.direction : '') + ' '
+      gradientFormatString += (arguments[0].type === 'radial' ? (gradientFormat.shape || 'ellipse') : '') + ' '
       gradientFormatString += (gradientFormat.extent || '') + ' '
       gradientFormatString += (gradientFormat.position && (gradientFormat.position.x !== undefined || gradientFormat.position.y !== undefined)) ? ' at ' : ''
       gradientFormatString += ((gradientFormat.position && gradientFormat.position.x !== undefined) ? gradientFormat.position.x : '') + ' '
@@ -177,7 +173,7 @@ export default React.createClass({
       gradientFormatString = gradientFormatString.replace(/\s+/g, ' ').trim()
       gradientFormatString += gradientFormatString.length > 0 ? ',' : ''
     }
-    let gradientStringArr = gradientArr && gradientArr.sort(function (a, b) {
+    let gradientStringArr = colorStops && colorStops.sort(function (a, b) {
         return a.p - b.p
       }).map(function (e) {
         return e.c + ' ' + e.p + '%'
@@ -187,10 +183,9 @@ export default React.createClass({
     return fullGradientString
   },
   render: function () {
-    let type, gradientFormat, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle
+    let type, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle,gradientFormat
     if (this.props.currentStyle) {
-      let g = this.parseGradientString()
-      gradientFormat = g.gradientFormat
+      gradientFormat = this.parseGradientString()
       if (gradientFormat) {
         gradientExtentSelect = gradientFormat.extent || 'farthest-corner'
         if (gradientExtentSelect && gradientExtentSelect.indexOf('px') >= 0) {

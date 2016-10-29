@@ -65,7 +65,7 @@ export default React.createClass({
     this.updateMarkerPosition(null, pct)
   },
   getGradientItemIndexFromAttrs: function (parsedGradientObject, attrs) {
-    return parsedGradientObject && parsedGradientObject.gradientArr && parsedGradientObject.gradientArr.findIndex(x => {
+    return parsedGradientObject && parsedGradientObject.colorStops && parsedGradientObject.colorStops.findIndex(x => {
         return x.c === attrs.c && Math.abs(x.p - attrs.p) < 0.001
       })
   },
@@ -76,30 +76,30 @@ export default React.createClass({
   },
   updateMarkerPosition: function (attrs, pct) {
     let g = this.props.parseGradientString()
-    let gradientArr = g.gradientArr || []
-    g.gradientArr = gradientArr
+    let colorStops = g.colorStops || []
+    g.colorStops = colorStops
     if (attrs) {
       let mi = this.getGradientItemIndexFromAttrs(g, attrs)
       if (pct !== null) {
         // dragging marker
-        mi >= 0 && (gradientArr[mi].p = pct)
+        mi >= 0 && (colorStops[mi].p = pct)
       }
       else {
         // removing marker
-        mi >= 0 && gradientArr.splice(mi, 1)
+        mi >= 0 && colorStops.splice(mi, 1)
       }
     }
     else {
-      if (gradientArr.length > 0) {
+      if (colorStops.length > 0) {
         // inserting marker
-        let rightMarkerIdx = gradientArr.findIndex((e)=>(e.p > pct))
-        rightMarkerIdx = rightMarkerIdx < 0 ? gradientArr.length : rightMarkerIdx
+        let rightMarkerIdx = colorStops.findIndex((e)=>(e.p > pct))
+        rightMarkerIdx = rightMarkerIdx < 0 ? colorStops.length : rightMarkerIdx
         let leftMarkerIdx = Math.max(0, rightMarkerIdx - 1)
-        rightMarkerIdx = Math.min(rightMarkerIdx, gradientArr.length - 1)
-        let leftColor = parseColor(gradientArr[leftMarkerIdx].c).rgba
-        let rightColor = parseColor(gradientArr[rightMarkerIdx].c).rgba
-        let dist = (gradientArr[rightMarkerIdx].p - gradientArr[leftMarkerIdx].p) || 1
-        let ratio = (pct - gradientArr[leftMarkerIdx].p) / dist
+        rightMarkerIdx = Math.min(rightMarkerIdx, colorStops.length - 1)
+        let leftColor = parseColor(colorStops[leftMarkerIdx].c).rgba
+        let rightColor = parseColor(colorStops[rightMarkerIdx].c).rgba
+        let dist = (colorStops[rightMarkerIdx].p - colorStops[leftMarkerIdx].p) || 1
+        let ratio = (pct - colorStops[leftMarkerIdx].p) / dist
         let newColor = []
         for (let i = 0; i < 4; i++) {
           let decimalVal = leftColor[i] + (rightColor[i] - leftColor[i]) * ratio
@@ -107,11 +107,11 @@ export default React.createClass({
         }
         let newColorStr = 'rgba(' + newColor.join() + ')'
         let newMarker = {c: newColorStr, p: pct}
-        gradientArr.splice(rightMarkerIdx, 0, newMarker)
+        colorStops.splice(rightMarkerIdx, 0, newMarker)
       }
       else {
         // inserting first marker
-        gradientArr.splice(0, 0, {c: 'rgba(255,255,255,1)', p: pct})
+        colorStops.splice(0, 0, {c: 'rgba(255,255,255,1)', p: pct})
       }
     }
     let s = this.props.composeGradientString(g)
@@ -119,22 +119,21 @@ export default React.createClass({
   },
   updateMarkerColor: function (attrs, newColor) {
     let g = this.props.parseGradientString()
-    let gradientArr = g.gradientArr
+    let colorStops = g.colorStops
     let gi = this.getGradientItemIndexFromAttrs(g, attrs)
-    gi >= 0 && (gradientArr[gi].c = newColor)
+    gi >= 0 && (colorStops[gi].c = newColor)
     let s = this.props.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
   render: function () {
-    let gradientString, gradientArr, gradientMarkers, gradientArrString
+    let  colorStops, gradientMarkers, gradientArrString
     try {
       let g = this.props.parseGradientString()
-      gradientString = g.gradientString
-      gradientArr = g.gradientArr
-      if (gradientArr) {
-        gradientArrString = gradientArr.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
+      colorStops = g.colorStops
+      if (colorStops) {
+        gradientArrString = colorStops.map((e, i)=> (e.c + ' ' + e.p + '%')).join(',')
       }
-      gradientMarkers = gradientArr && gradientArr.map((e, i) => {
+      gradientMarkers = colorStops && colorStops.map((e, i) => {
           let pressed = false
           if (this.state.pressedMarkerAttrs && this.state.pressedMarkerAttrs.c === e.c && Math.abs(this.state.pressedMarkerAttrs.p - e.p) < 0.001) {
             pressed = true
