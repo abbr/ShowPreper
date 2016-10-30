@@ -1,7 +1,9 @@
 [
   {
     "background": "radial-gradient(#f00, #fff)",
-    "border": "1px solid rgba(0, 0, 0, .3)",
+    "borderWidth": "1px",
+    "borderStyle": "solid",
+    "borderColor": "rgba(0, 0, 0, .3)",
     "borderRadius": "10px",
     "boxShadow": "0 2px 6px rgba(0, 0, 0, .1)"
   },
