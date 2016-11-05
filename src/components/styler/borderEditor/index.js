@@ -22,7 +22,30 @@ export default React.createClass({
     }
     return border
   },
-  onChangeWidthComponentCnt: function () {
+  composeBorder: function (parsedBorder) {
+    let borderStyleObject = {}
+    try {
+      borderStyleObject.borderWidth = parsedBorder.width.components.reduce((pv, cv, ci)=> {
+        return pv + ' ' + ((typeof cv == 'string') ? cv : (cv.length + cv.uom))
+      }, '').trim()
+    }
+    catch (ex) {
+    }
+    return borderStyleObject
+  },
+  onChangeWidthComponentCnt: function (newCnt) {
+    let border = this.parseBorder()
+    if (newCnt > border.width.components.length) {
+      let i = 0
+      while (i < (newCnt - border.width.components.length)) {
+        border.width.components.push({length: 0, uom: 'px'})
+        i++
+      }
+    }
+    else {
+      border.width.components.splice(newCnt, border.width.components.length - newCnt)
+    }
+    this.props.updateStyle(this.composeBorder(border))
   },
   render: function () {
     let border = this.parseBorder()
