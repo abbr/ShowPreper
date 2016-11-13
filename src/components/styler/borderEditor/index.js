@@ -2,7 +2,7 @@ import React from 'react'
 import DropdownList from 'react-widgets/lib/DropdownList'
 export default React.createClass({
   parseBorder: function () {
-    let border = {width: {}}
+    let border = {width: {components: []}}
     try {
       let widthComponentsRaw = this.props.currentStyle.borderWidth.split(' ')
       border.width.components = widthComponentsRaw.map((e, i)=> {
