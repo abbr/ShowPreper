@@ -10,7 +10,7 @@ import BorderEditor from './borderEditor'
 export default React.createClass({
   componentDidMount: function () {
     let that = this
-    $("#sp-styler-modal").draggable({
+    $("#sp-styler-modal-content").draggable({
       handle: ".modal-header"
     })
     $('#sp-styler-modal').on('hide.bs.modal', function (e) {
@@ -61,7 +61,7 @@ export default React.createClass({
     return <div className="modal fade" id="sp-styler-modal" tabIndex="-1" role="dialog"
                 aria-labelledby="sp-styler-modal-label">
       <div className="modal-dialog" role="document">
-        <div className="modal-content">
+        <div className="modal-content" id="sp-styler-modal-content">
           <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal"
                     aria-label="Close"><span
