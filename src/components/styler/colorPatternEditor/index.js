@@ -93,7 +93,8 @@ export default React.createClass({
         g.position[dimension] = value + 'px'
       }
       else {
-        g.position['x'] = '0px'
+        g.position.x = '0px'
+        g.position.y = '0px'
       }
     }
     else {
@@ -365,12 +366,12 @@ export default React.createClass({
                 <div className="col-xs-2">
                   <input type="radio" name="shape" value="circle"
                          onChange={this.onToggleGradientShape}
-                         checked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle
+                         checked={!!(gradientFormat && gradientFormat.shape === 'circle')}/>Circle
                 </div>
                 <div className="col-xs-2">
                   <input type="radio" name="shape" value="ellipse"
                          onChange={this.onToggleGradientShape}
-                         checked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
+                         checked={!!(gradientFormat && gradientFormat.shape === 'ellipse')}/>Ellipse
                 </div>
               </div>
               <div className="row">
@@ -405,15 +406,15 @@ export default React.createClass({
               <div className="row">
                 <div className="col-xs-2">Position:</div>
                 <div className="col-xs-2">
-                  <input type="radio" name="shape" value="circle"
+                  <input type="radio" name="position" value="center"
                          onChange={this.onChangeGradientPosition.bind(null, null)}
-                         checked={!gradientFormat || !gradientFormat.position || !gradientFormat.position.x}/>Center
+                         checked={!!(!gradientFormat || !gradientFormat.position || !gradientFormat.position.x)}/>Center
                 </div>
                 <div className="col-xs-8"
                 >
-                  <input type="radio" name="shape" value="circle"
+                  <input type="radio" name="position" value="position"
                          onChange={this.onChangeGradientPosition.bind(null, 'x')}
-                         checked={gradientFormat && gradientFormat.position && gradientFormat.position.x}/>
+                         checked={!!(gradientFormat && gradientFormat.position && gradientFormat.position.x)}/>
                   x: <NumberPicker value={gradientExtentXPosition} min={0}
                                    onChange={this.onChangeGradientPosition.bind(null, 'x')}/>px
                   y: <NumberPicker value={gradientExtentYPosition} min={0}
