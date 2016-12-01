@@ -85,6 +85,23 @@ export default React.createClass({
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
+  onChangeGradientPosition: function (dimension, value) {
+    let g = this.parseGradientString()
+    g.position = g.position || {}
+    if (dimension) {
+      if (typeof value == 'number') {
+        g.position[dimension] = value + 'px'
+      }
+      else {
+        g.position['x'] = '0px'
+      }
+    }
+    else {
+      delete g.position
+    }
+    let s = this.composeGradientString(g)
+    this.props.updateStyle({background: s})
+  },
   onChangeGradientDirection: function () {
     let g = this.parseGradientString()
     if (g) {
@@ -197,7 +214,7 @@ export default React.createClass({
     return fullGradientString
   },
   render: function () {
-    let type, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle, gradientFormat
+    let type, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle, gradientFormat, gradientExtentXPosition, gradientExtentYPosition
     if (this.props.currentStyle) {
       gradientFormat = this.parseGradientString()
       if (gradientFormat) {
@@ -214,6 +231,14 @@ export default React.createClass({
         if (gradientDirection && gradientDirection.indexOf('deg') >= 0) {
           gradientDirection = 'to angle'
           gradientAngle = gradientFormat.directionAngle
+        }
+        if (gradientFormat.position) {
+          gradientExtentXPosition = parseInt(gradientFormat.position['x'])
+          try {
+            gradientExtentYPosition = parseInt(gradientFormat.position['y'])
+          }
+          catch (ex) {
+          }
         }
       }
       if (this.props.currentStyle.match(/^(repeating-)?radial-gradient/)) {
@@ -339,13 +364,13 @@ export default React.createClass({
                 <div className="col-xs-2">Shape:</div>
                 <div className="col-xs-2">
                   <input type="radio" name="shape" value="circle"
-                         onClick={this.onToggleGradientShape}
-                         defaultChecked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle
+                         onChange={this.onToggleGradientShape}
+                         checked={gradientFormat && gradientFormat.shape === 'circle'}/>Circle
                 </div>
                 <div className="col-xs-2">
                   <input type="radio" name="shape" value="ellipse"
-                         onClick={this.onToggleGradientShape}
-                         defaultChecked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
+                         onChange={this.onToggleGradientShape}
+                         checked={gradientFormat && gradientFormat.shape === 'ellipse'}/>Ellipse
                 </div>
               </div>
               <div className="row">
@@ -376,6 +401,25 @@ export default React.createClass({
                 y: <NumberPicker value={gradientExtentYExtentPct} min={0}
                                  onChange={this.onChangeGradientExtentPct.bind(null, 1)}/>px
                 </span>
+              </div>
+              <div className="row">
+                <div className="col-xs-2">Position:</div>
+                <div className="col-xs-2">
+                  <input type="radio" name="shape" value="circle"
+                         onChange={this.onChangeGradientPosition.bind(null, null)}
+                         checked={!gradientFormat || !gradientFormat.position || !gradientFormat.position.x}/>Center
+                </div>
+                <div className="col-xs-8"
+                >
+                  <input type="radio" name="shape" value="circle"
+                         onChange={this.onChangeGradientPosition.bind(null, 'x')}
+                         checked={gradientFormat && gradientFormat.position && gradientFormat.position.x}/>
+                  x: <NumberPicker value={gradientExtentXPosition} min={0}
+                                   onChange={this.onChangeGradientPosition.bind(null, 'x')}/>px
+                  y: <NumberPicker value={gradientExtentYPosition} min={0}
+                                   onChange={this.onChangeGradientPosition.bind(null, 'y')}/>px
+                </div
+                >
               </div>
               Color Stops:
               <ColorStops id="sp-radial-color-stops"
