@@ -165,7 +165,7 @@ let Header = React.createClass({
               </button>
               <ul className="dropdown-menu">
                 <li><a href="./presentation.html" target="_blank">{lang.presentation}</a></li>
-                <li><a href="./handout.html" target="_blank">{lang.handouts}</a></li>
+                <li><a href="./handouts.html" target="_blank">{lang.handouts}</a></li>
               </ul>
             </div>
           </div>

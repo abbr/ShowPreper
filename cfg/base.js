@@ -15,6 +15,7 @@ module.exports = {
   entry: {
     app: [path.join(__dirname, '../src/components/run')],
     presentation: path.join(__dirname, '../src/components/show/presentation'),
+    handouts: path.join(__dirname, '../src/components/show/handouts'),
     vendors: [
       "webpack-material-design-icons",
       'babel-polyfill'
@@ -84,14 +85,21 @@ module.exports = {
     {
       template: path.join(__dirname, '../src/', 'index.html'),
       filename: 'index.html',
-      excludeChunks: ['presentation']
+      chunks: ['vendors', 'app']
     }
   ),
     new HtmlWebpackPlugin(
       {
         template: path.join(__dirname, '../src/', 'presentation.html'),
         filename: 'presentation.html',
-        excludeChunks: ['app']
+        chunks: ['vendors', 'presentation']
+      }
+    ),
+    new HtmlWebpackPlugin(
+      {
+        template: path.join(__dirname, '../src/', 'handouts.html'),
+        filename: 'handouts.html',
+        chunks: ['vendors', 'handouts']
       }
     ),
     new CopyWebpackPlugin([{from: 'src/favicon.ico'}]),
