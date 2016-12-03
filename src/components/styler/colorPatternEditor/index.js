@@ -137,6 +137,7 @@ export default React.createClass({
     gradientString = gradientStringMatch[3]
     switch (gradientFormat.type) {
       case 'radial':
+        gradientFormat.shape = 'ellipse'
         gradientFormatMatch = gradientString.match(/(circle|ellipse)\s*(.*?)\s*(?:at\s*(\S*?)\s*(\S*?)\s*)?,/)
         if (gradientFormatMatch) {
           gradientFormat.shape = gradientFormatMatch[1]
