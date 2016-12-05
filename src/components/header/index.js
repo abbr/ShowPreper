@@ -12,12 +12,16 @@ let Header = React.createClass({
   createWidget: function (type) {
     let deck = this.props.deck
     let activeSlide = deck.getActiveSlide()
+    activeSlide.components.forEach((e)=> {
+      delete e.selected
+    })
     this.props.onNewWidget(activeSlide, null,
       {
         "type": type,
         "x": 0,
         "y": 0,
-        "text": "<div style=\"font-family: Hammersmith One;font-size: 30pt\">(" + lang['triClickEdt'] + ")</div>"
+        "text": "<div style=\"font-family: Hammersmith One;font-size: 30pt\">(" + lang['triClickEdt'] + ")</div>",
+        "selected": true
       },
       lang['new'] + ' ' + lang[type])
   },
