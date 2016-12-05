@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'impress.js'
-import './presentation.less'
+import './impress.less'
 import DeckStore from 'stores/deck'
 import AutoScale from 'components/mixins/autoScale'
 import _ from 'lodash'

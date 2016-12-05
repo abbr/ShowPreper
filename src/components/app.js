@@ -50,6 +50,7 @@ let App = React.createClass({
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(),
     view: 'slides',
+    presentationFormat: 'impress',
     presentationStyle: null,
     defaultSlideStyle: null,
     selectedSlidesStyle: null,
@@ -60,6 +61,11 @@ let App = React.createClass({
         view: newView
       }
     )
+  },
+  changePresentationFormat: function (newFormat) {
+    this.setState({
+      presentationFormat: newFormat
+    })
   },
   onSlideClicked: function (i) {
     let deck = this.state.deck
@@ -265,6 +271,8 @@ let App = React.createClass({
               onRedo={this.onRedo}
               changeView={this.changeView}
               currentView={this.state.view}
+              changePresentationFormat={this.changePresentationFormat}
+              presentationFormat={this.state.presentationFormat}
               onNewWidget={this.onNewWidget}
               onNewDeck={this.onNewDeck}
               onDeleteDeck={this.onDeleteDeck}

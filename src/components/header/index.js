@@ -158,9 +158,10 @@ let Header = React.createClass({
             </ul>
 
             <div className="nav navbar-btn btn-group">
-              <a type="button" className="btn btn-success" href="./presentation.html" target="_blank">
+              <a type="button" className="btn btn-success" href={'./' + this.props.presentationFormat + '.html'}
+                 target="_blank">
                 <span className={'glyphicon glyphicon-play'}/>
-                <div>{lang.show}</div>
+                <div>{this.props.presentationFormat}</div>
               </a>
               <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
@@ -168,8 +169,10 @@ let Header = React.createClass({
                 <span className="sr-only">Toggle Dropdown</span>
               </button>
               <ul className="dropdown-menu">
-                <li><a href="./presentation.html" target="_blank">{lang.presentation}</a></li>
-                <li><a href="./handouts.html" target="_blank">{lang.handouts}</a></li>
+                <li><a style={{cursor: 'pointer'}} onClick={this.props.changePresentationFormat.bind(null, 'impress')}>Impress</a>
+                </li>
+                <li><a style={{cursor: 'pointer'}}
+                       onClick={this.props.changePresentationFormat.bind(null, 'handouts')}>{lang.handouts}</a></li>
               </ul>
             </div>
           </div>

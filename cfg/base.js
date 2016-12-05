@@ -14,7 +14,7 @@ module.exports = {
   },
   entry: {
     app: [path.join(__dirname, '../src/components/run')],
-    presentation: path.join(__dirname, '../src/components/show/presentation'),
+    impress: path.join(__dirname, '../src/components/show/impress'),
     handouts: path.join(__dirname, '../src/components/show/handouts'),
     vendors: [
       "webpack-material-design-icons",
@@ -90,9 +90,9 @@ module.exports = {
   ),
     new HtmlWebpackPlugin(
       {
-        template: path.join(__dirname, '../src/', 'presentation.html'),
-        filename: 'presentation.html',
-        chunks: ['vendors', 'presentation']
+        template: path.join(__dirname, '../src/', 'impress.html'),
+        filename: 'impress.html',
+        chunks: ['vendors', 'impress']
       }
     ),
     new HtmlWebpackPlugin(
