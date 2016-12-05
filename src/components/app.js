@@ -256,6 +256,7 @@ let App = React.createClass({
           return pv
         }, [])
         Main = <Overview
+          presentationFormat={this.state.presentationFormat}
           deck={this.state.deck}
           component={this.state.deck}
           selectedWidgets={selectedWidgets}
