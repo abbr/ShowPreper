@@ -15,12 +15,16 @@ let DisplayableComponent = React.createClass({
     translate3D.x = component.x || 0
     translate3D.y = component.y || 0
     translate3D.z = component.z || 0
-    thisComponentStyle.transform += ' translate3d(' + translate3D.x + 'px,' + translate3D.y + 'px,' + translate3D.z + 'px)'
+    if (!(translate3D.x === 0 && translate3D.y === 0 && translate3D.z === 0)) {
+      thisComponentStyle.transform += ' translate3d(' + translate3D.x + 'px,' + translate3D.y + 'px,' + translate3D.z + 'px)'
+    }
     component.width && (thisComponentStyle.width = component.width)
     component.height && (thisComponentStyle.height = component.height)
     let scaleX = (component.scale && component.scale.x) || 1
     let scaleY = (component.scale && component.scale.y) || 1
-    thisComponentStyle.transform += " scale(" + scaleX + "," + scaleY + ")"
+    if (!(scaleX === 1 && scaleY === 1)) {
+      thisComponentStyle.transform += " scale(" + scaleX + "," + scaleY + ")"
+    }
     if (component.rotate) {
       let rotStr = ''
       component.rotate.x && (rotStr += " rotateX(" + component.rotate.x + "rad)")
