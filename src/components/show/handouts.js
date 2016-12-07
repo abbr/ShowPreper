@@ -2,6 +2,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import DeckStore from 'stores/deck'
+import 'expose?$!expose?jQuery!jquery'
+import 'bootstrap-webpack'
 import './handouts.less'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 let Handouts = React.createClass({
@@ -23,20 +25,28 @@ let Handouts = React.createClass({
         component.width = bb.right - bb.left
         component.height = bb.bottom - bb.top
       }
-      return (
+      return <div
+        key={index}
+        className="row"
+      >
         <DisplayableComponent
-          ownClassName="slide"
+          ownClassName="slide col-xs-1"
           component={component}
           componentStyle={component.style || this.state.deck.defaultSlideStyle || {}}
           container={this.state.deck}
-          key={index}
           idx={index}
           ref={index}
           combinedTransform={true}
         />
-      )
+        <div className="col-xs-2">
+          notes:
+          <div>
+            {component.notes}
+          </div>
+        </div>
+      </div>
     })
-    return <div className="handouts">{deckView}</div>
+    return <div className="handouts container-fluid">{deckView}</div>
   }
 })
 
