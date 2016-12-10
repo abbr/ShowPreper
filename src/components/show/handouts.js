@@ -30,7 +30,7 @@ let Handouts = React.createClass({
         className="row"
       >
         <DisplayableComponent
-          ownClassName="slide col-xs-1"
+          ownClassName="slide col-xs-6"
           component={component}
           componentStyle={component.style || this.state.deck.defaultSlideStyle || {}}
           container={this.state.deck}
@@ -38,7 +38,7 @@ let Handouts = React.createClass({
           ref={index}
           combinedTransform={true}
         />
-        <div className="col-xs-2">
+        <div className="col-xs-6">
           notes:
           <div>
             {component.notes}
