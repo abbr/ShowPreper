@@ -173,6 +173,8 @@ let Header = React.createClass({
                 </li>
                 <li><a style={{cursor: 'pointer'}}
                        onClick={this.props.changePresentationFormat.bind(null, 'handouts')}>{lang.handouts}</a></li>
+                <li><a style={{cursor: 'pointer'}}
+                       onClick={this.props.changePresentationFormat.bind(null, 'bespoke')}>Bespoke</a></li>
               </ul>
             </div>
           </div>

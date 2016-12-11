@@ -15,6 +15,7 @@ module.exports = {
   entry: {
     app: [path.join(__dirname, '../src/components/run')],
     impress: path.join(__dirname, '../src/components/show/impress'),
+    bespoke: path.join(__dirname, '../src/components/show/bespoke'),
     handouts: path.join(__dirname, '../src/components/show/handouts'),
     vendors: [
       "webpack-material-design-icons",
@@ -100,6 +101,13 @@ module.exports = {
         template: path.join(__dirname, '../src/', 'handouts.html'),
         filename: 'handouts.html',
         chunks: ['vendors', 'handouts']
+      }
+    ),
+    new HtmlWebpackPlugin(
+      {
+        template: path.join(__dirname, '../src/', 'bespoke.html'),
+        filename: 'bespoke.html',
+        chunks: ['vendors', 'bespoke']
       }
     ),
     new CopyWebpackPlugin([{from: 'src/favicon.ico'}]),
