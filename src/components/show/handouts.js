@@ -30,7 +30,7 @@ let Handouts = React.createClass({
         className="row"
       >
         <DisplayableComponent
-          ownClassName="slide col-xs-6"
+          ownClassName="sp-slide col-xs-6"
           component={component}
           componentStyle={component.style || this.state.deck.defaultSlideStyle || {}}
           container={this.state.deck}
@@ -46,7 +46,7 @@ let Handouts = React.createClass({
         </div>
       </div>
     })
-    return <div className="handouts container-fluid">{deckView}</div>
+    return <div className="sp-handouts container-fluid">{deckView}</div>
   }
 })
 

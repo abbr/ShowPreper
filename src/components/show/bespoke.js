@@ -33,7 +33,7 @@ let BeSpoke = React.createClass({
         key={index}
       >
         <DisplayableComponent
-          ownClassName="slide"
+          ownClassName="sp-slide"
           component={component}
           componentStyle={component.style || this.state.deck.defaultSlideStyle || {}}
           container={this.state.deck}
@@ -43,7 +43,7 @@ let BeSpoke = React.createClass({
         />
       </section>
     })
-    return <article className="handouts cube">{deckView}</article>
+    return <article className="sp-bespoke cube">{deckView}</article>
   }
 })
 
