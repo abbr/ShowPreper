@@ -5,11 +5,12 @@ import DeckStore from 'stores/deck'
 import bespoke from 'bespoke'
 import bespokeKeys from 'bespoke-keys'
 import bespokeClasses from 'bespoke-classes'
+import bespokeTouch from 'bespoke-touch'
 import './bespoke.less'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 let BeSpoke = React.createClass({
   componentDidMount: function () {
-    bespoke.from('article', [bespokeKeys(), bespokeClasses()])
+    bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
   },
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck()

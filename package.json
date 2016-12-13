@@ -33,6 +33,7 @@
     "bespoke": "^1.1.0",
     "bespoke-classes": "^1.0.0",
     "bespoke-keys": "^1.1.0",
+    "bespoke-touch": "^1.0.0",
     "bootstrap": "^3.3.6",
     "bootstrap-webpack": "0.0.5",
     "chai": "^3.2.0",
