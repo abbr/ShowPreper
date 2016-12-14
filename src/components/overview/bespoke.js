@@ -58,7 +58,7 @@ module.exports = React.createClass({
         />
       </section>
     })
-    return <div className="sp-overview" style={this.props.deck.style}>
+    return <div className="sp-overview" style={this.props.presentationStyle || this.props.deck.style}>
       <article className="sp-bespoke coverflow" style={this.state.scaleStyle}>{deckView}</article>
     </div>
   }
