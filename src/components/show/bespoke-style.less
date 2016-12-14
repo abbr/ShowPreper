@@ -1,19 +1,9 @@
 article {
   perspective: 600px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
 }
 
 section {
-  transform: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -256px;
-  margin-top: -220px;
   opacity: 0;
 }
 
@@ -25,25 +15,4 @@ section.bespoke-slide {
 section.bespoke-active {
   opacity: 1;
   z-index: 1;
-}
-
-@media only screen and (max-width: 768px) {
-  body {
-    font-size: 10px;
-  }
-
-  section {
-    margin-top: -216px;
-  }
-
-  body,
-  section.bespoke-slide {
-    transition: transform .7s ease, opacity .7s ease;
-  }
-}
-
-@media only screen and (max-width: 570px) {
-  article {
-    transform: scale(0.5) translateY(-27px);
-  }
 }

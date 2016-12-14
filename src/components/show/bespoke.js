@@ -7,11 +7,24 @@ import bespokeKeys from 'bespoke-keys'
 import bespokeClasses from 'bespoke-classes'
 import bespokeTouch from 'bespoke-touch'
 import './bespoke.less'
+import AutoScale from 'components/mixins/autoScale'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 let BeSpoke = React.createClass({
+  mixins: [AutoScale],
   componentDidMount: function () {
     bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
+    this._resized()
+    window.addEventListener('resize', this._resized)
   },
+  componentWillUnmount: function () {
+    window.removeEventListener('resize', this._resized)
+  },
+  _resized: function () {
+    // width multiplication factor is an estimate
+    let bb = {width: this.state.deck.slideWidth * 2, height: this.state.deck.slideHeight}
+    this._scale(bb)
+  },
+
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck()
   }),
@@ -48,7 +61,9 @@ let BeSpoke = React.createClass({
         />
       </section>
     })
-    return <article className="sp-bespoke coverflow" style={this.state.deck.style}>{deckView}</article>
+    return <div className="sp-bespoke" style={this.state.deck.style}>
+      <article className="coverflow" style={this.state.scaleStyle}>{deckView}</article>
+    </div>
   }
 })
 
