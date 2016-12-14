@@ -1,10 +1,7 @@
 'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
-import Exporter from 'components/file/export'
-import Importer from 'components/file/import'
-import FileOpener from 'components/file/open'
-import FileSaveAs from 'components/file/saveAs'
+import FileMenu from './fileMenu'
 import QuickStyler from 'components/styler/quick'
 import './index.less'
 
@@ -25,18 +22,10 @@ let Header = React.createClass({
       },
       lang['new'] + ' ' + lang[type])
   },
-  onImport: function () {
-    this.refs.importer.click()
-  },
-  onDelete: function () {
-    this.props.onDeleteDeck()
-  },
   getInitialState: () => ({
     selectedStyleTarget: 'defaultSlide'
   }),
   render: function () {
-    let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
-    let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current + 1 < this.props.deck.undoStack.stack.length) ? this.props.deck.undoStack.stack[this.props.deck.undoStack.current + 1].desc : '')
     return <nav className="navbar navbar-default sp-header">
       <div className="container-fluid">
         <div className="navbar-header">
@@ -47,33 +36,7 @@ let Header = React.createClass({
             <span className="icon-bar"/>
             <span className="icon-bar"/>
           </button>
-          <div className="dropdown">
-            <a href="#" className="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button btn-default"
-               aria-haspopup="true"
-               aria-expanded="false">ShowPreper<span className="caret"/></a>
-            <ul className="dropdown-menu">
-              <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>{lang.undo}<span
-                className="badge">Ctrl-z</span></a></li>
-              <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>{lang.redo}<span
-                className="badge">Ctrl-y</span></a></li>
-              <li><a href="#fileOpen" title={lang.open}>{lang.open}</a>
-              </li>
-              <li><a href="#fileSaveAs" title={lang.saveAs}>{lang.saveAs}</a>
-              </li>
-              <li><a href="#openExport" title={lang.export}>{lang.export}</a>
-              </li>
-              <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
-              </li>
-              <li><a href="#" onClick={this.onDelete} title={lang.delete} style={{color: 'red'}}>{lang.delete}</a>
-              </li>
-            </ul>
-            <FileOpener onNewDeck={this.props.onNewDeck}/>
-            <FileSaveAs
-              onNewDeck={this.props.onNewDeck}
-              deck={this.props.deck}/>
-            <Exporter deck={this.props.deck}/>
-            <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
-          </div>
+          <FileMenu {...this.props}/>
         </div>
         <div className="collapse navbar-collapse" id="sp-navbar-collapse-1">
           <div className="nav navbar-btn navbar-left"
@@ -156,7 +119,6 @@ let Header = React.createClass({
                 </button>
               </li>
             </ul>
-
             <div className="nav navbar-btn btn-group">
               <a type="button" className="btn btn-success" href={'./' + this.props.presentationFormat + '.html'}
                  target="_blank">
