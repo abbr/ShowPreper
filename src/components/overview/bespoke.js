@@ -21,8 +21,7 @@ module.exports = React.createClass({
     window.removeEventListener('resize', this._resized)
   },
   _resized: function () {
-    // width multiplication factor is an estimate
-    let bb = {width: this.props.deck.slideWidth * 1.5, height: this.props.deck.slideHeight}
+    let bb = {width: this.props.deck.slideWidth, height: this.props.deck.slideHeight}
     this._scale(bb)
   },
 

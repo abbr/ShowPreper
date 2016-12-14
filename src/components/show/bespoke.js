@@ -20,8 +20,7 @@ let BeSpoke = React.createClass({
     window.removeEventListener('resize', this._resized)
   },
   _resized: function () {
-    // width multiplication factor is an estimate
-    let bb = {width: this.state.deck.slideWidth * 2, height: this.state.deck.slideHeight}
+    let bb = {width: this.state.deck.slideWidth, height: this.state.deck.slideHeight}
     this._scale(bb)
   },
 
