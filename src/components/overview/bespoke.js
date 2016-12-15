@@ -13,7 +13,11 @@ module.exports = React.createClass({
     return {}
   },
   componentDidMount: function () {
-    bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
+    let beDeck = bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
+    beDeck.slide(this.props.deck.activeSlide || 0)
+    beDeck.on('activate', (ev)=> {
+      this.props.deck.activateSlide(ev.index)
+    })
     this._resized()
     window.addEventListener('resize', this._resized)
   },
@@ -50,7 +54,7 @@ module.exports = React.createClass({
         <DisplayableComponent
           ownClassName="sp-slide"
           component={component}
-          componentStyle={component.style || this.props.deck.defaultSlideStyle || {}}
+          componentStyle={component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle || {}}
           container={this.props.deck}
           idx={index}
           ref={index}

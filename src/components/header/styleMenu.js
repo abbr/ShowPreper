@@ -20,10 +20,12 @@ module.exports = React.createClass({
           <li><a onClick={()=> {
             this.setState({selectedStyleTarget: 'defaultSlide'})
           }}>{lang.defaultSlide}</a></li>
-          {(this.props.currentView === 'slides') && <li><a onClick={()=> {
+          {(this.props.currentView === 'slides' || this.props.presentationFormat === 'bespoke') &&
+          <li><a onClick={()=> {
             this.setState({selectedStyleTarget: 'thisSlide'})
           }}>{lang.thisSlide}</a></li> }
-          {(this.props.currentView === 'overview') && <li><a onClick={()=> {
+          {(this.props.currentView === 'overview' && this.props.presentationFormat === 'impress') &&
+          <li><a onClick={()=> {
             this.setState({selectedStyleTarget: 'selectedSlides'})
           }}>{lang.selectedSlides}</a></li> }
           {this.props.currentView === 'overview' && <li><a onClick={()=> {
