@@ -44,6 +44,11 @@ module.exports = React.createClass({
         component.width = bb.right - bb.left
         component.height = bb.bottom - bb.top
       }
+      let componentStyle = null
+      if (index === this.props.deck.activeSlide) {
+        componentStyle = this.props.thisSlideStyle
+      }
+      componentStyle = componentStyle || component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle || {}
       return <section
         key={index}
         style={{
@@ -54,7 +59,7 @@ module.exports = React.createClass({
         <DisplayableComponent
           ownClassName="sp-slide"
           component={component}
-          componentStyle={component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle || {}}
+          componentStyle={componentStyle}
           container={this.props.deck}
           idx={index}
           ref={index}

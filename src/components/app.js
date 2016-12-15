@@ -264,6 +264,7 @@ let App = React.createClass({
           presentationStyle={this.state.presentationStyle}
           defaultSlideStyle={this.state.defaultSlideStyle}
           selectedSlidesStyle={this.state.selectedSlidesStyle}
+          thisSlideStyle={this.state.thisSlideStyle}
         />
     }
     return <div className="sp-main-container">
