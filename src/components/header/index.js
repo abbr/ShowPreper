@@ -2,7 +2,7 @@
 import React from 'react'
 import lang from 'i18n/lang'
 import FileMenu from './fileMenu'
-import QuickStyler from 'components/styler/quick'
+import StyleMenu from './styleMenu'
 import './index.less'
 
 let Header = React.createClass({
@@ -22,9 +22,6 @@ let Header = React.createClass({
       },
       lang['new'] + ' ' + lang[type])
   },
-  getInitialState: () => ({
-    selectedStyleTarget: 'defaultSlide'
-  }),
   render: function () {
     return <nav className="navbar navbar-default sp-header">
       <div className="container-fluid">
@@ -56,37 +53,7 @@ let Header = React.createClass({
                 {lang.insertObject}
               </div>
             </button>
-            <div className="dropdown" id="sp-navbar-style">
-              <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <div>{lang.setAppearance}</div>
-                <div className="btn-label">
-                  {lang[this.state.selectedStyleTarget]}<span className="caret"/>
-                </div>
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a onClick={()=> {
-                  this.setState({selectedStyleTarget: 'defaultSlide'})
-                }}>{lang.defaultSlide}</a></li>
-                {(this.props.currentView === 'slides') && <li><a onClick={()=> {
-                  this.setState({selectedStyleTarget: 'thisSlide'})
-                }}>{lang.thisSlide}</a></li> }
-                {(this.props.currentView === 'overview') && <li><a onClick={()=> {
-                  this.setState({selectedStyleTarget: 'selectedSlides'})
-                }}>{lang.selectedSlides}</a></li> }
-                {this.props.currentView === 'overview' && <li><a onClick={()=> {
-                  this.setState({selectedStyleTarget: 'presentation'})
-                }}>{lang.presentation}</a></li>}
-              </ul>
-            </div>
-            <QuickStyler selectedStyleTarget={this.state.selectedStyleTarget}
-                         presentationStyle={this.props.presentationStyle}
-                         deck={this.props.deck}
-                         defaultSlideStyle={this.props.defaultSlideStyle}
-                         selectedSlidesStyle={this.props.selectedSlidesStyle}
-                         thisSlideStyle={this.props.thisSlideStyle}
-                         setTargetStyle={this.props.setTargetStyle}
-                         onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
-            ></QuickStyler>
+            <StyleMenu {...this.props}/>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">
