@@ -61,7 +61,8 @@ let BeSpoke = React.createClass({
       </section>
     })
     return <div className="sp-bespoke" style={this.state.deck.style}>
-      <article className="coverflow" style={this.state.scaleStyle}>{deckView}</article>
+      <article className={this.state.deck.bespokeFormat || 'coverflow'}
+               style={this.state.scaleStyle}>{deckView}</article>
     </div>
   }
 })

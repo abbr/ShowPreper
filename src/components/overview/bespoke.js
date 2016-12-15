@@ -6,6 +6,7 @@ import bespokeClasses from 'bespoke-classes'
 import bespokeTouch from 'bespoke-touch'
 import AutoScale from 'components/mixins/autoScale'
 import './bespoke.less'
+import classNames from 'classnames'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 module.exports = React.createClass({
   mixins: [AutoScale],
@@ -68,7 +69,8 @@ module.exports = React.createClass({
       </section>
     })
     return <div className="sp-overview" style={this.props.presentationStyle || this.props.deck.style}>
-      <article className="sp-bespoke coverflow" style={this.state.scaleStyle}>{deckView}</article>
+      <article className={classNames('sp-bespoke', this.props.deck.bespokeFormat || 'coverflow')}
+               style={this.state.scaleStyle}>{deckView}</article>
     </div>
   }
 })
