@@ -4,7 +4,7 @@ import lang from 'i18n/lang'
 import FileMenu from './fileMenu'
 import StyleMenu from './styleMenu'
 import './index.less'
-import BespokeFormatMenu from './bespokeFormatMenu'
+import BespokeThemeMenu from './bespokeThemeMenu'
 
 let Header = React.createClass({
   createWidget: function (type) {
@@ -55,7 +55,7 @@ let Header = React.createClass({
               </div>
             </button>
             <StyleMenu {...this.props}/>
-            <BespokeFormatMenu {...this.props}/>
+            <BespokeThemeMenu {...this.props}/>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">
