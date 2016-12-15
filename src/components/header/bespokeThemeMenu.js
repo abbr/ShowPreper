@@ -6,14 +6,16 @@ let formats = require.context(
   true // useSubdirectories
 )
 module.exports = React.createClass({
-  updateBespokeTheme: function(name){
-
+  updateBespokeTheme: function (fileName) {
+    let theme = fileName.match(/\.\/(\w+)\.png/)[1]
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.deck,
+      index: -1
+    }, {bespokeTheme: theme})
   },
   render: function () {
-    let imgs = formats.keys().map(function (e, i) {
-      return <li key={i}><a onClick={()=> {
-        console.log('here')
-      }}><img src={formats(e)}/></a></li>
+    let imgs = formats.keys().map((e, i) => {
+      return <li key={i}><a onClick={this.updateBespokeTheme.bind(null, e)}><img src={formats(e)}/></a></li>
     })
     return <div className="sp-bespoke-format-menu dropdown">
       <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
