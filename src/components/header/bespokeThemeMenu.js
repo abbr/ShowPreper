@@ -19,8 +19,9 @@ module.exports = React.createClass({
     })
     return <div className="sp-bespoke-format-menu dropdown">
       <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <div className="btn-label">
-          xxx<span className="caret"/>
+        <div className="btn-label"> set bespoke theme to
+          <img src={formats('./' + (this.props.deck.bespokeTheme || 'coverflow') + '.png')}
+              className="sp-bespoke-active-theme"/><span className="caret"/>
         </div>
       </button>
       <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">

@@ -24,6 +24,10 @@ let Header = React.createClass({
       lang['new'] + ' ' + lang[type])
   },
   render: function () {
+    let bespokeThemeMenu
+    if (this.props.currentView === 'overview' && this.props.presentationFormat === 'bespoke') {
+      bespokeThemeMenu = <BespokeThemeMenu {...this.props}/>
+    }
     return <nav className="navbar navbar-default sp-header">
       <div className="container-fluid">
         <div className="navbar-header">
@@ -54,8 +58,8 @@ let Header = React.createClass({
                 {lang.insertObject}
               </div>
             </button>
+            {bespokeThemeMenu}
             <StyleMenu {...this.props}/>
-            <BespokeThemeMenu {...this.props}/>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">
