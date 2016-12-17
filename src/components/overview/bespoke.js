@@ -26,8 +26,37 @@ module.exports = React.createClass({
     window.removeEventListener('resize', this._resized)
   },
   _resized: function () {
-    let bb = {width: this.props.deck.slideWidth, height: this.props.deck.slideHeight}
+    let scaleFactor = this.props.deck.bespokeZoomFactor || 1
+    let cx = this.props.deck.slideWidth / 2
+    let cy = this.props.deck.slideHeight / 2
+    let bb = {
+      top: cy - this.props.deck.slideHeight * scaleFactor / 2,
+      right: cx + this.props.deck.slideWidth * scaleFactor / 2,
+      bottom: cy + this.props.deck.slideHeight * scaleFactor / 2,
+      left: cx - this.props.deck.slideWidth * scaleFactor / 2
+    }
     this._scale(bb)
+  },
+  zoom: function (delta) {
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.deck,
+      index: -1
+    }, {bespokeZoomFactor: (this.props.deck.bespokeZoomFactor || 1) + delta})
+    this._resized()
+  },
+  zoomIn: function () {
+    this.zoom(-0.05)
+    this.zoomInTimer = setInterval(()=>this.zoom(-0.05), 100)
+  },
+  stopZoomIn: function () {
+    clearInterval(this.zoomInTimer)
+  },
+  zoomOut: function () {
+    this.zoom(0.05)
+    this.zoomOutTimer = setInterval(()=>this.zoom(0.05), 100)
+  },
+  stopZoomOut: function () {
+    clearInterval(this.zoomOutTimer)
   },
 
   render: function () {
@@ -69,6 +98,15 @@ module.exports = React.createClass({
       </section>
     })
     return <div className="sp-overview" style={this.props.presentationStyle || this.props.deck.style}>
+      <span
+        className='glyphicon glyphicon-zoom-in'
+        onMouseDown={this.zoomIn}
+        onMouseUp={this.stopZoomIn}
+      />
+      <span className='glyphicon glyphicon-zoom-out'
+            onMouseDown={this.zoomOut}
+            onMouseUp={this.stopZoomOut}
+      />
       <article className={classNames('sp-bespoke', this.props.deck.bespokeTheme || 'coverflow')}
                style={this.state.scaleStyle}>{deckView}</article>
     </div>

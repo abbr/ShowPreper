@@ -20,7 +20,15 @@ let BeSpoke = React.createClass({
     window.removeEventListener('resize', this._resized)
   },
   _resized: function () {
-    let bb = {width: this.state.deck.slideWidth, height: this.state.deck.slideHeight}
+    let scaleFactor = this.state.deck.bespokeZoomFactor || 1
+    let cx = this.state.deck.slideWidth / 2
+    let cy = this.state.deck.slideHeight / 2
+    let bb = {
+      top: cy - this.state.deck.slideHeight * scaleFactor / 2,
+      right: cx + this.state.deck.slideWidth * scaleFactor / 2,
+      bottom: cy + this.state.deck.slideHeight * scaleFactor / 2,
+      left: cx - this.state.deck.slideWidth * scaleFactor / 2
+    }
     this._scale(bb)
   },
 
