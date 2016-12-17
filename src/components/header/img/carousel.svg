@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<svg width="250" height="111" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m46.796128,13.412766l0,84.424613l-22.686627,-21.106154l0,-42.212306l22.686627,-21.106153z" id="svg_15" stroke="#000000"/>
+  <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m227.730478,13.28639l0,84.424613l-22.686627,-21.106154l0,-42.212306l22.686627,-21.106153z" stroke="#000000" id="svg_29" transform="rotate(179.3616485595703 216.38719177246097,55.49869537353516) "/>
+  <rect fill="#000000" stroke-width="0" x="51.099398" y="14.04408" width="148.696727" height="83.161977" id="svg_2" stroke="#000000"/>
+  <text fill="#ffffff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="300.2906" y="173.715206" id="svg_5" font-size="24" font-family="Fantasy" text-anchor="middle" xml:space="preserve" transform="matrix(1.513740087600576,0,0,2.1451568658658906,-329.08821318267013,-296.45441983053746) " stroke="#000000">Carousel</text>
+  <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m20.740328,38.372436l0,34.591249l-5.145105,-8.647812l0,-17.295624l5.145105,-8.647812l0,-0.000001z" id="svg_31" transform="rotate(-179.04251098632812 18.167776107788086,55.66806030273438) " stroke="#000000"/>
+  <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m236.45621,38.364769l0,34.591249l-5.145105,-8.647812l0,-17.295624l5.145105,-8.647813z" transform="rotate(-0.7866405248641968 233.88366699218733,55.66038894653226) " stroke="#000000" id="svg_32"/>
+ </g>
+</svg>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<svg width="250" height="111" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" stroke="null" style="vector-effect: non-scaling-stroke;">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <rect stroke="#000000" id="svg_2" height="83.161977" width="148.696727" y="13.91901" x="50.708231" stroke-width="0" fill="#000000"/>
+  <text stroke="#000000" transform="matrix(1.4708434274938893,0,0,2.1451568658658906,-314.06319081339916,-296.45441983053746) " xml:space="preserve" text-anchor="middle" font-family="Fantasy" font-size="24" id="svg_5" y="173.661425" x="298.178621" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff">Coverflow</text>
+  <path stroke="#000000" opacity="0.5" id="svg_35" d="m39.961626,23.760639l10.235191,7.934839l0,47.609038l-10.235191,7.934839l0,-63.478717z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#999999"/>
+  <path transform="rotate(180 205.0904998779297,55.5) " id="svg_47" stroke="#000000" opacity="0.5" d="m199.972899,23.76064l10.235191,7.934839l0,47.609038l-10.235191,7.934839l0,-63.478716z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#999999"/>
+  <path id="svg_48" stroke="#000000" opacity="0.25" d="m28.705925,23.76064l10.235191,7.934839l0,47.609038l-10.235191,7.934839l0,-63.478716z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#999999"/>
+  <path transform="rotate(-180 216.1764678955078,55.5) " id="svg_49" stroke="#000000" opacity="0.25" d="m211.058868,23.760642l10.235191,7.934839l0,47.609038l-10.235191,7.934839l0,-63.478716z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#999999"/>
+ </g>
+</svg>

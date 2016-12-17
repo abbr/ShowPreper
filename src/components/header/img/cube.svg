@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<svg width="250" height="111" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g stroke="null">
+  <title>Layer 1</title>
+  <g id="svg_3">
+   <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m35.238769,23.760638l10.235191,7.934839l0,47.609038l-10.235191,7.934839l0,-63.478717l0,0.000001z" id="svg_35" opacity="0.5" stroke="#000000"/>
+   <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m204.526061,23.760639l10.235191,7.934839l0,47.609038l-10.235191,7.934839l0,-63.478716z" opacity="0.5" stroke="#000000" id="svg_47" transform="rotate(180 209.64364624023438,55.499996185302734) "/>
+   <g id="svg_1">
+    <rect fill="#000000" stroke-width="0" x="50.679907" y="13.919006" width="148.696727" height="83.161977" id="svg_2" stroke="#000000"/>
+    <text fill="#ffffff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="297.560215" y="173.636983" id="svg_5" font-size="24" font-family="Fantasy" text-anchor="middle" xml:space="preserve" transform="matrix(1.708283132505657,0,0,2.1451568658658906,-383.2773234346904,-296.45441983053746) " stroke="#000000">Cube</text>
+   </g>
+  </g>
+ </g>
+</svg>

@@ -7,7 +7,7 @@ let formats = require.context(
 )
 module.exports = React.createClass({
   updateBespokeTheme: function (fileName) {
-    let theme = fileName.match(/\.\/(\w+)\.png/)[1]
+    let theme = fileName.match(/\.\/(\w+)\.svg/)[1]
     this.props.onSelectedWidgetUpdated({
       container: this.props.deck,
       index: -1
@@ -20,7 +20,7 @@ module.exports = React.createClass({
     return <div className="sp-bespoke-format-menu dropdown">
       <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
         <div className="btn-label"> set bespoke theme to
-          <img src={formats('./' + (this.props.deck.bespokeTheme || 'coverflow') + '.png')}
+          <img src={formats('./' + (this.props.deck.bespokeTheme || 'coverflow') + '.svg')}
               className="sp-bespoke-active-theme"/><span className="caret"/>
         </div>
       </button>

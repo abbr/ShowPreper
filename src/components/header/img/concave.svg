@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<svg width="250" height="111" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g stroke="null">
+  <title>Layer 1</title>
+  <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m1.839455,0.683737l43.945598,13.704069l0,82.224421l-43.945598,13.704069l0,-109.63256l0,0.000001z" id="svg_35" stroke="#000000"/>
+  <rect fill="#000000" stroke-width="0" x="50.821354" y="13.919027" width="148.696727" height="83.161977" id="svg_2" stroke="#000000"/>
+  <text fill="#ffffff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="300.101365" y="173.646802" id="svg_5" font-size="24" font-family="Fantasy" text-anchor="middle" xml:space="preserve" transform="matrix(1.513740087600576,0,0,2.1451568658658906,-329.08821318267013,-296.45441983053746) " stroke="#000000">Concave</text>
+  <path fill="#999999" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m204.215023,0.683737l43.945599,13.70407l0,82.224421l-43.945599,13.704069l0,-109.63256z" stroke="#000000" id="svg_44" transform="rotate(-180 226.1877899169922,55.5) "/>
+  <text fill="#ffffff" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="114.705882" y="52.574662" id="svg_46" font-size="24" font-family="Fantasy" text-anchor="middle" xml:space="preserve"/>
+ </g>
+</svg>
