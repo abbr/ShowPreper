@@ -34,14 +34,15 @@ let Presentation = React.createClass({
       return (
         <DisplayableComponent
           ownClassName="step slide"
-          data-x={component.x+component.width/2}
-          data-y={component.y+component.height/2}
-          data-rotate-x={(component.rotate&&component.rotate.x)?component.rotate.x*180/Math.PI:0}
-          data-rotate-y={(component.rotate&&component.rotate.y)?component.rotate.y*180/Math.PI:0}
-          data-rotate-z={(component.rotate&&component.rotate.z)?component.rotate.z*180/Math.PI:0}
-          data-scale={component.scale?Math.max(component.scale.x,component.scale.y):1}
+          data-x={component.x + component.width / 2}
+          data-y={component.y + component.height / 2}
+          data-z={component.z}
+          data-rotate-x={(component.rotate && component.rotate.x) ? component.rotate.x * 180 / Math.PI : 0}
+          data-rotate-y={(component.rotate && component.rotate.y) ? component.rotate.y * 180 / Math.PI : 0}
+          data-rotate-z={(component.rotate && component.rotate.z) ? component.rotate.z * 180 / Math.PI : 0}
+          data-scale={component.scale ? Math.max(component.scale.x, component.scale.y) : 1}
           component={component}
-          componentStyle={component.style || this.state.deck.defaultSlideStyle||{}}
+          componentStyle={component.style || this.state.deck.defaultSlideStyle || {}}
           container={this.state.deck}
           key={index}
           idx={index}

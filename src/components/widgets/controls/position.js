@@ -10,7 +10,10 @@ let PositionControl = React.createClass({
     }
     let newPropObj = {}
     newPropObj[p] = parseInt(v)
-    this.props.onSelectedWidgetUpdated({container: this.props.container, index:this.props.idx}, newPropObj, lang.moveComponents)
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.container,
+      index: this.props.idx
+    }, newPropObj, lang.moveComponents)
   },
   render: function () {
     return <div className="positioningCtrls">
@@ -18,14 +21,20 @@ let PositionControl = React.createClass({
       <EditableHtmlElement
         eleNm="span"
         idx={this.props.idx}
-        onBlur={(ev)=>this.onBlur('x',ev.target.innerHTML)}
+        onBlur={(ev)=>this.onBlur('x', ev.target.innerHTML)}
         dangerouslySetInnerHTML={{__html: this.props.component.x}}/>
       <span className="bottomposition">↓</span>
       <EditableHtmlElement
         eleNm="span"
         idx={this.props.idx}
-        onBlur={(ev)=>this.onBlur('y',ev.target.innerHTML)}
+        onBlur={(ev)=>this.onBlur('y', ev.target.innerHTML)}
         dangerouslySetInnerHTML={{__html: this.props.component.y}}/>
+      <span className="bottomposition">↙</span>
+      <EditableHtmlElement
+        eleNm="span"
+        idx={this.props.idx}
+        onBlur={(ev)=>this.onBlur('z', ev.target.innerHTML)}
+        dangerouslySetInnerHTML={{__html: this.props.component.z || 0}}/>
     </div>
   }
 })

@@ -84,6 +84,7 @@
   "activeSlide": 0,
   "slideWidth": 640,
   "slideHeight": 480,
+  "perspective": 1024,
   "style": {
     "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
   },

@@ -1,13 +1,13 @@
 'use strict'
-import React from "react"
-import "./impress.less"
-import AutoScale from "components/mixins/autoScale"
-import Draggable from "components/mixins/draggable"
-import Scalable from "components/mixins/scalable"
-import Selectable from "components/mixins/selectable"
-import Rotatable from "components/mixins/rotatable"
-import Killable from "components/mixins/killable"
-import lang from "i18n/lang"
+import React from 'react'
+import './impress.less'
+import AutoScale from 'components/mixins/autoScale'
+import Draggable from 'components/mixins/draggable'
+import Scalable from 'components/mixins/scalable'
+import Selectable from 'components/mixins/selectable'
+import Rotatable from 'components/mixins/rotatable'
+import Killable from 'components/mixins/killable'
+import lang from 'i18n/lang'
 var EditableComponent = require('components/widgets/editableComponent')
 module.exports = React.createClass({
   mixins: [AutoScale, Selectable, Killable, Draggable(function () {
@@ -125,6 +125,10 @@ module.exports = React.createClass({
         />
       )
     })
+    let deckStyle = _.clone(this.state.scaleStyle)
+    if (deckStyle && deckStyle.transform && this.props.deck.perspective) {
+      deckStyle.transform = ' perspective(' + this.props.deck.perspective + 'px)' + deckStyle.transform
+    }
     return (
       <div
         onMouseDown={this.onSelectionMouseDown}
@@ -139,7 +143,7 @@ module.exports = React.createClass({
         />
         <div
           className="sp-overview-deck"
-          style={this.state.scaleStyle}>
+          style={deckStyle}>
           {deckView}
         </div>
       </div>

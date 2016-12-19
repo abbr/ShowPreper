@@ -11,6 +11,9 @@ let DisplayableComponent = React.createClass({
 
     let widgetStyle = _.merge({transform: ''}, componentStyle || {}), thisComponentStyle = {transform: ''}
 
+    if (component.perspective) {
+      thisComponentStyle.transform += ' perspective(' + component.perspective + 'px)'
+    }
     let translate3D = {}
     translate3D.x = component.x || 0
     translate3D.y = component.y || 0
