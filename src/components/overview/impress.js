@@ -126,8 +126,8 @@ module.exports = React.createClass({
       )
     })
     let deckStyle = _.clone(this.state.scaleStyle)
-    if (deckStyle && deckStyle.transform && this.props.deck.perspective) {
-      deckStyle.transform = ' perspective(' + this.props.deck.perspective + 'px)' + deckStyle.transform
+    if (deckStyle && this.props.deck.perspective) {
+      deckStyle.perspective = this.props.deck.perspective / (this.state.scale || 1) + 'px'
     }
     return (
       <div
