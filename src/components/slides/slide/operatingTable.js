@@ -18,7 +18,8 @@ let OperatingTable = React.createClass({
     }, function (e) {
       return {
         x: this.props.component.components[e].x || 0,
-        y: this.props.component.components[e].y || 0
+        y: this.props.component.components[e].y || 0,
+        z: this.props.component.components[e].z || 0
       }
     },
     function (e, x, y) {
@@ -97,7 +98,7 @@ let OperatingTable = React.createClass({
       })
       let otSlideStyle = _.merge({}, this.state.scaleStyle, this.props.thisSlideStyle || this.props.component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle)
       if (this.props.deck.perspective) {
-        otSlideStyle.perspective = this.props.deck.perspective + 'px'
+        otSlideStyle.perspective = (this.props.deck.perspective / this.state.scale) + 'px'
       }
       return (
         <div className="sp-operating-table"
