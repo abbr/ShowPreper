@@ -48,6 +48,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
           zScale = depth === 0 ? Infinity : scaledPerspective / depth
         }
         let updatedProps = {}
+        this._draggable.shiftKey = ev.shiftKey
         if (ev.shiftKey) {
           updatedProps.z = this._draggable.drags[i].oz + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
         }
@@ -77,7 +78,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
           zScale = depth === 0 ? Infinity : scaledPerspective / depth
         }
         let updatedProps = {}
-        if (ev.shiftKey) {
+        if (this._draggable.shiftKey) {
           updatedProps.z = this._draggable.drags[i].oz + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
         }
         else {
