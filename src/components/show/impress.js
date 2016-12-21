@@ -77,6 +77,7 @@ let Presentation = React.createClass({
       </div>
       <div id="impress"
            data-max-scale="9999" //virtually disable max scale
+           data-perspective={this.state.deck.perspective}
            data-width={this.state.deck.slideWidth}
            data-height={this.state.deck.slideHeight}>
         {deckView}
