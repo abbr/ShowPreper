@@ -95,12 +95,16 @@ let OperatingTable = React.createClass({
           />
         )
       })
+      let otSlideStyle = _.merge({}, this.state.scaleStyle, this.props.thisSlideStyle || this.props.component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle)
+      if (this.props.deck.perspective) {
+        otSlideStyle.perspective = this.props.deck.perspective + 'px'
+      }
       return (
         <div className="sp-operating-table"
              onMouseDown={this.onSelectionMouseDown}
         >
           <div className="sp-ot-slide"
-               style={_.merge({}, this.state.scaleStyle, this.props.thisSlideStyle || this.props.component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle)}>
+               style={otSlideStyle}>
             {componentsView}
           </div>
         </div>
