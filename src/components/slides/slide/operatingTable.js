@@ -22,22 +22,16 @@ let OperatingTable = React.createClass({
         z: this.props.component.components[e].z || 0
       }
     },
-    function (e, x, y) {
+    function (e, updatedProps) {
       this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
         container: this.props.component,
         index: e
-      }, {
-        x: x,
-        y: y
-      })
-    }, function (e, x, y) {
+      }, updatedProps)
+    }, function (e, updatedProps) {
       this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
           container: this.props.component,
           index: e
-        }, {
-          x: x,
-          y: y
-        }, lang.moveComponents
+        }, updatedProps, lang.moveComponents
       )
     }), Scalable, Rotatable, Killable],
   getInitialState: function () {

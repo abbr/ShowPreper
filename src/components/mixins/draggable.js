@@ -47,9 +47,15 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
           let depth = scaledPerspective - this._draggable.drags[i].oz
           zScale = depth === 0 ? Infinity : scaledPerspective / depth
         }
-        let x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale / zScale)
-        let y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale / zScale)
-        mouseMoveWidgetUpdateFunction && mouseMoveWidgetUpdateFunction.bind(this, e, x, y)()
+        let updatedProps = {}
+        if (ev.shiftKey) {
+          updatedProps.z = this._draggable.drags[i].oz + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
+        }
+        else {
+          updatedProps.x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale / zScale)
+          updatedProps.y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale / zScale)
+        }
+        mouseMoveWidgetUpdateFunction && mouseMoveWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
       ev.stopPropagation && ev.stopPropagation()
     },
@@ -70,9 +76,15 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
           let depth = scaledPerspective - this._draggable.drags[i].oz
           zScale = depth === 0 ? Infinity : scaledPerspective / depth
         }
-        let x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale / zScale)
-        let y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale / zScale)
-        mouseUpWidgetUpdateFunction && mouseUpWidgetUpdateFunction.bind(this, e, x, y)()
+        let updatedProps = {}
+        if (ev.shiftKey) {
+          updatedProps.z = this._draggable.drags[i].oz + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
+        }
+        else {
+          updatedProps.x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale / zScale)
+          updatedProps.y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale / zScale)
+        }
+        mouseUpWidgetUpdateFunction && mouseUpWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
       ev.stopPropagation && ev.stopPropagation()
     }

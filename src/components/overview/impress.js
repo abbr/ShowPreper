@@ -18,22 +18,16 @@ module.exports = React.createClass({
       y: this.props.component.components[e].y || 0,
       z: this.props.component.components[e].z || 0
     }
-  }, function (e, x, y) {
+  }, function (e, updatedProps) {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
       container: this.props.component,
       index: e
-    }, {
-      x: x,
-      y: y
-    })
-  }, function (e, x, y) {
+    }, updatedProps)
+  }, function (e, updatedProps) {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
         container: this.props.component,
         index: e
-      }, {
-        x: x,
-        y: y
-      }, lang.moveComponents
+      }, updatedProps, lang.moveComponents
     )
   }), Scalable, Rotatable],
   getInitialState: function () {
