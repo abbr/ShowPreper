@@ -1,8 +1,12 @@
 import React from 'react'
 import DropdownList from 'react-widgets/lib/DropdownList'
+import './index.less'
 export default React.createClass({
   parseBorder: function () {
-    let border = {width: {components: []}}
+    let border = {
+      width: {components: []},
+      style: this.props.currentStyle.borderStyle
+    }
     try {
       let widthComponentsRaw = this.props.currentStyle.borderWidth.split(' ')
       border.width.components = widthComponentsRaw.map((e, i)=> {
@@ -20,10 +24,11 @@ export default React.createClass({
     }
     catch (ex) {
     }
+
     return border
   },
   composeBorder: function (parsedBorder) {
-    let borderStyleObject = {}
+    let borderStyleObject = {borderStyle: parsedBorder.style}
     try {
       borderStyleObject.borderWidth = parsedBorder.width.components.reduce((pv, cv, ci)=> {
         return pv + ' ' + ((typeof cv == 'string') ? cv : (cv.length + cv.uom))
@@ -32,6 +37,11 @@ export default React.createClass({
     catch (ex) {
     }
     return borderStyleObject
+  },
+  onChangeStyle: function (newStyle) {
+    let border = this.parseBorder()
+    border.style = newStyle
+    this.props.updateStyle(this.composeBorder(border))
   },
   onChangeWidthComponentCnt: function (newCnt) {
     let border = this.parseBorder()
@@ -68,7 +78,7 @@ export default React.createClass({
           />
         </div>
       })
-    return <div className="container-fluid">
+    return <div className="container-fluid sp-border-editor">
       <div className="row">
         <div className="col-xs-1">Width:</div>
         <div className="col-xs-11">
@@ -83,8 +93,19 @@ export default React.createClass({
         <div className="col-xs-11 row">
           {borderWidthComponents}
         </div>
-
       </div>
+      <div className="row">
+        <div className="col-xs-1">Style:</div>
+        <div className="col-xs-11">
+          <DropdownList
+            data={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']}
+            value={border.style}
+            onChange={this.onChangeStyle}
+            className="sp-style-dropdown"
+          />
+        </div>
+      </div>
+
     </div>
   }
 })
