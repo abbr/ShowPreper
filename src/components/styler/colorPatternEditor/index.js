@@ -30,7 +30,7 @@ const linearGradientDirectionArr = [
 ]
 export default React.createClass({
   componentDidMount() {
-    $("#colorpicker").spectrum({
+    $("#sp-background-solid-colorpicker").spectrum({
       color: this.props.currentStyle,
       showAlpha: true,
       showInput: true,
@@ -124,7 +124,7 @@ export default React.createClass({
   },
 
   componentDidUpdate: function () {
-    $("#colorpicker").spectrum("set", this.props.currentStyle)
+    $("#sp-background-solid-colorpicker").spectrum("set", this.props.currentStyle)
   },
   parseGradientString: function () {
     let gradientString, gradientFormatMatch, gradientFormat = {}
@@ -275,7 +275,7 @@ export default React.createClass({
           <div id="collapseOne" className="panel-collapse collapse"
                role="tabpanel" aria-labelledby="headingOne">
             <div className="panel-body">
-              <input id='colorpicker'/>
+              <input id='sp-background-solid-colorpicker'/>
             </div>
           </div>
         </div>
