@@ -22,11 +22,29 @@ export default React.createClass({
   parseBorder: function () {
     let border = {
       width: {components: []},
-      style: this.props.currentStyle.borderStyle
+      style: this.props.currentStyle.borderStyle,
+      radius: {components: []}
     }
     try {
       let widthComponentsRaw = this.props.currentStyle.borderWidth.split(' ')
       border.width.components = widthComponentsRaw.map((e, i)=> {
+        let lengthMatch = e.match(/(\d+)(\w+)/)
+        if (lengthMatch) {
+          return {
+            length: parseInt(lengthMatch[1]),
+            uom: lengthMatch[2]
+          }
+        }
+        else {
+          return e
+        }
+      })
+    }
+    catch (ex) {
+    }
+    try {
+      let radiusComponentsRaw = this.props.currentStyle.borderRadius.split(' ')
+      border.radius.components = radiusComponentsRaw.map((e, i)=> {
         let lengthMatch = e.match(/(\d+)(\w+)/)
         if (lengthMatch) {
           return {
@@ -48,6 +66,13 @@ export default React.createClass({
     let borderStyleObject = {borderStyle: parsedBorder.style}
     try {
       borderStyleObject.borderWidth = parsedBorder.width.components.reduce((pv, cv, ci)=> {
+        return pv + ' ' + ((typeof cv == 'string') ? cv : (cv.length + cv.uom))
+      }, '').trim()
+    }
+    catch (ex) {
+    }
+    try {
+      borderStyleObject.borderRadius = parsedBorder.radius.components.reduce((pv, cv)=> {
         return pv + ' ' + ((typeof cv == 'string') ? cv : (cv.length + cv.uom))
       }, '').trim()
     }
@@ -80,6 +105,26 @@ export default React.createClass({
     border.width.components[i][prop] = (newVal instanceof Object) ? newVal.target.value : newVal
     this.props.updateStyle(this.composeBorder(border))
   },
+  onChangeRadiusComponentCnt: function (newCnt) {
+    let border = this.parseBorder()
+    let diff = newCnt - border.radius.components.length
+    if (diff > 0) {
+      let i = 0
+      while (i < diff) {
+        border.radius.components.push({length: 0, uom: 'px'})
+        i++
+      }
+    }
+    else {
+      border.radius.components.splice(newCnt, -diff)
+    }
+    this.props.updateStyle(this.composeBorder(border))
+  },
+  onChangeRadiusComponent: function (i, prop, newVal) {
+    let border = this.parseBorder()
+    border.radius.components[i][prop] = (newVal instanceof Object) ? newVal.target.value : newVal
+    this.props.updateStyle(this.composeBorder(border))
+  },
   render: function () {
     let border = this.parseBorder()
     let borderWidthComponents = border.width.components && border.width.components.map((e, i)=> {
@@ -92,6 +137,19 @@ export default React.createClass({
           <DropdownList data={['px', 'em']}
                         value={e.uom}
                         onChange={this.onChangeWidthComponent.bind(null, i, 'uom')}
+          />
+        </div>
+      })
+    let borderRadiusComponents = border.radius.components && border.radius.components.map((e, i)=> {
+        return <div className="col-xs-3" key={i}
+                    style={{display: 'inline'}}>
+          <input value={e.length}
+                 size={1}
+                 onChange={this.onChangeRadiusComponent.bind(null, i, 'length')
+                 }/>
+          <DropdownList data={['px', 'em', '%']}
+                        value={e.uom}
+                        onChange={this.onChangeRadiusComponent.bind(null, i, 'uom')}
           />
         </div>
       })
@@ -126,7 +184,22 @@ export default React.createClass({
         <div className="col-xs-1">Color:</div>
         <div className="col-xs-11">
           <input id='sp-border-colorpicker'/>
+        </div>
+      </div>
 
+      <div className="row">
+        <div className="col-xs-1">Radius:</div>
+        <div className="col-xs-11">
+          <DropdownList data={[1, 2, 3, 4]}
+                        value={border.radius.components && border.radius.components.length}
+                        onChange={this.onChangeRadiusComponentCnt}
+          /> components
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-1"></div>
+        <div className="col-xs-11 row">
+          {borderRadiusComponents}
         </div>
       </div>
 
