@@ -37,7 +37,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
     },
     onDraggableMouseMove: function (ev) {
       let scale = this.state.scale || 1
-      let perspective = this.props.deck.perspective
+      let perspective = this.props.deck && this.props.deck.perspective
       this._draggable.dragged = true
       let selectedWidgets = getSelectedWidgets.bind(this)()
       selectedWidgets.forEach((e, i)=> {
@@ -68,7 +68,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
       document.removeEventListener('mouseup', this.onDraggableMouseUp)
       if (!this._draggable.dragged) return
       let scale = this.state.scale || 1
-      let perspective = this.props.deck.perspective
+      let perspective = this.props.deck && this.props.deck.perspective
       let selectedWidgets = getSelectedWidgets.bind(this)()
       selectedWidgets.forEach((e, i)=> {
         let zScale = 1

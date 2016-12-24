@@ -317,7 +317,7 @@ export default React.createClass({
                role="tabpanel" aria-labelledby="headingTwo">
             <div className="panel-body container-fluid">
               <div className="row">
-                <div className="col-xs-2">Repeating:</div>
+                <div className="col-xs-2">Repeating</div>
                 <div className="col-xs-1">
                   <input type="checkbox"
                          onClick={this.onToggleIsRepeating}
@@ -325,12 +325,14 @@ export default React.createClass({
                 </div>
               </div>
               <div className="row">
-                <div className="col-xs-2">Direction:</div>
-                <DropdownList className="col-xs-4" data={linearGradientDirectionArr}
-                              valueField="value" textField="text"
-                              value={gradientDirection}
-                              onChange={this.onChangeGradientDirection}
-                />
+                <div className="col-xs-2">Direction</div>
+                <div className="col-xs-4">
+                  <DropdownList data={linearGradientDirectionArr}
+                                valueField="value" textField="text"
+                                value={gradientDirection}
+                                onChange={this.onChangeGradientDirection}
+                  />
+                </div>
                 <div className="col-xs-1"/>
                 <div
                   style={{
@@ -347,7 +349,7 @@ export default React.createClass({
                   </AngleInput>
                 </div>
               </div>
-              Color Stops:
+              Color Stops
               <ColorStops id="sp-linear-color-stops"
                           parseGradientString={this.parseGradientString}
                           updateStyle={this.props.updateStyle}
@@ -375,7 +377,7 @@ export default React.createClass({
                aria-labelledby="headingThree">
             <div className="panel-body container-fluid">
               <div className="row">
-                <div className="col-xs-2">Repeating:</div>
+                <div className="col-xs-2">Repeating</div>
                 <div className="col-xs-1">
                   <input type="checkbox"
                          onClick={this.onToggleIsRepeating}
@@ -383,7 +385,7 @@ export default React.createClass({
                 </div>
               </div>
               <div className="row">
-                <div className="col-xs-2">Shape:</div>
+                <div className="col-xs-2">Shape</div>
                 <div className="col-xs-2">
                   <input type="radio" name="shape" value="circle"
                          onChange={this.onToggleGradientShape}
@@ -396,17 +398,18 @@ export default React.createClass({
                 </div>
               </div>
               <div className="row">
-                <div className="col-xs-2">Extent:</div>
-                <DropdownList data={gradientExtentSelectionArr}
-                              valueField="value" textField="text"
-                              value={gradientExtentSelect}
-                              onChange={this.onChangeGradientExtent}
-                              className="col-xs-4"
-                />
+                <div className="col-xs-2">Extent</div>
+                <div className="col-xs-4">
+                  <DropdownList data={gradientExtentSelectionArr}
+                                valueField="value" textField="text"
+                                value={gradientExtentSelect}
+                                onChange={this.onChangeGradientExtent}
+
+                  /></div>
                 {gradientExtentInput}
               </div>
               <div className="row">
-                <div className="col-xs-2">Position:</div>
+                <div className="col-xs-2">Position</div>
                 <div className="col-xs-2">
                   <input type="radio" name="position" value="center"
                          onChange={this.onChangeGradientPosition.bind(null, null)}
@@ -424,7 +427,7 @@ export default React.createClass({
                 </div
                 >
               </div>
-              Color Stops:
+              Color Stops
               <ColorStops id="sp-radial-color-stops"
                           parseGradientString={this.parseGradientString}
                           updateStyle={this.props.updateStyle}

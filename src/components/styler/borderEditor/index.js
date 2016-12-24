@@ -155,7 +155,7 @@ export default React.createClass({
       })
     return <div className="container-fluid sp-border-editor">
       <div className="row">
-        <div className="col-xs-1">Width:</div>
+        <div className="col-xs-1">Width</div>
         <div className="col-xs-11">
           <DropdownList data={[1, 2, 3, 4]}
                         value={border.width.components && border.width.components.length}
@@ -170,7 +170,7 @@ export default React.createClass({
         </div>
       </div>
       <div className="row">
-        <div className="col-xs-1">Style:</div>
+        <div className="col-xs-1">Style</div>
         <div className="col-xs-11">
           <DropdownList
             data={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']}
@@ -181,14 +181,14 @@ export default React.createClass({
         </div>
       </div>
       <div className="row">
-        <div className="col-xs-1">Color:</div>
+        <div className="col-xs-1">Color</div>
         <div className="col-xs-11">
           <input id='sp-border-colorpicker'/>
         </div>
       </div>
 
       <div className="row">
-        <div className="col-xs-1">Radius:</div>
+        <div className="col-xs-1">Radius</div>
         <div className="col-xs-11">
           <DropdownList data={[1, 2, 3, 4]}
                         value={border.radius.components && border.radius.components.length}
