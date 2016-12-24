@@ -3,7 +3,6 @@ import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import './index.less'
 import 'react-widgets/lib/less/react-widgets.less'
-import NumberPicker from 'react-widgets/lib/NumberPicker'
 import DropdownList from 'react-widgets/lib/DropdownList'
 import localizer from 'react-widgets/lib/localizers/simple-number'
 import ColorStops from './colorStops'
@@ -75,22 +74,22 @@ export default React.createClass({
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
-  onChangeGradientExtentPct: function (dimension, value) {
+  onChangeGradientExtentPct: function (dimension, ev) {
     let g = this.parseGradientString()
     if (g && g.extent) {
       let xyExtArr = g.extent.split(' ')
-      xyExtArr[dimension] = value + 'px'
+      xyExtArr[dimension] = ev.target.value + 'px'
       g.extent = xyExtArr.join(' ')
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
-  onChangeGradientPosition: function (dimension, value) {
+  onChangeGradientPosition: function (dimension, ev) {
     let g = this.parseGradientString()
     g.position = g.position || {}
     if (dimension) {
-      if (typeof value == 'number') {
-        g.position[dimension] = value + 'px'
+      if (!isNaN(ev.target.value)) {
+        g.position[dimension] = ev.target.value + 'px'
       }
       else {
         g.position.x = '0px'
@@ -216,7 +215,7 @@ export default React.createClass({
     return fullGradientString
   },
   render: function () {
-    let type, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle, gradientFormat, gradientExtentXPosition, gradientExtentYPosition
+    let type, gradientExtentSelect, gradientExtentXExtentPct, gradientExtentYExtentPct, gradientDirection, gradientAngle, gradientFormat, gradientExtentXPosition = '', gradientExtentYPosition = ''
     if (this.props.currentStyle) {
       gradientFormat = this.parseGradientString()
       if (gradientFormat) {
@@ -234,7 +233,7 @@ export default React.createClass({
           gradientDirection = 'to angle'
           gradientAngle = gradientFormat.directionAngle
         }
-        if (gradientFormat.position) {
+        if (gradientFormat.position && gradientFormat.position.x) {
           gradientExtentXPosition = parseInt(gradientFormat.position['x'])
           try {
             gradientExtentYPosition = parseInt(gradientFormat.position['y'])
@@ -251,6 +250,27 @@ export default React.createClass({
       }
       else if (this.props.currentStyle.match(/^(rgba?\(|transparent)/)) {
         type = 'color'
+      }
+    }
+    let gradientExtentInput
+    if (gradientFormat && gradientExtentSelect === 'length') {
+      switch (gradientFormat.shape) {
+        case 'circle':
+          gradientExtentInput = <span
+            className="col-xs-4">
+                  <input type="text" value={gradientExtentXExtentPct} size={1}
+                         onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
+            </span>
+          break
+        case 'ellipse':
+          gradientExtentInput = <span
+            className="col-xs-4">
+            x: <input type="text" value={gradientExtentXExtentPct} size={1}
+                      onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
+            y: <input type="text" value={gradientExtentYExtentPct} size={1}
+                      onChange={this.onChangeGradientExtentPct.bind(null, 1)}/>px
+            </span>
+          break
       }
     }
     return <div id="sp-color-pattern-editor">
@@ -383,26 +403,7 @@ export default React.createClass({
                               onChange={this.onChangeGradientExtent}
                               className="col-xs-4"
                 />
-                <span
-                  style={{
-                    display: (gradientFormat && gradientFormat.shape === 'circle' && gradientExtentSelect === 'length') ? 'inline' : 'none'
-                  }}
-                  className="col-xs-4"
-                >
-                  <NumberPicker value={gradientExtentXExtentPct} min={0}
-                                onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
-                </span>
-                <span
-                  style={{
-                    display: (gradientFormat && gradientFormat.shape === 'ellipse' && gradientExtentSelect === 'length') ? 'inline' : 'none'
-                  }}
-                  className="col-xs-4"
-                >
-                  x: <NumberPicker value={gradientExtentXExtentPct} min={0}
-                                   onChange={this.onChangeGradientExtentPct.bind(null, 0)}/>px
-                y: <NumberPicker value={gradientExtentYExtentPct} min={0}
-                                 onChange={this.onChangeGradientExtentPct.bind(null, 1)}/>px
-                </span>
+                {gradientExtentInput}
               </div>
               <div className="row">
                 <div className="col-xs-2">Position:</div>
@@ -416,10 +417,10 @@ export default React.createClass({
                   <input type="radio" name="position" value="position"
                          onChange={this.onChangeGradientPosition.bind(null, 'x')}
                          checked={!!(gradientFormat && gradientFormat.position && gradientFormat.position.x)}/>
-                  x: <NumberPicker value={gradientExtentXPosition} min={0}
-                                   onChange={this.onChangeGradientPosition.bind(null, 'x')}/>px
-                  y: <NumberPicker value={gradientExtentYPosition} min={0}
-                                   onChange={this.onChangeGradientPosition.bind(null, 'y')}/>px
+                  x: <input type="text" value={gradientExtentXPosition} size={1}
+                            onChange={this.onChangeGradientPosition.bind(null, 'x')}/>px
+                  y: <input value={gradientExtentYPosition} size={1}
+                            onChange={this.onChangeGradientPosition.bind(null, 'y')}/>px
                 </div
                 >
               </div>
