@@ -18,22 +18,22 @@ export default React.createClass({
         y: (bb && bb.top) || 0
       }
     },
-    function (e, x, y) {
+    function (e, updatedProps) {
       if (!e) return
       let m = this.getMarkerFromAttrs(e)
       let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-      let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
-      if (y - bb.top > 30) {
+      let pct = (Math.max(0, Math.min(1, (updatedProps.x - bb.left) / bb.width) * 100)).toFixed(2)
+      if (updatedProps.y - bb.top > 30) {
         pct = null
       }
       this.updateMarkerPosition(e, pct)
       e.p = pct
       this.setState({draggingMarkerAttrs: pct === null ? null : e})
-    }, function (e, x, y) {
+    }, function (e, updatedProps) {
       if (!e) return
       let m = this.getMarkerFromAttrs(e)
       let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-      let pct = (Math.max(0, Math.min(1, (x - bb.left) / bb.width) * 100)).toFixed(2)
+      let pct = (Math.max(0, Math.min(1, (updatedProps.x - bb.left) / bb.width) * 100)).toFixed(2)
       this.updateMarkerPosition(e, pct)
       e.p = pct
       this.setState({draggingMarkerAttrs: e})
@@ -126,7 +126,7 @@ export default React.createClass({
     this.props.updateStyle({background: s})
   },
   render: function () {
-    let  colorStops, gradientMarkers, gradientArrString
+    let colorStops, gradientMarkers, gradientArrString
     try {
       let g = this.props.parseGradientString()
       colorStops = g.colorStops
