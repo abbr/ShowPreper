@@ -28,7 +28,7 @@ export default React.createClass({
     try {
       let widthComponentsRaw = this.props.currentStyle.borderWidth.split(' ')
       border.width.components = widthComponentsRaw.map((e, i)=> {
-        let lengthMatch = e.match(/(\d+)(\w+)/)
+        let lengthMatch = e.trim().match(/(\d+)(\D+)/)
         if (lengthMatch) {
           return {
             length: parseInt(lengthMatch[1]),
@@ -45,7 +45,7 @@ export default React.createClass({
     try {
       let radiusComponentsRaw = this.props.currentStyle.borderRadius.split(' ')
       border.radius.components = radiusComponentsRaw.map((e, i)=> {
-        let lengthMatch = e.match(/(\d+)(\w+)/)
+        let lengthMatch = e.trim().match(/(\d+)(\D+)/)
         if (lengthMatch) {
           return {
             length: parseInt(lengthMatch[1]),
