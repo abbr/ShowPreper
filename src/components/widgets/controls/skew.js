@@ -31,6 +31,7 @@ let SkewControl = React.createClass({
         idx={this.props.idx}
         onBlur={(ev)=>this.onBlur(this.props.axis, ev.target.innerHTML)}
         dangerouslySetInnerHTML={{__html: (Math.round(this.props.component.skew[this.props.axis] * 180 / Math.PI) % 360 + 360) % 360}}/>
+      <span contentEditable={false}>°</span>
       </span>
   }
 })
