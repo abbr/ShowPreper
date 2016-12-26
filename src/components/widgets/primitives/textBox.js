@@ -5,6 +5,9 @@ let TextBox = React.createClass({
   getInitialState: function () {
     return {editable: false}
   },
+  componentWillUnmount() {
+    delete this.editor
+  },
   onDoubleClick: function (ev) {
     let reactEle = this
     this.setState({editable: true})
@@ -41,7 +44,7 @@ let TextBox = React.createClass({
     >
       <div
         contentEditable={this.state.editable}
-        title={this.props.selected?lang.doubleClickEdit:null}
+        title={this.props.selected ? lang.doubleClickEdit : null}
         onDoubleClick={this.props.editable && this.onDoubleClick}
         dangerouslySetInnerHTML={{__html: this.props.component.text}}
         ref="editableContent"

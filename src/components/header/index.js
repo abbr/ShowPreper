@@ -18,7 +18,7 @@ let Header = React.createClass({
         "type": type,
         "x": 0,
         "y": 0,
-        "text": "<div style=\"font-family: Hammersmith One;font-size: 30pt\">(" + lang['triClickEdt'] + ")</div>",
+        "text": "<p><span style=\"font-size: 26px\"><span style=\"font-family:arial,helvetica,sans-serif\">(" + lang['triClickEdt'] + ")</span></span></p>",
         "selected": true
       },
       lang['new'] + ' ' + lang[type])
