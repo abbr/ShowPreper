@@ -1,67 +1,71 @@
-.sp-component{
+.sp-component {
   position: absolute;
-  .sp-widget-slide{
+  .sp-widget-slide {
     height: 100%;
   }
-  .sp-selected{
-    border: orange 3pt dashed!important;
+  .sp-selected {
+    border: orange 3pt dashed !important;
   }
-  .sp-selected:first-child{
+  .sp-selected:first-child {
     height: 100%;
   }
-  .sp-edit-ctrls{
+  .sp-edit-ctrls {
     visibility: hidden;
     font-size: 14pt;
     height: 0px;
     z-index: 100;
-    .scale{
+    .scale {
       position: absolute;
       cursor: se-resize;
       left: 100%;
       top: 100%;
       transform: translate(-13%, -27%) rotate(45deg);
     }
-    .rotate-z{
+    .rotate-z {
       position: absolute;
       left: 100%;
       top: 50%;
       transform: translate(19%, -50%);
     }
-    .rotate-x{
+    .rotate-x {
       position: absolute;
       top: 50%;
       transform: translate(-114%, -50%);
     }
-    .rotate-y{
+    .rotate-y {
       position: absolute;
       top: 0;
       left: 50%;
       transform: translate(-50%, -84%);
     }
-    .skew-x{
+    .skew-x {
       position: absolute;
       top: 0;
       transform: translate(-8%, -73%) rotate(55deg);
     }
-    .skew-y{
+    .skew-y {
       position: absolute;
       top: 100%;
       transform: translate(-103%, -69%) rotate(-35deg);
     }
-    .kill{
+    .kill {
       position: absolute;
       top: 0%;
       left: 100%;
       transform: translate(-6%, -62%);
       color: red;
     }
+    *[contenteditable] {
+      background-color: white;
+      border-radius: 20%;
+    }
   }
-  &.sp-overview-component .sp-edit-ctrls{
+  &.sp-overview-component .sp-edit-ctrls {
     font-size: 40pt;
   }
-  &.sp-selected{
+  &.sp-selected {
     z-index: 1;
-    .sp-edit-ctrls{
+    .sp-edit-ctrls {
       visibility: visible;
     }
   }
