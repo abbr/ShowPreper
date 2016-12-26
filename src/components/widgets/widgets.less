@@ -19,10 +19,15 @@
     }
     .scale {
       position: absolute;
-      cursor: se-resize;
       left: 100%;
+      right: -30%;
       top: 100%;
-      transform: translate(-13%, -27%) rotate(45deg);
+      transform: translate(-1%, -10%);
+      .sp-scale-icon {
+        cursor: se-resize;
+        display: inline-block;
+        transform: rotate(45deg);
+      }
     }
     .rotate-z {
       position: absolute;
@@ -47,6 +52,7 @@
       top: 0;
       transform: translate(-8%, -73%);
       .sp-skew-x-icon {
+        cursor: pointer;
         display: inline-block;
         transform: rotate(55deg);
       }
@@ -56,6 +62,7 @@
       top: 100%;
       transform: translate(-103%, -69%);
       .sp-skew-y-icon {
+        cursor: pointer;
         display: inline-block;
         transform: rotate(-35deg);
       }
