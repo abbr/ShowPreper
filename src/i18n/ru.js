@@ -42,6 +42,7 @@ module.exports = {
   moveComponents: 'move components',
   scaleComponents: 'scale components',
   rotateComponents: 'rotate components',
+  skewComponents: 'skew components',
   show: 'Show',
   handouts: 'handouts',
   doubleClickEdit: 'Double click to edit',

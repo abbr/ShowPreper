@@ -41,6 +41,7 @@ module.exports = {
   createPresentation: 'Create Presentation',
   moveComponents: 'move components',
   rotateComponents: 'rotate components',
+  skewComponents: 'skew components',
   show: 'Show',
   handouts: 'handouts',
   doubleClickEdit: 'Double click to edit',
