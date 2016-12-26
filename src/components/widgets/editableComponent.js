@@ -43,22 +43,28 @@ let EditableComponent = React.createClass({
           <RotateControl
             idx={this.props.idx}
             component={this.props.component}
+            container={this.props.container}
             axis="z"
             position="right"
             onRotateMouseDown={this.props.onRotateMouseDown}
+            onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           />
           <RotateControl
             idx={this.props.idx}
             component={this.props.component}
+            container={this.props.container}
             axis="x"
             position="left"
             onRotateMouseDown={this.props.onRotateMouseDown}
+            onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           />
           <RotateControl
             idx={this.props.idx}
             component={this.props.component}
+            container={this.props.container}
             axis="y"
             onRotateMouseDown={this.props.onRotateMouseDown}
+            onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           />
           <SkewControl
             idx={this.props.idx}

@@ -1,7 +1,21 @@
 'use strict'
 import React from 'react'
+import EditableHtmlElement from './editableHtmlElement'
+import lang from 'i18n/lang'
+import _ from 'lodash'
 
 let RotateControl = React.createClass({
+  onBlur: function (p, v) {
+    if (isNaN(v)) {
+      return
+    }
+    let newPropObj = _.cloneDeep(this.props.component.rotate)
+    newPropObj[p] = parseInt(v)
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.container,
+      index: this.props.idx
+    }, {rotate: newPropObj}, lang.moveComponents)
+  },
   onMouseDown: function (ev) {
     this.props.onRotateMouseDown(ev, this.props.idx, this.props.axis)
   },
@@ -18,6 +32,12 @@ let RotateControl = React.createClass({
               xmlSpace="preserve" textAnchor="middle" fontFamily="serif" fontSize="24" id="svg_1" y="218.326696"
               x="208.913934" strokeWidth="0" fill="#000000">{this.props.axis.toUpperCase()}</text>
       </svg>
+      <EditableHtmlElement
+        eleNm="span"
+        idx={this.props.idx}
+        onBlur={(ev)=>this.onBlur(this.props.axis, ev.target.innerHTML)}
+        dangerouslySetInnerHTML={{__html: this.props.component.rotate[this.props.axis]}}/>
+
     </span>
   }
 })
