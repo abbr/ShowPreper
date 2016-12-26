@@ -9,7 +9,7 @@ let SkewControl = React.createClass({
     if (isNaN(v)) {
       return
     }
-    let newPropObj = _.cloneDeep(this.props.component.skew)
+    let newPropObj = _.cloneDeep(this.props.component.skew || {})
     newPropObj[p] = parseInt(v) * Math.PI / 180
     this.props.onSelectedWidgetUpdated({
       container: this.props.container,
@@ -20,6 +20,12 @@ let SkewControl = React.createClass({
     this.props.onRotateMouseDown(ev, this.props.idx, this.props.axis, 'skew')
   },
   render: function () {
+    let skew = 0
+    try {
+      skew = this.props.component.skew[this.props.axis]
+    }
+    catch (ex) {
+    }
     return <span
       className={"skew-" + this.props.axis}>
       <span
@@ -30,7 +36,7 @@ let SkewControl = React.createClass({
         eleNm="span"
         idx={this.props.idx}
         onBlur={(ev)=>this.onBlur(this.props.axis, ev.target.innerHTML)}
-        dangerouslySetInnerHTML={{__html: (Math.round(this.props.component.skew[this.props.axis] * 180 / Math.PI) % 360 + 360) % 360}}/>
+        dangerouslySetInnerHTML={{__html: (Math.round(skew * 180 / Math.PI) % 360 + 360) % 360}}/>
       <span contentEditable={false}>°</span>
       </span>
   }
