@@ -28,7 +28,7 @@ export default React.createClass({
   },
   render: function () {
     let s, sDisp, attrs = []
-    s = this.props.getStyle()
+    s = this.props.getStyle() || {}
     sDisp = _.reduce(s, (p, e, k)=> {
       var capitalLtrs = k.match(/([A-Z])/)
       if (capitalLtrs) {
