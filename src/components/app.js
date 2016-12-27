@@ -163,45 +163,55 @@ let App = React.createClass({
     })
   },
   onCopy: function (ev, key, preserveSelectProp) {
-    try {
-      let deck = this.state.deck
-      let activeSlide = deck.getActiveSlide()
-      let selectedComponents = activeSlide.components.reduce((pv, cv, i)=> {
-        if (cv.selected) {
-          pv.push(cv)
-        }
-        return pv
-      }, [])
-      let clipboardItems = _.cloneDeep(selectedComponents)
-      if (!preserveSelectProp) {
-        clipboardItems.forEach((e)=> {
-          e.selected = false
-        })
+    let deck = this.state.deck
+    let component
+    switch (this.state.view) {
+      case 'slides':
+        component = deck.getActiveSlide()
+        break
+      case 'overview':
+        component = deck
+        break
+    }
+    let selectedComponents = component.components.reduce((pv, cv, i)=> {
+      if (cv.selected) {
+        pv.push(cv)
       }
-      this.setState({clipboard: clipboardItems})
+      return pv
+    }, [])
+    let clipboardItems = _.cloneDeep(selectedComponents)
+    if (!preserveSelectProp) {
+      clipboardItems.forEach((e)=> {
+        e.selected = false
+      })
     }
-    catch (ex) {
-    }
+    this.setState({clipboard: {items: clipboardItems, view: this.state.view}})
   },
   onCut: function () {
     this.onCopy(null, null, true)
     this.deleteWidgets(lang.cut)
   },
   onPaste: function () {
-    try {
-      let deck = this.state.deck
-      let activeSlide = deck.getActiveSlide()
-      this.state.clipboard.forEach((e, i)=> {
-        let markUndoDesc
-        if (i === this.state.clipboard.length - 1) {
-          markUndoDesc = lang.paste
-        }
-        this.onNewWidget(activeSlide, null, _.cloneDeep(e), markUndoDesc)
-      })
-
+    if (this.state.clipboard.view !== this.state.view) {
+      return
     }
-    catch (ex) {
+    let deck = this.state.deck
+    let component
+    switch (this.state.view) {
+      case 'slides':
+        component = deck.getActiveSlide()
+        break
+      case 'overview':
+        component = deck
+        break
     }
+    this.state.clipboard.items.forEach((e, i)=> {
+      let markUndoDesc
+      if (i === this.state.clipboard.items.length - 1) {
+        markUndoDesc = lang.paste
+      }
+      this.onNewWidget(component, null, _.cloneDeep(e), markUndoDesc)
+    })
   },
   onSlideMoved: function (from, to) {
     let deck = this.state.deck
