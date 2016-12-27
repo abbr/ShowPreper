@@ -29,9 +29,9 @@ module.exports = React.createClass({
         </li>
         <li><a href="#fileSaveAs" title={lang.saveAs}>{lang.saveAs}</a>
         </li>
-        <li><a href="#openExport" title={lang.export}>{lang.export}</a>
+        <li><a href="#openExport" title={lang.download}>{lang.download}</a>
         </li>
-        <li><a href="#" onClick={this.onImport} title={lang.import}>{lang.import}</a>
+        <li><a href="#" onClick={this.onImport} title={lang.upload}>{lang.upload}</a>
         </li>
         <li><a href="#" onClick={this.onDelete} title={lang.delete} style={{color: 'red'}}>{lang.delete}</a>
         </li>

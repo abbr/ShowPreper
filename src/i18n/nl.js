@@ -60,4 +60,6 @@ module.exports = {
   removeStyle: 'Remove style',
   setToTransparent: 'Set to transparent',
   border: 'Border',
+  download: 'Download...',
+  upload: 'Upload...',
 }
