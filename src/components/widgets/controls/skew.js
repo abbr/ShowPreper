@@ -10,7 +10,7 @@ let SkewControl = React.createClass({
       return
     }
     let newPropObj = _.cloneDeep(this.props.component.skew || {})
-    newPropObj[p] = parseInt(v) * Math.PI / 180
+    newPropObj[p] = (parseInt(v) % 360 + 360) % 360 * Math.PI / 180
     this.props.onSelectedWidgetUpdated({
       container: this.props.container,
       index: this.props.idx
