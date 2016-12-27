@@ -19,6 +19,9 @@ let App = React.createClass({
     this.setDocTitle(this.state.deck._fn)
   },
   componentDidMount: function () {
+    key.bind('ctrl+c', this.onCopy)
+    key.bind('ctrl+x', this.onCut)
+    key.bind('ctrl+v', this.onPaste)
     key.bind('ctrl+z', this.onUndo)
     key.bind('ctrl+y', this.onRedo)
     key.bind('del', this.deleteWidgets)
@@ -54,7 +57,8 @@ let App = React.createClass({
     presentationStyle: null,
     defaultSlideStyle: null,
     selectedSlidesStyle: null,
-    thisSlideStyle: null
+    thisSlideStyle: null,
+    clipboard: null
   }),
   changeView: function (newView) {
     this.setState({
@@ -157,6 +161,36 @@ let App = React.createClass({
     this.setState({
       deck: deck
     })
+  },
+  onCopy: function () {
+    try {
+      let deck = this.state.deck
+      let activeSlide = deck.getActiveSlide()
+      let selectedComponents = activeSlide.components.reduce((pv, cv, i)=> {
+        if (cv.selected) {
+          pv.push(cv)
+        }
+        return pv
+      }, [])
+      // todo: detect overlap
+      this.setState({clipboard: _.cloneDeep(selectedComponents)})
+    }
+    catch (ex) {
+    }
+  },
+  onCut: function () {
+    // todo: implement
+  },
+  onPaste: function () {
+    try {
+      let deck = this.state.deck
+      let activeSlide = deck.getActiveSlide()
+      this.state.clipboard.forEach((e, i)=> {
+        this.onNewWidget(activeSlide, null, _.cloneDeep(e))
+      })
+    }
+    catch (ex) {
+    }
   },
   onSlideMoved: function (from, to) {
     let deck = this.state.deck
