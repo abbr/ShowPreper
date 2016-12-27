@@ -22,7 +22,7 @@ let RotateControl = React.createClass({
   render: function () {
     let rotate = 0
     try {
-      rotate = this.props.component.rotate[this.props.axis]
+      rotate = this.props.component.rotate[this.props.axis] || 0
     }
     catch (ex) {
     }

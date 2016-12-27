@@ -22,7 +22,7 @@ let ScaleControl = React.createClass({
   render: function () {
     let scale = 1
     try {
-      scale = Math.max(this.props.component.scale.x, this.props.component.scale.y).toFixed(2)
+      scale = Math.max(this.props.component.scale.x || 1, this.props.component.scale.y || 1).toFixed(2)
     }
     catch (ex) {
     }

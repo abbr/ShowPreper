@@ -22,7 +22,7 @@ let SkewControl = React.createClass({
   render: function () {
     let skew = 0
     try {
-      skew = this.props.component.skew[this.props.axis]
+      skew = this.props.component.skew[this.props.axis] || 0
     }
     catch (ex) {
     }
