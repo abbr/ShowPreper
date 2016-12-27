@@ -185,7 +185,13 @@ let App = React.createClass({
         e.selected = false
       })
     }
-    this.setState({clipboard: {items: clipboardItems, view: this.state.view}})
+    this.setState({
+      clipboard: {
+        items: clipboardItems,
+        view: this.state.view,
+        presentationFormat: this.state.presentationFormat
+      }
+    })
   },
   onCut: function () {
     this.onCopy(null, null, true)
@@ -193,6 +199,9 @@ let App = React.createClass({
   },
   onPaste: function () {
     if (this.state.clipboard.view !== this.state.view) {
+      return
+    }
+    if (this.state.clipboard.view === 'overview' && this.state.clipboard.presentationFormat !== this.state.presentationFormat) {
       return
     }
     let deck = this.state.deck
