@@ -162,7 +162,7 @@ let App = React.createClass({
       deck: deck
     })
   },
-  onCopy: function () {
+  onCopy: function (ev, key, preserveSelectProp) {
     try {
       let deck = this.state.deck
       let activeSlide = deck.getActiveSlide()
@@ -172,22 +172,33 @@ let App = React.createClass({
         }
         return pv
       }, [])
-      // todo: detect overlap
-      this.setState({clipboard: _.cloneDeep(selectedComponents)})
+      let clipboardItems = _.cloneDeep(selectedComponents)
+      if (!preserveSelectProp) {
+        clipboardItems.forEach((e)=> {
+          e.selected = false
+        })
+      }
+      this.setState({clipboard: clipboardItems})
     }
     catch (ex) {
     }
   },
   onCut: function () {
-    // todo: implement
+    this.onCopy(null, null, true)
+    this.deleteWidgets(lang.cut)
   },
   onPaste: function () {
     try {
       let deck = this.state.deck
       let activeSlide = deck.getActiveSlide()
       this.state.clipboard.forEach((e, i)=> {
-        this.onNewWidget(activeSlide, null, _.cloneDeep(e))
+        let markUndoDesc
+        if (i === this.state.clipboard.length - 1) {
+          markUndoDesc = lang.paste
+        }
+        this.onNewWidget(activeSlide, null, _.cloneDeep(e), markUndoDesc)
       })
+
     }
     catch (ex) {
     }
@@ -229,7 +240,7 @@ let App = React.createClass({
       }
     }
     if (hasDeletedSomething) {
-      deck.markUndo(lang.delete)
+      deck.markUndo(typeof arguments[0] == 'string' ? arguments[0] : lang.delete)
       this.setState({
         deck: deck
       })
