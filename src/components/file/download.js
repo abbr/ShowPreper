@@ -1,5 +1,6 @@
 'use strict'
 import React from 'react'
+import lang from 'i18n/lang'
 
 let Exporter = React.createClass({
   render: function () {
@@ -7,14 +8,28 @@ let Exporter = React.createClass({
       type: 'application/json'
     })
     let blobURL = window.URL.createObjectURL(blob)
-    return <div id="openExport" className="sp-modal-dialog">
-      <div>
-        <a href="#close" title="Close" className="sp-modal-close">X</a>
-        <h2>Export ...</h2>
-        <p>This is a sample modal box that can be created using the powers of CSS3.</p>
-        <p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or
-          create a login/register form for users.</p>
-        <a href={blobURL} download={this.props.deck._fn + (this.props.deck._fn.endsWith('.spj')?"":".spj")}>download</a>
+    return <div id="sp-open-download" className="modal fade" tabIndex="-1" role="dialog">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+            <h4 className="modal-title">{lang.download}</h4>
+          </div>
+          <div className="modal-body">
+            <a href={blobURL} download={this.props.deck._fn + (this.props.deck._fn.endsWith('.spj') ? "" : ".spj")}>{lang.download} {this.props.deck._fn}</a>
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-default" data-dismiss="modal">{lang.btnCancel}</button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={this.onOk}
+              data-dismiss="modal"
+            >{lang.btnOk}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   }

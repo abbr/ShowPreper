@@ -25,13 +25,13 @@ module.exports = React.createClass({
           className="badge">Ctrl-z</span></a></li>
         <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>{lang.redo}<span
           className="badge">Ctrl-y</span></a></li>
-        <li><a href="#sp-file-open" data-toggle="modal" title={lang.open}>{lang.open}</a>
+        <li><a href="#sp-file-open" data-toggle="modal" title={lang.open}>{lang.open}...</a>
         </li>
-        <li><a href="#sp-file-save-as" data-toggle="modal" title={lang.saveAs}>{lang.saveAs}</a>
+        <li><a href="#sp-file-save-as" data-toggle="modal" title={lang.saveAs}>{lang.saveAs}...</a>
         </li>
-        <li><a href="#openExport" title={lang.download}>{lang.download}</a>
+        <li><a href="#sp-open-download" data-toggle="modal" title={lang.download}>{lang.download}...</a>
         </li>
-        <li><a href="#" onClick={this.onUpload} title={lang.upload}>{lang.upload}</a>
+        <li><a href="#" onClick={this.onUpload} title={lang.upload}>{lang.upload}...</a>
         </li>
         <li><a href="#" onClick={this.onDelete} title={lang.delete} style={{color: 'red'}}>{lang.delete}</a>
         </li>
