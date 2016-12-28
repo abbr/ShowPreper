@@ -27,7 +27,7 @@ module.exports = React.createClass({
           className="badge">Ctrl-y</span></a></li>
         <li><a href="#sp-file-open" data-toggle="modal" title={lang.open}>{lang.open}</a>
         </li>
-        <li><a href="#fileSaveAs" title={lang.saveAs}>{lang.saveAs}</a>
+        <li><a href="#sp-file-save-as" data-toggle="modal" title={lang.saveAs}>{lang.saveAs}</a>
         </li>
         <li><a href="#openExport" title={lang.download}>{lang.download}</a>
         </li>

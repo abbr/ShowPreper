@@ -34,25 +34,32 @@ let FileSaveAs = React.createClass({
     }
   },
   render: function () {
-    return <div id="fileSaveAs" className="sp-modal-dialog">
-      <div>
-        <a href="#close" title="Close" className="sp-modal-close">X</a>
-        <h2>Save As ...</h2>
-        <input type="text" onChange={this.onChange}
-               value={this.state.fn.replace(/\.spj$/,'')}></input>.spj
-        <div style={{color: 'red'}}>{this.state.errMsg}</div>
-        <a
-          className="btn btn-primary"
-          onClick={this.onOk}
-          href="#close"
-        >{lang.btnOk}
-        </a>
-        <a
-          href="#close"
-          className="btn btn-primary"
-        >{lang.btnCancel}
-        </a>
+    return <div id="sp-file-save-as" className="modal fade" tabIndex="-1" role="dialog">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+            <h4 className="modal-title">{lang.saveAs}</h4>
+          </div>
+          <div className="modal-body">
+            <input type="text" onChange={this.onChange}
+                   value={this.state.fn.replace(/\.spj$/,'')}></input>.spj
+            <div style={{color: 'red'}}>{this.state.errMsg}</div>
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-default" data-dismiss="modal">{lang.btnCancel}</button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={this.onOk}
+              data-dismiss="modal"
+            >{lang.btnOk}
+            </button>
+          </div>
+        </div>
       </div>
+
     </div>
   }
 })
