@@ -1,14 +1,14 @@
 'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
-import Exporter from 'components/file/export'
-import Importer from 'components/file/import'
+import Downloader from 'components/file/download'
+import Uploader from 'components/file/upload'
 import FileOpener from 'components/file/open'
 import FileSaveAs from 'components/file/saveAs'
 
 module.exports = React.createClass({
-  onImport: function () {
-    this.refs.importer.click()
+  onUpload: function () {
+    this.refs.uploader.click()
   },
   onDelete: function () {
     this.props.onDeleteDeck()
@@ -31,7 +31,7 @@ module.exports = React.createClass({
         </li>
         <li><a href="#openExport" title={lang.download}>{lang.download}</a>
         </li>
-        <li><a href="#" onClick={this.onImport} title={lang.upload}>{lang.upload}</a>
+        <li><a href="#" onClick={this.onUpload} title={lang.upload}>{lang.upload}</a>
         </li>
         <li><a href="#" onClick={this.onDelete} title={lang.delete} style={{color: 'red'}}>{lang.delete}</a>
         </li>
@@ -40,8 +40,8 @@ module.exports = React.createClass({
       <FileSaveAs
         onNewDeck={this.props.onNewDeck}
         deck={this.props.deck}/>
-      <Exporter deck={this.props.deck}/>
-      <Importer onNewDeck={this.props.onNewDeck} ref="importer"/>
+      <Downloader deck={this.props.deck}/>
+      <Uploader onNewDeck={this.props.onNewDeck} ref="uploader"/>
     </div>
   }
 })
