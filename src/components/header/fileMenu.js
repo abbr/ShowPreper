@@ -25,7 +25,7 @@ module.exports = React.createClass({
           className="badge">Ctrl-z</span></a></li>
         <li><a href="#" onClick={this.props.onRedo} title={redoTitle}>{lang.redo}<span
           className="badge">Ctrl-y</span></a></li>
-        <li><a href="#fileOpen" title={lang.open}>{lang.open}</a>
+        <li><a href="#sp-file-open" data-toggle="modal" title={lang.open}>{lang.open}</a>
         </li>
         <li><a href="#fileSaveAs" title={lang.saveAs}>{lang.saveAs}</a>
         </li>

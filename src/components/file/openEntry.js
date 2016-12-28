@@ -6,7 +6,7 @@ let OpenEntry = React.createClass({
     this.props.onNewDeck(this.props.name)
   },
   render: function () {
-    return <div><a href="#" onClick={this.onOpen}>{this.props.name}</a></div>
+    return <div><a data-toggle="modal" href="#sp-file-open" onClick={this.onOpen}>{this.props.name}</a></div>
   }
 })
 module.exports = OpenEntry
