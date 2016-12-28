@@ -1,0 +1,32 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "type": "TextBox",
+          "x": 111,
+          "y": 149,
+          "text": "<p>&nbsp;<span style=\"font-size:26px\"><span style=\"font-family:arial,helvetica,sans-serif\">Welcome to ShowPreper!</span></span></p>\n\n<ul>\n\t<li><span style=\"font-size:26px\"><span style=\"font-family:arial,helvetica,sans-serif\">click me to select</span></span></li>\n\t<li><span style=\"font-size:26px\"><span style=\"font-family:arial,helvetica,sans-serif\">or double-click me to edit</span></span></li>\n\t<li><span style=\"font-size:26px\"><span style=\"font-family:arial,helvetica,sans-serif\">or tripple click me to select line &amp; edit</span></span></li>\n</ul>\n",
+          "selected": false
+        }
+      ],
+      "type": "Slide",
+      "z": 0,
+      "selected": true,
+      "y": 234,
+      "x": 292,
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "activeSlide": 0,
+  "slideWidth": 640,
+  "slideHeight": 480,
+  "perspective": 1024,
+  "style": {
+    "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
+  },
+  "defaultSlideStyle": {
+    "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
+  }
+}
