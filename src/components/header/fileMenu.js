@@ -40,7 +40,7 @@ module.exports = React.createClass({
       <FileSaveAs
         onNewDeck={this.props.onNewDeck}
         deck={this.props.deck}/>
-      <Downloader deck={this.props.deck}/>
+      <Downloader {...this.props}/>
       <Uploader onNewDeck={this.props.onNewDeck} ref="uploader"/>
     </div>
   }

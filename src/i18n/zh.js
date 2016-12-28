@@ -29,10 +29,7 @@ module.exports = {
   invisible: '隐藏',
   reset: '重置',
   go: '走',
-  strutExporterJson: {
-    explain: '保存到本地硬盘。',
-    clickBelow: '点击下载'
-  },
+  downloadProjectFileExplain: "This allows you to save a file with extension .spj on your computer that you can upload back to ShowPreper later.",
   background: '背景',
   surface: '全局背景',
   invalidFilename: '文件名不可用',
@@ -63,4 +60,6 @@ module.exports = {
   border: 'Border',
   download: 'Download',
   upload: 'Upload',
+  project: 'project',
+  btnClose: 'Close',
 }

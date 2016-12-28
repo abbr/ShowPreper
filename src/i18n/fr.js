@@ -29,10 +29,7 @@ module.exports = {
   invisible: 'Invisible',
   reset: 'Réinitialiser',
   go: 'Aller',
-  strutExporterJson: {
-    explain: 'Vous pouvez sauvegarder la présentation dans un fichier que vous pourrez réimporter dans Strut plus tard',
-    clickBelow: 'Cliquer ci-dessous pour télécharger le fichier'
-  },
+  downloadProjectFileExplain: "This allows you to save a file with extension .spj on your computer that you can upload back to ShowPreper later.",
   background: 'Fond de la diapo',
   surface: 'Surface',
   invalidFilename: 'Invalid Filename',
@@ -63,4 +60,6 @@ module.exports = {
   border: 'Border',
   download: 'Download',
   upload: 'Upload',
+  project: 'project',
+  btnClose: 'Close',
 }

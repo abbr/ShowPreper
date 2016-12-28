@@ -95,7 +95,7 @@ let Header = React.createClass({
             <div className="nav navbar-btn btn-group">
               <a type="button" className="btn btn-success" href={'./' + this.props.presentationFormat + '.html'}
                  target="_blank">
-                <span className={'glyphicon glyphicon-play'}/>
+                <span className="glyphicon glyphicon-play"/>
                 <div>{this.props.presentationFormat}</div>
               </a>
               <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown"
