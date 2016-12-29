@@ -4,6 +4,7 @@ import lang from 'i18n/lang'
 import FileMenu from './fileMenu'
 import StyleMenu from './styleMenu'
 import './index.less'
+import _ from 'lodash'
 import BespokeThemeMenu from './bespokeThemeMenu'
 
 let Header = React.createClass({
@@ -24,9 +25,12 @@ let Header = React.createClass({
       lang['new'] + ' ' + lang[type])
   },
   render: function () {
-    let bespokeThemeMenu
+    let bespokeThemeMenu, styleMenu
     if (this.props.currentView === 'overview' && this.props.presentationFormat === 'bespoke') {
       bespokeThemeMenu = <BespokeThemeMenu {...this.props}/>
+    }
+    if (this.props.currentView === 'slides' || this.props.presentationFormat !== 'handouts') {
+      styleMenu = <StyleMenu {...this.props}/>
     }
     return <nav className="navbar navbar-default sp-header">
       <div className="container-fluid">
@@ -59,7 +63,7 @@ let Header = React.createClass({
               </div>
             </button>
             {bespokeThemeMenu}
-            <StyleMenu {...this.props}/>
+            {styleMenu}
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-btn sp-view-btns">
@@ -96,7 +100,7 @@ let Header = React.createClass({
               <a type="button" className="btn btn-success" href={'./' + this.props.presentationFormat + '.html'}
                  target="_blank">
                 <span className="glyphicon glyphicon-play"/>
-                <div>{this.props.presentationFormat}</div>
+                <div>{_.capitalize(this.props.presentationFormat)}</div>
               </a>
               <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
@@ -109,7 +113,7 @@ let Header = React.createClass({
                 <li><a style={{cursor: 'pointer'}}
                        onClick={this.props.changePresentationFormat.bind(null, 'handouts')}>{lang.handouts}</a></li>
                 <li><a style={{cursor: 'pointer'}}
-                       onClick={this.props.changePresentationFormat.bind(null, 'bespoke')}>bespoke</a></li>
+                       onClick={this.props.changePresentationFormat.bind(null, 'bespoke')}>Bespoke</a></li>
               </ul>
             </div>
           </div>

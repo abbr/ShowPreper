@@ -40,7 +40,7 @@ module.exports = {
   rotateComponents: 'rotate components',
   skewComponents: 'skew components',
   show: 'Show',
-  handouts: 'handouts',
+  handouts: 'Handouts',
   doubleClickEdit: 'Double click to edit',
   duplicatedFileNameErr: 'Duplicated file name. If you click Ok, old file will be overwritten.',
   emptyFileNameErr: 'File name cannot be empty.',
