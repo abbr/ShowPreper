@@ -4,19 +4,25 @@
       "components": [
         {
           "type": "TextBox",
-          "x": 161,
+          "x": 160,
           "y": 174,
           "text": "<p>&nbsp;<span style=\"font-size:26px\"><span style=\"font-family:arial,helvetica,sans-serif\">Welcome to ShowPreper!</span></span></p>\n\n<ul>\n\t<li><span style=\"font-size:26px\"><span style=\"font-family:arial,helvetica,sans-serif\">click me to select</span></span></li>\n\t<li><span style=\"font-size:26px\"><span style=\"font-family:arial,helvetica,sans-serif\">or double-click to edit</span></span></li>\n</ul>\n",
           "selected": false
         }
       ],
-      "type": "Slide",
-      "z": 0,
-      "selected": true,
-      "y": 239,
-      "x": 351,
-      "width": 640,
-      "height": 480
+      "type": "Slide"
+    },
+    {
+      "components": [],
+      "type": "Slide"
+    },
+    {
+      "components": [],
+      "type": "Slide"
+    },
+    {
+      "components": [],
+      "type": "Slide"
     }
   ],
   "activeSlide": 0,
