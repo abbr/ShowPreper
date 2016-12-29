@@ -1,1 +1,26 @@
+markdown: kramdown
+highlighter: rouge
+permalink: /news/:year/:month/:day/:title/
 theme: jekyll-theme-tactile
+repository: abbr/ShowPreper
+
+collections:
+  docs:
+    output: true
+
+name: ShowPreper
+baseurl: "/ShowPreper"
+url: "https://abbr.github.io"
+
+
+gems:
+  - jekyll-feed
+  - jekyll-redirect-from
+  - jemoji
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-mentions
+
+exclude:
+  - README.md
+  - .gitignore
