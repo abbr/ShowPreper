@@ -1,6 +1,9 @@
 [
   {
-    "background": "radial-gradient(#f00, #fff)",
+    "background": "linear-gradient(45deg, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%)"
+  },
+  {
+    "background": "linear-gradient(135deg, rgba(206,220,231,1) 0%,rgba(89,106,114,1) 100%)",
     "borderWidth": "1px",
     "borderStyle": "solid",
     "borderColor": "rgba(0, 0, 0, .3)",
@@ -8,22 +11,19 @@
     "boxShadow": "0 2px 6px rgba(0, 0, 0, .1)"
   },
   {
-    "background": "radial-gradient(#0f0, #fff)"
+    "background": "linear-gradient(135deg, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%)"
   },
   {
-    "background": "radial-gradient(#00f, #fff)"
+    "background": "linear-gradient(to bottom, rgba(201,222,150,1) 0%,rgba(138,182,107,1) 44%,rgba(57,130,53,1) 100%)"
   },
   {
-    "background": "radial-gradient(#f77, #fff)"
+    "background": "radial-gradient(ellipse at center, rgba(254,252,234,1) 0%,rgba(241,218,54,1) 100%)"
   },
   {
-    "background": "radial-gradient(#7f7, #fff)"
+    "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
   },
   {
-    "background": "radial-gradient(#77f, #fff)"
-  },
-  {
-    "background": "radial-gradient(#b89, #fff)"
+    "background": "linear-gradient(135deg, rgba(233,246,253,1) 0%,rgba(211,238,251,1) 100%)"
   },
   {
     "background": "rgba(0, 0, 0, 0)"
