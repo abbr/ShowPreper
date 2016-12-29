@@ -111,5 +111,6 @@ exports.getDefaultDeck = function () {
   if (typeof(Storage) !== "undefined") {
     _fn = localStorage.getItem(_spDefaultDeck) || _spDefaultFileNm
   }
-  return new Deck(_fn)
+  let args = [null, _fn]
+  return new (Function.prototype.bind.apply(Deck, args.concat(Array.from(arguments))))
 }

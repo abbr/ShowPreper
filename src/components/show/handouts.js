@@ -5,10 +5,12 @@ import DeckStore from 'stores/deck'
 import 'expose?$!expose?jQuery!jquery'
 import 'bootstrap-webpack'
 import './handouts.less'
+import Global from 'react-global'
+
 var DisplayableComponent = require('components/widgets/displayableComponent')
 let Handouts = React.createClass({
   getInitialState: () => ({
-    deck: DeckStore.getDefaultDeck()
+    deck: DeckStore.getDefaultDeck(Global.get('deck'))
   }),
   render: function () {
     let deckView = this.state.deck.components.map((component, index) => {
@@ -46,7 +48,11 @@ let Handouts = React.createClass({
         </div>
       </div>
     })
-    return <div className="sp-handouts container-fluid">{deckView}</div>
+    return <div><Global values={{
+      deck: this.state.deck
+    }}/>
+      <div className="sp-handouts container-fluid">{deckView}</div>
+    </div>
   }
 })
 

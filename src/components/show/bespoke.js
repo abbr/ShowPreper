@@ -6,6 +6,7 @@ import bespoke from 'bespoke'
 import bespokeKeys from 'bespoke-keys'
 import bespokeClasses from 'bespoke-classes'
 import bespokeTouch from 'bespoke-touch'
+import Global from 'react-global'
 import './bespoke.less'
 import AutoScale from 'components/mixins/autoScale'
 var DisplayableComponent = require('components/widgets/displayableComponent')
@@ -31,9 +32,8 @@ let BeSpoke = React.createClass({
     }
     this._scale(bb)
   },
-
   getInitialState: () => ({
-    deck: DeckStore.getDefaultDeck()
+    deck: DeckStore.getDefaultDeck(Global.get('deck'))
   }),
   render: function () {
     let deckView = this.state.deck.components.map((component, index) => {
@@ -69,6 +69,9 @@ let BeSpoke = React.createClass({
       </section>
     })
     return <div className="sp-bespoke" style={this.state.deck.style}>
+      <Global values={{
+        deck: this.state.deck
+      }}/>
       <article className={this.state.deck.bespokeTheme || 'coverflow'}
                style={this.state.scaleStyle}>{deckView}</article>
     </div>

@@ -6,12 +6,13 @@ import './impress.less'
 import DeckStore from 'stores/deck'
 import AutoScale from 'components/mixins/autoScale'
 import _ from 'lodash'
+import Global from 'react-global'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 
 let Presentation = React.createClass({
   mixins: [AutoScale],
   getInitialState: () => ({
-    deck: DeckStore.getDefaultDeck()
+    deck: DeckStore.getDefaultDeck(Global.get('deck'))
   }),
   componentWillMount: function () {
     _.merge(document.body.style, this.state.deck.style)
@@ -70,6 +71,9 @@ let Presentation = React.createClass({
                        data-scale={overviewScale}/>)
 
     return <div>
+      <Global values={{
+        deck: this.state.deck
+      }}/>
       <div className="fallback-message">
         <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a
           simplified version of this presentation.</p>

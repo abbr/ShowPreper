@@ -81,6 +81,7 @@
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-dom": "^15.0.0",
+    "react-global": "^0.1.8",
     "react-hot-loader": "^1.2.9",
     "react-widgets": "^3.4.4",
     "rimraf": "^2.4.3",
