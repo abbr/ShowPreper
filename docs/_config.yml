@@ -1,7 +1,7 @@
 markdown: kramdown
 highlighter: rouge
 permalink: /news/:year/:month/:day/:title/
-theme: jekyll-theme-leap-day
+theme: jekyll-theme-slate
 repository: abbr/ShowPreper
 
 collections:
@@ -11,6 +11,8 @@ collections:
 name: ShowPreper
 baseurl: "/ShowPreper"
 url: "https://abbr.github.io"
+
+logo: img/logo.svg
 
 
 gems:
