@@ -51,7 +51,11 @@ exports.onRotateMouseMove = function (ev) {
   let deltaRotate = this.computeDeltaRotate(ev) * this._rotatable.sign
   this.props.selectedWidgets.forEach(e=> {
     let axis = this._rotatable.axis.toLowerCase()
-    let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
+    let newRotateAngle = ((this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI)
+    if (ev.ctrlKey) {
+      let deg = newRotateAngle * 180 / Math.PI
+      newRotateAngle = Math.round(deg / 10) * 10 * Math.PI / 180
+    }
     let newRotate = _.cloneDeep(this._rotatable.rotates[e])
     newRotate[axis] = newRotateAngle
     let newOperation = {}
@@ -73,7 +77,11 @@ exports.onRotateMouseUp = function (ev) {
   let deltaRotate = this.computeDeltaRotate(ev) * this._rotatable.sign
   this.props.selectedWidgets.forEach(e=> {
     let axis = this._rotatable.axis.toLowerCase()
-    let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
+    let newRotateAngle = ((this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI)
+    if (ev.ctrlKey) {
+      let deg = newRotateAngle * 180 / Math.PI
+      newRotateAngle = Math.round(deg / 10) * 10 * Math.PI / 180
+    }
     let newRotate = _.cloneDeep(this._rotatable.rotates[e])
     newRotate[axis] = newRotateAngle
     let newOperation = {}
