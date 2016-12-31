@@ -105,9 +105,6 @@ let OperatingTable = React.createClass({
       if (this.state.showGrid) {
         otSlideStyle.background = 'url(' + GridImage + ')'
       }
-      else {
-        console.log('here')
-      }
       return (
         <div className="sp-operating-table"
              onMouseDown={this.onSelectionMouseDown}

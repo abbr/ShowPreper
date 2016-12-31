@@ -51,10 +51,17 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         this._draggable.shiftKey = ev.shiftKey
         if (ev.shiftKey) {
           updatedProps.z = this._draggable.drags[i].oz + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
+          if (ev.ctrlKey) {
+            updatedProps.z = 10 * Math.round(updatedProps.z / 10)
+          }
         }
         else {
           updatedProps.x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale / zScale)
           updatedProps.y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale / zScale)
+          if (ev.ctrlKey) {
+            updatedProps.x = 10 * Math.round(updatedProps.x / 10)
+            updatedProps.y = 10 * Math.round(updatedProps.y / 10)
+          }
         }
         mouseMoveWidgetUpdateFunction && mouseMoveWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
@@ -80,10 +87,17 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         let updatedProps = {}
         if (this._draggable.shiftKey) {
           updatedProps.z = this._draggable.drags[i].oz + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale)
+          if (ev.ctrlKey) {
+            updatedProps.z = 10 * Math.round(updatedProps.z / 10)
+          }
         }
         else {
           updatedProps.x = this._draggable.drags[i].oleft + Math.round((ev.pageX - this._draggable.drags[i].ox) / scale / zScale)
           updatedProps.y = this._draggable.drags[i].otop + Math.round((ev.pageY - this._draggable.drags[i].oy) / scale / zScale)
+          if (ev.ctrlKey) {
+            updatedProps.x = 10 * Math.round(updatedProps.x / 10)
+            updatedProps.y = 10 * Math.round(updatedProps.y / 10)
+          }
         }
         mouseUpWidgetUpdateFunction && mouseUpWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
