@@ -20,7 +20,7 @@
     "background": "radial-gradient(ellipse at center, rgba(254,252,234,1) 0%,rgba(241,218,54,1) 100%)"
   },
   {
-    "background": "radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))"
+    "background": "radial-gradient(rgba(240, 240, 240, 0.85), rgb(190, 190, 190))"
   },
   {
     "background": "linear-gradient(135deg, rgba(233,246,253,1) 0%,rgba(211,238,251,1) 100%)"
