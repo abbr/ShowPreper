@@ -21,9 +21,11 @@ let EditableComponent = React.createClass({
       'sp-selected': this.props.selected
     });
     return (
-      <DisplayableComponent {...this.props}
+      <DisplayableComponent
+        {...this.props}
         className={cmpClass}
         onMouseDown={this.onMouseDown}
+        onTouchStart={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         editable={true}
         setDraggable={this.props.setDraggable}
