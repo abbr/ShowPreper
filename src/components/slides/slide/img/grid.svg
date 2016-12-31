@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Grid</title>
+  <line opacity="0.1" id="svg_1" y2="9" x2="9.5" y1="0" x1="9.5" fill="none" stroke="#000000"/>
+  <line id="svg_2" y2="9.5" x2="10" y1="9.5" x1="0" opacity="0.1" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#000000" fill="none"/>
+ </g>
+</svg>

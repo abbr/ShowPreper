@@ -10,6 +10,9 @@ import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
 import Killable from 'components/mixins/killable'
 import lang from 'i18n/lang'
+import GridImage from './img/grid.svg'
+let key = require('mousetrap')
+
 require('./operatingTable.less')
 
 let OperatingTable = React.createClass({
@@ -35,7 +38,7 @@ let OperatingTable = React.createClass({
       )
     }), Scalable, Rotatable, Killable],
   getInitialState: function () {
-    return {draggable: true}
+    return {draggable: true, ctrlKeyPressed: false}
   },
   componentWillMount: function () {
     this.mouseDownHdlrs = []
@@ -44,6 +47,11 @@ let OperatingTable = React.createClass({
   componentDidMount: function () {
     this._resized()
     window.addEventListener('resize', this._resized)
+    key.bind('ctrl', this.onCtrlKey, 'keydown')
+    key.bind('ctrl', this.onCtrlKey, 'keyup')
+  },
+  onCtrlKey: function (ev) {
+    this.setState({ctrlKeyPressed: !!(ev.type === 'keydown')})
   },
   _resized: function () {
     let deck = this.props.deck
@@ -62,6 +70,9 @@ let OperatingTable = React.createClass({
   },
   componentWillUnmount: function () {
     window.removeEventListener('resize', this._resized)
+    key.unbind('ctrl', 'keydown')
+    key.unbind('ctrl', 'keyup')
+
   },
   render: function () {
     try {
@@ -93,6 +104,12 @@ let OperatingTable = React.createClass({
       let otSlideStyle = _.merge({}, this.state.scaleStyle, this.props.thisSlideStyle || this.props.component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle)
       if (this.props.deck.perspective) {
         otSlideStyle.perspective = (this.props.deck.perspective / this.state.scale) + 'px'
+      }
+      if (this.state.ctrlKeyPressed) {
+        otSlideStyle.background = 'url(' + GridImage + ')'
+      }
+      else{
+        console.log('here')
       }
       return (
         <div className="sp-operating-table"
