@@ -170,9 +170,12 @@ let App = React.createClass({
         component = deck.getActiveSlide()
         break
       case 'overview':
-        component = deck
+        if(this.state.presentationFormat === 'impress'){
+          component = deck
+        }
         break
     }
+    if (!component) return
     let selectedComponents = component.components.reduce((pv, cv, i)=> {
       if (cv.selected) {
         pv.push(cv)
