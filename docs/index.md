@@ -1,21 +1,41 @@
 ---
 ---
-# About
 
-# Live Demo
+# About
+WYSIWYG editor for [Impress.js]((https://github.com/impress/impress.js)) and [Bespoke.js](http://markdalgleish.com/projects/bespoke.js/).
+
+# Online Access
+For the impatient, full feature of ShowPreper can be accessed free [online](https://showpreper.herokuapp.com/).
 
 # Installation
 
+### Prerequisites
+
+* node@>=4.2.4
+* npm@>=3.5.3
+
+### Development
 ```
 git clone https://github.com/abbr/ShowPreper.git
 cd ShowPreper
 npm install
-node
+node .
 ```
+
+### Production
+```
+git clone https://github.com/abbr/ShowPreper.git
+cd ShowPreper
+npm install
+npm run dist
+```
+Then deploy `/dist` folder to a web server such as Nginx.
+
 # Acknowledgements
-ShowPreper is built solely on top of many FOSS components. Special thanks goes to:
+ShowPreper is built on many FOSS components. Special thanks go to
 
 * [Struct](http://strut.io/) for inspiration. In many ways ShowPreper can be considered as a re-write of Struct.
+* [Impress.js](https://github.com/impress/impress.js) and [Bespoke.js](http://markdalgleish.com/projects/bespoke.js/) for rendering.
 * [React](https://facebook.github.io/react/) as application platform.
 * [Heroku](https://dashboard.heroku.com/) for free hosting.
 
