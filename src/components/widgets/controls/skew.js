@@ -30,6 +30,7 @@ let SkewControl = React.createClass({
       className={"skew-" + this.props.axis}>
       <span
         onMouseDown={this.onMouseDown}
+        onTouchStart={this.onMouseDown}
         className={"sp-skew-" + this.props.axis + "-icon"}>♢
       </span>
       <EditableHtmlElement
