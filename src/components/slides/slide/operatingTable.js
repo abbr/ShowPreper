@@ -47,11 +47,14 @@ let OperatingTable = React.createClass({
   componentDidMount: function () {
     this._resized()
     window.addEventListener('resize', this._resized)
-    key.bind('ctrl', this.onCtrlKey, 'keydown')
-    key.bind('ctrl', this.onCtrlKey, 'keyup')
+    key.bind('g', this.onToggleGrid)
   },
-  onCtrlKey: function (ev) {
-    this.setState({ctrlKeyPressed: !!(ev.type === 'keydown')})
+  componentWillUnmount: function () {
+    window.removeEventListener('resize', this._resized)
+    key.unbind('g')
+  },
+  onToggleGrid: function (ev) {
+    this.setState({showGrid: !this.state.showGrid})
   },
   _resized: function () {
     let deck = this.props.deck
@@ -67,12 +70,6 @@ let OperatingTable = React.createClass({
   },
   setDraggable: function (draggable) {
     this.setState({draggable: draggable})
-  },
-  componentWillUnmount: function () {
-    window.removeEventListener('resize', this._resized)
-    key.unbind('ctrl', 'keydown')
-    key.unbind('ctrl', 'keyup')
-
   },
   render: function () {
     try {
@@ -105,10 +102,10 @@ let OperatingTable = React.createClass({
       if (this.props.deck.perspective) {
         otSlideStyle.perspective = (this.props.deck.perspective / this.state.scale) + 'px'
       }
-      if (this.state.ctrlKeyPressed) {
+      if (this.state.showGrid) {
         otSlideStyle.background = 'url(' + GridImage + ')'
       }
-      else{
+      else {
         console.log('here')
       }
       return (
