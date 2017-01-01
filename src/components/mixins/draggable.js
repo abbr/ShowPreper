@@ -15,15 +15,10 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
       // only left mouse button or touchstart
       if (ev.button !== 0 && ev.type !== 'touchstart') return
       if (!this.state.draggable) return
-      switch (ev.type) {
-        case 'touchstart':
-          document.addEventListener('touchmove', this.onDraggableMouseMove)
-          document.addEventListener('touchend', this.onDraggableMouseUp)
-          break
-        default:
-          document.addEventListener('mousemove', this.onDraggableMouseMove)
-          document.addEventListener('mouseup', this.onDraggableMouseUp)
-      }
+      document.addEventListener('touchmove', this.onDraggableMouseMove)
+      document.addEventListener('touchend', this.onDraggableMouseUp)
+      document.addEventListener('mousemove', this.onDraggableMouseMove)
+      document.addEventListener('mouseup', this.onDraggableMouseUp)
       document.body.style.WebkitUserSelect = "none"
       document.body.style.MozUserSelect = "none"
       document.body.style.MsUserSelect = "none"
@@ -43,8 +38,11 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         this._draggable.drags[i] = draggable
       })
       ev.stopPropagation && ev.stopPropagation()
+      ev.preventDefault && ev.preventDefault()
     },
     onDraggableMouseMove: function (ev) {
+      ev.preventDefault && ev.preventDefault()
+      ev.stopPropagation && ev.stopPropagation()
       let scale = this.state.scale || 1
       let perspective = this.props.deck && this.props.deck.perspective
       this._draggable.dragged = true
@@ -76,7 +74,6 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         }
         mouseMoveWidgetUpdateFunction && mouseMoveWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
-      ev.stopPropagation && ev.stopPropagation()
     },
     onDraggableMouseUp: function (ev) {
       if (ev.type === 'touchend' && ev.targetTouches.length > 0) {
@@ -120,6 +117,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         mouseUpWidgetUpdateFunction && mouseUpWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
       ev.stopPropagation && ev.stopPropagation()
+      ev.preventDefault && ev.preventDefault()
     }
   }
 }

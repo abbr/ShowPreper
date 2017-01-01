@@ -35,9 +35,12 @@ exports.onScaleMouseDown = function (ev, idx) {
     this._scalable.scales[e] = scalable
   })
   ev.stopPropagation && ev.stopPropagation()
+  ev.preventDefault && ev.preventDefault()
 }
 
 exports.onScaleMouseUp = function (ev) {
+  ev.stopPropagation && ev.stopPropagation()
+  ev.preventDefault && ev.preventDefault()
   document.body.style.WebkitUserSelect = ""
   document.body.style.MozUserSelect = ""
   document.body.style.MsUserSelect = ""
@@ -59,7 +62,6 @@ exports.onScaleMouseUp = function (ev) {
       lang.scaleComponents
     )
   })
-  ev.stopPropagation && ev.stopPropagation()
 }
 
 exports.onScaleMouseMove = function (ev) {
@@ -76,6 +78,7 @@ exports.onScaleMouseMove = function (ev) {
     })
   })
   ev.stopPropagation && ev.stopPropagation()
+  ev.preventDefault && ev.preventDefault()
 }
 
 exports.computeDeltaScale = function (ev) {

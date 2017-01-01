@@ -49,9 +49,12 @@ exports.onRotateMouseDown = function (ev, idx, _axis, _operation) {
     rotatable.rotates[e][axis] = rotatable.rotates[e][axis] || 0
   })
   ev.stopPropagation && ev.stopPropagation()
+  ev.preventDefault && ev.preventDefault()
 }
 
 exports.onRotateMouseMove = function (ev) {
+  ev.stopPropagation && ev.stopPropagation()
+  ev.preventDefault && ev.preventDefault()
   let deltaRotate = this.computeDeltaRotate(ev) * this._rotatable.sign
   this.props.selectedWidgets.forEach(e=> {
     let axis = this._rotatable.axis.toLowerCase()
@@ -69,7 +72,6 @@ exports.onRotateMouseMove = function (ev) {
       index: e
     }, newOperation)
   })
-  ev.stopPropagation && ev.stopPropagation()
 }
 
 exports.onRotateMouseUp = function (ev) {
@@ -101,6 +103,7 @@ exports.onRotateMouseUp = function (ev) {
     )
   })
   ev.stopPropagation && ev.stopPropagation()
+  ev.preventDefault && ev.preventDefault()
 }
 
 exports.computeDeltaRotate = function (ev) {

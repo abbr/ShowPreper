@@ -27,6 +27,9 @@ export default React.createClass({
     return (
       <div className="sp-gradient-marker" title="" style={s} onMouseDown={(evt)=> {
         evt.stopPropagation()
+      }} onTouchStart={(evt)=> {
+        evt.stopPropagation()
+        evt.preventDefault()
       }}>
         <svg xmlns="http://www.w3.org/2000/svg"
              width="32" height="32" viewBox="0 0 32 32" fill={'rgb(' + parseColor(this.props.attrs.c).rgb + ')'}
@@ -50,6 +53,9 @@ export default React.createClass({
           </defs>
           <use xlinkHref={(this.props.down ? '#down-' : '#up-') + (this.props.pressed ? 'pressed' : 'unpressed')}
                onMouseDown={(evt)=> {
+                 this.props.onMouseDown(evt, this.props.attrs)
+               }}
+               onTouchStart={(evt)=> {
                  this.props.onMouseDown(evt, this.props.attrs)
                }}
                onClick={(evt)=> {
