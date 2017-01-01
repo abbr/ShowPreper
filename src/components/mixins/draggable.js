@@ -38,7 +38,6 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         this._draggable.drags[i] = draggable
       })
       ev.stopPropagation && ev.stopPropagation()
-      ev.preventDefault && ev.preventDefault()
     },
     onDraggableMouseMove: function (ev) {
       ev.preventDefault && ev.preventDefault()
