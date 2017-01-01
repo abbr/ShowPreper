@@ -5,7 +5,7 @@ import Downloader from 'components/file/download'
 import Uploader from 'components/file/upload'
 import FileOpener from 'components/file/open'
 import FileSaveAs from 'components/file/saveAs'
-
+import Logo from './logo.svg'
 module.exports = React.createClass({
   onUpload: function () {
     this.refs.uploader.click()
@@ -19,7 +19,10 @@ module.exports = React.createClass({
     return <div className="dropdown">
       <a href="#" className="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button btn-default"
          aria-haspopup="true"
-         aria-expanded="false">ShowPreper<span className="caret"/></a>
+         aria-expanded="false">
+        <img src={Logo}/>
+         ShowPreper
+        <span className="caret"/></a>
       <ul className="dropdown-menu">
         <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>{lang.undo}<span
           className="badge">Ctrl-z</span></a></li>
