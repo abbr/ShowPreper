@@ -15,10 +15,15 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
       // only left mouse button or touchstart
       if (ev.button !== 0 && ev.type !== 'touchstart') return
       if (!this.state.draggable) return
-      document.addEventListener('mousemove', this.onDraggableMouseMove)
-      document.addEventListener('touchmove', this.onDraggableMouseMove)
-      document.addEventListener('mouseup', this.onDraggableMouseUp)
-      document.addEventListener('touchend', this.onDraggableMouseUp)
+      switch (ev.type) {
+        case 'touchstart':
+          document.addEventListener('touchmove', this.onDraggableMouseMove)
+          document.addEventListener('touchend', this.onDraggableMouseUp)
+          break
+        default:
+          document.addEventListener('mousemove', this.onDraggableMouseMove)
+          document.addEventListener('mouseup', this.onDraggableMouseUp)
+      }
       document.body.style.WebkitUserSelect = "none"
       document.body.style.MozUserSelect = "none"
       document.body.style.MsUserSelect = "none"
