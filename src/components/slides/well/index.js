@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom'
 import 'jquery-ui/jquery-ui.js'
 import 'jquery-ui/themes/smoothness/jquery-ui.min.css'
 import lang from 'i18n/lang'
+import './touchPunch'
+
 var WellSlide = require('./wellSlide')
 
 require('./index.less')
