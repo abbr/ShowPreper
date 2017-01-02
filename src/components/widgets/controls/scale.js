@@ -31,6 +31,7 @@ let ScaleControl = React.createClass({
                 onMouseDown={this.onMouseDown}
                 onTouchStart={this.onMouseDown}
                 className="sp-scale-icon"
+                title={lang.scale}
               >↔</span>
               <EditableHtmlElement
                 eleNm="span"

@@ -24,6 +24,7 @@ let PositionControl = React.createClass({
       <span className="sp-position-icon"
             onMouseDown={this.onMouseDown.bind(null, 'x')}
             onTouchStart={this.onMouseDown.bind(null, 'x')}
+            title={lang.translate+'-x'}
       >→</span>
       <EditableHtmlElement
         eleNm="span"
@@ -33,6 +34,7 @@ let PositionControl = React.createClass({
       <span className="sp-position-icon"
             onMouseDown={this.onMouseDown.bind(null, 'y')}
             onTouchStart={this.onMouseDown.bind(null, 'y')}
+            title={lang.translate+'-y'}
       >↓</span>
       <EditableHtmlElement
         eleNm="span"
@@ -42,6 +44,7 @@ let PositionControl = React.createClass({
       <span className="sp-position-icon"
             onMouseDown={this.onMouseDown.bind(null, 'z')}
             onTouchStart={this.onMouseDown.bind(null, 'z')}
+            title={lang.translate+'-z'}
       >↙</span>
       <EditableHtmlElement
         eleNm="span"

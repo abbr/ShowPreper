@@ -61,4 +61,8 @@ module.exports = {
   upload: 'Upload',
   project: 'project',
   btnClose: 'Close',
+  translate: 'translate',
+  rotate: 'rotate',
+  skew: 'skew',
+  scale: 'scale',
 }
