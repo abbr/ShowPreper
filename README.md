@@ -1,2 +1,2 @@
 # ShowPreper 
-check out [full documentation](https://abbr.github.io/ShowPreper/).
+See [product site](https://abbr.github.io/ShowPreper/).
