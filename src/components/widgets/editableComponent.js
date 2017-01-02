@@ -35,6 +35,8 @@ let EditableComponent = React.createClass({
             idx={this.props.idx}
             component={this.props.component}
             container={this.props.container}
+            onMouseDown={this.onMouseDown}
+            setDraggable={this.props.setDraggable}
             onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           />
           <ScaleControl

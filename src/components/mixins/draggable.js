@@ -57,18 +57,19 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         this._draggable.shiftKey = ev.shiftKey
         let pageX = ev.targetTouches ? ev.targetTouches[0].pageX : ev.pageX
         let pageY = ev.targetTouches ? ev.targetTouches[0].pageY : ev.pageY
-        if (ev.shiftKey) {
-          let dx = Math.round((pageX - this._draggable.drags[i].ox) / scale)
-          let dy = Math.round((pageY - this._draggable.drags[i].oy) / scale)
-          let d = Math.abs(dx) > Math.abs(dy) ? dx : dy
-          updatedProps.z = this._draggable.drags[i].oz + d
+        if (ev.shiftKey || this.state.draggable === 'z') {
+          updatedProps.z = this._draggable.drags[i].oz + Math.round((pageX - this._draggable.drags[i].ox) / scale)
           if (ev.ctrlKey) {
             updatedProps.z = 10 * Math.round(updatedProps.z / 10)
           }
         }
         else {
-          updatedProps.x = this._draggable.drags[i].oleft + Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
-          updatedProps.y = this._draggable.drags[i].otop + Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
+          if (this.state.draggable === 'x' || this.state.draggable === true) {
+            updatedProps.x = this._draggable.drags[i].oleft + Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
+          }
+          if (this.state.draggable === 'y' || this.state.draggable === true) {
+            updatedProps.y = this._draggable.drags[i].otop + Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
+          }
           if (ev.ctrlKey) {
             updatedProps.x = 10 * Math.round(updatedProps.x / 10)
             updatedProps.y = 10 * Math.round(updatedProps.y / 10)
@@ -102,18 +103,19 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
           zScale = depth === 0 ? Infinity : scaledPerspective / depth
         }
         let updatedProps = {}
-        if (this._draggable.shiftKey) {
-          let dx = Math.round((pageX - this._draggable.drags[i].ox) / scale)
-          let dy = Math.round((pageY - this._draggable.drags[i].oy) / scale)
-          let d = Math.abs(dx) > Math.abs(dy) ? dx : dy
-          updatedProps.z = this._draggable.drags[i].oz + d
+        if (this._draggable.shiftKey || this.state.draggable === 'z') {
+          updatedProps.z = this._draggable.drags[i].oz + Math.round((pageX - this._draggable.drags[i].ox) / scale)
           if (ev.ctrlKey) {
             updatedProps.z = 10 * Math.round(updatedProps.z / 10)
           }
         }
         else {
-          updatedProps.x = this._draggable.drags[i].oleft + Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
-          updatedProps.y = this._draggable.drags[i].otop + Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
+          if (this.state.draggable === 'x' || this.state.draggable === true) {
+            updatedProps.x = this._draggable.drags[i].oleft + Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
+          }
+          if (this.state.draggable === 'y' || this.state.draggable === true) {
+            updatedProps.y = this._draggable.drags[i].otop + Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
+          }
           if (ev.ctrlKey) {
             updatedProps.x = 10 * Math.round(updatedProps.x / 10)
             updatedProps.y = 10 * Math.round(updatedProps.y / 10)
@@ -121,6 +123,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         }
         mouseUpWidgetUpdateFunction && mouseUpWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
+      this.setState({draggable: true})
       ev.stopPropagation && ev.stopPropagation()
       ev.preventDefault && ev.preventDefault()
     }
