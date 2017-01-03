@@ -3,6 +3,7 @@ var port = process.env.port || 8000
 var srcPath = path.join(__dirname, '/../src')
 var HtmlWebpackPlugin = require("html-webpack-plugin")
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+var gitRevisionPlugin = new (require('git-revision-webpack-plugin'))()
 
 module.exports = {
   port: port,
@@ -39,11 +40,21 @@ module.exports = {
     root: srcPath,
   },
   module: {
-    preLoaders: [{
-      test: /\.(js|jsx)$/,
-      include: path.join(__dirname, 'src'),
-      loader: 'eslint-loader'
-    }],
+    preLoaders: [
+      {
+        test: /\.(js|jsx)$/,
+        include: path.join(__dirname, 'src'),
+        loader: 'eslint-loader'
+      },
+      {
+        test: /about\.js$/,
+        loader: 'string-replace',
+        query: {
+          search: '$$GIT_HASH$$',
+          replace: gitRevisionPlugin.commithash()
+        }
+      }
+    ],
     loaders: [
       {
         test: /\.css$/,

@@ -5,6 +5,7 @@ import Downloader from 'components/file/download'
 import Uploader from 'components/file/upload'
 import FileOpener from 'components/file/open'
 import FileSaveAs from 'components/file/saveAs'
+import About from 'components/file/about'
 import Logo from './logo.svg'
 module.exports = React.createClass({
   onUpload: function () {
@@ -38,6 +39,8 @@ module.exports = React.createClass({
         </li>
         <li><a href="#" onClick={this.onDelete} title={lang.delete} style={{color: 'red'}}>{lang.delete}</a>
         </li>
+        <li><a href="#sp-about" data-toggle="modal" title="about">About...</a>
+        </li>
       </ul>
       <FileOpener onNewDeck={this.props.onNewDeck}/>
       <FileSaveAs
@@ -45,6 +48,7 @@ module.exports = React.createClass({
         deck={this.props.deck}/>
       <Downloader {...this.props}/>
       <Uploader onNewDeck={this.props.onNewDeck} ref="uploader"/>
+      <About/>
     </div>
   }
 })
