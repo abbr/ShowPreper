@@ -4,6 +4,12 @@ var srcPath = path.join(__dirname, '/../src')
 var HtmlWebpackPlugin = require("html-webpack-plugin")
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var gitRevisionPlugin = new (require('git-revision-webpack-plugin'))()
+var gitHash = ''
+try {
+  gitHash = gitRevisionPlugin.commithash()
+}
+catch (ex) {
+}
 
 module.exports = {
   port: port,
@@ -51,7 +57,7 @@ module.exports = {
         loader: 'string-replace',
         query: {
           search: '$$GIT_HASH$$',
-          replace: gitRevisionPlugin.commithash()
+          replace: gitHash
         }
       }
     ],

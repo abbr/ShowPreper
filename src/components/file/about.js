@@ -4,6 +4,11 @@ import lang from 'i18n/lang'
 
 module.exports = React.createClass({
   render: function () {
+    let gitHashTag
+    let gitHash = '$$GIT_HASH$$'
+    if (gitHash.length > 0) {
+      gitHashTag = <li>Git Hash: {gitHash}</li>
+    }
     return <div id="sp-about" className="modal fade" tabIndex="-1" role="dialog">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
@@ -19,8 +24,7 @@ module.exports = React.createClass({
               </li>
               <li><a href="https://abbr.github.io/ShowPreper/" target="_blank">Product Home Page</a>
               </li>
-              <li>Git Hash: $$GIT_HASH$$
-              </li>
+              {gitHashTag}
             </ul>
           </div>
           <div className="modal-footer">
