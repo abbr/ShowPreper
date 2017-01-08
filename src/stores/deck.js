@@ -80,8 +80,8 @@ Deck.prototype.getSlides = function () {
 Deck.prototype.getSlideBoundingBox = function (e) {
   let nCols = Math.ceil(Math.sqrt(this.getSlides().length))
   // assume square grid layout
-  let slideWidth = this.slideWidth || DEFAULT_SLIDE_SIZE.width
-  let slideHeight = this.slideHeight || DEFAULT_SLIDE_SIZE.height
+  let slideWidth = e.width || this.slideWidth || DEFAULT_SLIDE_SIZE.width
+  let slideHeight = e.height || this.slideHeight || DEFAULT_SLIDE_SIZE.height
   let slideMargin = Math.min(slideWidth, slideHeight) * 0.1
   let i = this.getSlides().indexOf(e)
   let row = Math.floor(i / nCols)
