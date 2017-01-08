@@ -11,6 +11,9 @@ var WellSlide = React.createClass({
   componentDidMount: function () {
     this._resized()
   },
+  componentWillReceiveProps: function(){
+    this._resized()
+  },
   getInitialState: function () {
     return {}
   },
