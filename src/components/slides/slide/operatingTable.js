@@ -111,6 +111,19 @@ let OperatingTable = React.createClass({
         >
           <div className="sp-ot-slide"
                style={otSlideStyle}>
+            <svg className="sp-ot-dragger" width="64" height="64"
+                 xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <line stroke="#000000" y2="64" x2="32" y1="0" x1="32" strokeWidth="5" fill="none"/>
+                <g>
+                  <path transform="rotate(45 23.456237792968754,32) "
+                        d="m21.072446,34.383791l0,-4.767581l4.767581,4.767581l-4.767581,0z" strokeWidth="5"
+                        stroke="#000000"/>
+                  <path stroke="#000000" transform="rotate(-135 40.54376220703125,32) "
+                        d="m38.159972,34.38379l0,-4.76758l4.76758,4.76758l-4.76758,0z" strokeWidth="5"/>
+                </g>
+              </g>
+            </svg>
             {componentsView}
           </div>
         </div>

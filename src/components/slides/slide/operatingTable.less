@@ -18,5 +18,16 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
     background: #fff;
     transform-style: preserve-3d;
+    .sp-ot-dragger {
+      display: none; // todo: remove it when implemented
+      opacity: 0.1;
+      cursor: pointer;
+      position: absolute;
+      top: ~'calc(50% - 32px)';
+      right: -32px;
+    }
+    .sp-ot-dragger:hover {
+      opacity: 0.5;
+    }
   }
 }
