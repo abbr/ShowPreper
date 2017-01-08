@@ -109,7 +109,12 @@ let OperatingTable = React.createClass({
         >
           <div className="sp-ot-slide"
                style={otSlideStyle}>
-            <Dragger/>
+            <Dragger
+              onSelectedWidgetUpdated = {this.props.onSelectedWidgetUpdated}
+              component = {this.props.component}
+              scale={this.state.scale}
+              resized={this._resized}
+            />
             {componentsView}
           </div>
         </div>

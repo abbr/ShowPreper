@@ -1,8 +1,37 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import lang from 'i18n/lang'
+import Draggable from '../../mixins/draggable'
 export default React.createClass({
   getInitialState: function () {
-    return {draggable: true, target: 'thisSlide'}
+    return {draggable: 'x', target: 'thisSlide'}
+  },
+  mixins: [Draggable(function () {
+      return [this]
+    }, function (e) {
+      let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
+      return {
+        x: (bb && bb.left) || 0,
+        y: (bb && bb.top) || 0,
+        z: 0
+      }
+    },
+    function (e, updatedProps) {
+      let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
+      let slideWidth = this.props.component.width || this.props.deck.slideWidth
+      let slideHeight = this.props.component.height || this.props.deck.slideHeight
+      let newWidth = Math.round(Math.abs(slideWidth + (updatedProps.x - bb.left) * 2 / this.props.scale))
+      this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+        container: this.props.component,
+        index: -1
+      }, {width: newWidth, height: slideHeight}, null, () => {
+        this.props.resized && this.props.resized()
+      })
+    },
+    function (e, updatedProps) {
+    })],
+  onMouseDown: function () {
+    this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
   },
   componentWillMount: function () {
     this.mouseDownHdlrs = []
@@ -13,6 +42,7 @@ export default React.createClass({
   render: function () {
     return <svg className="sp-ot-dragger" width="64" height="64"
                 xmlns="http://www.w3.org/2000/svg"
+                onMouseDown={this.onMouseDown}
                 onClick={this.onClick}>
       <defs>
         <g id="svg-defaultSlide">

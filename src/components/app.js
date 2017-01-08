@@ -91,7 +91,7 @@ let App = React.createClass({
       deck: deck
     })
   },
-  onSelectedWidgetUpdated: function (widget, newProps, markUndoDesc) {
+  onSelectedWidgetUpdated: function (widget, newProps, markUndoDesc, cb) {
     let component, widgetIdx
     let deck = this.state.deck
     switch (typeof(widget)) {
@@ -128,7 +128,7 @@ let App = React.createClass({
     }
     this.setState({
       deck: deck
-    })
+    },cb)
   },
   onNewDeck: function (nm, props) {
     let deck = new DeckStore.Deck(nm, props)
