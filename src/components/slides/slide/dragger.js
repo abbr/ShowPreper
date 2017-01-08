@@ -27,10 +27,16 @@ export default React.createClass({
     let slideWidth = this.props.component.width || this.props.deck.slideWidth
     let slideHeight = this.props.component.height || this.props.deck.slideHeight
     let newWidth = Math.round(Math.abs(slideWidth + (updatedProps.x - bb.left) * 2 / this.props.scale))
+    let container = this.props.component
+    let updatedContainerProps = {width: newWidth, height: slideHeight}
+    if (this.state.target === 'defaultSlide') {
+      container = this.props.deck
+      updatedContainerProps = {slideWidth: newWidth, slideHeight: slideHeight}
+    }
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
-      container: this.props.component,
+      container: container,
       index: -1
-    }, {width: newWidth, height: slideHeight}, markUndoDesc, () => {
+    }, updatedContainerProps, markUndoDesc, () => {
       this.props.resized && this.props.resized()
     })
   },
@@ -41,13 +47,42 @@ export default React.createClass({
     this.mouseDownHdlrs = []
   },
   onClick: function () {
+    if (this._draggable && this._draggable.dragged) return
+    // if this slide has custom width, it cannot be used to set default slide aspect ratio
+    if (this.state.target === 'thisSlide' && this.props.component.width) return
     this.setState({target: this.state.target === 'thisSlide' ? 'defaultSlide' : 'thisSlide'})
   },
+  onDblClick: function (ev) {
+    ev.stopPropagation && ev.stopPropagation()
+    ev.preventDefault && ev.preventDefault()
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+      container: this.props.component,
+      index: -1
+    }, 'width')
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+      container: this.props.component,
+      index: -1
+    }, 'height')
+  },
   render: function () {
+    let title = lang.dragToChangeAspectRatio + ';\n'
+    if (this.state.target === 'thisSlide') {
+      if (this.props.component.width) {
+        title += lang.doubleClickToResetToDefault
+      }
+      else{
+        title += lang.clickToChangeDefaultSlide
+      }
+    }
+    else {
+      title += lang.clickToChangeThisSlide
+    }
     return <svg className="sp-ot-dragger" width="64" height="64"
                 xmlns="http://www.w3.org/2000/svg"
                 onMouseDown={this.onMouseDown}
-                onClick={this.onClick}>
+                onClick={this.onClick}
+                onDoubleClick={this.onDblClick}
+    >
       <defs>
         <g id="svg-defaultSlide">
           <line x1="29" y1="0" x2="29" y2="64" stroke="#000000"/>
@@ -57,7 +92,7 @@ export default React.createClass({
         <line id="svg-thisSlide" stroke="#000000" y2="64" x2="32" y1="0" x1="32" strokeWidth="5" fill="none"/>
       </defs>
       <g>
-        <title>{lang.dragToChangeAspectRatio + ';\n' + (this.state.target === 'thisSlide' ? lang.clickToChangeDefaultSlide : lang.clickToChangeThisSlide)}</title>
+        <title>{title}</title>
         <use xlinkHref={'#svg-' + this.state.target}></use>
         <g>
           <path transform="rotate(45 23.456237792968754,32) "

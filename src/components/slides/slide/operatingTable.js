@@ -45,7 +45,7 @@ let OperatingTable = React.createClass({
   componentWillMount: function () {
     this.mouseDownHdlrs = []
   },
-  componentWillReceiveProps: function(){
+  componentWillReceiveProps: function () {
     this._resized()
   },
   componentDidMount: function () {
@@ -113,8 +113,9 @@ let OperatingTable = React.createClass({
           <div className="sp-ot-slide"
                style={otSlideStyle}>
             <Dragger
-              onSelectedWidgetUpdated = {this.props.onSelectedWidgetUpdated}
-              component = {this.props.component}
+              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+              deck={this.props.deck}
+              component={this.props.component}
               scale={this.state.scale}
               resized={this._resized}
             />
