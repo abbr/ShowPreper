@@ -35,7 +35,6 @@ module.exports = React.createClass({
   },
   componentWillMount: function () {
     this.mouseDownHdlrs = []
-    this.mouseUpHdlrs = []
   },
   componentDidMount: function () {
     this._resized()
@@ -80,9 +79,6 @@ module.exports = React.createClass({
   },
   stopZoomOut: function () {
     clearInterval(this.zoomOutTimer)
-  },
-  onMouseUp: function () {
-    this.mouseUpHdlrs.forEach(e=>e.apply(this, arguments))
   },
   onMouseDown: function () {
     this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
