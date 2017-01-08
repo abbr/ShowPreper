@@ -17,19 +17,23 @@ export default React.createClass({
       }
     },
     function (e, updatedProps) {
-      let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
-      let slideWidth = this.props.component.width || this.props.deck.slideWidth
-      let slideHeight = this.props.component.height || this.props.deck.slideHeight
-      let newWidth = Math.round(Math.abs(slideWidth + (updatedProps.x - bb.left) * 2 / this.props.scale))
-      this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
-        container: this.props.component,
-        index: -1
-      }, {width: newWidth, height: slideHeight}, null, () => {
-        this.props.resized && this.props.resized()
-      })
+      this.resizeSlide(e, updatedProps)
     },
     function (e, updatedProps) {
+      this.resizeSlide(e, updatedProps, lang.changeAspectRatio)
     })],
+  resizeSlide: function (e, updatedProps, markUndoDesc) {
+    let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
+    let slideWidth = this.props.component.width || this.props.deck.slideWidth
+    let slideHeight = this.props.component.height || this.props.deck.slideHeight
+    let newWidth = Math.round(Math.abs(slideWidth + (updatedProps.x - bb.left) * 2 / this.props.scale))
+    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
+      container: this.props.component,
+      index: -1
+    }, {width: newWidth, height: slideHeight}, markUndoDesc, () => {
+      this.props.resized && this.props.resized()
+    })
+  },
   onMouseDown: function () {
     this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
   },

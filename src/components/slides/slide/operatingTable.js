@@ -45,6 +45,9 @@ let OperatingTable = React.createClass({
   componentWillMount: function () {
     this.mouseDownHdlrs = []
   },
+  componentWillReceiveProps: function(){
+    this._resized()
+  },
   componentDidMount: function () {
     this._resized()
     window.addEventListener('resize', this._resized)

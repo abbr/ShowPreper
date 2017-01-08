@@ -69,4 +69,5 @@ module.exports = {
   doubleClickToResetToDefault: 'dbl-click to reset to default slide\'s aspect ratio',
   clickToChangeDefaultSlide: 'click to change default slide\'s',
   clickToChangeThisSlide: 'click to change this slide\'s',
+  changeAspectRatio: 'change aspect ratio',
 }
