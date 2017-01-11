@@ -1,6 +1,8 @@
 'use strict'
 import React from 'react'
 import './handouts.less'
+import _ from 'lodash'
+
 var DisplayableComponent = require('components/widgets/displayableComponent')
 module.exports = React.createClass({
   updateNotes: function (index, markUndoDesc, e) {
@@ -10,9 +12,10 @@ module.exports = React.createClass({
     }, {notes: e.target.value}, markUndoDesc)
   },
   render: function () {
-    let deckView = this.props.deck.components.map((component, index) => {
-      if (component.type === 'Slide') {
-        let bb = this.props.deck.getSlideBoundingBox(component)
+    let deckView = this.props.deck.components.map((e, index) => {
+      let component = _.cloneDeep(e)
+      if (e.type === 'Slide') {
+        let bb = this.props.deck.getSlideBoundingBox(e)
         // don't transform slides
         delete component.x
         delete component.y

@@ -8,6 +8,7 @@ import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
 import Killable from 'components/mixins/killable'
 import lang from 'i18n/lang'
+import _ from 'lodash'
 var EditableComponent = require('components/widgets/editableComponent')
 module.exports = React.createClass({
   mixins: [AutoScale, Selectable, Killable, Draggable(function () {
@@ -88,9 +89,10 @@ module.exports = React.createClass({
       if (e.selected) pv.push(i)
       return pv
     }, [])
-    let deckView = this.props.deck.components.map((component, index) => {
-      if (component.type === 'Slide') {
-        let bb = this.props.deck.getSlideBoundingBox(component)
+    let deckView = this.props.deck.components.map((e, index) => {
+      let component = _.cloneDeep(e)
+      if (e.type === 'Slide') {
+        let bb = this.props.deck.getSlideBoundingBox(e)
         component.y = bb.top
         component.x = bb.left
         component.width = bb.right - bb.left
