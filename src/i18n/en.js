@@ -66,9 +66,10 @@ module.exports = {
   rotate: 'rotate',
   skew: 'skew',
   scale: 'scale',
-  dragToChangeAspectRatio: 'drag to change aspect ratio',
+  dragToChangeThisSlideAspectRatio: 'drag to change this slide\'s aspect ratio',
+  dragToChangeDefaultSlideAspectRatio: 'drag to change default slide\'s aspect ratio',
   doubleClickToResetToDefault: 'dbl-click to reset to default slide\'s aspect ratio',
-  clickToChangeDefaultSlide: 'click to change default slide\'s',
-  clickToChangeThisSlide: 'click to change this slide\'s',
+  clickToChangeDefaultSlide: 'click then drag to change default slide\'s',
+  clickToChangeThisSlide: 'click then drag to change this slide\'s',
   changeAspectRatio: 'change aspect ratio',
 }
