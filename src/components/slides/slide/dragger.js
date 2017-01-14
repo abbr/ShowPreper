@@ -87,6 +87,7 @@ export default React.createClass({
       title += lang.clickToChangeThisSlide
     }
     return <div
+      onTouchStart={this.onMouseDown}
       onMouseDown={this.onMouseDown}
       onClick={this.onClick}
       onDoubleClick={this.onDblClick}
