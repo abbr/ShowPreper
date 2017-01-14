@@ -6,8 +6,7 @@ import 'react-widgets/lib/less/react-widgets.less'
 import DropdownList from 'react-widgets/lib/DropdownList'
 import localizer from 'react-widgets/lib/localizers/simple-number'
 import ColorStops from './colorStops'
-import AngleInput from 'angle-input/react'
-import 'angle-input/angle-input.css'
+import AngleInput from './angleInput'
 import classNames from 'classnames'
 localizer()
 const gradientExtentSelectionArr = [
@@ -119,16 +118,28 @@ export default React.createClass({
   },
   onChangeGradientDirectionAngle: function () {
     document.addEventListener('mouseup', this.onGradientDirectionAngleMouseUp)
-    this.setState({isGradientAngleBeingDragged: true})
     let g = this.parseGradientString()
+    let newAngle
+    switch (typeof arguments[0]) {
+      case 'number':
+        newAngle = (-arguments[0] + 90 + 360) % 360
+        this.setState({isGradientAngleBeingDragged: true})
+        break
+      case 'object':
+        newAngle = parseInt(arguments[0].target.innerHTML)
+    }
     if (g) {
-      g.direction = (-arguments[0] + 90 + 360) % 360 + 'deg'
+      g.direction = newAngle + 'deg'
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
+  onGradientDirectionAngleEdit: function (ev) {
+    ev.stopPropagation && ev.stopPropagation()
+  },
   onGradientDirectionAngleMouseUp: function () {
     this.setState({isGradientAngleBeingDragged: false})
+    document.removeEventListener('mouseup', this.onGradientDirectionAngleMouseUp)
   },
 
   componentDidUpdate: function () {
@@ -350,12 +361,17 @@ export default React.createClass({
                   }}
                 >
                   <AngleInput
-                    className="col-xs-1 default-input angle-input"
+                    className="col-xs-1 default-input angle-input noselect"
                     onInput={this.onChangeGradientDirectionAngle}
                     onChange={this.onChangeGradientDirectionAngle}
                     defaultValue={(-parseInt(gradientAngle || 0) + 90 + 360) % 360}
                   >
-                    <span className="centered">{gradientAngle}°</span>
+                    <span className="centered">
+                    <span className="noselect"
+                      contentEditable={true} onMouseDown={this.onGradientDirectionAngleEdit}
+                      onBlur={this.onChangeGradientDirectionAngle}
+                      dangerouslySetInnerHTML={{__html: gradientAngle}}
+                    ></span>°</span>
                   </AngleInput>
                 </div>
               </div>

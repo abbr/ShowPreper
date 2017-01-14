@@ -20,7 +20,6 @@
     "heroku-postbuild": "npm run dist"
   },
   "devDependencies": {
-    "angle-input": "andrejewski/angle-input",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
