@@ -8,6 +8,7 @@ import localizer from 'react-widgets/lib/localizers/simple-number'
 import ColorStops from './colorStops'
 import AngleInput from 'angle-input/react'
 import 'angle-input/angle-input.css'
+import classNames from 'classnames'
 localizer()
 const gradientExtentSelectionArr = [
   {value: 'closest-corner', text: 'closest-corner'},
@@ -274,7 +275,7 @@ export default React.createClass({
       }
     }
     return <div id="sp-color-pattern-editor">
-      <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
         <div className="panel panel-default">
           <div className="panel-heading" id="headingOne"
                role="button" data-toggle="collapse" data-parent="#accordion"
@@ -292,7 +293,7 @@ export default React.createClass({
               </span>
             </h4>
           </div>
-          <div id="collapseOne" className="panel-collapse collapse"
+          <div id="collapseOne" className={classNames("panel-collapse", "collapse", (type === 'color') ? 'in' : null)}
                role="tabpanel" aria-labelledby="headingOne">
             <div className="panel-body">
               <input id='sp-background-solid-colorpicker'/>
@@ -313,7 +314,8 @@ export default React.createClass({
               linear gradient
             </h4>
           </div>
-          <div id="collapseTwo" className="panel-collapse collapse"
+          <div id="collapseTwo"
+               className={classNames("panel-collapse", "collapse", (type === 'linear-gradient') ? 'in' : null)}
                role="tabpanel" aria-labelledby="headingTwo">
             <div className="panel-body container-fluid">
               <div className="row">
@@ -373,7 +375,8 @@ export default React.createClass({
             </h4>
           </div>
           <div id="collapseThree"
-               className="panel-collapse collapse in" role="tabpanel"
+               className={classNames("panel-collapse", "collapse", (type === 'radial-gradient') ? 'in' : null)}
+               role="tabpanel"
                aria-labelledby="headingThree">
             <div className="panel-body container-fluid">
               <div className="row">
