@@ -29,6 +29,9 @@ const linearGradientDirectionArr = [
   {value: 'to angle', text: 'to angle'}
 ]
 export default React.createClass({
+  getInitialState: () => ({
+    isGradientAngleBeingDragged: false,
+  }),
   componentDidMount() {
     $("#sp-background-solid-colorpicker").spectrum({
       color: this.props.currentStyle,
@@ -115,12 +118,17 @@ export default React.createClass({
     this.props.updateStyle({background: s})
   },
   onChangeGradientDirectionAngle: function () {
+    document.addEventListener('mouseup', this.onGradientDirectionAngleMouseUp)
+    this.setState({isGradientAngleBeingDragged: true})
     let g = this.parseGradientString()
     if (g) {
       g.direction = (-arguments[0] + 90 + 360) % 360 + 'deg'
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
+  },
+  onGradientDirectionAngleMouseUp: function () {
+    this.setState({isGradientAngleBeingDragged: false})
   },
 
   componentDidUpdate: function () {
@@ -274,7 +282,7 @@ export default React.createClass({
           break
       }
     }
-    return <div id="sp-color-pattern-editor">
+    return <div id="sp-color-pattern-editor" className={this.state.isGradientAngleBeingDragged ? 'noselect' : ''}>
       <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
         <div className="panel panel-default">
           <div className="panel-heading" id="headingOne"
@@ -342,7 +350,7 @@ export default React.createClass({
                   }}
                 >
                   <AngleInput
-                    className="col-xs-1 default-input angle-input noselect"
+                    className="col-xs-1 default-input angle-input"
                     onInput={this.onChangeGradientDirectionAngle}
                     onChange={this.onChangeGradientDirectionAngle}
                     defaultValue={(-parseInt(gradientAngle || 0) + 90 + 360) % 360}
