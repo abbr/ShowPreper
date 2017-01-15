@@ -116,6 +116,13 @@ export default React.createClass({
     let s = this.composeGradientString(g)
     this.props.updateStyle({background: s})
   },
+  onGradientDirectionAngleInputKeydown: function () {
+    if (arguments[0].key !== 'Enter') {
+      return
+    }
+    arguments[0].preventDefault && arguments[0].preventDefault()
+    arguments[0].target.blur()
+  },
   onChangeGradientDirectionAngle: function () {
     document.addEventListener('mouseup', this.onGradientDirectionAngleMouseUp)
     let g = this.parseGradientString()
@@ -370,6 +377,7 @@ export default React.createClass({
                     <span
                       contentEditable={this.state.isGradientAngleBeingDragged ? false : true}
                       onMouseDown={this.onGradientDirectionAngleEdit}
+                      onKeyDown={this.onGradientDirectionAngleInputKeydown}
                       onBlur={this.onChangeGradientDirectionAngle}
                       dangerouslySetInnerHTML={{__html: gradientAngle}}
                     ></span>°</span>

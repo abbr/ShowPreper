@@ -45,42 +45,6 @@ module.exports = React.createClass({
     var step = this.props.step || 1
     return (Math.round(degree / this.props.step) * this.props.step % 360 + 360) % 360
   },
-  _onFocus: function (e) {
-    this.beginKeyboardInput()
-  },
-  _onBlur: function (e) {
-    this.endKeyboardInput()
-  },
-  _onKeyDown: function (e) {
-    var step = this.props.step || 1
-    var value = this.state.value
-
-    var LEFT_ARROW = 37
-    var UP_ARROW = 38
-    var RIGHT_ARROW = 39
-    var DOWN_ARROW = 40
-
-    var dir = 0
-    switch (e.keyCode) {
-      case UP_ARROW:
-      case RIGHT_ARROW:
-        dir = 1
-        break
-      case DOWN_ARROW:
-      case LEFT_ARROW:
-        dir = -1
-        break
-    }
-    var val = value + (dir * step)
-    val = this.normalize(val)
-    if (dir) {
-      e.preventDefault()
-      this.setState({value: val})
-      if (this.props.onChange) {
-        this.props.onChange(val)
-      }
-    }
-  },
   _onMouseDown: function (e) {
     this.beginTracking()
   },
@@ -110,22 +74,12 @@ module.exports = React.createClass({
     var fx = done ? this.props.onChange : this.props.onInput
     if (fx) fx(value)
   },
-  beginKeyboardInput: function () {
-    document.body.addEventListener('keydown', this._onKeyDown, false)
-    this.keyboardInput = true
-  },
-  endKeyboardInput: function () {
-    document.body.removeEventListener('keydown', this._onKeyDown, false)
-    this.keyboardInput = false
-  },
   render: function () {
     var className = this.props.className || 'angle-input'
     var pivotClassName = this.props.pivotClassName || 'angle-input-pivot'
     return <div
       ref='container'
       className={className}
-      onFocus={this._onFocus}
-      onBlur={this._onBlur}
       onMouseDown={this._onMouseDown}
       tabIndex={this.props.tabIndex || 0}
     >
