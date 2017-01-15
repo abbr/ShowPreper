@@ -2,29 +2,21 @@ import React from 'react'
 import './angleInput.less'
 module.exports = React.createClass({
   displayName: 'AngleInput',
-  radToDeg: function (rad) {
-    return rad * (180 / Math.PI)
-  },
   getCenter: function (element) {
     var rect = element.getBoundingClientRect()
     return [
-      rect.left + (rect.width / 2),
-      rect.top + (rect.height / 2),
+      parseInt(rect.left + (rect.width / 2)),
+      parseInt(rect.top + (rect.height / 2)),
     ]
   },
   angle: function (vector, element) {
     var center = this.getCenter(element)
     var x = vector[0] - center[0]
     var y = vector[1] - center[1]
-    var deg = this.radToDeg(Math.atan2(x, y))
-    deg -= 90
-    if (deg < 0) deg += 360
-    return deg
+    return (-parseInt(Math.atan2(x, y) * 180 / Math.PI) + 180 + 360) % 360
   },
   propTypes: {
     defaultValue: React.PropTypes.number,
-    max: React.PropTypes.number,
-    min: React.PropTypes.number,
     step: React.PropTypes.number,
     onChange: React.PropTypes.func,
     onInput: React.PropTypes.func,
@@ -35,8 +27,6 @@ module.exports = React.createClass({
   getDefaultProps: function () {
     return {
       defaultValue: 0,
-      max: 360,
-      min: 0,
       step: 1,
 
       className: 'angle-input',
@@ -52,14 +42,8 @@ module.exports = React.createClass({
     }
   },
   normalize: function (degree) {
-    var max = this.props.max
-    var min = this.props.min
     var step = this.props.step || 1
-    var n = Math.max(min, Math.min(degree, max))
-    var s = n - (n % step)
-    var high = Math.ceil(n / step)
-    var low = Math.round(n / step)
-    return high >= (n / step) ? (high * step == 360) ? 0 : (high * step) : low * step
+    return (Math.round(degree / this.props.step) * this.props.step % 360 + 360) % 360
   },
   _onFocus: function (e) {
     this.beginKeyboardInput()
@@ -68,8 +52,6 @@ module.exports = React.createClass({
     this.endKeyboardInput()
   },
   _onKeyDown: function (e) {
-    var max = this.props.max
-    var min = this.props.min
     var step = this.props.step || 1
     var value = this.state.value
 
@@ -90,8 +72,6 @@ module.exports = React.createClass({
         break
     }
     var val = value + (dir * step)
-    if (val === max + 1) val = min
-    if (val === min - 1) val = max - 1
     val = this.normalize(val)
     if (dir) {
       e.preventDefault()
@@ -152,7 +132,7 @@ module.exports = React.createClass({
       <span
         key='pivot'
         className={pivotClassName}
-        style={{transform: "rotate(-" + this.state.value + "deg)"}}
+        style={{transform: "rotate(" + (this.state.value - 90) + "deg)"}}
       >
       </span>
       {this.props.children }

@@ -122,7 +122,7 @@ export default React.createClass({
     let newAngle
     switch (typeof arguments[0]) {
       case 'number':
-        newAngle = (-arguments[0] + 90 + 360) % 360
+        newAngle = (arguments[0] + 360) % 360
         this.setState({isGradientAngleBeingDragged: true})
         break
       case 'object':
@@ -361,14 +361,15 @@ export default React.createClass({
                   }}
                 >
                   <AngleInput
-                    className="col-xs-1 default-input angle-input noselect"
+                    className="col-xs-1 default-input angle-input"
                     onInput={this.onChangeGradientDirectionAngle}
                     onChange={this.onChangeGradientDirectionAngle}
-                    defaultValue={(-parseInt(gradientAngle || 0) + 90 + 360) % 360}
+                    defaultValue={(parseInt(gradientAngle || 0) + 360) % 360}
                   >
                     <span className="centered">
-                    <span className="noselect"
-                      contentEditable={true} onMouseDown={this.onGradientDirectionAngleEdit}
+                    <span
+                      contentEditable={this.state.isGradientAngleBeingDragged ? false : true}
+                      onMouseDown={this.onGradientDirectionAngleEdit}
                       onBlur={this.onChangeGradientDirectionAngle}
                       dangerouslySetInnerHTML={{__html: gradientAngle}}
                     ></span>°</span>
