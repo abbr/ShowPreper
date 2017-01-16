@@ -54,6 +54,7 @@ exports._scale = function (size) {
   let scaleStyle = {
     transform: translateStr + scaleStr,
     marginLeft: leftOffset + 'px',
+    marginTop: topOffset + 'px',
     width: componentCx * 2,
     height: componentCy * 2,
   }
