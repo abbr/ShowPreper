@@ -54,10 +54,9 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
           zScale = depth === 0 ? Infinity : scaledPerspective / depth
         }
         let updatedProps = {}
-        this._draggable.shiftKey = ev.shiftKey
         let pageX = ev.targetTouches ? ev.targetTouches[0].pageX : ev.pageX
         let pageY = ev.targetTouches ? ev.targetTouches[0].pageY : ev.pageY
-        if (ev.shiftKey || this.state.draggable === 'z') {
+        if (this.state.draggable === 'z') {
           updatedProps.z = this._draggable.drags[i].oz + Math.round((pageX - this._draggable.drags[i].ox) / scale)
           if (ev.ctrlKey) {
             updatedProps.z = 10 * Math.round(updatedProps.z / 10)
@@ -103,7 +102,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
           zScale = depth === 0 ? Infinity : scaledPerspective / depth
         }
         let updatedProps = {}
-        if (this._draggable.shiftKey || this.state.draggable === 'z') {
+        if (this.state.draggable === 'z') {
           updatedProps.z = this._draggable.drags[i].oz + Math.round((pageX - this._draggable.drags[i].ox) / scale)
           if (ev.ctrlKey) {
             updatedProps.z = 10 * Math.round(updatedProps.z / 10)
