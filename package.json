@@ -48,7 +48,6 @@
     "glob": "^6.0.0",
     "html-webpack-plugin": "^2.22.0",
     "imports-loader": "^0.6.5",
-    "impress.js": "github:impress/impress.js#0.6.0",
     "isparta-instrumenter-loader": "^1.0.0",
     "jquery": "^2.1.4",
     "jquery-ui": "~1.10.5",

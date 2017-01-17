@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import 'impress.js'
+import './impress-vendor.js'
 import './impress.less'
 import DeckStore from 'stores/deck'
 import AutoScale from 'components/mixins/autoScale'
@@ -38,6 +38,8 @@ let Presentation = React.createClass({
           data-x={component.x + component.width / 2}
           data-y={component.y + component.height / 2}
           data-z={component.z}
+          data-width={component.width}
+          data-height={component.height}
           data-rotate-x={(component.rotate && component.rotate.x) ? component.rotate.x * 180 / Math.PI : 0}
           data-rotate-y={(component.rotate && component.rotate.y) ? component.rotate.y * 180 / Math.PI : 0}
           data-rotate-z={(component.rotate && component.rotate.z) ? component.rotate.z * 180 / Math.PI : 0}
