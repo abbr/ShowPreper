@@ -5,7 +5,7 @@ import Draggable from '../../mixins/draggable'
 import ClassNames from 'classnames'
 export default React.createClass({
   getInitialState: function () {
-    return {draggable: this.props.axis, target: 'thisSlide'}
+    return {draggable: this.props.axis}
   },
   mixins: [Draggable(function () {
       return [this]
@@ -52,7 +52,7 @@ export default React.createClass({
     }
     let container = this.props.component
     let updatedContainerProps = {width: newWidth, height: slideHeight}
-    if (this.state.target === 'defaultSlide') {
+    if (this.props.slideDragTarget === 'defaultSlide') {
       container = this.props.deck
       updatedContainerProps = {slideWidth: newWidth, slideHeight: slideHeight}
     }
@@ -74,8 +74,8 @@ export default React.createClass({
       return
     }
     // if this slide has custom width, it cannot be used to set default slide aspect ratio
-    if (this.state.target === 'thisSlide' && this.props.component.width) return
-    this.setState({target: this.state.target === 'thisSlide' ? 'defaultSlide' : 'thisSlide'})
+    if (this.props.slideDragTarget === 'thisSlide' && this.props.component.width) return
+    this.props.toggleSlideDragTarget()
   },
   onDblClick: function (ev) {
     ev.stopPropagation && ev.stopPropagation()
@@ -91,7 +91,7 @@ export default React.createClass({
   },
   render: function () {
     let title
-    if (this.state.target === 'thisSlide') {
+    if (this.props.slideDragTarget === 'thisSlide') {
       title = lang.dragToChangeThisSlideAspectRatio + ';\n'
       if (this.props.component.width) {
         title += lang.doubleClickToResetToDefault
@@ -127,7 +127,7 @@ export default React.createClass({
           <line id="svg-thisSlide" stroke="#000000" y2="64" x2="32" y1="0" x1="32" strokeWidth="5" fill="none"/>
         </defs>
         <g>
-          <use xlinkHref={'#svg-' + this.state.target}></use>
+          <use xlinkHref={'#svg-' + this.props.slideDragTarget}></use>
           <g>
             <path transform="rotate(45 23.456237792968754,32) "
                   d="m21.072446,34.383791l0,-4.767581l4.767581,4.767581l-4.767581,0z" strokeWidth="5"

@@ -40,7 +40,10 @@ let OperatingTable = React.createClass({
       )
     }), Scalable, Rotatable, Killable],
   getInitialState: function () {
-    return {draggable: true, ctrlKeyPressed: false}
+    return {draggable: true, ctrlKeyPressed: false, slideDragTarget: 'thisSlide'}
+  },
+  toggleSlideDragTarget: function () {
+    this.setState({slideDragTarget: this.state.slideDragTarget === 'thisSlide' ? 'defaultSlide' : 'thisSlide'})
   },
   componentWillMount: function () {
     this.mouseDownHdlrs = []
@@ -119,6 +122,8 @@ let OperatingTable = React.createClass({
               scale={this.state.scale}
               resized={this._resized}
               axis="x"
+              toggleSlideDragTarget={this.toggleSlideDragTarget}
+              slideDragTarget={this.state.slideDragTarget}
             />
             <Dragger
               onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
@@ -127,6 +132,8 @@ let OperatingTable = React.createClass({
               scale={this.state.scale}
               resized={this._resized}
               axis="y"
+              toggleSlideDragTarget={this.toggleSlideDragTarget}
+              slideDragTarget={this.state.slideDragTarget}
             />
             {componentsView}
           </div>
