@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import lang from 'i18n/lang'
 import Draggable from '../../mixins/draggable'
+import ClassNames from 'classnames'
 export default React.createClass({
   getInitialState: function () {
-    return {draggable: 'x', target: 'thisSlide'}
+    return {draggable: this.props.axis, target: 'thisSlide'}
   },
   mixins: [Draggable(function () {
       return [this]
@@ -24,14 +25,31 @@ export default React.createClass({
     })],
   resizeSlide: function (e, updatedProps, markUndoDesc) {
     // set a minimum  drag threshold to handle click and dbl-click correctly
-    if (Math.abs(updatedProps.x - e._draggable.drags[0].oleft) < 5) {
+    if (Math.abs(updatedProps[this.props.axis] - e._draggable.drags[0][this.props.axis === 'x' ?
+          'oleft'
+          :
+          'oright'
+          ]) <
+      5
+    ) {
       e._draggable.dragged = false
       return
     }
     let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
     let slideWidth = this.props.component.width || this.props.deck.slideWidth
     let slideHeight = this.props.component.height || this.props.deck.slideHeight
-    let newWidth = Math.round(Math.abs(slideWidth + (updatedProps.x - bb.left) * 2 / this.props.scale))
+    let newWidth = slideWidth
+    let newHeight = slideHeight
+    switch (this.props.axis) {
+      case 'x':
+        newWidth = Math.round(Math.abs(slideWidth + (updatedProps.x - bb.left) * 2 / this.props.scale))
+        break
+      case 'y':
+        newHeight = Math.round(Math.abs(slideHeight + (updatedProps.y - bb.top) * 2 / this.props.scale))
+        newWidth = slideWidth * slideHeight / newHeight
+        break
+      default:
+    }
     let container = this.props.component
     let updatedContainerProps = {width: newWidth, height: slideHeight}
     if (this.state.target === 'defaultSlide') {
@@ -91,8 +109,11 @@ export default React.createClass({
       onMouseDown={this.onMouseDown}
       onClick={this.onClick}
       onDoubleClick={this.onDblClick}
-      className="sp-ot-dragger"
+      className={ClassNames('sp-ot-dragger', 'sp-ot-dragger' + '-' + this.props.axis)}
       title={title}
+      style={{
+        transform: 'scale(' + 1 / this.props.scale + ')' + (this.props.axis === 'y' ? ' rotate(90deg)' : '')
+      }}
     >
       <svg width="64" height="64"
            xmlns="http://www.w3.org/2000/svg"

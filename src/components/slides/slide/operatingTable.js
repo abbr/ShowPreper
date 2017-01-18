@@ -118,6 +118,15 @@ let OperatingTable = React.createClass({
               component={this.props.component}
               scale={this.state.scale}
               resized={this._resized}
+              axis="x"
+            />
+            <Dragger
+              onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+              deck={this.props.deck}
+              component={this.props.component}
+              scale={this.state.scale}
+              resized={this._resized}
+              axis="y"
             />
             {componentsView}
           </div>
