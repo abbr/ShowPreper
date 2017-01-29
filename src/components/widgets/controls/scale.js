@@ -17,7 +17,6 @@ let ScaleControl = React.createClass({
     }, {scale: newPropObj}, lang.scaleComponents)
   },
   onDoubleClick: function () {
-    console.log('here')
     let newPropObj = _.cloneDeep(this.props.component.scale || {})
     newPropObj.x = newPropObj.y = 1
     this.props.onSelectedWidgetUpdated({
