@@ -16,6 +16,15 @@ let ScaleControl = React.createClass({
       index: this.props.idx
     }, {scale: newPropObj}, lang.scaleComponents)
   },
+  onDoubleClick: function () {
+    console.log('here')
+    let newPropObj = _.cloneDeep(this.props.component.scale || {})
+    newPropObj.x = newPropObj.y = 1
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.container,
+      index: this.props.idx
+    }, {scale: newPropObj}, lang.scaleComponents)
+  },
   onMouseDown: function (ev) {
     this.props.onScaleMouseDown(ev, this.props.idx)
   },
@@ -31,6 +40,7 @@ let ScaleControl = React.createClass({
                 onMouseDown={this.onMouseDown}
                 onTouchStart={this.onMouseDown}
                 className="sp-scale-icon"
+                onDoubleClick={this.onDoubleClick}
                 title={lang.scale}
               >↔</span>
               <EditableHtmlElement

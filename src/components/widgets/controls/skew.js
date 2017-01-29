@@ -16,6 +16,14 @@ let SkewControl = React.createClass({
       index: this.props.idx
     }, {skew: newPropObj}, lang.skewComponents)
   },
+  onDoubleClick: function () {
+    let newPropObj = _.cloneDeep(this.props.component.skew || {})
+    newPropObj[this.props.axis] = 0
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.container,
+      index: this.props.idx
+    }, {skew: newPropObj}, lang.skewComponents)
+  },
   onMouseDown: function (ev) {
     this.props.onRotateMouseDown(ev, this.props.idx, this.props.axis, 'skew')
   },
@@ -32,6 +40,7 @@ let SkewControl = React.createClass({
         onMouseDown={this.onMouseDown}
         onTouchStart={this.onMouseDown}
         className={"sp-skew-" + this.props.axis + "-icon"}
+        onDoubleClick={this.onDoubleClick}
         title={lang.skew + '-' + this.props.axis}
       >♢
       </span>

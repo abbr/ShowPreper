@@ -15,6 +15,15 @@ let PositionControl = React.createClass({
       index: this.props.idx
     }, newPropObj, lang.moveComponents)
   },
+  onDoubleClick: function (axis, ev) {
+    let newPropObj = {}
+    newPropObj[axis] = 0
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.container,
+      index: this.props.idx
+    }, newPropObj, lang.moveComponents)
+    this.props.setDraggable(true)
+  },
   onMouseDown: function (axis, ev) {
     this.props.onMouseDown(ev)
     this.props.setDraggable(axis)
@@ -22,9 +31,10 @@ let PositionControl = React.createClass({
   render: function () {
     return <div className="positioningCtrls">
       <span className="sp-position-icon"
+            onDoubleClick={this.onDoubleClick.bind(null, 'x')}
             onMouseDown={this.onMouseDown.bind(null, 'x')}
             onTouchStart={this.onMouseDown.bind(null, 'x')}
-            title={lang.translate+'-x'}
+            title={lang.translate + '-x'}
       >→</span>
       <EditableHtmlElement
         eleNm="span"
@@ -32,9 +42,10 @@ let PositionControl = React.createClass({
         onBlur={(ev)=>this.onBlur('x', ev.target.innerHTML)}
         dangerouslySetInnerHTML={{__html: this.props.component.x}}/>
       <span className="sp-position-icon"
+            onDoubleClick={this.onDoubleClick.bind(null, 'y')}
             onMouseDown={this.onMouseDown.bind(null, 'y')}
             onTouchStart={this.onMouseDown.bind(null, 'y')}
-            title={lang.translate+'-y'}
+            title={lang.translate + '-y'}
       >↓</span>
       <EditableHtmlElement
         eleNm="span"
@@ -42,9 +53,10 @@ let PositionControl = React.createClass({
         onBlur={(ev)=>this.onBlur('y', ev.target.innerHTML)}
         dangerouslySetInnerHTML={{__html: this.props.component.y}}/>
       <span className="sp-position-icon"
+            onDoubleClick={this.onDoubleClick.bind(null, 'z')}
             onMouseDown={this.onMouseDown.bind(null, 'z')}
             onTouchStart={this.onMouseDown.bind(null, 'z')}
-            title={lang.translate+'-z'}
+            title={lang.translate + '-z'}
       >↙</span>
       <EditableHtmlElement
         eleNm="span"

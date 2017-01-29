@@ -16,6 +16,14 @@ let RotateControl = React.createClass({
       index: this.props.idx
     }, {rotate: newPropObj}, lang.rotateComponents)
   },
+  onDoubleClick: function () {
+    let newPropObj = _.cloneDeep(this.props.component.rotate || {})
+    newPropObj[this.props.axis] = 0
+    this.props.onSelectedWidgetUpdated({
+      container: this.props.container,
+      index: this.props.idx
+    }, {rotate: newPropObj}, lang.rotateComponents)
+  },
   onMouseDown: function (ev) {
     this.props.onRotateMouseDown(ev, this.props.idx, this.props.axis)
   },
@@ -32,6 +40,7 @@ let RotateControl = React.createClass({
       <svg width="1em" height="1em" viewBox="0 0 512 512" cursor="pointer" xmlns="http://www.w3.org/2000/svg"
            onMouseDown={this.onMouseDown}
            onTouchStart={this.onMouseDown}
+           onDoubleClick={this.onDoubleClick}
            style={{verticalAlign: 'text-bottom'}}
       >
         <g>
