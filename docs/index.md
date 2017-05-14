@@ -34,7 +34,7 @@ Then deploy `/dist` folder to a web server such as Nginx. ShowPreper runs fully 
 # Acknowledgements
 ShowPreper is built on many FOSS components. Special thanks go to
 
-* [Struct](http://strut.io/) for inspiration. In many ways ShowPreper can be considered as a re-write of Struct.
+* [Strut](http://strut.io/) for inspiration. In many ways ShowPreper can be considered as a re-write of Strut.
 * [Impress.js](https://github.com/impress/impress.js) and [Bespoke.js](http://markdalgleish.com/projects/bespoke.js/) for rendering.
 * [React](https://facebook.github.io/react/) as application platform.
 * [Heroku](https://dashboard.heroku.com/) for free hosting.
