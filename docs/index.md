@@ -29,7 +29,7 @@ cd ShowPreper
 npm install
 npm run dist
 ```
-Then deploy `/dist` folder to a web server such as Nginx. ShowPreper runs fully on client-side so there is minimum server requirements other than serving static files.
+Then deploy `/dist` folder to a web server such as Nginx. ShowPreper runs fully on client-side so there is no minimum server requirements other than serving static files.
 
 # Acknowledgements
 ShowPreper is built on many FOSS components. Special thanks go to
