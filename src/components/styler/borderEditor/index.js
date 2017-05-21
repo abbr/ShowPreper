@@ -26,8 +26,8 @@ export default React.createClass({
       radius: {components: []}
     }
     try {
-      let widthComponentsRaw = this.props.currentStyle.borderWidth.split(' ')
-      border.width.components = widthComponentsRaw.map((e, i)=> {
+      let widthComponentsRaw = (this.props.currentStyle.borderWidth.trim() === '') ? null : this.props.currentStyle.borderWidth.split(' ')
+      border.width.components = widthComponentsRaw.map((e, i) => {
         let lengthMatch = e.trim().match(/(\d+)(\D+)/)
         if (lengthMatch) {
           return {
@@ -43,8 +43,8 @@ export default React.createClass({
     catch (ex) {
     }
     try {
-      let radiusComponentsRaw = this.props.currentStyle.borderRadius.split(' ')
-      border.radius.components = radiusComponentsRaw.map((e, i)=> {
+      let radiusComponentsRaw = (this.props.currentStyle.borderRadius.trim() === '') ? null : this.props.currentStyle.borderRadius.split(' ')
+      border.radius.components = radiusComponentsRaw.map((e, i) => {
         let lengthMatch = e.trim().match(/(\d+)(\D+)/)
         if (lengthMatch) {
           return {
@@ -65,14 +65,14 @@ export default React.createClass({
   composeBorder: function (parsedBorder) {
     let borderStyleObject = {borderStyle: parsedBorder.style}
     try {
-      borderStyleObject.borderWidth = parsedBorder.width.components.reduce((pv, cv, ci)=> {
+      borderStyleObject.borderWidth = parsedBorder.width.components.reduce((pv, cv, ci) => {
         return pv + ' ' + ((typeof cv == 'string') ? cv : (cv.length + cv.uom))
       }, '').trim()
     }
     catch (ex) {
     }
     try {
-      borderStyleObject.borderRadius = parsedBorder.radius.components.reduce((pv, cv)=> {
+      borderStyleObject.borderRadius = parsedBorder.radius.components.reduce((pv, cv) => {
         return pv + ' ' + ((typeof cv == 'string') ? cv : (cv.length + cv.uom))
       }, '').trim()
     }
@@ -127,7 +127,7 @@ export default React.createClass({
   },
   render: function () {
     let border = this.parseBorder()
-    let borderWidthComponents = border.width.components && border.width.components.map((e, i)=> {
+    let borderWidthComponents = border.width.components && border.width.components.map((e, i) => {
         return <div className="col-xs-3" key={i}
                     style={{display: 'inline'}}>
           <input value={e.length}
@@ -140,7 +140,7 @@ export default React.createClass({
           />
         </div>
       })
-    let borderRadiusComponents = border.radius.components && border.radius.components.map((e, i)=> {
+    let borderRadiusComponents = border.radius.components && border.radius.components.map((e, i) => {
         return <div className="col-xs-3" key={i}
                     style={{display: 'inline'}}>
           <input value={e.length}
@@ -157,7 +157,7 @@ export default React.createClass({
       <div className="row">
         <div className="col-xs-1">Width</div>
         <div className="col-xs-11">
-          <DropdownList data={[1, 2, 3, 4]}
+          <DropdownList data={[0, 1, 2, 3, 4]}
                         value={border.width.components && border.width.components.length}
                         onChange={this.onChangeWidthComponentCnt}
           /> components
@@ -190,7 +190,7 @@ export default React.createClass({
       <div className="row">
         <div className="col-xs-1">Radius</div>
         <div className="col-xs-11">
-          <DropdownList data={[1, 2, 3, 4]}
+          <DropdownList data={[0, 1, 2, 3, 4]}
                         value={border.radius.components && border.radius.components.length}
                         onChange={this.onChangeRadiusComponentCnt}
           /> components
