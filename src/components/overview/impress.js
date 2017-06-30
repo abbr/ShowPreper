@@ -84,6 +84,9 @@ module.exports = React.createClass({
   onMouseDown: function () {
     this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
   },
+  setDraggable: function (draggable) {
+    this.setState({draggable: draggable})
+  },
   render: function () {
     let selectedWidgets = this.props.deck.components.reduce((pv, e, i, a)=> {
       if (e.selected) pv.push(i)
@@ -115,6 +118,7 @@ module.exports = React.createClass({
           onRotateMouseDown={this.onRotateMouseDown}
           onKillMouseDown={this.onKillMouseDown}
           onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
+          setDraggable={this.setDraggable}
         />
       )
     })
