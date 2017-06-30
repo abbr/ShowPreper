@@ -10,7 +10,7 @@ let RotateControl = React.createClass({
       return
     }
     let newPropObj = _.cloneDeep(this.props.component.rotate || {})
-    newPropObj[p] = (parseInt(v) % 360 + 360) % 360 * Math.PI / 180
+    newPropObj[p] = (parseInt(v) % 360) * Math.PI / 180
     this.props.onSelectedWidgetUpdated({
       container: this.props.container,
       index: this.props.idx
@@ -57,7 +57,7 @@ let RotateControl = React.createClass({
         eleNm="span"
         idx={this.props.idx}
         onBlur={(ev)=>this.onBlur(this.props.axis, ev.target.innerHTML)}
-        dangerouslySetInnerHTML={{__html: (Math.round(rotate * 180 / Math.PI) % 360 + 360) % 360}}/>
+        dangerouslySetInnerHTML={{__html: (Math.round(rotate * 180 / Math.PI) % 360)}}/>
       <span contentEditable={false}>°</span>
     </span>
   }
