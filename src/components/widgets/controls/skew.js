@@ -10,7 +10,7 @@ let SkewControl = React.createClass({
       return
     }
     let newPropObj = _.cloneDeep(this.props.component.skew || {})
-    newPropObj[p] = (parseInt(v) % 360 + 360) % 360 * Math.PI / 180
+    newPropObj[p] = (parseInt(v) % 360) * Math.PI / 180
     this.props.onSelectedWidgetUpdated({
       container: this.props.container,
       index: this.props.idx
@@ -48,7 +48,7 @@ let SkewControl = React.createClass({
         eleNm="span"
         idx={this.props.idx}
         onBlur={(ev)=>this.onBlur(this.props.axis, ev.target.innerHTML)}
-        dangerouslySetInnerHTML={{__html: (Math.round(skew * 180 / Math.PI) % 360 + 360) % 360}}/>
+        dangerouslySetInnerHTML={{__html: (Math.round(skew * 180 / Math.PI) % 360 )}}/>
       <span contentEditable={false}>°</span>
       </span>
   }
