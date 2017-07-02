@@ -7,11 +7,11 @@ import './index.less'
 import _ from 'lodash'
 import BespokeThemeMenu from './bespokeThemeMenu'
 
-let Header = React.createClass({
-  createWidget: function (type) {
+module.exports = class Header extends React.Component {
+  createWidget = (type) => {
     let deck = this.props.deck
     let activeSlide = deck.getActiveSlide()
-    activeSlide.components.forEach((e)=> {
+    activeSlide.components.forEach((e) => {
       delete e.selected
     })
     this.props.onNewWidget(activeSlide, null,
@@ -23,8 +23,9 @@ let Header = React.createClass({
         "selected": true
       },
       lang['new'] + ' ' + lang[type])
-  },
-  render: function () {
+  }
+
+  render() {
     let bespokeThemeMenu, styleMenu
     if (this.props.currentView === 'overview' && this.props.presentationFormat === 'bespoke') {
       bespokeThemeMenu = <BespokeThemeMenu {...this.props}/>
@@ -70,7 +71,7 @@ let Header = React.createClass({
               <li style={this.props.currentView !== 'slides' ? {} : {display: 'none'}}>
                 <button type="button"
                         className="btn btn-default"
-                        onClick={()=> {
+                        onClick={() => {
                           this.props.changeView('slides')
                           this.setState({selectedStyleTarget: 'defaultSlide'})
                         }}
@@ -84,7 +85,7 @@ let Header = React.createClass({
               <li style={this.props.currentView !== 'overview' ? {} : {display: 'none'}}>
                 <button type="button"
                         className="btn btn-default"
-                        onClick={()=> {
+                        onClick={() => {
                           this.props.changeView('overview')
                           this.setState({selectedStyleTarget: 'defaultSlide'})
                         }}
@@ -123,6 +124,4 @@ let Header = React.createClass({
       {/*<!-- /.container-fluid -->*/}
     </nav>
   }
-})
-
-module.exports = Header
+}

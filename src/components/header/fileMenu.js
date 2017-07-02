@@ -7,14 +7,15 @@ import FileOpener from 'components/file/open'
 import FileSaveAs from 'components/file/saveAs'
 import About from 'components/file/about'
 import Logo from './logo.svg'
-module.exports = React.createClass({
-  onUpload: function () {
+module.exports = class  extends React.Component {
+  onUpload = () => {
     this.refs.uploader.click()
-  },
-  onDelete: function () {
+  }
+  onDelete = () => {
     this.props.onDeleteDeck()
-  },
-  render: function () {
+  }
+
+  render() {
     let undoTitle = lang.undo + ' ' + this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
     let redoTitle = lang.redo + ' ' + ((this.props.deck.undoStack.current + 1 < this.props.deck.undoStack.stack.length) ? this.props.deck.undoStack.stack[this.props.deck.undoStack.current + 1].desc : '')
     return <div className="dropdown">
@@ -22,7 +23,7 @@ module.exports = React.createClass({
          aria-haspopup="true"
          aria-expanded="false">
         <img src={Logo}/>
-         ShowPreper
+        ShowPreper
         <span className="caret"/></a>
       <ul className="dropdown-menu">
         <li><a href="#" onClick={this.props.onUndo} title={undoTitle}>{lang.undo}<span
@@ -51,4 +52,4 @@ module.exports = React.createClass({
       <About/>
     </div>
   }
-})
+}
