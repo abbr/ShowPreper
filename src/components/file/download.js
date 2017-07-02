@@ -2,8 +2,8 @@
 import React from 'react'
 import lang from 'i18n/lang'
 
-let Exporter = React.createClass({
-  render: function () {
+module.exports = class Exporter extends React.Component {
+  render() {
     let blob = new Blob([JSON.stringify(this.props.deck, null, 2)], {
       type: 'application/json'
     })
@@ -59,5 +59,5 @@ let Exporter = React.createClass({
       </div>
     </div>
   }
-})
-module.exports = Exporter
+}
+

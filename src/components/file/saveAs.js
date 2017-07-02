@@ -2,14 +2,16 @@
 import React from 'react'
 import lang from 'i18n/lang'
 
-let FileSaveAs = React.createClass({
-  getInitialState: function () {
-    return {
+module.exports = class FileSaveAs extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
       fn: this.props.deck._fn,
       errMsg: ''
     }
-  },
-  onChange: function (e) {
+  }
+
+  onChange = (e) => {
     let newName = e.target.value + '.spj'
     if (newName !== this.props.deck._fn && Object.keys(localStorage).indexOf(newName) >= 0) {
       this.setState({errMsg: lang.duplicatedFileNameErr})
@@ -21,19 +23,20 @@ let FileSaveAs = React.createClass({
       this.setState({errMsg: ''})
     }
     this.setState({fn: newName})
-  },
-  onOk: function () {
+  }
+  onOk = () => {
     this.props.onNewDeck(this.state.fn, this.props.deck)
-  },
-  componentWillReceiveProps: function (nextProps) {
+  }
+  componentWillReceiveProps = (nextProps) => {
     if (nextProps.deck._fn !== this.props.deck._fn) {
       this.setState({
         fn: nextProps.deck._fn,
         errMsg: ''
       })
     }
-  },
-  render: function () {
+  }
+
+  render() {
     return <div id="sp-file-save-as" className="modal fade" tabIndex="-1" role="dialog">
       <div className="modal-dialog">
         <div className="modal-content">
@@ -44,7 +47,7 @@ let FileSaveAs = React.createClass({
           </div>
           <div className="modal-body">
             <input type="text" onChange={this.onChange}
-                   value={this.state.fn.replace(/\.spj$/,'')}></input>.spj
+                   value={this.state.fn.replace(/\.spj$/, '')}></input>.spj
             <div style={{color: 'red'}}>{this.state.errMsg}</div>
           </div>
           <div className="modal-footer">
@@ -59,8 +62,6 @@ let FileSaveAs = React.createClass({
           </div>
         </div>
       </div>
-
     </div>
   }
-})
-module.exports = FileSaveAs
+}

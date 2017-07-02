@@ -3,8 +3,8 @@ import React from 'react'
 import OpenEntry from './openEntry'
 import lang from 'i18n/lang'
 
-let FileOpener = React.createClass({
-  render: function () {
+module.exports = class FileOpener extends React.Component {
+  render() {
     let keys = []
     for (var key in localStorage) {
       if (key.endsWith('.spj')) {
@@ -33,5 +33,4 @@ let FileOpener = React.createClass({
       </div>
     </div>
   }
-})
-module.exports = FileOpener
+}

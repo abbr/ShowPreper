@@ -1,14 +1,14 @@
 'use strict'
-import React from "react"
-import ReactDOM from "react-dom"
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-let Importer = React.createClass({
-  click: function () {
+module.exports = class Importer extends React.Component {
+  click = () => {
     let domEle = ReactDOM.findDOMNode(this)
     domEle.value = null
     domEle.click()
-  },
-  onChange: function (e) {
+  }
+  onChange = (e) => {
     let file = e.target.files[0]
     // TODO validate file mime type
     if (file != null) {
@@ -19,9 +19,9 @@ let Importer = React.createClass({
       }.bind(this)
       reader.readAsText(file)
     }
-  },
-  render: function () {
+  }
+
+  render() {
     return <input type="file" style={{display: "none"}} accept=".spj" onChange={this.onChange}></input>
   }
-})
-module.exports = Importer
+}

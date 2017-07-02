@@ -2,8 +2,8 @@
 import React from 'react'
 import lang from 'i18n/lang'
 
-module.exports = React.createClass({
-  render: function () {
+module.exports = class extends React.Component {
+  render() {
     let gitHashTag
     let gitHash = '$$GIT_HASH$$'
     if (gitHash.length > 0) {
@@ -34,4 +34,4 @@ module.exports = React.createClass({
       </div>
     </div>
   }
-})
+}
