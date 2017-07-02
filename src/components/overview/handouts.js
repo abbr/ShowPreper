@@ -4,14 +4,15 @@ import './handouts.less'
 import _ from 'lodash'
 
 var DisplayableComponent = require('components/widgets/displayableComponent')
-module.exports = React.createClass({
-  updateNotes: function (index, markUndoDesc, e) {
+module.exports = class extends React.Component {
+  updateNotes = (index, markUndoDesc, e) => {
     this.props.onSelectedWidgetUpdated({
       container: this.props.deck,
       index: index
     }, {notes: e.target.value}, markUndoDesc)
-  },
-  render: function () {
+  }
+
+  render() {
     let deckView = this.props.deck.components.map((e, index) => {
       let component = _.cloneDeep(e)
       if (e.type === 'Slide') {
@@ -39,13 +40,14 @@ module.exports = React.createClass({
           idx={index}
           ref={index}
           combinedTransform={true}
-        /><div className="col-xs-1">Notes:
-        <textarea value={component.notes} onBlur={this.updateNotes.bind(null, index, 'notes')}
-                  onChange={this.updateNotes.bind(null, index, null)}></textarea>
+        />
+        <div className="col-xs-1">Notes:
+          <textarea value={component.notes} onBlur={this.updateNotes.bind(null, index, 'notes')}
+                    onChange={this.updateNotes.bind(null, index, null)}></textarea>
         </div>
       </div>
     })
     return <div className="sp-handouts sp-overview container-fluid">{deckView}</div>
   }
-})
+}
 

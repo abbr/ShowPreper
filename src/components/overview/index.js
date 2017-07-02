@@ -3,8 +3,8 @@ import React from 'react'
 import Impress from './impress'
 import Handouts from './handouts'
 import Bespoke from './bespoke'
-module.exports = React.createClass({
-  render: function () {
+module.exports = class extends React.Component {
+  render() {
     switch (this.props.presentationFormat) {
       case 'handouts':
         return <Handouts {...this.props}></Handouts>
@@ -19,5 +19,5 @@ module.exports = React.createClass({
         break
     }
   }
-})
+}
 
