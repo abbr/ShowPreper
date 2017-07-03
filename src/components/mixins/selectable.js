@@ -1,6 +1,4 @@
 'use strict'
-import ReactDOM from 'react-dom'
-import lang from 'i18n/lang'
 
 exports.componentDidMount = function () {
   this.mouseDownHdlrs.unshift(this.onSelectionMouseDown)
@@ -33,4 +31,17 @@ exports.onSelectionMouseDown = function (ev, i) {
       )
     }
   })
+}
+
+
+exports.selectableMixin = Base => class extends Base {
+  componentWillUnmount = () => {
+    super.componentWillUnmount && super.componentWillUnmount()
+    exports.componentWillUnmount()
+  }
+  componentDidMount = () => {
+    supre.componentDidMount && super.componentDidMount()
+    exports.componentDidMount()
+  }
+  onSelectionMouseDown = exports.onSelectionMouseDown
 }

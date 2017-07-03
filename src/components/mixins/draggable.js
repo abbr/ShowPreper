@@ -46,7 +46,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
       let perspective = this.props.deck && this.props.deck.perspective
       this._draggable.dragged = true
       let selectedWidgets = getSelectedWidgets.bind(this)()
-      selectedWidgets.forEach((e, i)=> {
+      selectedWidgets.forEach((e, i) => {
         let zScale = 1
         if (perspective) {
           let scaledPerspective = perspective / scale
@@ -94,7 +94,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
       let scale = this.state.scale || 1
       let perspective = this.props.deck && this.props.deck.perspective
       let selectedWidgets = getSelectedWidgets.bind(this)()
-      selectedWidgets.forEach((e, i)=> {
+      selectedWidgets.forEach((e, i) => {
         let zScale = 1
         if (perspective) {
           let scaledPerspective = perspective / scale
@@ -129,6 +129,20 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
   }
 }
 
-
-
-
+export const draggableMixin = (Base, getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) => class extends Base {
+  constructor() {
+    super()
+    prot = module.exports(this.getSelectedWidgets, this.getInitialWidgetPosition, this.mouseMoveWidgetUpdateFunction, this.mouseUpWidgetUpdateFunction)
+    this.componentDidMount = () => {
+      super.componentDidMount && super.componentDidMount()
+      prot.componentDidMount()
+    }
+    this.componentWillUnmount = () => {
+      super.componentWillUnmount && super.componentWillUnmount()
+      prot.componentWillUnmount()
+    }
+    this.onDraggableMouseDown = prot.onDraggableMouseDown
+    this.onDraggableMouseMove = prot.onDraggableMouseMove
+    this.onDraggableMouseUp = prot.onDraggableMouseUp
+  }
+}

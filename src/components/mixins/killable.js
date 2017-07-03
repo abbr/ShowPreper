@@ -1,6 +1,4 @@
 'use strict'
-import ReactDOM from 'react-dom'
-import lang from 'i18n/lang'
 
 exports.onKillMouseDown = function (ev) {
   ev.stopPropagation && ev.stopPropagation()
@@ -16,4 +14,8 @@ exports.onKillMouseDown = function (ev) {
       )
     }
   }
+}
+
+exports.killableMixin = Base => class extends Base {
+  onKillMouseDown = exports.onKillMouseDown
 }

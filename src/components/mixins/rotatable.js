@@ -56,7 +56,7 @@ exports.onRotateMouseMove = function (ev) {
   ev.stopPropagation && ev.stopPropagation()
   ev.preventDefault && ev.preventDefault()
   let deltaRotate = this.computeDeltaRotate(ev) * this._rotatable.sign
-  this.props.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e => {
     let axis = this._rotatable.axis.toLowerCase()
     let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
     if (ev.ctrlKey) {
@@ -83,7 +83,7 @@ exports.onRotateMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onRotateMouseUp)
   document.removeEventListener('touchend', this.onRotateMouseUp)
   let deltaRotate = this.computeDeltaRotate(ev) * this._rotatable.sign
-  this.props.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e => {
     let axis = this._rotatable.axis.toLowerCase()
     let newRotateAngle = (this._rotatable.rotates[e][axis] + deltaRotate) % (2 * Math.PI)
     if (ev.ctrlKey) {
@@ -142,4 +142,16 @@ exports.computeAngle = function (o, p) {
     a = Math.PI - a
   }
   return a
+}
+
+exports.rotatableMixin = Base => class extends Base {
+  componentWillUnmount = () => {
+    super.componentWillUnmount && super.componentWillUnmount()
+    exports.componentWillUnmount()
+  }
+  onRotateMouseDown = exports.onRotateMouseDown
+  onRotateMouseMove = exports.onRotateMouseMove
+  onRotateMouseUp = exports.onRotateMouseUp
+  computeDeltaRotate = exports.computeDeltaRotate
+  computeAngle = exports.computeAngle
 }

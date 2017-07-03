@@ -49,7 +49,7 @@ exports.onScaleMouseUp = function (ev) {
   document.removeEventListener('mouseup', this.onScaleMouseUp)
   document.removeEventListener('touchend', this.onScaleMouseUp)
   let deltaScale = this.computeDeltaScale(ev)
-  this.props.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e => {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
         container: this.props.component,
         index: e
@@ -66,7 +66,7 @@ exports.onScaleMouseUp = function (ev) {
 
 exports.onScaleMouseMove = function (ev) {
   let deltaScale = this.computeDeltaScale(ev)
-  this.props.selectedWidgets.forEach(e=> {
+  this.props.selectedWidgets.forEach(e => {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
       container: this.props.component,
       index: e
@@ -101,4 +101,15 @@ exports.computeDeltaScale = function (ev) {
   let deltaScaleX = 1 + 2 * (pageX - widgetOriginalScale.ox) / scale / widgetOriginalScale.oWidth / denominator
   let deltaScaleY = 1 + 2 * (pageY - widgetOriginalScale.oy) / scale / widgetOriginalScale.oHeight / denominator
   return Math.max(deltaScaleX, deltaScaleY, 0)
+}
+
+exports.salableMixin = Base => class extends Base {
+  componentWillUnmount = () => {
+    super.componentWillUnmount && super.componentWillUnmount()
+    exports.componentWillUnmount()
+  }
+  onScaleMouseDown = exports.onScaleMouseDown
+  onScaleMouseUp = exports.onScaleMouseUp
+  onScaleMouseMove = exports.onScaleMouseMove
+  computeDeltaScale = exports.computeDeltaScale
 }
