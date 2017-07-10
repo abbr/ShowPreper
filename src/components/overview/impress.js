@@ -10,48 +10,55 @@ import Killable from 'components/mixins/killable'
 import lang from 'i18n/lang'
 import _ from 'lodash'
 var EditableComponent = require('components/widgets/editableComponent')
-module.exports = React.createClass({
-  mixins: [AutoScale, Selectable, Killable, Draggable(function () {
+module.exports = class extends Draggable.draggableMixin(Rotatable.rotatableMixin(Scalable.scalableMixin(Killable.killableMixin(Selectable.selectableMixin(AutoScale.autoScaleMixin(React.Component))))), function getSelectedWidgets() {
     return this.props.selectedWidgets
-  }, function (e) {
+  }
+  , function getInitialWidgetPosition(e) {
     return {
       x: this.props.component.components[e].x || 0,
       y: this.props.component.components[e].y || 0,
       z: this.props.component.components[e].z || 0
     }
-  }, function (e, updatedProps) {
+  }
+  , function mouseMoveWidgetUpdateFunction(e, updatedProps) {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
       container: this.props.component,
       index: e
     }, updatedProps)
-  }, function (e, updatedProps) {
+  }
+  , function mouseUpWidgetUpdateFunction(e, updatedProps) {
     this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
         container: this.props.component,
         index: e
       }, updatedProps, lang.moveComponents
     )
-  }), Scalable, Rotatable],
-  getInitialState: function () {
-    return {draggable: true}
-  },
-  componentWillMount: function () {
+  }
+) {
+  constructor(props) {
+    super(props)
+    this.state = {draggable: true}
+  }
+  componentWillMount() {
+    super.componentWillMount && super.componentWillMount()
     this.mouseDownHdlrs = []
-  },
-  componentDidMount: function () {
+  }
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     this._resized()
     window.addEventListener('resize', this._resized)
-  },
-  componentWillUnmount: function () {
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount && super.componentWillUnmount()
     window.removeEventListener('resize', this._resized)
-  },
-  _resized: function () {
+  }
+  _resized = () => {
     let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     let newBB = this._scale(bb)
     if (newBB) {
       this.props.onSelectedWidgetUpdated({container: this.props.deck, index: -1}, {boundingBox: newBB})
     }
-  },
-  zoom: function (pct) {
+  }
+  zoom(pct) {
     let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     let width = bb.right - bb.left
     let height = bb.bottom - bb.top
@@ -66,29 +73,31 @@ module.exports = React.createClass({
     let newBB = {top: newTop, right: newRight, bottom: newBottom, left: newLeft}
     this.props.onSelectedWidgetUpdated({container: this.props.deck, index: -1}, {boundingBox: newBB})
     this._resized()
-  },
-  zoomIn: function () {
+  }
+  zoomIn = () => {
     this.zoom(-0.1)
-    this.zoomInTimer = setInterval(()=>this.zoom(-0.1), 100)
-  },
-  stopZoomIn: function () {
+    this.zoomInTimer = setInterval(() => this.zoom(-0.1), 100)
+  }
+  stopZoomIn = () => {
     clearInterval(this.zoomInTimer)
-  },
-  zoomOut: function () {
+  }
+  zoomOut = () => {
     this.zoom(0.1)
-    this.zoomOutTimer = setInterval(()=>this.zoom(0.1), 100)
-  },
-  stopZoomOut: function () {
+    this.zoomOutTimer = setInterval(() => this.zoom(0.1), 100)
+  }
+  stopZoomOut = () => {
     clearInterval(this.zoomOutTimer)
-  },
-  onMouseDown: function () {
-    this.mouseDownHdlrs.forEach(e=>e.apply(this, arguments))
-  },
-  setDraggable: function (draggable) {
+  }
+  onMouseDown = (...args) => {
+    this.mouseDownHdlrs.forEach((function (e) {
+      e.apply(this, args)
+    }).bind(this))
+  }
+  setDraggable = (draggable) => {
     this.setState({draggable: draggable})
-  },
-  render: function () {
-    let selectedWidgets = this.props.deck.components.reduce((pv, e, i, a)=> {
+  }
+  render() {
+    let selectedWidgets = this.props.deck.components.reduce((pv, e, i, a) => {
       if (e.selected) pv.push(i)
       return pv
     }, [])
@@ -146,5 +155,5 @@ module.exports = React.createClass({
       </div>
     )
   }
-})
+}
 
