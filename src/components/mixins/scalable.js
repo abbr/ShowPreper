@@ -103,13 +103,14 @@ exports.computeDeltaScale = function (ev) {
   return Math.max(deltaScaleX, deltaScaleY, 0)
 }
 
-exports.salableMixin = Base => class extends Base {
-  componentWillUnmount = () => {
+exports.scalableMixin = Base => class extends Base {
+  componentWillUnmount() {
     super.componentWillUnmount && super.componentWillUnmount()
-    exports.componentWillUnmount()
+    exports.componentWillUnmount.apply(this)
   }
-  onScaleMouseDown = exports.onScaleMouseDown
-  onScaleMouseUp = exports.onScaleMouseUp
-  onScaleMouseMove = exports.onScaleMouseMove
+
+  onScaleMouseDown = exports.onScaleMouseDown.bind(this)
+  onScaleMouseUp = exports.onScaleMouseUp.bind(this)
+  onScaleMouseMove = exports.onScaleMouseMove.bind(this)
   computeDeltaScale = exports.computeDeltaScale
 }

@@ -35,13 +35,15 @@ exports.onSelectionMouseDown = function (ev, i) {
 
 
 exports.selectableMixin = Base => class extends Base {
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     super.componentWillUnmount && super.componentWillUnmount()
-    exports.componentWillUnmount()
+    exports.componentWillUnmount.apply(this)
   }
-  componentDidMount = () => {
-    supre.componentDidMount && super.componentDidMount()
-    exports.componentDidMount()
+
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
+    exports.componentDidMount.apply(this)
   }
-  onSelectionMouseDown = exports.onSelectionMouseDown
+
+  onSelectionMouseDown = exports.onSelectionMouseDown.bind(this)
 }

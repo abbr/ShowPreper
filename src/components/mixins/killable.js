@@ -17,5 +17,5 @@ exports.onKillMouseDown = function (ev) {
 }
 
 exports.killableMixin = Base => class extends Base {
-  onKillMouseDown = exports.onKillMouseDown
+  onKillMouseDown = exports.onKillMouseDown.bind(this)
 }

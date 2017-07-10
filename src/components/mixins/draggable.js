@@ -129,20 +129,22 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
   }
 }
 
-export const draggableMixin = (Base, getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) => class extends Base {
-  constructor() {
-    super()
-    prot = module.exports(this.getSelectedWidgets, this.getInitialWidgetPosition, this.mouseMoveWidgetUpdateFunction, this.mouseUpWidgetUpdateFunction)
-    this.componentDidMount = () => {
-      super.componentDidMount && super.componentDidMount()
-      prot.componentDidMount()
-    }
-    this.componentWillUnmount = () => {
-      super.componentWillUnmount && super.componentWillUnmount()
-      prot.componentWillUnmount()
-    }
-    this.onDraggableMouseDown = prot.onDraggableMouseDown
-    this.onDraggableMouseMove = prot.onDraggableMouseMove
-    this.onDraggableMouseUp = prot.onDraggableMouseUp
+module.exports.draggableMixin = (Base, getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) => class extends Base {
+  constructor(props) {
+    super(props)
+    this.prot = module.exports(getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction)
+    this.onDraggableMouseDown = this.prot.onDraggableMouseDown
+    this.onDraggableMouseMove = this.prot.onDraggableMouseMove.bind(this)
+    this.onDraggableMouseUp = this.prot.onDraggableMouseUp.bind(this)
+  }
+
+  componentWillUnmount() {
+    super.componentWillUnmount && super.componentWillUnmount()
+    this.prot.componentWillUnmount.apply(this)
+  }
+
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
+    this.prot.componentDidMount.apply(this)
   }
 }

@@ -145,13 +145,14 @@ exports.computeAngle = function (o, p) {
 }
 
 exports.rotatableMixin = Base => class extends Base {
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     super.componentWillUnmount && super.componentWillUnmount()
-    exports.componentWillUnmount()
+    exports.componentWillUnmount.apply(this)
   }
-  onRotateMouseDown = exports.onRotateMouseDown
-  onRotateMouseMove = exports.onRotateMouseMove
-  onRotateMouseUp = exports.onRotateMouseUp
-  computeDeltaRotate = exports.computeDeltaRotate
-  computeAngle = exports.computeAngle
+
+  onRotateMouseDown = exports.onRotateMouseDown.bind(this)
+  onRotateMouseMove = exports.onRotateMouseMove.bind(this)
+  onRotateMouseUp = exports.onRotateMouseUp.bind(this)
+  computeDeltaRotate = exports.computeDeltaRotate.bind(this)
+  computeAngle = exports.computeAngle.bind(this)
 }
