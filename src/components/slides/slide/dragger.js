@@ -3,32 +3,32 @@ import ReactDOM from 'react-dom'
 import lang from 'i18n/lang'
 import Draggable from '../../mixins/draggable'
 import ClassNames from 'classnames'
-export default React.createClass({
-  getInitialState: function() {
-    return { draggable: this.props.axis }
+export default class extends Draggable.draggableMixin(
+  React.Component,
+  function() {
+    return [this]
   },
-  mixins: [
-    Draggable(
-      function() {
-        return [this]
-      },
-      function(e) {
-        let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
-        return {
-          x: (bb && bb.left) || 0,
-          y: (bb && bb.top) || 0,
-          z: 0
-        }
-      },
-      function(e, updatedProps) {
-        this.resizeSlide(e, updatedProps)
-      },
-      function(e, updatedProps) {
-        this.resizeSlide(e, updatedProps, lang.changeAspectRatio)
-      }
-    )
-  ],
-  resizeSlide: function(e, updatedProps, markUndoDesc) {
+  function(e) {
+    let bb = ReactDOM.findDOMNode(e).getBoundingClientRect()
+    return {
+      x: (bb && bb.left) || 0,
+      y: (bb && bb.top) || 0,
+      z: 0
+    }
+  },
+  function(e, updatedProps) {
+    this.resizeSlide(e, updatedProps)
+  },
+  function(e, updatedProps) {
+    this.resizeSlide(e, updatedProps, lang.changeAspectRatio)
+  }
+) {
+  constructor(props) {
+    super(props)
+    this.state = { draggable: this.props.axis }
+  }
+
+  resizeSlide(e, updatedProps, markUndoDesc) {
     // set a minimum  drag threshold to handle click and dbl-click correctly
     if (
       Math.abs(
@@ -80,14 +80,15 @@ export default React.createClass({
           this.props.resized && this.props.resized()
         }
       )
-  },
-  onMouseDown: function() {
+  }
+  onMouseDown = () => {
     this.mouseDownHdlrs.forEach(e => e.apply(this, arguments))
-  },
-  componentWillMount: function() {
+  }
+  componentWillMount() {
+    super.componentWillMount && super.componentWillMount()
     this.mouseDownHdlrs = []
-  },
-  onClick: function() {
+  }
+  onClick = () => {
     if (this._draggable && this._draggable.dragged) {
       return
     }
@@ -98,8 +99,8 @@ export default React.createClass({
     )
       return
     this.props.toggleSlideDragTarget()
-  },
-  onDblClick: function(ev) {
+  }
+  onDblClick = ev => {
     ev.stopPropagation && ev.stopPropagation()
     ev.preventDefault && ev.preventDefault()
     this.props.onSelectedWidgetUpdated &&
@@ -118,8 +119,8 @@ export default React.createClass({
         },
         'height'
       )
-  },
-  render: function() {
+  }
+  render() {
     let title
     if (this.props.slideDragTarget === 'thisSlide') {
       title = lang.dragToChangeThisSlideAspectRatio + ';\n'
@@ -190,4 +191,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
