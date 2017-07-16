@@ -6,27 +6,29 @@ var DisplayableComponent = require('components/widgets/displayableComponent')
 import AutoScale from 'components/mixins/autoScale'
 import classNames from 'classnames'
 
-var WellSlide = React.createClass({
-  mixins: [AutoScale],
-  componentDidMount: function() {
+var WellSlide = class extends AutoScale.autoScaleMixin(React.Component) {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     this._resized()
-  },
-  componentWillReceiveProps: function() {
+  }
+  componentWillReceiveProps() {
+    super.componentWillReceiveProps && super.componentWillReceiveProps()
     this._resized()
-  },
-  getInitialState: function() {
-    return {}
-  },
-  _resized: function() {
+  }
+  _resized() {
     let deck = this.props.deck
     let slideWidth = this.props.component.width || deck.slideWidth
     let slideHeight = this.props.component.height || deck.slideHeight
     this._scale({ width: slideWidth, height: slideHeight })
-  },
-  _clicked: function() {
+  }
+  _clicked = () => {
     this.props.onSlideClicked(this.props.index)
-  },
-  render: function() {
+  }
+  render() {
     let componentsView = this.props.component.components.map(
       (component, index) => {
         return <DisplayableComponent component={component} key={index} />
@@ -55,6 +57,6 @@ var WellSlide = React.createClass({
       </div>
     )
   }
-})
+}
 
 module.exports = WellSlide
