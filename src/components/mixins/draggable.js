@@ -1,17 +1,22 @@
 'use strict'
 
-module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) {
+module.exports = function(
+  getSelectedWidgets,
+  getInitialWidgetPosition,
+  mouseMoveWidgetUpdateFunction,
+  mouseUpWidgetUpdateFunction
+) {
   return {
-    componentDidMount: function () {
+    componentDidMount: function() {
       this.mouseDownHdlrs && this.mouseDownHdlrs.push(this.onDraggableMouseDown)
     },
-    componentWillUnmount: function () {
+    componentWillUnmount: function() {
       document.removeEventListener('mousemove', this.onDraggableMouseMove)
       document.removeEventListener('touchmove', this.onDraggableMouseMove)
       document.removeEventListener('mouseup', this.onDraggableMouseUp)
       document.removeEventListener('touchend', this.onDraggableMouseUp)
     },
-    onDraggableMouseDown: function (ev) {
+    onDraggableMouseDown: function(ev) {
       // only left mouse button or touchstart
       if (ev.button !== 0 && ev.type !== 'touchstart') return
       if (!this.state.draggable) return
@@ -19,9 +24,9 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
       document.addEventListener('touchend', this.onDraggableMouseUp)
       document.addEventListener('mousemove', this.onDraggableMouseMove)
       document.addEventListener('mouseup', this.onDraggableMouseUp)
-      document.body.style.WebkitUserSelect = "none"
-      document.body.style.MozUserSelect = "none"
-      document.body.style.MsUserSelect = "none"
+      document.body.style.WebkitUserSelect = 'none'
+      document.body.style.MozUserSelect = 'none'
+      document.body.style.MsUserSelect = 'none'
 
       this._draggable = {}
       this._draggable.drags = []
@@ -39,7 +44,7 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
       })
       ev.stopPropagation && ev.stopPropagation()
     },
-    onDraggableMouseMove: function (ev) {
+    onDraggableMouseMove: function(ev) {
       ev.preventDefault && ev.preventDefault()
       ev.stopPropagation && ev.stopPropagation()
       let scale = this.state.scale || 1
@@ -57,35 +62,41 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         let pageX = ev.targetTouches ? ev.targetTouches[0].pageX : ev.pageX
         let pageY = ev.targetTouches ? ev.targetTouches[0].pageY : ev.pageY
         if (this.state.draggable === 'z') {
-          updatedProps.z = this._draggable.drags[i].oz + Math.round((pageX - this._draggable.drags[i].ox) / scale)
+          updatedProps.z =
+            this._draggable.drags[i].oz +
+            Math.round((pageX - this._draggable.drags[i].ox) / scale)
           if (ev.ctrlKey) {
             updatedProps.z = 10 * Math.round(updatedProps.z / 10)
           }
-        }
-        else {
+        } else {
           if (this.state.draggable === 'x' || this.state.draggable === true) {
-            updatedProps.x = this._draggable.drags[i].oleft + Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
+            updatedProps.x =
+              this._draggable.drags[i].oleft +
+              Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
           }
           if (this.state.draggable === 'y' || this.state.draggable === true) {
-            updatedProps.y = this._draggable.drags[i].otop + Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
+            updatedProps.y =
+              this._draggable.drags[i].otop +
+              Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
           }
           if (ev.ctrlKey) {
             updatedProps.x = 10 * Math.round(updatedProps.x / 10)
             updatedProps.y = 10 * Math.round(updatedProps.y / 10)
           }
         }
-        mouseMoveWidgetUpdateFunction && mouseMoveWidgetUpdateFunction.bind(this, e, updatedProps)()
+        mouseMoveWidgetUpdateFunction &&
+          mouseMoveWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
     },
-    onDraggableMouseUp: function (ev) {
+    onDraggableMouseUp: function(ev) {
       if (ev.type === 'touchend' && ev.targetTouches.length > 0) {
         return
       }
       let pageX = ev.changedTouches ? ev.changedTouches[0].pageX : ev.pageX
       let pageY = ev.changedTouches ? ev.changedTouches[0].pageY : ev.pageY
-      document.body.style.WebkitUserSelect = ""
-      document.body.style.MozUserSelect = ""
-      document.body.style.MsUserSelect = ""
+      document.body.style.WebkitUserSelect = ''
+      document.body.style.MozUserSelect = ''
+      document.body.style.MsUserSelect = ''
       document.removeEventListener('mousemove', this.onDraggableMouseMove)
       document.removeEventListener('touchmove', this.onDraggableMouseMove)
       document.removeEventListener('mouseup', this.onDraggableMouseUp)
@@ -103,48 +114,66 @@ module.exports = function (getSelectedWidgets, getInitialWidgetPosition, mouseMo
         }
         let updatedProps = {}
         if (this.state.draggable === 'z') {
-          updatedProps.z = this._draggable.drags[i].oz + Math.round((pageX - this._draggable.drags[i].ox) / scale)
+          updatedProps.z =
+            this._draggable.drags[i].oz +
+            Math.round((pageX - this._draggable.drags[i].ox) / scale)
           if (ev.ctrlKey) {
             updatedProps.z = 10 * Math.round(updatedProps.z / 10)
           }
-        }
-        else {
+        } else {
           if (this.state.draggable === 'x' || this.state.draggable === true) {
-            updatedProps.x = this._draggable.drags[i].oleft + Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
+            updatedProps.x =
+              this._draggable.drags[i].oleft +
+              Math.round((pageX - this._draggable.drags[i].ox) / scale / zScale)
           }
           if (this.state.draggable === 'y' || this.state.draggable === true) {
-            updatedProps.y = this._draggable.drags[i].otop + Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
+            updatedProps.y =
+              this._draggable.drags[i].otop +
+              Math.round((pageY - this._draggable.drags[i].oy) / scale / zScale)
           }
           if (ev.ctrlKey) {
             updatedProps.x = 10 * Math.round(updatedProps.x / 10)
             updatedProps.y = 10 * Math.round(updatedProps.y / 10)
           }
         }
-        mouseUpWidgetUpdateFunction && mouseUpWidgetUpdateFunction.bind(this, e, updatedProps)()
+        mouseUpWidgetUpdateFunction &&
+          mouseUpWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
-      this.setState({draggable: true})
+      this.setState({ draggable: true })
       ev.stopPropagation && ev.stopPropagation()
       ev.preventDefault && ev.preventDefault()
     }
   }
 }
 
-module.exports.draggableMixin = (Base, getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction) => class extends Base {
-  constructor(props) {
-    super(props)
-    this.prot = module.exports(getSelectedWidgets, getInitialWidgetPosition, mouseMoveWidgetUpdateFunction, mouseUpWidgetUpdateFunction)
-    this.onDraggableMouseDown = this.prot.onDraggableMouseDown
-    this.onDraggableMouseMove = this.prot.onDraggableMouseMove.bind(this)
-    this.onDraggableMouseUp = this.prot.onDraggableMouseUp.bind(this)
-  }
+module.exports.draggableMixin = (
+  Base,
+  getSelectedWidgets,
+  getInitialWidgetPosition,
+  mouseMoveWidgetUpdateFunction,
+  mouseUpWidgetUpdateFunction
+) =>
+  class extends Base {
+    constructor(props) {
+      super(props)
+      this.prot = module.exports(
+        getSelectedWidgets,
+        getInitialWidgetPosition,
+        mouseMoveWidgetUpdateFunction,
+        mouseUpWidgetUpdateFunction
+      )
+      this.onDraggableMouseDown = this.prot.onDraggableMouseDown
+      this.onDraggableMouseMove = this.prot.onDraggableMouseMove.bind(this)
+      this.onDraggableMouseUp = this.prot.onDraggableMouseUp.bind(this)
+    }
 
-  componentWillUnmount() {
-    super.componentWillUnmount && super.componentWillUnmount()
-    this.prot.componentWillUnmount.apply(this)
-  }
+    componentWillUnmount() {
+      super.componentWillUnmount && super.componentWillUnmount()
+      this.prot.componentWillUnmount.apply(this)
+    }
 
-  componentDidMount() {
-    super.componentDidMount && super.componentDidMount()
-    this.prot.componentDidMount.apply(this)
+    componentDidMount() {
+      super.componentDidMount && super.componentDidMount()
+      this.prot.componentDidMount.apply(this)
+    }
   }
-}

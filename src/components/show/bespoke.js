@@ -12,15 +12,15 @@ import AutoScale from 'components/mixins/autoScale'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 let BeSpoke = React.createClass({
   mixins: [AutoScale],
-  componentDidMount: function () {
+  componentDidMount: function() {
     bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
     this._resized()
     window.addEventListener('resize', this._resized)
   },
-  componentWillUnmount: function () {
+  componentWillUnmount: function() {
     window.removeEventListener('resize', this._resized)
   },
-  _resized: function () {
+  _resized: function() {
     let scaleFactor = this.state.deck.bespokeZoomFactor || 1
     let cx = this.state.deck.slideWidth / 2
     let cy = this.state.deck.slideHeight / 2
@@ -35,7 +35,7 @@ let BeSpoke = React.createClass({
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(Global.get('deck'))
   }),
-  render: function () {
+  render: function() {
     let deckView = this.state.deck.components.map((component, index) => {
       if (component.type === 'Slide') {
         let bb = this.state.deck.getSlideBoundingBox(component)
@@ -50,31 +50,43 @@ let BeSpoke = React.createClass({
         component.width = bb.right - bb.left
         component.height = bb.bottom - bb.top
       }
-      return <section
-        key={index}
-        style={{
-          width: component.width,
-          height: component.height
-        }}
-      >
-        <DisplayableComponent
-          ownClassName="sp-slide"
-          component={component}
-          componentStyle={component.style || this.state.deck.defaultSlideStyle || {}}
-          container={this.state.deck}
-          idx={index}
-          ref={index}
-          combinedTransform={true}
-        />
-      </section>
+      return (
+        <section
+          key={index}
+          style={{
+            width: component.width,
+            height: component.height
+          }}
+        >
+          <DisplayableComponent
+            ownClassName="sp-slide"
+            component={component}
+            componentStyle={
+              component.style || this.state.deck.defaultSlideStyle || {}
+            }
+            container={this.state.deck}
+            idx={index}
+            ref={index}
+            combinedTransform={true}
+          />
+        </section>
+      )
     })
-    return <div className="sp-bespoke" style={this.state.deck.style}>
-      <Global values={{
-        deck: this.state.deck
-      }}/>
-      <article className={this.state.deck.bespokeTheme || 'coverflow'}
-               style={this.state.scaleStyle}>{deckView}</article>
-    </div>
+    return (
+      <div className="sp-bespoke" style={this.state.deck.style}>
+        <Global
+          values={{
+            deck: this.state.deck
+          }}
+        />
+        <article
+          className={this.state.deck.bespokeTheme || 'coverflow'}
+          style={this.state.scaleStyle}
+        >
+          {deckView}
+        </article>
+      </div>
+    )
   }
 })
 

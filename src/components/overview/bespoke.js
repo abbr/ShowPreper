@@ -4,22 +4,26 @@ import bespoke from 'bespoke'
 import bespokeKeys from 'bespoke-keys'
 import bespokeClasses from 'bespoke-classes'
 import bespokeTouch from 'bespoke-touch'
-import {autoScaleMixin} from 'components/mixins/autoScale'
+import { autoScaleMixin } from 'components/mixins/autoScale'
 import './bespoke.less'
 import classNames from 'classnames'
 import _ from 'lodash'
 
 var DisplayableComponent = require('components/widgets/displayableComponent')
-module.exports = class  extends autoScaleMixin(React.Component) {
+module.exports = class extends autoScaleMixin(React.Component) {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
   componentDidMount = () => {
-    let beDeck = bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
+    let beDeck = bespoke.from('article', [
+      bespokeKeys(),
+      bespokeClasses(),
+      bespokeTouch()
+    ])
     beDeck.slide(this.props.deck.activeSlide || 0)
-    beDeck.on('activate', (ev) => {
+    beDeck.on('activate', ev => {
       this.props.deck.activateSlide(ev.index)
     })
     this._resized()
@@ -40,11 +44,14 @@ module.exports = class  extends autoScaleMixin(React.Component) {
     }
     this._scale(bb)
   }
-  zoom = (delta) => {
-    this.props.onSelectedWidgetUpdated({
-      container: this.props.deck,
-      index: -1
-    }, {bespokeZoomFactor: (this.props.deck.bespokeZoomFactor || 1) + delta})
+  zoom = delta => {
+    this.props.onSelectedWidgetUpdated(
+      {
+        container: this.props.deck,
+        index: -1
+      },
+      { bespokeZoomFactor: (this.props.deck.bespokeZoomFactor || 1) + delta }
+    )
     this._resized()
   }
   zoomIn = () => {
@@ -82,37 +89,57 @@ module.exports = class  extends autoScaleMixin(React.Component) {
       if (index === this.props.deck.activeSlide) {
         componentStyle = this.props.thisSlideStyle
       }
-      componentStyle = componentStyle || component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle || {}
-      return <section
-        key={index}
-        style={{
-          width: component.width,
-          height: component.height
-        }}
-      >
-        <DisplayableComponent
-          ownClassName="sp-slide"
-          component={component}
-          componentStyle={componentStyle}
-          container={this.props.deck}
-          idx={index}
-          ref={index}
-          combinedTransform={true}
-        />
-      </section>
+      componentStyle =
+        componentStyle ||
+        component.style ||
+        this.props.defaultSlideStyle ||
+        this.props.deck.defaultSlideStyle ||
+        {}
+      return (
+        <section
+          key={index}
+          style={{
+            width: component.width,
+            height: component.height
+          }}
+        >
+          <DisplayableComponent
+            ownClassName="sp-slide"
+            component={component}
+            componentStyle={componentStyle}
+            container={this.props.deck}
+            idx={index}
+            ref={index}
+            combinedTransform={true}
+          />
+        </section>
+      )
     })
-    return <div className="sp-overview" style={this.props.presentationStyle || this.props.deck.style}>
-      <span
-        className='glyphicon glyphicon-zoom-in'
-        onMouseDown={this.zoomIn}
-        onMouseUp={this.stopZoomIn}
-      />
-      <span className='glyphicon glyphicon-zoom-out'
-            onMouseDown={this.zoomOut}
-            onMouseUp={this.stopZoomOut}
-      />
-      <article className={classNames('sp-bespoke', this.props.deck.bespokeTheme || 'coverflow')}
-               style={this.state.scaleStyle}>{deckView}</article>
-    </div>
+    return (
+      <div
+        className="sp-overview"
+        style={this.props.presentationStyle || this.props.deck.style}
+      >
+        <span
+          className="glyphicon glyphicon-zoom-in"
+          onMouseDown={this.zoomIn}
+          onMouseUp={this.stopZoomIn}
+        />
+        <span
+          className="glyphicon glyphicon-zoom-out"
+          onMouseDown={this.zoomOut}
+          onMouseUp={this.stopZoomOut}
+        />
+        <article
+          className={classNames(
+            'sp-bespoke',
+            this.props.deck.bespokeTheme || 'coverflow'
+          )}
+          style={this.state.scaleStyle}
+        >
+          {deckView}
+        </article>
+      </div>
+    )
   }
 }

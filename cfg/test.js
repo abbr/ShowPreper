@@ -10,9 +10,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: 'isparta-instrumenter-loader',
-        include: [
-          path.join(__dirname, '/../src')
-        ]
+        include: [path.join(__dirname, '/../src')]
       }
     ],
     loaders: [

@@ -3,28 +3,26 @@ import _ from 'lodash'
 import DefaultDeck from 'sources/default.spj'
 const _spDefaultFileNm = 'default.spj'
 const _spDefaultDeck = '_defaultDeck'
-const DEFAULT_SLIDE_SIZE = {width: 640, height: 480}
+const DEFAULT_SLIDE_SIZE = { width: 640, height: 480 }
 
-let Deck = function (fn, props) {
+let Deck = function(fn, props) {
   var savedDeckObj
   var _fn = fn || _spDefaultFileNm
-  if (typeof(Storage) !== "undefined") {
+  if (typeof Storage !== 'undefined') {
     try {
       savedDeckObj = JSON.parse(localStorage.getItem(_fn))
-    }
-    catch (ex) {
-    }
+    } catch (ex) {}
   }
   let deckObj = props || savedDeckObj || _.cloneDeep(DefaultDeck)
   _.assign(this, deckObj)
-  Object.defineProperty(this, "undoStack", {
+  Object.defineProperty(this, 'undoStack', {
     enumerable: false,
     value: {
       stack: [],
       current: -1
     }
   })
-  Object.defineProperty(this, "_fn", {
+  Object.defineProperty(this, '_fn', {
     enumerable: false,
     value: _fn
   })
@@ -34,50 +32,60 @@ let Deck = function (fn, props) {
   this.markUndo('')
 }
 
-Deck.prototype.getActiveSlide = function () {
+Deck.prototype.getActiveSlide = function() {
   return this.getSlides()[this.activeSlide || 0]
 }
 
-Deck.prototype.activateSlide = function (i) {
+Deck.prototype.activateSlide = function(i) {
   this.activeSlide = i
 }
 
-Deck.prototype.delete = function () {
+Deck.prototype.delete = function() {
   try {
     localStorage.removeItem(this._fn)
     if (localStorage.getItem(_spDefaultDeck) === this._fn) {
       localStorage.removeItem(_spDefaultDeck)
     }
-  }
-  catch (e) {
-  }
+  } catch (e) {}
 }
 
-Deck.prototype.save = function () {
-  if (typeof(Storage) !== "undefined") {
+Deck.prototype.save = function() {
+  if (typeof Storage !== 'undefined') {
     localStorage.setItem(_spDefaultDeck, this._fn)
     localStorage.setItem(this._fn, JSON.stringify(this))
   }
 }
 
-Deck.prototype.markUndo = function (desc) {
-  this.undoStack.stack.splice(++this.undoStack.current, this.undoStack.stack.length, {
-    desc: desc,
-    deck: _.cloneDeep(this)
-  })
+Deck.prototype.markUndo = function(desc) {
+  this.undoStack.stack.splice(
+    ++this.undoStack.current,
+    this.undoStack.stack.length,
+    {
+      desc: desc,
+      deck: _.cloneDeep(this)
+    }
+  )
 }
 
-Deck.prototype.undo = function () {
-  (this.undoStack.current > 0) && _.assign(this, _.cloneDeep(this.undoStack.stack[--this.undoStack.current].deck))
+Deck.prototype.undo = function() {
+  this.undoStack.current > 0 &&
+    _.assign(
+      this,
+      _.cloneDeep(this.undoStack.stack[--this.undoStack.current].deck)
+    )
 }
 
-Deck.prototype.redo = function () {
-  ((this.undoStack.current + 1) < this.undoStack.stack.length) && _.assign(this, _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck))
+Deck.prototype.redo = function() {
+  this.undoStack.current + 1 < this.undoStack.stack.length &&
+    _.assign(
+      this,
+      _.cloneDeep(this.undoStack.stack[++this.undoStack.current].deck)
+    )
 }
-Deck.prototype.getSlides = function () {
-  return this.components.filter((e, i, a)=>e.type === 'Slide')
+Deck.prototype.getSlides = function() {
+  return this.components.filter((e, i, a) => e.type === 'Slide')
 }
-Deck.prototype.getSlideBoundingBox = function (e) {
+Deck.prototype.getSlideBoundingBox = function(e) {
   let nCols = Math.ceil(Math.sqrt(this.getSlides().length))
   // assume square grid layout
   let slideWidth = e.width || this.slideWidth || DEFAULT_SLIDE_SIZE.width
@@ -90,27 +98,35 @@ Deck.prototype.getSlideBoundingBox = function (e) {
   let right = left + slideWidth
   let top = e.y || (slideHeight + slideMargin) * row
   let bottom = top + slideHeight
-  return {top: top, right: right, bottom: bottom, left: left}
+  return { top: top, right: right, bottom: bottom, left: left }
 }
 
-Deck.prototype.getDefaultDeckBoundingBox = function () {
+Deck.prototype.getDefaultDeckBoundingBox = function() {
   return this.getSlides().reduce((pv, e) => {
     let bb = this.getSlideBoundingBox(e)
-    pv = pv || {top: bb.top, right: bb.right, bottom: bb.bottom, left: bb.left}
+    pv = pv || {
+      top: bb.top,
+      right: bb.right,
+      bottom: bb.bottom,
+      left: bb.left
+    }
     return {
-      top: Math.min(bb.top, pv.top)
-      , right: Math.max(bb.right, pv.right)
-      , bottom: Math.max(bb.bottom, pv.bottom)
-      , left: Math.min(bb.left, pv.left)
+      top: Math.min(bb.top, pv.top),
+      right: Math.max(bb.right, pv.right),
+      bottom: Math.max(bb.bottom, pv.bottom),
+      left: Math.min(bb.left, pv.left)
     }
   }, null)
 }
 exports.Deck = Deck
-exports.getDefaultDeck = function () {
+exports.getDefaultDeck = function() {
   let _fn = _spDefaultFileNm
-  if (typeof(Storage) !== "undefined") {
+  if (typeof Storage !== 'undefined') {
     _fn = localStorage.getItem(_spDefaultDeck) || _spDefaultFileNm
   }
   let args = [null, _fn]
-  return new (Function.prototype.bind.apply(Deck, args.concat(Array.from(arguments))))
+  return new (Function.prototype.bind.apply(
+    Deck,
+    args.concat(Array.from(arguments))
+  ))()
 }

@@ -4,12 +4,12 @@ module.exports = {
   insertWebsite: 'Website invoegen',
   addSlide: 'Dia toevoegen',
   removeSlide: 'Dia verwijderen',
-  slides: 'Dia\'s',
+  slides: "Dia's",
   overview: 'Overzicht',
   open: 'Openen',
   save: 'Opslaan',
   saveAs: 'Opslaan als',
-  'new': 'Nieuw',
+  new: 'Nieuw',
   text: 'Tekst',
   TextBox: 'Tekst',
   image: 'Afbeelding',
@@ -29,7 +29,8 @@ module.exports = {
   invisible: 'Onzichtbaar',
   reset: 'Terugzetten',
   go: 'Gaan',
-  downloadProjectFileExplain: "This allows you to save a file with extension .spj on your computer that you can upload back to ShowPreper later.",
+  downloadProjectFileExplain:
+    'This allows you to save a file with extension .spj on your computer that you can upload back to ShowPreper later.',
   background: 'Achtergrond',
   surface: 'Werkblad',
   invalidFilename: 'Invalid Filename',
@@ -42,7 +43,8 @@ module.exports = {
   show: 'Show',
   handouts: 'Handouts',
   doubleClickEdit: 'Double click to edit',
-  duplicatedFileNameErr: 'Duplicated file name. If you click Ok, old file will be overwritten.',
+  duplicatedFileNameErr:
+    'Duplicated file name. If you click Ok, old file will be overwritten.',
   emptyFileNameErr: 'File name cannot be empty.',
   btnOk: 'Ok',
   btnCancel: 'Cancel',
@@ -65,10 +67,12 @@ module.exports = {
   rotate: 'rotate',
   skew: 'skew',
   scale: 'scale',
-  dragToChangeThisSlideAspectRatio: 'drag to change this slide\'s aspect ratio',
-  dragToChangeDefaultSlideAspectRatio: 'drag to change default slide\'s aspect ratio',
-  doubleClickToResetToDefault: 'dbl-click to reset to default slide\'s aspect ratio',
-  clickToChangeDefaultSlide: 'click to change default slide\'s',
-  clickToChangeThisSlide: 'click to change this slide\'s',
-  changeAspectRatio: 'change aspect ratio',
+  dragToChangeThisSlideAspectRatio: "drag to change this slide's aspect ratio",
+  dragToChangeDefaultSlideAspectRatio:
+    "drag to change default slide's aspect ratio",
+  doubleClickToResetToDefault:
+    "dbl-click to reset to default slide's aspect ratio",
+  clickToChangeDefaultSlide: "click to change default slide's",
+  clickToChangeThisSlide: "click to change this slide's",
+  changeAspectRatio: 'change aspect ratio'
 }

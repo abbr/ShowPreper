@@ -7,17 +7,16 @@ module.exports = class extends React.Component {
   render() {
     switch (this.props.presentationFormat) {
       case 'handouts':
-        return <Handouts {...this.props}></Handouts>
+        return <Handouts {...this.props} />
         break
       case 'impress':
-        return <Impress {...this.props}></Impress>
+        return <Impress {...this.props} />
         break
       case 'bespoke':
-        return <Bespoke {...this.props}/>
+        return <Bespoke {...this.props} />
         break
       default:
         break
     }
   }
 }
-

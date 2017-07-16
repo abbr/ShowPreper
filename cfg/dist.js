@@ -8,11 +8,13 @@ var config = {
     filename: '[name].[hash].js'
   },
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      loader: 'babel',
-      include: path.join(__dirname, '/../src')
-    }]
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel',
+        include: path.join(__dirname, '/../src')
+      }
+    ]
   },
   cache: false,
   devtool: 'sourcemap',
@@ -30,7 +32,7 @@ var config = {
       root: path.join(__dirname, '..'),
       verbose: true,
       dry: false
-    }),
+    })
   ]
 }
 

@@ -9,7 +9,7 @@ module.exports = {
   open: 'Abrir',
   save: 'Guardar',
   saveAs: 'Guardar como',
-  'new': 'Nuevo',
+  new: 'Nuevo',
   text: 'Texto',
   TextBox: 'Texto',
   image: 'Imagen',
@@ -29,7 +29,8 @@ module.exports = {
   invisible: 'Invisible',
   reset: 'Reajustar',
   go: 'Ir',
-  downloadProjectFileExplain: "This allows you to save a file with extension .spj on your computer that you can upload back to ShowPreper later.",
+  downloadProjectFileExplain:
+    'This allows you to save a file with extension .spj on your computer that you can upload back to ShowPreper later.',
   background: 'Fondo',
   surface: 'Superficie',
   invalidFilename: 'Invalid Filename',
@@ -43,7 +44,8 @@ module.exports = {
   show: 'Show',
   handouts: 'Handouts',
   doubleClickEdit: 'Double click to edit',
-  duplicatedFileNameErr: 'Duplicated file name. If you click Ok, old file will be overwritten.',
+  duplicatedFileNameErr:
+    'Duplicated file name. If you click Ok, old file will be overwritten.',
   emptyFileNameErr: 'File name cannot be empty.',
   btnOk: 'Ok',
   btnCancel: 'Cancel',
@@ -66,10 +68,12 @@ module.exports = {
   rotate: 'rotate',
   skew: 'skew',
   scale: 'scale',
-  dragToChangeThisSlideAspectRatio: 'drag to change this slide\'s aspect ratio',
-  dragToChangeDefaultSlideAspectRatio: 'drag to change default slide\'s aspect ratio',
-  doubleClickToResetToDefault: 'dbl-click to reset to default slide\'s aspect ratio',
-  clickToChangeDefaultSlide: 'click to change default slide\'s',
-  clickToChangeThisSlide: 'click to change this slide\'s',
-  changeAspectRatio: 'change aspect ratio',
+  dragToChangeThisSlideAspectRatio: "drag to change this slide's aspect ratio",
+  dragToChangeDefaultSlideAspectRatio:
+    "drag to change default slide's aspect ratio",
+  doubleClickToResetToDefault:
+    "dbl-click to reset to default slide's aspect ratio",
+  clickToChangeDefaultSlide: "click to change default slide's",
+  clickToChangeThisSlide: "click to change this slide's",
+  changeAspectRatio: 'change aspect ratio'
 }

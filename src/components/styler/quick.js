@@ -7,10 +7,10 @@ import lang from 'i18n/lang'
 import Styler from './'
 
 let QuickStyler = React.createClass({
-  getInitialState: function () {
-    return {palettes: new Palettes()}
+  getInitialState: function() {
+    return { palettes: new Palettes() }
   },
-  getStyle: function () {
+  getStyle: function() {
     let s
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
@@ -21,15 +21,14 @@ let QuickStyler = React.createClass({
         break
       case 'selectedSlides':
         let commonStyle
-        this.props.deck.components.forEach((e) => {
+        this.props.deck.components.forEach(e => {
           if (!e.selected) {
             return
           }
           let thisSlideStyle = e.style || this.props.deck.defaultSlideStyle
           if (commonStyle === undefined) {
             commonStyle = thisSlideStyle
-          }
-          else if (commonStyle !== thisSlideStyle) {
+          } else if (commonStyle !== thisSlideStyle) {
             commonStyle = null
           }
         })
@@ -41,14 +40,14 @@ let QuickStyler = React.createClass({
     }
     return s
   },
-  updatePalette: function (i) {
+  updatePalette: function(i) {
     let s = this.getStyle()
     let p = new Palettes()
     p[i] = s
     p.save()
-    this.setState({palettes: p})
+    this.setState({ palettes: p })
   },
-  updateStyle: function (evt, idx) {
+  updateStyle: function(evt, idx) {
     let p = this.state.palettes
     let targetStyle = this.getStyle()
     if (idx) {
@@ -65,16 +64,23 @@ let QuickStyler = React.createClass({
             break
           case 'click':
             if (idx === '8') {
-              this.props.onSelectedWidgetUpdated({
-                container: this.props.deck,
-                index: -1
-              }, 'defaultSlideStyle', lang.setAppearance + ' ' + lang.defaultSlide)
-            }
-            else {
-              this.props.onSelectedWidgetUpdated({
-                container: this.props.deck,
-                index: -1
-              }, {defaultSlideStyle: targetStyle}, lang.setAppearance + ' ' + lang.defaultSlide)
+              this.props.onSelectedWidgetUpdated(
+                {
+                  container: this.props.deck,
+                  index: -1
+                },
+                'defaultSlideStyle',
+                lang.setAppearance + ' ' + lang.defaultSlide
+              )
+            } else {
+              this.props.onSelectedWidgetUpdated(
+                {
+                  container: this.props.deck,
+                  index: -1
+                },
+                { defaultSlideStyle: targetStyle },
+                lang.setAppearance + ' ' + lang.defaultSlide
+              )
             }
           default:
             this.props.setTargetStyle('defaultSlideStyle', null)
@@ -90,16 +96,23 @@ let QuickStyler = React.createClass({
             break
           case 'click':
             if (idx === '8') {
-              this.props.onSelectedWidgetUpdated({
-                container: this.props.deck.getActiveSlide(),
-                index: -1
-              }, 'style', lang.setAppearance + ' ' + lang.thisSlide)
-            }
-            else {
-              this.props.onSelectedWidgetUpdated({
-                container: this.props.deck.getActiveSlide(),
-                index: -1
-              }, {style: targetStyle}, lang.setAppearance + ' ' + lang.thisSlide)
+              this.props.onSelectedWidgetUpdated(
+                {
+                  container: this.props.deck.getActiveSlide(),
+                  index: -1
+                },
+                'style',
+                lang.setAppearance + ' ' + lang.thisSlide
+              )
+            } else {
+              this.props.onSelectedWidgetUpdated(
+                {
+                  container: this.props.deck.getActiveSlide(),
+                  index: -1
+                },
+                { style: targetStyle },
+                lang.setAppearance + ' ' + lang.thisSlide
+              )
             }
           default:
             this.props.setTargetStyle('thisSlideStyle', null)
@@ -114,23 +127,30 @@ let QuickStyler = React.createClass({
             this.props.setTargetStyle('selectedSlidesStyle', targetStyle)
             break
           case 'click':
-            this.props.deck.components.forEach((e)=> {
+            this.props.deck.components.forEach(e => {
               if (e.selected) {
                 if (idx === '8') {
-                  this.props.onSelectedWidgetUpdated({
-                    container: e,
-                    index: -1
-                  }, 'style')
-                }
-                else {
-                  this.props.onSelectedWidgetUpdated({
-                    container: e,
-                    index: -1
-                  }, {style: targetStyle})
+                  this.props.onSelectedWidgetUpdated(
+                    {
+                      container: e,
+                      index: -1
+                    },
+                    'style'
+                  )
+                } else {
+                  this.props.onSelectedWidgetUpdated(
+                    {
+                      container: e,
+                      index: -1
+                    },
+                    { style: targetStyle }
+                  )
                 }
               }
             })
-            this.props.deck.markUndo(lang.setAppearance + ' ' + lang.selectedSlides)
+            this.props.deck.markUndo(
+              lang.setAppearance + ' ' + lang.selectedSlides
+            )
           default:
             this.props.setTargetStyle('selectedSlidesStyle', null)
         }
@@ -145,77 +165,91 @@ let QuickStyler = React.createClass({
             break
           case 'click':
             if (idx === '8') {
-              this.props.onSelectedWidgetUpdated({
-                container: this.props.deck,
-                index: -1
-              }, 'style', lang.setAppearance + ' ' + lang.presentation)
-            }
-            else {
-              this.props.onSelectedWidgetUpdated({
-                container: this.props.deck,
-                index: -1
-              }, {style: targetStyle}, lang.setAppearance + ' ' + lang.presentation)
+              this.props.onSelectedWidgetUpdated(
+                {
+                  container: this.props.deck,
+                  index: -1
+                },
+                'style',
+                lang.setAppearance + ' ' + lang.presentation
+              )
+            } else {
+              this.props.onSelectedWidgetUpdated(
+                {
+                  container: this.props.deck,
+                  index: -1
+                },
+                { style: targetStyle },
+                lang.setAppearance + ' ' + lang.presentation
+              )
             }
           default:
             this.props.setTargetStyle('presentationStyle', null)
         }
     }
   },
-  render: function () {
+  render: function() {
     let p = _.cloneDeep(this.state.palettes)
     p[8] = p[9] = {}
-    let pDivs = _.map(p, (e, i)=> {
+    let pDivs = _.map(p, (e, i) => {
       let s = _.clone(e)
-      let extraCN = '', title = ''
-      let mouseEvtHdlr = (evt)=> {
+      let extraCN = '',
+        title = ''
+      let mouseEvtHdlr = evt => {
         this.updateStyle(evt, i)
       }
       let mouseClickHdlr = mouseEvtHdlr
 
       switch (i) {
-        case "7":
+        case '7':
           s.background = 'url(' + require('./transparent.svg') + ')'
           title = lang.setToTransparent
           break
-        case "8":
+        case '8':
           extraCN = ' special-style glyphicon glyphicon-remove'
           title = lang.removeStyle
           break
-        case "9":
+        case '9':
           extraCN = ' special-style glyphicon glyphicon-edit'
           title = lang.customizeStyle
           mouseEvtHdlr = null
-          mouseClickHdlr = (evt) => {
+          mouseClickHdlr = evt => {
             $('#sp-styler-modal').modal('show')
           }
           break
         default:
           title = 'palette ' + (parseInt(i) + 1)
       }
-      return <div
-        className={"sp-palette" + extraCN}
-        style={s}
-        title={title}
-        onMouseOver={mouseEvtHdlr}
-        onMouseLeave={mouseEvtHdlr}
-        onClick={mouseClickHdlr}
-        key={i}></div>
+      return (
+        <div
+          className={'sp-palette' + extraCN}
+          style={s}
+          title={title}
+          onMouseOver={mouseEvtHdlr}
+          onMouseLeave={mouseEvtHdlr}
+          onClick={mouseClickHdlr}
+          key={i}
+        />
+      )
     })
-    return <div id="sp-quick-styler">
-      {pDivs}
-      <Styler selectedStyleTarget={this.props.selectedStyleTarget}
-              presentationStyle={this.props.presentationStyle}
-              deck={this.props.deck}
-              defaultSlideStyle={this.props.defaultSlideStyle}
-              selectedSlidesStyle={this.props.selectedSlidesStyle}
-              thisSlideStyle={this.props.thisSlideStyle}
-              setTargetStyle={this.props.setTargetStyle}
-              updatePalette={this.updatePalette}
-              getStyle={this.getStyle}
-              updateStyle={this.updateStyle}
-              palettes={this.state.palettes}
-      ></Styler>
-    </div>
+    return (
+      <div id="sp-quick-styler">
+        {pDivs}
+        <Styler
+          selectedStyleTarget={this.props.selectedStyleTarget}
+          presentationStyle={this.props.presentationStyle}
+          deck={this.props.deck}
+          defaultSlideStyle={this.props.defaultSlideStyle}
+          selectedSlidesStyle={this.props.selectedSlidesStyle}
+          thisSlideStyle={this.props.thisSlideStyle}
+          setTargetStyle={this.props.setTargetStyle}
+          updatePalette={this.updatePalette}
+          getStyle={this.getStyle}
+          updateStyle={this.updateStyle}
+          palettes={this.state.palettes}
+        />
+      </div>
+    )
   }
 })
 module.exports = QuickStyler

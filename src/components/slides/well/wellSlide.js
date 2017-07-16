@@ -8,40 +8,47 @@ import classNames from 'classnames'
 
 var WellSlide = React.createClass({
   mixins: [AutoScale],
-  componentDidMount: function () {
+  componentDidMount: function() {
     this._resized()
   },
-  componentWillReceiveProps: function(){
+  componentWillReceiveProps: function() {
     this._resized()
   },
-  getInitialState: function () {
+  getInitialState: function() {
     return {}
   },
-  _resized: function () {
+  _resized: function() {
     let deck = this.props.deck
     let slideWidth = this.props.component.width || deck.slideWidth
     let slideHeight = this.props.component.height || deck.slideHeight
-    this._scale({width: slideWidth, height: slideHeight})
+    this._scale({ width: slideWidth, height: slideHeight })
   },
-  _clicked: function () {
+  _clicked: function() {
     this.props.onSlideClicked(this.props.index)
   },
-  render: function () {
-    let componentsView = this.props.component.components.map((component, index) => {
-      return (
-        <DisplayableComponent
-          component={component}
-          key={index}
-        />
-      )
-    })
+  render: function() {
+    let componentsView = this.props.component.components.map(
+      (component, index) => {
+        return <DisplayableComponent component={component} key={index} />
+      }
+    )
     return (
-      <div className="sp-well-slide-container"
-           onClick={this._clicked}>
+      <div className="sp-well-slide-container" onClick={this._clicked}>
         <div
-          className={classNames("sp-well-slide",
-            {"sp-selected": this.props.deck.activeSlide === this.props.index})}
-          style={_.merge({}, this.state.scaleStyle, ((this.props.deck.activeSlide === this.props.index) ? this.props.thisSlideStyle : null) || this.props.component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle)}>
+          className={classNames('sp-well-slide', {
+            'sp-selected': this.props.deck.activeSlide === this.props.index
+          })}
+          style={_.merge(
+            {},
+            this.state.scaleStyle,
+            (this.props.deck.activeSlide === this.props.index
+              ? this.props.thisSlideStyle
+              : null) ||
+              this.props.component.style ||
+              this.props.defaultSlideStyle ||
+              this.props.deck.defaultSlideStyle
+          )}
+        >
           {this.props.children}
           {componentsView}
         </div>

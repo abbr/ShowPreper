@@ -6,12 +6,13 @@ import SlideEditor from 'components/slides/slide'
 import './index.less'
 
 let Main = React.createClass({
-  render: function () {
-    return <div className="sp-slides">
-      <SlideWell {...this.props}
-      />
-      <SlideEditor {...this.props}/>
-    </div>
+  render: function() {
+    return (
+      <div className="sp-slides">
+        <SlideWell {...this.props} />
+        <SlideEditor {...this.props} />
+      </div>
+    )
   }
 })
 

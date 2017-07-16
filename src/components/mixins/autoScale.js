@@ -2,22 +2,39 @@
 import ReactDOM from 'react-dom'
 
 // fit (width, height) into (frameWidth, frameHeight)
-exports.getFitSquareScaleFactor = function (width, height, frameWidth, frameHeight) {
-  return (width / height < frameWidth / frameHeight) ? frameHeight / height : frameWidth / width
+exports.getFitSquareScaleFactor = function(
+  width,
+  height,
+  frameWidth,
+  frameHeight
+) {
+  return width / height < frameWidth / frameHeight
+    ? frameHeight / height
+    : frameWidth / width
 }
 
-exports._scale = function (size) {
+exports._scale = function(size) {
   let rootElSize
   try {
     rootElSize = window.getComputedStyle(ReactDOM.findDOMNode(this))
-  }
-  catch (ex) {
+  } catch (ex) {
     return
   }
-  let domWidth = parseInt(rootElSize.width) - parseInt(rootElSize.paddingLeft) - parseInt(rootElSize.paddingRight)
-  let domHeight = parseInt(rootElSize.height) - parseInt(rootElSize.paddingTop) - parseInt(rootElSize.paddingBottom)
+  let domWidth =
+    parseInt(rootElSize.width) -
+    parseInt(rootElSize.paddingLeft) -
+    parseInt(rootElSize.paddingRight)
+  let domHeight =
+    parseInt(rootElSize.height) -
+    parseInt(rootElSize.paddingTop) -
+    parseInt(rootElSize.paddingBottom)
 
-  let componentWidth, componentHeight, componentTop, componentRight, componentBottom, componentLeft
+  let componentWidth,
+    componentHeight,
+    componentTop,
+    componentRight,
+    componentBottom,
+    componentLeft
   if (size.width || size.height) {
     componentWidth = size.width
     componentHeight = size.height
@@ -25,8 +42,7 @@ exports._scale = function (size) {
     componentRight = size.width
     componentBottom = size.height
     componentLeft = 0
-  }
-  else {
+  } else {
     componentWidth = size.right - size.left
     componentHeight = size.bottom - size.top
     componentTop = size.top
@@ -43,7 +59,7 @@ exports._scale = function (size) {
   )
   let leftOffset = (domWidth - componentWidth * scale) / 2
   let topOffset = (domHeight - componentHeight * scale) / 2
-  let scaleStr = " scale(" + scale + ")"
+  let scaleStr = ' scale(' + scale + ')'
   let componentCx = (componentLeft + componentRight) / 2
   let componentCy = (componentTop + componentBottom) / 2
   let domCx = componentWidth * scale / 2
@@ -56,7 +72,7 @@ exports._scale = function (size) {
     marginLeft: leftOffset + 'px',
     marginTop: topOffset + 'px',
     width: componentCx * 2,
-    height: componentCy * 2,
+    height: componentCy * 2
   }
   this.setState({
     scaleStyle: scaleStyle,
@@ -75,7 +91,8 @@ exports._scale = function (size) {
 }
 
 export default exports
-export const autoScaleMixin = Base => class extends Base {
-  getFitSquareScaleFactor = exports.getFitSquareScaleFactor
-  _scale = exports._scale
-}
+export const autoScaleMixin = Base =>
+  class extends Base {
+    getFitSquareScaleFactor = exports.getFitSquareScaleFactor
+    _scale = exports._scale
+  }

@@ -7,6 +7,12 @@ module.exports = class OpenEntry extends React.Component {
   }
 
   render() {
-    return <div><a data-toggle="modal" href="#sp-file-open" onClick={this.onOpen}>{this.props.name}</a></div>
+    return (
+      <div>
+        <a data-toggle="modal" href="#sp-file-open" onClick={this.onOpen}>
+          {this.props.name}
+        </a>
+      </div>
+    )
   }
 }

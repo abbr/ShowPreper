@@ -6,10 +6,14 @@ import _ from 'lodash'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 module.exports = class extends React.Component {
   updateNotes = (index, markUndoDesc, e) => {
-    this.props.onSelectedWidgetUpdated({
-      container: this.props.deck,
-      index: index
-    }, {notes: e.target.value}, markUndoDesc)
+    this.props.onSelectedWidgetUpdated(
+      {
+        container: this.props.deck,
+        index: index
+      },
+      { notes: e.target.value },
+      markUndoDesc
+    )
   }
 
   render() {
@@ -28,26 +32,34 @@ module.exports = class extends React.Component {
         component.width = bb.right - bb.left
         component.height = bb.bottom - bb.top
       }
-      return <div
-        key={index}
-        className="row"
-      >
-        <DisplayableComponent
-          ownClassName="slide col-xs-1"
-          component={component}
-          componentStyle={component.style || this.props.deck.defaultSlideStyle || {}}
-          container={this.props.deck}
-          idx={index}
-          ref={index}
-          combinedTransform={true}
-        />
-        <div className="col-xs-1">Notes:
-          <textarea value={component.notes} onBlur={this.updateNotes.bind(null, index, 'notes')}
-                    onChange={this.updateNotes.bind(null, index, null)}></textarea>
+      return (
+        <div key={index} className="row">
+          <DisplayableComponent
+            ownClassName="slide col-xs-1"
+            component={component}
+            componentStyle={
+              component.style || this.props.deck.defaultSlideStyle || {}
+            }
+            container={this.props.deck}
+            idx={index}
+            ref={index}
+            combinedTransform={true}
+          />
+          <div className="col-xs-1">
+            Notes:
+            <textarea
+              value={component.notes}
+              onBlur={this.updateNotes.bind(null, index, 'notes')}
+              onChange={this.updateNotes.bind(null, index, null)}
+            />
+          </div>
         </div>
-      </div>
+      )
     })
-    return <div className="sp-handouts sp-overview container-fluid">{deckView}</div>
+    return (
+      <div className="sp-handouts sp-overview container-fluid">
+        {deckView}
+      </div>
+    )
   }
 }
-

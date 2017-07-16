@@ -10,16 +10,16 @@ import KillControl from './controls/kill'
 import DisplayableComponent from './displayableComponent'
 
 let EditableComponent = React.createClass({
-  onMouseDown: function (ev) {
+  onMouseDown: function(ev) {
     this.props.onMouseDown && this.props.onMouseDown(ev, this.props.idx)
   },
-  onMouseUp: function (ev) {
+  onMouseUp: function(ev) {
     this.props.onMouseUp && this.props.onMouseUp(ev, this.props.idx)
   },
-  render: function () {
+  render: function() {
     let cmpClass = classNames(this.props.className, {
       'sp-selected': this.props.selected
-    });
+    })
     return (
       <DisplayableComponent
         {...this.props}
@@ -88,11 +88,10 @@ let EditableComponent = React.createClass({
             onRotateMouseDown={this.props.onRotateMouseDown}
             onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
           />
-          <KillControl
-            onKillMouseDown={this.props.onKillMouseDown}
-          />
+          <KillControl onKillMouseDown={this.props.onKillMouseDown} />
         </div>
-      </DisplayableComponent>)
+      </DisplayableComponent>
+    )
   }
 })
 module.exports = EditableComponent

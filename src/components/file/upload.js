@@ -8,12 +8,12 @@ module.exports = class Importer extends React.Component {
     domEle.value = null
     domEle.click()
   }
-  onChange = (e) => {
+  onChange = e => {
     let file = e.target.files[0]
     // TODO validate file mime type
     if (file != null) {
       let reader = new FileReader()
-      reader.onload = function (e) {
+      reader.onload = function(e) {
         // TODO parse files
         this.props.onNewDeck(file.name, JSON.parse(e.target.result))
       }.bind(this)
@@ -22,6 +22,13 @@ module.exports = class Importer extends React.Component {
   }
 
   render() {
-    return <input type="file" style={{display: "none"}} accept=".spj" onChange={this.onChange}></input>
+    return (
+      <input
+        type="file"
+        style={{ display: 'none' }}
+        accept=".spj"
+        onChange={this.onChange}
+      />
+    )
   }
 }

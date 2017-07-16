@@ -1,15 +1,13 @@
 var path = require('path')
 var port = process.env.port || 8000
 var srcPath = path.join(__dirname, '/../src')
-var HtmlWebpackPlugin = require("html-webpack-plugin")
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var gitRevisionPlugin = new (require('git-revision-webpack-plugin'))()
 var gitHash = ''
 try {
   gitHash = gitRevisionPlugin.commithash()
-}
-catch (ex) {
-}
+} catch (ex) {}
 
 module.exports = {
   port: port,
@@ -17,24 +15,17 @@ module.exports = {
   context: path.join(__dirname, '..'),
   output: {
     path: path.join(__dirname, '/../dist'),
-    filename: '[name].js',
+    filename: '[name].js'
   },
   entry: {
     app: [path.join(__dirname, '../src/components/run')],
     impress: path.join(__dirname, '../src/components/show/impress'),
     bespoke: path.join(__dirname, '../src/components/show/bespoke'),
     handouts: path.join(__dirname, '../src/components/show/handouts'),
-    vendors: [
-      "webpack-material-design-icons",
-      'babel-polyfill'
-    ],
+    vendors: ['webpack-material-design-icons', 'babel-polyfill']
   },
   resolve: {
-    extensions: [
-      '',
-      '.js',
-      '.jsx'
-    ],
+    extensions: ['', '.js', '.jsx'],
     alias: {
       actions: srcPath + '/actions/',
       components: srcPath + '/components/',
@@ -43,7 +34,7 @@ module.exports = {
       styles: srcPath + '/styles/',
       config: srcPath + '/config/' + process.env.REACT_WEBPACK_ENV
     },
-    root: srcPath,
+    root: srcPath
   },
   module: {
     preLoaders: [
@@ -68,11 +59,13 @@ module.exports = {
       },
       {
         test: /\.sass/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+        loader:
+          'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax'
       },
       {
         test: /\.scss/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded'
+        loader:
+          'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded'
       },
       {
         test: /\.less/,
@@ -89,44 +82,46 @@ module.exports = {
 
       // Needed for the css-loenader when [bootstrap-webpack](https://github.com/bline/bootstrap-webpack)
       // loads bootstrap's css.
-      {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff"},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"},
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"},
-      {test: /\.(json|spj)$/, loader: 'json-loader'},
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/octet-stream'
+      },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=image/svg+xml'
+      },
+      { test: /\.(json|spj)$/, loader: 'json-loader' }
     ]
   },
-  postcss: function () {
+  postcss: function() {
     return []
   },
-  plugins: [new HtmlWebpackPlugin(
-    {
+  plugins: [
+    new HtmlWebpackPlugin({
       template: path.join(__dirname, '../src/', 'index.html'),
       filename: 'index.html',
       chunks: ['vendors', 'app']
-    }
-  ),
-    new HtmlWebpackPlugin(
-      {
-        template: path.join(__dirname, '../src/', 'impress.html'),
-        filename: 'impress.html',
-        chunks: ['vendors', 'impress']
-      }
-    ),
-    new HtmlWebpackPlugin(
-      {
-        template: path.join(__dirname, '../src/', 'handouts.html'),
-        filename: 'handouts.html',
-        chunks: ['vendors', 'handouts']
-      }
-    ),
-    new HtmlWebpackPlugin(
-      {
-        template: path.join(__dirname, '../src/', 'bespoke.html'),
-        filename: 'bespoke.html',
-        chunks: ['vendors', 'bespoke']
-      }
-    ),
-    new CopyWebpackPlugin([{from: 'src/favicon.ico'}]),
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../src/', 'impress.html'),
+      filename: 'impress.html',
+      chunks: ['vendors', 'impress']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../src/', 'handouts.html'),
+      filename: 'handouts.html',
+      chunks: ['vendors', 'handouts']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../src/', 'bespoke.html'),
+      filename: 'bespoke.html',
+      chunks: ['vendors', 'bespoke']
+    }),
+    new CopyWebpackPlugin([{ from: 'src/favicon.ico' }])
   ]
 }

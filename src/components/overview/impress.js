@@ -10,33 +10,49 @@ import Killable from 'components/mixins/killable'
 import lang from 'i18n/lang'
 import _ from 'lodash'
 var EditableComponent = require('components/widgets/editableComponent')
-module.exports = class extends Draggable.draggableMixin(Rotatable.rotatableMixin(Scalable.scalableMixin(Killable.killableMixin(Selectable.selectableMixin(AutoScale.autoScaleMixin(React.Component))))), function getSelectedWidgets() {
+module.exports = class extends Draggable.draggableMixin(
+  Rotatable.rotatableMixin(
+    Scalable.scalableMixin(
+      Killable.killableMixin(
+        Selectable.selectableMixin(AutoScale.autoScaleMixin(React.Component))
+      )
+    )
+  ),
+  function getSelectedWidgets() {
     return this.props.selectedWidgets
-  }
-  , function getInitialWidgetPosition(e) {
+  },
+  function getInitialWidgetPosition(e) {
     return {
       x: this.props.component.components[e].x || 0,
       y: this.props.component.components[e].y || 0,
       z: this.props.component.components[e].z || 0
     }
-  }
-  , function mouseMoveWidgetUpdateFunction(e, updatedProps) {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
-      container: this.props.component,
-      index: e
-    }, updatedProps)
-  }
-  , function mouseUpWidgetUpdateFunction(e, updatedProps) {
-    this.props.onSelectedWidgetUpdated && this.props.onSelectedWidgetUpdated({
-        container: this.props.component,
-        index: e
-      }, updatedProps, lang.moveComponents
-    )
+  },
+  function mouseMoveWidgetUpdateFunction(e, updatedProps) {
+    this.props.onSelectedWidgetUpdated &&
+      this.props.onSelectedWidgetUpdated(
+        {
+          container: this.props.component,
+          index: e
+        },
+        updatedProps
+      )
+  },
+  function mouseUpWidgetUpdateFunction(e, updatedProps) {
+    this.props.onSelectedWidgetUpdated &&
+      this.props.onSelectedWidgetUpdated(
+        {
+          container: this.props.component,
+          index: e
+        },
+        updatedProps,
+        lang.moveComponents
+      )
   }
 ) {
   constructor(props) {
     super(props)
-    this.state = {draggable: true}
+    this.state = { draggable: true }
   }
   componentWillMount() {
     super.componentWillMount && super.componentWillMount()
@@ -52,14 +68,19 @@ module.exports = class extends Draggable.draggableMixin(Rotatable.rotatableMixin
     window.removeEventListener('resize', this._resized)
   }
   _resized = () => {
-    let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
+    let bb =
+      this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     let newBB = this._scale(bb)
     if (newBB) {
-      this.props.onSelectedWidgetUpdated({container: this.props.deck, index: -1}, {boundingBox: newBB})
+      this.props.onSelectedWidgetUpdated(
+        { container: this.props.deck, index: -1 },
+        { boundingBox: newBB }
+      )
     }
   }
   zoom(pct) {
-    let bb = this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
+    let bb =
+      this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
     let width = bb.right - bb.left
     let height = bb.bottom - bb.top
     let cx = bb.left + width / 2
@@ -70,8 +91,16 @@ module.exports = class extends Draggable.draggableMixin(Rotatable.rotatableMixin
     let newRight = cx + newWidth / 2
     let newTop = cy - newHeight / 2
     let newBottom = cy + newHeight / 2
-    let newBB = {top: newTop, right: newRight, bottom: newBottom, left: newLeft}
-    this.props.onSelectedWidgetUpdated({container: this.props.deck, index: -1}, {boundingBox: newBB})
+    let newBB = {
+      top: newTop,
+      right: newRight,
+      bottom: newBottom,
+      left: newLeft
+    }
+    this.props.onSelectedWidgetUpdated(
+      { container: this.props.deck, index: -1 },
+      { boundingBox: newBB }
+    )
     this._resized()
   }
   zoomIn = () => {
@@ -89,12 +118,14 @@ module.exports = class extends Draggable.draggableMixin(Rotatable.rotatableMixin
     clearInterval(this.zoomOutTimer)
   }
   onMouseDown = (...args) => {
-    this.mouseDownHdlrs.forEach((function (e) {
-      e.apply(this, args)
-    }).bind(this))
+    this.mouseDownHdlrs.forEach(
+      function(e) {
+        e.apply(this, args)
+      }.bind(this)
+    )
   }
-  setDraggable = (draggable) => {
-    this.setState({draggable: draggable})
+  setDraggable = draggable => {
+    this.setState({ draggable: draggable })
   }
   render() {
     let selectedWidgets = this.props.deck.components.reduce((pv, e, i, a) => {
@@ -112,7 +143,15 @@ module.exports = class extends Draggable.draggableMixin(Rotatable.rotatableMixin
       }
       return (
         <EditableComponent
-          componentStyle={((selectedWidgets.indexOf(index) >= 0) ? this.props.selectedSlidesStyle : null) || component.style || this.props.defaultSlideStyle || this.props.deck.defaultSlideStyle || {}}
+          componentStyle={
+            (selectedWidgets.indexOf(index) >= 0
+              ? this.props.selectedSlidesStyle
+              : null) ||
+            component.style ||
+            this.props.defaultSlideStyle ||
+            this.props.deck.defaultSlideStyle ||
+            {}
+          }
           className="sp-overview-component"
           component={component}
           container={this.props.deck}
@@ -133,27 +172,29 @@ module.exports = class extends Draggable.draggableMixin(Rotatable.rotatableMixin
     })
     let deckStyle = _.clone(this.state.scaleStyle)
     if (deckStyle && this.props.deck.perspective) {
-      deckStyle.perspective = this.props.deck.perspective / (this.state.scale || 1) + 'px'
+      deckStyle.perspective =
+        this.props.deck.perspective / (this.state.scale || 1) + 'px'
     }
     return (
       <div
         onMouseDown={this.onSelectionMouseDown}
-        className="sp-overview" style={this.props.presentationStyle || this.props.deck.style}>
-        <span className='glyphicon glyphicon-zoom-in'
-              onMouseDown={this.zoomIn}
-              onMouseUp={this.stopZoomIn}
+        className="sp-overview"
+        style={this.props.presentationStyle || this.props.deck.style}
+      >
+        <span
+          className="glyphicon glyphicon-zoom-in"
+          onMouseDown={this.zoomIn}
+          onMouseUp={this.stopZoomIn}
         />
-        <span className='glyphicon glyphicon-zoom-out'
-              onMouseDown={this.zoomOut}
-              onMouseUp={this.stopZoomOut}
+        <span
+          className="glyphicon glyphicon-zoom-out"
+          onMouseDown={this.zoomOut}
+          onMouseUp={this.stopZoomOut}
         />
-        <div
-          className="sp-overview-deck"
-          style={deckStyle}>
+        <div className="sp-overview-deck" style={deckStyle}>
           {deckView}
         </div>
       </div>
     )
   }
 }
-

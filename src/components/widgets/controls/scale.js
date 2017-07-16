@@ -5,50 +5,63 @@ import lang from 'i18n/lang'
 import _ from 'lodash'
 
 let ScaleControl = React.createClass({
-  onBlur: function (v) {
+  onBlur: function(v) {
     if (isNaN(v)) {
       return
     }
     let newPropObj = _.cloneDeep(this.props.component.scale || {})
     newPropObj.x = newPropObj.y = parseFloat(v)
-    this.props.onSelectedWidgetUpdated({
-      container: this.props.container,
-      index: this.props.idx
-    }, {scale: newPropObj}, lang.scaleComponents)
+    this.props.onSelectedWidgetUpdated(
+      {
+        container: this.props.container,
+        index: this.props.idx
+      },
+      { scale: newPropObj },
+      lang.scaleComponents
+    )
   },
-  onDoubleClick: function () {
+  onDoubleClick: function() {
     let newPropObj = _.cloneDeep(this.props.component.scale || {})
     newPropObj.x = newPropObj.y = 1
-    this.props.onSelectedWidgetUpdated({
-      container: this.props.container,
-      index: this.props.idx
-    }, {scale: newPropObj}, lang.scaleComponents)
+    this.props.onSelectedWidgetUpdated(
+      {
+        container: this.props.container,
+        index: this.props.idx
+      },
+      { scale: newPropObj },
+      lang.scaleComponents
+    )
   },
-  onMouseDown: function (ev) {
+  onMouseDown: function(ev) {
     this.props.onScaleMouseDown(ev, this.props.idx)
   },
-  render: function () {
+  render: function() {
     let scale = 1
     try {
-      scale = Math.max(this.props.component.scale.x || 1, this.props.component.scale.y || 1).toFixed(2)
-    }
-    catch (ex) {
-    }
-    return <span className="scale">
-              <span
-                onMouseDown={this.onMouseDown}
-                onTouchStart={this.onMouseDown}
-                className="sp-scale-icon"
-                onDoubleClick={this.onDoubleClick}
-                title={lang.scale}
-              >↔</span>
-              <EditableHtmlElement
-                eleNm="span"
-                idx={this.props.idx}
-                onBlur={(ev)=>this.onBlur(ev.target.innerHTML)}
-                dangerouslySetInnerHTML={{__html: scale}}/>
-            </span>
+      scale = Math.max(
+        this.props.component.scale.x || 1,
+        this.props.component.scale.y || 1
+      ).toFixed(2)
+    } catch (ex) {}
+    return (
+      <span className="scale">
+        <span
+          onMouseDown={this.onMouseDown}
+          onTouchStart={this.onMouseDown}
+          className="sp-scale-icon"
+          onDoubleClick={this.onDoubleClick}
+          title={lang.scale}
+        >
+          ↔
+        </span>
+        <EditableHtmlElement
+          eleNm="span"
+          idx={this.props.idx}
+          onBlur={ev => this.onBlur(ev.target.innerHTML)}
+          dangerouslySetInnerHTML={{ __html: scale }}
+        />
+      </span>
+    )
   }
 })
 module.exports = ScaleControl
-

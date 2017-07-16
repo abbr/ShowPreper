@@ -6,22 +6,26 @@ var baseConfig = require('./base')
 
 var config = {
   entry: {
-    app: ['webpack-dev-server/client?http://localhost:' + baseConfig.port + '/'
-      , 'webpack/hot/dev-server']
+    app: [
+      'webpack-dev-server/client?http://localhost:' + baseConfig.port + '/',
+      'webpack/hot/dev-server'
+    ]
   },
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      loader: 'react-hot!babel-loader',
-      include: path.join(__dirname, '/../src')
-    }]
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'react-hot!babel-loader',
+        include: path.join(__dirname, '/../src')
+      }
+    ]
   },
   devServer: {
     historyApiFallback: true,
     hot: true,
     port: baseConfig.port,
     inline: true,
-    info: true,
+    info: true
   },
   cache: true,
   devtool: 'inline-source-map',

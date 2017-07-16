@@ -12,7 +12,7 @@ let Handouts = React.createClass({
   getInitialState: () => ({
     deck: DeckStore.getDefaultDeck(Global.get('deck'))
   }),
-  render: function () {
+  render: function() {
     let deckView = this.state.deck.components.map((component, index) => {
       if (component.type === 'Slide') {
         let bb = this.state.deck.getSlideBoundingBox(component)
@@ -27,32 +27,38 @@ let Handouts = React.createClass({
         component.width = bb.right - bb.left
         component.height = bb.bottom - bb.top
       }
-      return <div
-        key={index}
-        className="row"
-      >
-        <DisplayableComponent
-          ownClassName="sp-slide col-xs-6"
-          component={component}
-          componentStyle={component.style || this.state.deck.defaultSlideStyle || {}}
-          container={this.state.deck}
-          idx={index}
-          ref={index}
-          combinedTransform={true}
-        />
-        <div className="col-xs-6">
-          notes:
-          <div>
-            {component.notes}
+      return (
+        <div key={index} className="row">
+          <DisplayableComponent
+            ownClassName="sp-slide col-xs-6"
+            component={component}
+            componentStyle={
+              component.style || this.state.deck.defaultSlideStyle || {}
+            }
+            container={this.state.deck}
+            idx={index}
+            ref={index}
+            combinedTransform={true}
+          />
+          <div className="col-xs-6">
+            notes:
+            <div>{component.notes}</div>
           </div>
         </div>
-      </div>
+      )
     })
-    return <div><Global values={{
-      deck: this.state.deck
-    }}/>
-      <div className="sp-handouts container-fluid">{deckView}</div>
-    </div>
+    return (
+      <div>
+        <Global
+          values={{
+            deck: this.state.deck
+          }}
+        />
+        <div className="sp-handouts container-fluid">
+          {deckView}
+        </div>
+      </div>
+    )
   }
 })
 
