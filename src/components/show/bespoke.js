@@ -8,19 +8,25 @@ import bespokeClasses from 'bespoke-classes'
 import bespokeTouch from 'bespoke-touch'
 import Global from 'react-global'
 import './bespoke.less'
-import AutoScale from 'components/mixins/autoScale'
+import { autoScaleMixin } from 'components/mixins/autoScale'
+
 var DisplayableComponent = require('components/widgets/displayableComponent')
-let BeSpoke = React.createClass({
-  mixins: [AutoScale],
-  componentDidMount: function() {
+let BeSpoke = class extends autoScaleMixin(React.Component) {
+  constructor(props) {
+    super(props)
+    this.state = {
+      deck: DeckStore.getDefaultDeck(Global.get('deck'))
+    }
+  }
+  componentDidMount = () => {
     bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
     this._resized()
     window.addEventListener('resize', this._resized)
-  },
-  componentWillUnmount: function() {
+  }
+  componentWillUnmount = () => {
     window.removeEventListener('resize', this._resized)
-  },
-  _resized: function() {
+  }
+  _resized = () => {
     let scaleFactor = this.state.deck.bespokeZoomFactor || 1
     let cx = this.state.deck.slideWidth / 2
     let cy = this.state.deck.slideHeight / 2
@@ -31,11 +37,8 @@ let BeSpoke = React.createClass({
       left: cx - this.state.deck.slideWidth * scaleFactor / 2
     }
     this._scale(bb)
-  },
-  getInitialState: () => ({
-    deck: DeckStore.getDefaultDeck(Global.get('deck'))
-  }),
-  render: function() {
+  }
+  render() {
     let deckView = this.state.deck.components.map((component, index) => {
       if (component.type === 'Slide') {
         let bb = this.state.deck.getSlideBoundingBox(component)
@@ -88,7 +91,7 @@ let BeSpoke = React.createClass({
       </div>
     )
   }
-})
+}
 
 // Render the main component into the dom
 ReactDOM.render(<BeSpoke />, document.getElementById('app'))
