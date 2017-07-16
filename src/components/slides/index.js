@@ -5,8 +5,8 @@ import SlideWell from 'components/slides/well'
 import SlideEditor from 'components/slides/slide'
 import './index.less'
 
-let Main = React.createClass({
-  render: function() {
+let Main = class extends React.Component {
+  render() {
     return (
       <div className="sp-slides">
         <SlideWell {...this.props} />
@@ -14,6 +14,6 @@ let Main = React.createClass({
       </div>
     )
   }
-})
+}
 
 module.exports = Main
