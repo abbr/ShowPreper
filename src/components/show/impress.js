@@ -9,22 +9,28 @@ import _ from 'lodash'
 import Global from 'react-global'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 
-let Presentation = React.createClass({
-  mixins: [AutoScale],
-  getInitialState: () => ({
-    deck: DeckStore.getDefaultDeck(Global.get('deck'))
-  }),
-  componentWillMount: function() {
+let Presentation = class extends AutoScale.autoScaleMixin(React.Component) {
+  constructor(props) {
+    super(props)
+    this.state = {
+      deck: DeckStore.getDefaultDeck(Global.get('deck'))
+    }
+  }
+
+  componentWillMount() {
+    super.componentWillMount && super.componentWillMount()
     _.merge(document.body.style, this.state.deck.style)
-  },
-  componentDidMount: function() {
+  }
+
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     if ('ontouchstart' in document.documentElement) {
       document.querySelector('.hint').innerHTML =
         '<p>Tap on the left or right to navigate</p>'
     }
     window.impress().init()
-  },
-  render: function() {
+  }
+  render() {
     let deckView = this.state.deck.components.map((component, index) => {
       if (component.type === 'Slide') {
         let bb = this.state.deck.getSlideBoundingBox(component)
@@ -141,6 +147,6 @@ let Presentation = React.createClass({
       </div>
     )
   }
-})
+}
 // Render the main component into the dom
 ReactDOM.render(<Presentation />, document.getElementById('app'))

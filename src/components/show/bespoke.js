@@ -18,12 +18,14 @@ let BeSpoke = class extends autoScaleMixin(React.Component) {
       deck: DeckStore.getDefaultDeck(Global.get('deck'))
     }
   }
-  componentDidMount = () => {
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
     this._resized()
     window.addEventListener('resize', this._resized)
   }
-  componentWillUnmount = () => {
+  componentWillUnmount() {
+    super.componentWillUnmount && super.componentWillUnmount()
     window.removeEventListener('resize', this._resized)
   }
   _resized = () => {
