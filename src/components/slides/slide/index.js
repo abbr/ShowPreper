@@ -2,8 +2,8 @@
 import React from 'react'
 import lang from 'i18n/lang'
 import OperatingTable from './operatingTable'
-let SlideEditor = React.createClass({
-  render: function() {
+let SlideEditor = class extends React.Component {
+  render() {
     try {
       let component = this.props.deck.getActiveSlide()
       let selectedWidgets = component.components.reduce((pv, e, i, a) => {
@@ -23,6 +23,6 @@ let SlideEditor = React.createClass({
       return <div />
     }
   }
-})
+}
 
 module.exports = SlideEditor
