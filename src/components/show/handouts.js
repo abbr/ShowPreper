@@ -8,11 +8,14 @@ import './handouts.less'
 import Global from 'react-global'
 
 var DisplayableComponent = require('components/widgets/displayableComponent')
-let Handouts = React.createClass({
-  getInitialState: () => ({
-    deck: DeckStore.getDefaultDeck(Global.get('deck'))
-  }),
-  render: function() {
+let Handouts = class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      deck: DeckStore.getDefaultDeck(Global.get('deck'))
+    }
+  }
+  render() {
     let deckView = this.state.deck.components.map((component, index) => {
       if (component.type === 'Slide') {
         let bb = this.state.deck.getSlideBoundingBox(component)
@@ -60,7 +63,7 @@ let Handouts = React.createClass({
       </div>
     )
   }
-})
+}
 
 // Render the main component into the dom
 ReactDOM.render(<Handouts />, document.getElementById('app'))
