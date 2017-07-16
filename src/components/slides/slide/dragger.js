@@ -81,8 +81,8 @@ export default class extends Draggable.draggableMixin(
         }
       )
   }
-  onMouseDown = () => {
-    this.mouseDownHdlrs.forEach(e => e.apply(this, arguments))
+  onMouseDown = (...args) => {
+    this.mouseDownHdlrs.forEach(e => e.apply(this, args))
   }
   componentWillMount() {
     super.componentWillMount && super.componentWillMount()

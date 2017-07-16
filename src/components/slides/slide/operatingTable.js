@@ -17,93 +17,97 @@ let key = require('mousetrap')
 
 require('./operatingTable.less')
 
-let OperatingTable = React.createClass({
-  mixins: [
-    AutoScale,
-    Selectable,
-    Draggable(
-      function() {
-        return this.props.selectedWidgets
-      },
-      function(e) {
-        return {
-          x: this.props.component.components[e].x || 0,
-          y: this.props.component.components[e].y || 0,
-          z: this.props.component.components[e].z || 0
-        }
-      },
-      function(e, updatedProps) {
-        this.props.onSelectedWidgetUpdated &&
-          this.props.onSelectedWidgetUpdated(
-            {
-              container: this.props.component,
-              index: e
-            },
-            updatedProps
-          )
-      },
-      function(e, updatedProps) {
-        this.props.onSelectedWidgetUpdated &&
-          this.props.onSelectedWidgetUpdated(
-            {
-              container: this.props.component,
-              index: e
-            },
-            updatedProps,
-            lang.moveComponents
-          )
-      }
-    ),
-    Scalable,
-    Rotatable,
-    Killable
-  ],
-  getInitialState: function() {
+let OperatingTable = class extends Draggable.draggableMixin(
+  Rotatable.rotatableMixin(
+    Scalable.scalableMixin(
+      Killable.killableMixin(
+        Selectable.selectableMixin(AutoScale.autoScaleMixin(React.Component))
+      )
+    )
+  ),
+  function() {
+    return this.props.selectedWidgets
+  },
+  function(e) {
     return {
+      x: this.props.component.components[e].x || 0,
+      y: this.props.component.components[e].y || 0,
+      z: this.props.component.components[e].z || 0
+    }
+  },
+  function(e, updatedProps) {
+    this.props.onSelectedWidgetUpdated &&
+      this.props.onSelectedWidgetUpdated(
+        {
+          container: this.props.component,
+          index: e
+        },
+        updatedProps
+      )
+  },
+  function(e, updatedProps) {
+    this.props.onSelectedWidgetUpdated &&
+      this.props.onSelectedWidgetUpdated(
+        {
+          container: this.props.component,
+          index: e
+        },
+        updatedProps,
+        lang.moveComponents
+      )
+  }
+) {
+  constructor(props) {
+    super(props)
+    this.state = {
       draggable: true,
       ctrlKeyPressed: false,
       slideDragTarget: 'thisSlide'
     }
-  },
-  toggleSlideDragTarget: function() {
+  }
+  toggleSlideDragTarget = () => {
     this.setState({
       slideDragTarget:
         this.state.slideDragTarget === 'thisSlide'
           ? 'defaultSlide'
           : 'thisSlide'
     })
-  },
-  componentWillMount: function() {
+  }
+  componentWillMount() {
+    super.componentWillMount && super.componentWillMount()
     this.mouseDownHdlrs = []
-  },
-  componentWillReceiveProps: function() {
+  }
+  componentWillReceiveProps() {
+    super.componentWillReceiveProps && super.componentWillReceiveProps()
     this._resized()
-  },
-  componentDidMount: function() {
+  }
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     this._resized()
     window.addEventListener('resize', this._resized)
     key.bind('g', this.onToggleGrid)
-  },
-  componentWillUnmount: function() {
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount && super.componentWillUnmount()
     window.removeEventListener('resize', this._resized)
     key.unbind('g')
-  },
-  onToggleGrid: function(ev) {
+  }
+  onToggleGrid = ev => {
     this.setState({ showGrid: !this.state.showGrid })
-  },
-  _resized: function() {
+  }
+  _resized = () => {
     let deck = this.props.deck
     let slideWidth = this.props.component.width || deck.slideWidth
     let slideHeight = this.props.component.height || deck.slideHeight
     this._scale({ width: slideWidth, height: slideHeight })
-  },
-  onMouseDown: function() {
-    this.mouseDownHdlrs.forEach(e => e.apply(this, arguments))
-  },
-  setDraggable: function(draggable) {
+  }
+  onMouseDown = (...args) => {
+    this.mouseDownHdlrs.forEach(e => e.apply(this, args))
+  }
+  setDraggable = draggable => {
     this.setState({ draggable: draggable })
-  },
-  render: function() {
+  }
+  render() {
     try {
       let slide = this.props.deck.getActiveSlide()
       let selectedWidgets = slide.components.reduce((pv, e, i, a) => {
@@ -179,6 +183,6 @@ let OperatingTable = React.createClass({
       return <div />
     }
   }
-})
+}
 
 module.exports = OperatingTable
