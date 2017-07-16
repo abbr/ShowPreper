@@ -11,8 +11,9 @@ var WellSlide = require('./wellSlide')
 
 require('./index.less')
 
-var SlideWell = React.createClass({
+var SlideWell = class extends React.Component {
   componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     this.domItems = jQuery(ReactDOM.findDOMNode(this.refs['slides']))
     this.domItems.sortable({
       placeholder: 'sp-ui-state-highlight',
@@ -30,8 +31,8 @@ var SlideWell = React.createClass({
       }
     })
     this.domItems.disableSelection()
-  },
-  newSlide: function(index) {
+  }
+  newSlide(index) {
     return () => {
       this.props.onNewWidget(this.props.deck, index + 1, {
         components: [],
@@ -39,8 +40,8 @@ var SlideWell = React.createClass({
         z: 0
       })
     }
-  },
-  deleteSlide: function(index) {
+  }
+  deleteSlide(index) {
     return () => {
       this.props.onSelectedWidgetUpdated(
         { container: this.props.deck, index: index },
@@ -48,8 +49,8 @@ var SlideWell = React.createClass({
         lang.delete
       )
     }
-  },
-  render: function() {
+  }
+  render() {
     var slides = this.props.deck.getSlides().map((slide, index) => {
       return (
         <div
@@ -100,6 +101,6 @@ var SlideWell = React.createClass({
       </div>
     )
   }
-})
+}
 
 module.exports = SlideWell
