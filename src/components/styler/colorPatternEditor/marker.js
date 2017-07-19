@@ -3,6 +3,7 @@ import _ from 'lodash'
 import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import parseColor from 'parse-color'
+import uuidv4 from 'uuid/v4'
 
 export default React.createClass({
   componentDidMount() {
@@ -26,6 +27,9 @@ export default React.createClass({
       '#' + this.props.panelId + '-markerColorPicker' + this.props.index
     ).spectrum('set', this.props.attrs.c)
   },
+  getInitialState: () => ({
+    uuid: uuidv4()
+  }),
   render: function() {
     let s = _.assign({}, this.props.style, {
       marginLeft: -8,
@@ -54,40 +58,55 @@ export default React.createClass({
         >
           <title>marker</title>
           <defs>
-            <filter id="pressed" x="0" y="0" width="150%" height="150%">
+            <filter
+              id={this.state.uuid + '-pressed'}
+              x="0"
+              y="0"
+              width="150%"
+              height="150%"
+            >
               <feOffset result="offOut" in="SourceAlpha" dx="1" dy="1" />
               <feGaussianBlur result="blurOut" in="offOut" stdDeviation="1" />
               <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
             </filter>
-            <filter id="unpressed" x="0" y="0" width="150%" height="150%">
+            <filter
+              id={this.state.uuid + '-unpressed'}
+              x="0"
+              y="0"
+              width="150%"
+              height="150%"
+            >
               <feOffset result="offOut" in="SourceAlpha" dx="3" dy="3" />
               <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
               <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
             </filter>
             <path
-              id="up-pressed"
-              filter="url(#pressed)"
+              id={this.state.uuid + '-up-pressed'}
+              filter={'url(#' + this.state.uuid + '-pressed)'}
               d="M 8 0 L 16 16 L 0 16 z"
             />
             <path
-              id="down-pressed"
-              filter="url(#pressed)"
+              id={this.state.uuid + '-down-pressed'}
+              filter={'url(#' + this.state.uuid + '-pressed)'}
               d="M 0 0 L 16 0 L 8 16 z"
             />
             <path
-              id="up-unpressed"
-              filter="url(#unpressed)"
+              id={this.state.uuid + '-up-unpressed'}
+              filter={'url(#' + this.state.uuid + '-unpressed)'}
               d="M 8 0 L 16 16 L 0 16 z"
             />
             <path
-              id="down-unpressed"
-              filter="url(#unpressed)"
+              id={this.state.uuid + '-down-unpressed'}
+              filter={'url(#' + this.state.uuid + '-unpressed)'}
               d="M 0 0 L 16 0 L 8 16 z"
             />
           </defs>
           <use
             xlinkHref={
-              (this.props.down ? '#down-' : '#up-') +
+              '#' +
+              this.state.uuid +
+              '-' +
+              (this.props.down ? 'down-' : 'up-') +
               (this.props.pressed ? 'pressed' : 'unpressed')
             }
             onMouseDown={evt => {
