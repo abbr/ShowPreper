@@ -3,8 +3,7 @@ import _ from 'lodash'
 import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import parseColor from 'parse-color'
-import uuidv4 from 'uuid/v4'
-
+var markerId = 0
 export default React.createClass({
   componentDidMount() {
     $(
@@ -28,7 +27,7 @@ export default React.createClass({
     ).spectrum('set', this.props.attrs.c)
   },
   getInitialState: () => ({
-    uuid: uuidv4()
+    markerId: markerId++
   }),
   render: function() {
     let s = _.assign({}, this.props.style, {
@@ -59,7 +58,7 @@ export default React.createClass({
           <title>marker</title>
           <defs>
             <filter
-              id={this.state.uuid + '-pressed'}
+              id={this.state.markerId + '-pressed'}
               x="0"
               y="0"
               width="150%"
@@ -70,7 +69,7 @@ export default React.createClass({
               <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
             </filter>
             <filter
-              id={this.state.uuid + '-unpressed'}
+              id={this.state.markerId + '-unpressed'}
               x="0"
               y="0"
               width="150%"
@@ -81,30 +80,30 @@ export default React.createClass({
               <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
             </filter>
             <path
-              id={this.state.uuid + '-up-pressed'}
-              filter={'url(#' + this.state.uuid + '-pressed)'}
+              id={this.state.markerId + '-up-pressed'}
+              filter={'url(#' + this.state.markerId + '-pressed)'}
               d="M 8 0 L 16 16 L 0 16 z"
             />
             <path
-              id={this.state.uuid + '-down-pressed'}
-              filter={'url(#' + this.state.uuid + '-pressed)'}
+              id={this.state.markerId + '-down-pressed'}
+              filter={'url(#' + this.state.markerId + '-pressed)'}
               d="M 0 0 L 16 0 L 8 16 z"
             />
             <path
-              id={this.state.uuid + '-up-unpressed'}
-              filter={'url(#' + this.state.uuid + '-unpressed)'}
+              id={this.state.markerId + '-up-unpressed'}
+              filter={'url(#' + this.state.markerId + '-unpressed)'}
               d="M 8 0 L 16 16 L 0 16 z"
             />
             <path
-              id={this.state.uuid + '-down-unpressed'}
-              filter={'url(#' + this.state.uuid + '-unpressed)'}
+              id={this.state.markerId + '-down-unpressed'}
+              filter={'url(#' + this.state.markerId + '-unpressed)'}
               d="M 0 0 L 16 0 L 8 16 z"
             />
           </defs>
           <use
             xlinkHref={
               '#' +
-              this.state.uuid +
+              this.state.markerId +
               '-' +
               (this.props.down ? 'down-' : 'up-') +
               (this.props.pressed ? 'pressed' : 'unpressed')
