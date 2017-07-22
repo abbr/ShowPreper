@@ -19,6 +19,10 @@ export default class extends React.Component {
       }
     })
   }
+  componentWillUnmount(){
+    super.componentWillUnmount && super.componentWillUnmount()
+    $('#sp-border-colorpicker').spectrum('destroy')
+  }
   componentDidUpdate() {
     super.componentDidUpdate && super.componentDidUpdate()
     $('#sp-border-colorpicker').spectrum(

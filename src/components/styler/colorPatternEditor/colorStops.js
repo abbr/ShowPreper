@@ -1,6 +1,4 @@
 import React from 'react'
-import 'spectrum-colorpicker'
-import 'spectrum-colorpicker/spectrum.css'
 import Draggable from '../../mixins/draggable'
 import Marker from './marker'
 import parseColor from 'parse-color'

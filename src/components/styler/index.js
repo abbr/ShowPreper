@@ -1,6 +1,4 @@
 import React from 'react'
-import 'spectrum-colorpicker'
-import 'spectrum-colorpicker/spectrum.css'
 import lang from 'i18n/lang'
 import './index.less'
 import _ from 'lodash'

@@ -31,7 +31,7 @@ export default React.createClass({
   getInitialState: () => ({
     isGradientAngleBeingDragged: false
   }),
-  componentDidMount() {
+  componentDidMount: function() {
     $('#sp-background-solid-colorpicker').spectrum({
       color: this.props.currentStyle,
       showAlpha: true,
@@ -44,6 +44,9 @@ export default React.createClass({
         })
       }
     })
+  },
+  componentWillUnmount: function() {
+    $('#sp-background-solid-colorpicker').spectrum('destroy')
   },
   onToggleGradientShape: function() {
     let g = this.parseGradientString()
