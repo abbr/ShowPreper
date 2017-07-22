@@ -26,6 +26,11 @@ export default React.createClass({
       '#' + this.props.panelId + '-markerColorPicker' + this.props.index
     ).spectrum('set', this.props.attrs.c)
   },
+  componentWillUnmount: function() {
+    $(
+      '#' + this.props.panelId + '-markerColorPicker' + this.props.index
+    ).spectrum('destroy')
+  },
   getInitialState: () => ({
     markerId: markerId++
   }),
