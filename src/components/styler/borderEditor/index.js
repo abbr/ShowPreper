@@ -3,8 +3,9 @@ import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import DropdownList from 'react-widgets/lib/DropdownList'
 import './index.less'
-export default React.createClass({
+export default class extends React.Component {
   componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     $('#sp-border-colorpicker').spectrum({
       color: this.props.currentStyle.borderColor,
       showAlpha: true,
@@ -17,14 +18,15 @@ export default React.createClass({
         })
       }
     })
-  },
-  componentDidUpdate: function() {
+  }
+  componentDidUpdate() {
+    super.componentDidUpdate && super.componentDidUpdate()
     $('#sp-border-colorpicker').spectrum(
       'set',
       this.props.currentStyle.borderColor
     )
-  },
-  parseBorder: function() {
+  }
+  parseBorder() {
     let border = {
       width: { components: [] },
       style: this.props.currentStyle.borderStyle,
@@ -66,8 +68,8 @@ export default React.createClass({
     } catch (ex) {}
 
     return border
-  },
-  composeBorder: function(parsedBorder) {
+  }
+  composeBorder(parsedBorder) {
     let borderStyleObject = { borderStyle: parsedBorder.style }
     try {
       borderStyleObject.borderWidth = parsedBorder.width.components
@@ -84,13 +86,13 @@ export default React.createClass({
         .trim()
     } catch (ex) {}
     return borderStyleObject
-  },
-  onChangeStyle: function(newStyle) {
+  }
+  onChangeStyle = newStyle => {
     let border = this.parseBorder()
     border.style = newStyle
     this.props.updateStyle(this.composeBorder(border))
-  },
-  onChangeWidthComponentCnt: function(newCnt) {
+  }
+  onChangeWidthComponentCnt = newCnt => {
     let border = this.parseBorder()
     let diff = newCnt - border.width.components.length
     if (diff > 0) {
@@ -103,14 +105,14 @@ export default React.createClass({
       border.width.components.splice(newCnt, -diff)
     }
     this.props.updateStyle(this.composeBorder(border))
-  },
-  onChangeWidthComponent: function(i, prop, newVal) {
+  }
+  onChangeWidthComponent = (i, prop, newVal) => {
     let border = this.parseBorder()
     border.width.components[i][prop] =
       newVal instanceof Object ? newVal.target.value : newVal
     this.props.updateStyle(this.composeBorder(border))
-  },
-  onChangeRadiusComponentCnt: function(newCnt) {
+  }
+  onChangeRadiusComponentCnt = newCnt => {
     let border = this.parseBorder()
     let diff = newCnt - border.radius.components.length
     if (diff > 0) {
@@ -123,14 +125,14 @@ export default React.createClass({
       border.radius.components.splice(newCnt, -diff)
     }
     this.props.updateStyle(this.composeBorder(border))
-  },
-  onChangeRadiusComponent: function(i, prop, newVal) {
+  }
+  onChangeRadiusComponent = (i, prop, newVal) => {
     let border = this.parseBorder()
     border.radius.components[i][prop] =
       newVal instanceof Object ? newVal.target.value : newVal
     this.props.updateStyle(this.composeBorder(border))
-  },
-  render: function() {
+  }
+  render() {
     let border = this.parseBorder()
     let borderWidthComponents =
       border.width.components &&
@@ -238,4 +240,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
