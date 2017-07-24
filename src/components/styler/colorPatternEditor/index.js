@@ -387,8 +387,9 @@ export default React.createClass({
               aria-controls="collapseOne"
               href="#collapseOne"
               onClick={evt => {
-                this.props.updateStyle({ background: 'rgb()' })
-                return true
+                if (type !== 'color') {
+                  this.props.updateStyle({ background: 'rgb()' })
+                }
               }}
             >
               <h4 className="panel-title">
@@ -428,7 +429,9 @@ export default React.createClass({
               aria-expanded="false"
               aria-controls="collapseTwo"
               onClick={evt => {
-                this.props.updateStyle({ background: 'linear-gradient()' })
+                if (type !== 'linear-gradient') {
+                  this.props.updateStyle({ background: 'linear-gradient()' })
+                }
               }}
             >
               <h4 className="panel-title collapsed">
@@ -524,7 +527,9 @@ export default React.createClass({
               aria-controls="collapseThree"
               href="#collapseThree"
               onClick={evt => {
-                this.props.updateStyle({ background: 'radial-gradient()' })
+                if (type !== 'radial-gradient') {
+                  this.props.updateStyle({ background: 'radial-gradient()' })
+                }
               }}
             >
               <h4 className="panel-title">
