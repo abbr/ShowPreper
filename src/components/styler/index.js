@@ -7,12 +7,11 @@ import BorderEditor from './borderEditor'
 
 export default React.createClass({
   componentDidMount: function() {
-    let that = this
     $('#sp-styler-modal-content').draggable({
       handle: '.modal-header'
     })
-    $('#sp-styler-modal').on('hide.bs.modal', function(e) {
-      that.props.setTargetStyle(that.props.selectedStyleTarget + 'Style', null)
+    $('#sp-styler-modal').on('hide.bs.modal', e => {
+      this.props.setTargetStyle(this.props.selectedStyleTarget + 'Style', null)
     })
   },
   updateStyle: function(newStyleComponent) {
