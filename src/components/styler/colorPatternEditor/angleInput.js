@@ -1,73 +1,56 @@
 import React from 'react'
 import './angleInput.less'
-module.exports = React.createClass({
-  displayName: 'AngleInput',
-  getCenter: function(element) {
+import PropTypes from 'prop-types'
+export default class AngleInput extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { value: this.props.defaultValue || 0 }
+  }
+  getCenter(element) {
     var rect = element.getBoundingClientRect()
     return [
       parseInt(rect.left + rect.width / 2),
       parseInt(rect.top + rect.height / 2)
     ]
-  },
-  angle: function(vector, element) {
+  }
+  angle(vector, element) {
     var center = this.getCenter(element)
     var x = vector[0] - center[0]
     var y = vector[1] - center[1]
     return (-parseInt(Math.atan2(x, y) * 180 / Math.PI) + 180 + 360) % 360
-  },
-  propTypes: {
-    defaultValue: React.PropTypes.number,
-    step: React.PropTypes.number,
-    onChange: React.PropTypes.func,
-    onInput: React.PropTypes.func,
-
-    className: React.PropTypes.string,
-    pivotClassName: React.PropTypes.string
-  },
-  getDefaultProps: function() {
-    return {
-      defaultValue: 0,
-      step: 1,
-
-      className: 'angle-input',
-      pivotClassName: 'angle-input-pivot'
-    }
-  },
-  getInitialState: function() {
-    return { value: this.props.defaultValue || 0 }
-  },
-  componentWillReceiveProps: function(nextProps) {
+  }
+  componentWillReceiveProps(nextProps) {
     if (nextProps.defaultValue) {
       this.setState({ value: nextProps.defaultValue })
     }
-  },
-  normalize: function(degree) {
+  }
+  normalize(degree) {
     var step = this.props.step || 1
     return (
       (Math.round(degree / this.props.step) * this.props.step % 360 + 360) % 360
     )
-  },
-  _onMouseDown: function(e) {
+  }
+  _onMouseDown = e => {
     this.beginTracking()
-  },
-  _onMouseMove: function(e) {
+  }
+  _onMouseMove = e => {
     this.updateWithEvent(e, false)
-  },
-  _onMouseUp: function(e) {
+  }
+  _onMouseUp = e => {
     this.updateWithEvent(e, true)
     this.endTracking()
-  },
-  beginTracking: function() {
+  }
+  beginTracking() {
     document.body.addEventListener('mousemove', this._onMouseMove, false)
     document.body.addEventListener('mouseup', this._onMouseUp, false)
     this.tracking = true
-  },
-  endTracking: function() {
+  }
+  endTracking() {
     document.body.removeEventListener('mousemove', this._onMouseMove, false)
     document.body.removeEventListener('mouseup', this._onMouseUp, false)
     this.tracking = false
-  },
-  updateWithEvent: function(event, done) {
+  }
+  updateWithEvent(event, done) {
     var $dom = this.refs.container
     var vector = [event.x, event.y]
     var deg = this.angle(vector, $dom)
@@ -75,8 +58,8 @@ module.exports = React.createClass({
     this.setState({ value: value })
     var fx = done ? this.props.onChange : this.props.onInput
     if (fx) fx(value)
-  },
-  render: function() {
+  }
+  render() {
     var className = this.props.className || 'angle-input'
     var pivotClassName = this.props.pivotClassName || 'angle-input-pivot'
     return (
@@ -95,4 +78,21 @@ module.exports = React.createClass({
       </div>
     )
   }
-})
+}
+
+AngleInput.propTypes = {
+  defaultValue: PropTypes.number,
+  step: PropTypes.number,
+  onChange: PropTypes.func,
+  onInput: PropTypes.func,
+  className: PropTypes.string,
+  pivotClassName: PropTypes.string
+}
+
+AngleInput.defaultProps = {
+  defaultValue: 0,
+  step: 1,
+  className: 'angle-input',
+  pivotClassName: 'angle-input-pivot'
+}
+
