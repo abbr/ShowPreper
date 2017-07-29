@@ -9,14 +9,14 @@ import SkewControl from './controls/skew'
 import KillControl from './controls/kill'
 import DisplayableComponent from './displayableComponent'
 
-let EditableComponent = React.createClass({
-  onMouseDown: function(ev) {
+let EditableComponent = class extends React.Component {
+  onMouseDown = ev => {
     this.props.onMouseDown && this.props.onMouseDown(ev, this.props.idx)
-  },
-  onMouseUp: function(ev) {
+  }
+  onMouseUp = ev => {
     this.props.onMouseUp && this.props.onMouseUp(ev, this.props.idx)
-  },
-  render: function() {
+  }
+  render() {
     let cmpClass = classNames(this.props.className, {
       'sp-selected': this.props.selected
     })
@@ -93,5 +93,5 @@ let EditableComponent = React.createClass({
       </DisplayableComponent>
     )
   }
-})
+}
 module.exports = EditableComponent

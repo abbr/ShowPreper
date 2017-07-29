@@ -3,8 +3,8 @@ import React from 'react'
 import classNames from 'classnames'
 let _ = require('lodash')
 
-let DisplayableComponent = React.createClass({
-  render: function() {
+let DisplayableComponent = class extends React.Component {
+  render() {
     const {
       component,
       container,
@@ -103,5 +103,5 @@ let DisplayableComponent = React.createClass({
       </div>
     )
   }
-})
+}
 module.exports = DisplayableComponent
