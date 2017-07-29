@@ -6,11 +6,13 @@ import _ from 'lodash'
 import lang from 'i18n/lang'
 import Styler from './'
 
-let QuickStyler = React.createClass({
-  getInitialState: function() {
-    return { palettes: new Palettes() }
-  },
-  getStyle: function() {
+let QuickStyler = class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { palettes: new Palettes() }
+  }
+
+  getStyle = () => {
     let s
     switch (this.props.selectedStyleTarget) {
       case 'defaultSlide':
@@ -39,15 +41,15 @@ let QuickStyler = React.createClass({
         break
     }
     return s
-  },
-  updatePalette: function(i) {
+  }
+  updatePalette = i => {
     let s = this.getStyle()
     let p = new Palettes()
     p[i] = s
     p.save()
     this.setState({ palettes: p })
-  },
-  updateStyle: function(evt, idx) {
+  }
+  updateStyle = (evt, idx) => {
     let p = this.state.palettes
     let targetStyle = this.getStyle()
     if (idx) {
@@ -187,8 +189,8 @@ let QuickStyler = React.createClass({
             this.props.setTargetStyle('presentationStyle', null)
         }
     }
-  },
-  render: function() {
+  }
+  render() {
     let p = _.cloneDeep(this.state.palettes)
     p[8] = p[9] = {}
     let pDivs = _.map(p, (e, i) => {
@@ -251,5 +253,5 @@ let QuickStyler = React.createClass({
       </div>
     )
   }
-})
+}
 module.exports = QuickStyler
