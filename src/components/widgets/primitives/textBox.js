@@ -1,14 +1,16 @@
 'use strict'
 import React from 'react'
 import lang from 'i18n/lang'
-let TextBox = React.createClass({
-  getInitialState: function() {
-    return { editable: false }
-  },
+let TextBox = class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { editable: false }
+  }
   componentWillUnmount() {
+    super.componentWillUnmount && super.componentWillUnmount()
     delete this.editor
-  },
-  onDoubleClick: function(ev) {
+  }
+  onDoubleClick = ev => {
     let reactEle = this
     this.setState({ editable: true })
     this.props.setDraggable(false)
@@ -41,8 +43,8 @@ let TextBox = React.createClass({
       reactEle.props.setDraggable(true)
     })
     ev.stopPropagation && ev.stopPropagation()
-  },
-  render: function() {
+  }
+  render() {
     return (
       <div style={this.props.style} className={this.props.className}>
         <div
@@ -55,5 +57,5 @@ let TextBox = React.createClass({
       </div>
     )
   }
-})
+}
 module.exports = TextBox

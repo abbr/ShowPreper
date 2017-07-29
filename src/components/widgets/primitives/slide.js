@@ -3,8 +3,8 @@ import React from 'react'
 var DisplayableComponent = require('../displayableComponent')
 import classNames from 'classnames'
 
-let TextBox = React.createClass({
-  render: function() {
+let TextBox = class extends React.Component {
+  render() {
     let componentsView = this.props.component.components.map(
       (component, index) => {
         return <DisplayableComponent component={component} key={index} />
@@ -19,5 +19,5 @@ let TextBox = React.createClass({
       </div>
     )
   }
-})
+}
 module.exports = TextBox
