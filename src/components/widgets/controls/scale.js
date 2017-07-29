@@ -4,8 +4,8 @@ import EditableHtmlElement from './editableHtmlElement'
 import lang from 'i18n/lang'
 import _ from 'lodash'
 
-let ScaleControl = React.createClass({
-  onBlur: function(v) {
+let ScaleControl = class extends React.Component {
+  onBlur = v => {
     if (isNaN(v)) {
       return
     }
@@ -19,8 +19,8 @@ let ScaleControl = React.createClass({
       { scale: newPropObj },
       lang.scaleComponents
     )
-  },
-  onDoubleClick: function() {
+  }
+  onDoubleClick = () => {
     let newPropObj = _.cloneDeep(this.props.component.scale || {})
     newPropObj.x = newPropObj.y = 1
     this.props.onSelectedWidgetUpdated(
@@ -31,11 +31,11 @@ let ScaleControl = React.createClass({
       { scale: newPropObj },
       lang.scaleComponents
     )
-  },
-  onMouseDown: function(ev) {
+  }
+  onMouseDown = ev => {
     this.props.onScaleMouseDown(ev, this.props.idx)
-  },
-  render: function() {
+  }
+  render() {
     let scale = 1
     try {
       scale = Math.max(
@@ -63,5 +63,5 @@ let ScaleControl = React.createClass({
       </span>
     )
   }
-})
+}
 module.exports = ScaleControl

@@ -4,8 +4,8 @@ import EditableHtmlElement from './editableHtmlElement'
 import lang from 'i18n/lang'
 import _ from 'lodash'
 
-let SkewControl = React.createClass({
-  onBlur: function(p, v) {
+let SkewControl = class extends React.Component {
+  onBlur = (p, v) => {
     if (isNaN(v)) {
       return
     }
@@ -19,8 +19,8 @@ let SkewControl = React.createClass({
       { skew: newPropObj },
       lang.skewComponents
     )
-  },
-  onDoubleClick: function() {
+  }
+  onDoubleClick = () => {
     let newPropObj = _.cloneDeep(this.props.component.skew || {})
     newPropObj[this.props.axis] = 0
     this.props.onSelectedWidgetUpdated(
@@ -31,11 +31,11 @@ let SkewControl = React.createClass({
       { skew: newPropObj },
       lang.skewComponents
     )
-  },
-  onMouseDown: function(ev) {
+  }
+  onMouseDown = ev => {
     this.props.onRotateMouseDown(ev, this.props.idx, this.props.axis, 'skew')
-  },
-  render: function() {
+  }
+  render() {
     let skew = 0
     try {
       skew = this.props.component.skew[this.props.axis] || 0
@@ -63,5 +63,5 @@ let SkewControl = React.createClass({
       </span>
     )
   }
-})
+}
 module.exports = SkewControl

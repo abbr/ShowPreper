@@ -4,8 +4,8 @@ import EditableHtmlElement from './editableHtmlElement'
 import lang from 'i18n/lang'
 import _ from 'lodash'
 
-let RotateControl = React.createClass({
-  onBlur: function(p, v) {
+let RotateControl = class extends React.Component {
+  onBlur = (p, v) => {
     if (isNaN(v)) {
       return
     }
@@ -19,8 +19,8 @@ let RotateControl = React.createClass({
       { rotate: newPropObj },
       lang.rotateComponents
     )
-  },
-  onDoubleClick: function() {
+  }
+  onDoubleClick = () => {
     let newPropObj = _.cloneDeep(this.props.component.rotate || {})
     newPropObj[this.props.axis] = 0
     this.props.onSelectedWidgetUpdated(
@@ -31,11 +31,11 @@ let RotateControl = React.createClass({
       { rotate: newPropObj },
       lang.rotateComponents
     )
-  },
-  onMouseDown: function(ev) {
+  }
+  onMouseDown = ev => {
     this.props.onRotateMouseDown(ev, this.props.idx, this.props.axis)
-  },
-  render: function() {
+  }
+  render() {
     let rotate = 0
     try {
       rotate = this.props.component.rotate[this.props.axis] || 0
@@ -91,5 +91,5 @@ let RotateControl = React.createClass({
       </span>
     )
   }
-})
+}
 module.exports = RotateControl

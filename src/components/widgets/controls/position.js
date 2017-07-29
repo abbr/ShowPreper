@@ -3,8 +3,8 @@ import React from 'react'
 import EditableHtmlElement from './editableHtmlElement'
 import lang from 'i18n/lang'
 
-let PositionControl = React.createClass({
-  onBlur: function(p, v) {
+let PositionControl = class extends React.Component {
+  onBlur = (p, v) => {
     if (isNaN(v)) {
       return
     }
@@ -18,8 +18,8 @@ let PositionControl = React.createClass({
       newPropObj,
       lang.moveComponents
     )
-  },
-  onDoubleClick: function(axis, ev) {
+  }
+  onDoubleClick = (axis, ev) => {
     let newPropObj = {}
     newPropObj[axis] = 0
     this.props.onSelectedWidgetUpdated(
@@ -31,12 +31,12 @@ let PositionControl = React.createClass({
       lang.moveComponents
     )
     this.props.setDraggable(true)
-  },
-  onMouseDown: function(axis, ev) {
+  }
+  onMouseDown = (axis, ev) => {
     this.props.onMouseDown(ev)
     this.props.setDraggable(axis)
-  },
-  render: function() {
+  }
+  render() {
     return (
       <div className="positioningCtrls">
         <span
@@ -87,6 +87,6 @@ let PositionControl = React.createClass({
       </div>
     )
   }
-})
+}
 
 module.exports = PositionControl
