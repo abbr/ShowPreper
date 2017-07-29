@@ -8,12 +8,12 @@ let EditableHtmlElement = class extends React.Component {
       contentEditable: false
     }
   }
-  onMouseDown = () => {
-    this.props.onMouseDown && this.props.onMouseDown.apply(this, arguments)
+  onMouseDown = (...args) => {
+    this.props.onMouseDown && this.props.onMouseDown.apply(this, args)
     this.setState({ contentEditable: true })
   }
-  onBlur = () => {
-    this.props.onBlur && this.props.onBlur.apply(this, arguments)
+  onBlur = (...args) => {
+    this.props.onBlur && this.props.onBlur.apply(this, args)
     this.setState({ contentEditable: false })
   }
   onKeyPress = ev => {
