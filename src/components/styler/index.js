@@ -5,16 +5,17 @@ import _ from 'lodash'
 import ColorPatternEditor from './colorPatternEditor'
 import BorderEditor from './borderEditor'
 
-export default React.createClass({
-  componentDidMount: function() {
+export default class extends React.Component {
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     $('#sp-styler-modal-content').draggable({
       handle: '.modal-header'
     })
     $('#sp-styler-modal').on('hide.bs.modal', e => {
       this.props.setTargetStyle(this.props.selectedStyleTarget + 'Style', null)
     })
-  },
-  updateStyle: function(newStyleComponent) {
+  }
+  updateStyle = newStyleComponent => {
     let s = this.props.getStyle()
     let targetStyle = _.mergeWith(
       {},
@@ -30,8 +31,8 @@ export default React.createClass({
       this.props.selectedStyleTarget + 'Style',
       targetStyle
     )
-  },
-  render: function() {
+  }
+  render() {
     let s,
       sDisp,
       attrs = []
@@ -174,4 +175,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
