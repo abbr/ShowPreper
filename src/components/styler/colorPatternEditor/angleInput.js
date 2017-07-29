@@ -20,6 +20,8 @@ export default class AngleInput extends React.Component {
     return (-parseInt(Math.atan2(x, y) * 180 / Math.PI) + 180 + 360) % 360
   }
   componentWillReceiveProps(nextProps) {
+    super.componentWillReceiveProps &&
+      super.componentWillReceiveProps(nextProps)
     if (nextProps.defaultValue) {
       this.setState({ value: nextProps.defaultValue })
     }
@@ -95,4 +97,3 @@ AngleInput.defaultProps = {
   className: 'angle-input',
   pivotClassName: 'angle-input-pivot'
 }
-

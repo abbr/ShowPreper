@@ -4,8 +4,15 @@ import 'spectrum-colorpicker'
 import 'spectrum-colorpicker/spectrum.css'
 import parseColor from 'parse-color'
 var markerId = 0
-export default React.createClass({
+export default class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      markerId: markerId++
+    }
+  }
   componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     $(
       '#' + this.props.panelId + '-markerColorPicker' + this.props.index
     ).spectrum({
@@ -20,21 +27,20 @@ export default React.createClass({
         this.props.updateMarkerColor(this.props.attrs, rgba)
       }
     })
-  },
-  componentDidUpdate: function() {
+  }
+  componentDidUpdate() {
+    super.componentDidUpdate && super.componentDidUpdate()
     $(
       '#' + this.props.panelId + '-markerColorPicker' + this.props.index
     ).spectrum('set', this.props.attrs.c)
-  },
-  componentWillUnmount: function() {
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount && super.componentWillUnmount()
     $(
       '#' + this.props.panelId + '-markerColorPicker' + this.props.index
     ).spectrum('destroy')
-  },
-  getInitialState: () => ({
-    markerId: markerId++
-  }),
-  render: function() {
+  }
+  render() {
     let s = _.assign({}, this.props.style, {
       marginLeft: -8,
       marginBottom: -16
@@ -140,4 +146,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
