@@ -11,14 +11,29 @@ import Overview from './overview'
 import DeckStore from 'stores/deck'
 import _ from 'lodash'
 let key = require('mousetrap')
-let App = React.createClass({
-  setDocTitle: t => {
+let App = class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      deck: DeckStore.getDefaultDeck(),
+      view: 'slides',
+      presentationFormat: 'impress',
+      presentationStyle: null,
+      defaultSlideStyle: null,
+      selectedSlidesStyle: null,
+      thisSlideStyle: null,
+      clipboard: null
+    }
+  }
+  setDocTitle(t) {
     document.title = 'ShowPreper - ' + t
-  },
-  componentWillMount: function() {
+  }
+  componentWillMount() {
+    super.componentWillMount && super.componentWillMount()
     this.setDocTitle(this.state.deck._fn)
-  },
-  componentDidMount: function() {
+  }
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     key.bind('ctrl+c', this.onCopy)
     key.bind('ctrl+x', this.onCut)
     key.bind('ctrl+v', this.onPaste)
@@ -65,36 +80,27 @@ let App = React.createClass({
       },
       'keyup'
     )
-  },
-  getInitialState: () => ({
-    deck: DeckStore.getDefaultDeck(),
-    view: 'slides',
-    presentationFormat: 'impress',
-    presentationStyle: null,
-    defaultSlideStyle: null,
-    selectedSlidesStyle: null,
-    thisSlideStyle: null,
-    clipboard: null
-  }),
-  changeView: function(newView) {
+  }
+  changeView = newView => {
     this.setState({
       view: newView
     })
-  },
-  changePresentationFormat: function(newFormat) {
+  }
+  changePresentationFormat = newFormat => {
     this.setState({
       presentationFormat: newFormat
     })
-  },
-  onSlideClicked: function(i) {
+  }
+  onSlideClicked = i => {
     let deck = this.state.deck
     deck.activateSlide(i)
     deck.save()
     this.setState({
       deck: deck
     })
-  },
-  onNewWidget: function(container, index, newProps, markUndoDesc) {
+  }
+
+  onNewWidget = (container, index, newProps, markUndoDesc) => {
     let startIdx = Number.isInteger(index) ? index : container.components.length
     container.components.splice(startIdx, 0, newProps || {})
     let deck = this.state.deck
@@ -105,8 +111,8 @@ let App = React.createClass({
     this.setState({
       deck: deck
     })
-  },
-  onSelectedWidgetUpdated: function(widget, newProps, markUndoDesc, cb) {
+  }
+  onSelectedWidgetUpdated = (widget, newProps, markUndoDesc, cb) => {
     let component, widgetIdx
     let deck = this.state.deck
     switch (typeof widget) {
@@ -147,40 +153,40 @@ let App = React.createClass({
       },
       cb
     )
-  },
-  onNewDeck: function(nm, props) {
+  }
+  onNewDeck = (nm, props) => {
     let deck = new DeckStore.Deck(nm, props)
     deck.save()
     this.setState({
       deck: deck
     })
-  },
-  onDeleteDeck: function() {
+  }
+  onDeleteDeck = () => {
     this.state.deck.delete()
     let deck = DeckStore.getDefaultDeck()
     deck.save()
     this.setState({
       deck: deck
     })
-  },
-  onUndo: function() {
+  }
+  onUndo = () => {
     let deck = this.state.deck
     deck.undo()
     deck.save()
     this.setState({
       deck: deck
     })
-  },
+  }
 
-  onRedo: function() {
+  onRedo = () => {
     let deck = this.state.deck
     deck.redo()
     deck.save()
     this.setState({
       deck: deck
     })
-  },
-  onCopy: function(ev, key, preserveSelectProp) {
+  }
+  onCopy = (ev, key, preserveSelectProp) => {
     let deck = this.state.deck
     let component
     switch (this.state.view) {
@@ -213,12 +219,12 @@ let App = React.createClass({
         presentationFormat: this.state.presentationFormat
       }
     })
-  },
-  onCut: function() {
+  }
+  onCut = () => {
     this.onCopy(null, null, true)
     this.deleteWidgets(lang.cut)
-  },
-  onPaste: function() {
+  }
+  onPaste = () => {
     if (this.state.clipboard.view !== this.state.view) {
       return
     }
@@ -245,8 +251,8 @@ let App = React.createClass({
       }
       this.onNewWidget(component, null, _.cloneDeep(e), markUndoDesc)
     })
-  },
-  onSlideMoved: function(from, to) {
+  }
+  onSlideMoved = (from, to) => {
     let deck = this.state.deck
     let slides = deck.getSlides()
     let indexOfFrom = deck.components.indexOf(slides[from])
@@ -257,8 +263,8 @@ let App = React.createClass({
     this.setState({
       deck: deck
     })
-  },
-  deleteWidgets: function() {
+  }
+  deleteWidgets = (...args) => {
     let deck = this.state.deck
     let component
     switch (this.state.view) {
@@ -283,15 +289,13 @@ let App = React.createClass({
       }
     }
     if (hasDeletedSomething) {
-      deck.markUndo(
-        typeof arguments[0] == 'string' ? arguments[0] : lang.delete
-      )
+      deck.markUndo(typeof args[0] == 'string' ? args[0] : lang.delete)
       this.setState({
         deck: deck
       })
     }
-  },
-  panBy: function(axis, delta, markUndoDesc) {
+  }
+  panBy = (axis, delta, markUndoDesc) => {
     let deck = this.state.deck
     let component
     switch (this.state.view) {
@@ -315,13 +319,14 @@ let App = React.createClass({
         markUndoDesc
       )
     })
-  },
-  componentWillUpdate: function(nextProps, nextState) {
+  }
+  componentWillUpdate(nextProps, nextState) {
+    super.componentWillUpdate && super.componentWillUpdate()
     if (nextState.deck._fn !== this.state.deck._fn) {
       this.setDocTitle(nextState.deck._fn)
     }
-  },
-  setTargetStyle: function(target, style) {
+  }
+  setTargetStyle = (target, style) => {
     let tmp = {}
     // have to double apply style because react seems cannot
     // handle background and background-color together correctly
@@ -330,8 +335,8 @@ let App = React.createClass({
       tmp[target] = style
       this.setState(tmp)
     })
-  },
-  render: function() {
+  }
+  render() {
     var Main
     switch (this.state.view) {
       case 'slides':
@@ -390,6 +395,6 @@ let App = React.createClass({
       </div>
     )
   }
-})
+}
 
 module.exports = App
