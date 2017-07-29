@@ -5,72 +5,73 @@ import parseColor from 'parse-color'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 
-export default React.createClass({
-  mixins: [
-    Draggable(
-      function() {
-        return [this.state.draggingMarkerAttrs]
-      },
-      function(e) {
-        let m = this.getMarkerFromAttrs(e)
-        let bb = ReactDOM.findDOMNode(m).getBoundingClientRect()
-        return {
-          x: (bb && bb.left + 8) || 0,
-          y: (bb && bb.top) || 0
-        }
-      },
-      function(e, updatedProps) {
-        if (!e) return
-        let m = this.getMarkerFromAttrs(e)
-        let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-        let pct = Math.max(
-          0,
-          Math.min(1, (updatedProps.x - bb.left) / bb.width) * 100
-        ).toFixed(2)
-        if (updatedProps.y - bb.top > 30) {
-          pct = null
-        }
-        this.updateMarkerPosition(e, pct)
-        e.p = pct
-        this.setState({ draggingMarkerAttrs: pct === null ? null : e })
-      },
-      function(e, updatedProps) {
-        if (!e) return
-        let m = this.getMarkerFromAttrs(e)
-        let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
-        let pct = Math.max(
-          0,
-          Math.min(1, (updatedProps.x - bb.left) / bb.width) * 100
-        ).toFixed(2)
-        this.updateMarkerPosition(e, pct)
-        e.p = pct
-        this.setState({ draggingMarkerAttrs: e })
-      }
-    )
-  ],
-  componentWillMount: function() {
-    this.mouseDownHdlrs = []
+export default class extends Draggable.draggableMixin(
+  React.Component,
+  function() {
+    return [this.state.draggingMarkerAttrs]
   },
-  onMouseDown: function(evt, markerAttrs) {
+  function(e) {
+    let m = this.getMarkerFromAttrs(e)
+    let bb = ReactDOM.findDOMNode(m).getBoundingClientRect()
+    return {
+      x: (bb && bb.left + 8) || 0,
+      y: (bb && bb.top) || 0
+    }
+  },
+  function(e, updatedProps) {
+    if (!e) return
+    let m = this.getMarkerFromAttrs(e)
+    let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
+    let pct = Math.max(
+      0,
+      Math.min(1, (updatedProps.x - bb.left) / bb.width) * 100
+    ).toFixed(2)
+    if (updatedProps.y - bb.top > 30) {
+      pct = null
+    }
+    this.updateMarkerPosition(e, pct)
+    e.p = pct
+    this.setState({ draggingMarkerAttrs: pct === null ? null : e })
+  },
+  function(e, updatedProps) {
+    if (!e) return
+    let m = this.getMarkerFromAttrs(e)
+    let bb = ReactDOM.findDOMNode(m).parentNode.getBoundingClientRect()
+    let pct = Math.max(
+      0,
+      Math.min(1, (updatedProps.x - bb.left) / bb.width) * 100
+    ).toFixed(2)
+    this.updateMarkerPosition(e, pct)
+    e.p = pct
+    this.setState({ draggingMarkerAttrs: e })
+  }
+) {
+  constructor(props) {
+    super(props)
+    this.state = {
+      draggable: true,
+      pressedMarkerAttrs: null,
+      draggingMarkerAttrs: null
+    }
+  }
+  componentWillMount() {
+    this.mouseDownHdlrs = []
+  }
+  onMouseDown = (evt, markerAttrs) => {
     evt.persist()
     this.setState({ draggingMarkerAttrs: markerAttrs }, function() {
       this.mouseDownHdlrs.forEach(e => e.apply(this, [evt]))
     })
-  },
-  getInitialState: () => ({
-    draggable: true,
-    pressedMarkerAttrs: null,
-    draggingMarkerAttrs: null
-  }),
-  onMarkerClick: function(evt, markerAttrs) {
+  }
+  onMarkerClick = (evt, markerAttrs) => {
     this.setState({
       pressedMarkerAttrs: _.isEqual(markerAttrs, this.state.pressedMarkerAttrs)
         ? null
         : markerAttrs
     })
-  },
-  onMarkerPanelMouseDown: function() {
-    let evt = arguments[0]
+  }
+  onMarkerPanelMouseDown = (...args) => {
+    let evt = args[0]
     let x = evt.clientX
     let panelDomRect = evt.target.getBoundingClientRect()
     let pct = (Math.max(
@@ -78,8 +79,8 @@ export default React.createClass({
       Math.min(1, (x - panelDomRect.left) / (panelDomRect.width || 1))
     ) * 100).toFixed(2)
     this.updateMarkerPosition(null, pct)
-  },
-  getGradientItemIndexFromAttrs: function(parsedGradientObject, attrs) {
+  }
+  getGradientItemIndexFromAttrs(parsedGradientObject, attrs) {
     return (
       parsedGradientObject &&
       parsedGradientObject.colorStops &&
@@ -87,13 +88,13 @@ export default React.createClass({
         return x.c === attrs.c && Math.abs(x.p - attrs.p) < 0.001
       })
     )
-  },
-  getMarkerFromAttrs: function(attrs) {
+  }
+  getMarkerFromAttrs(attrs) {
     let g = this.props.parseGradientString()
     let mi = this.getGradientItemIndexFromAttrs(g, attrs)
     return mi >= 0 ? this.refs['colorMarker' + mi] : null
-  },
-  updateMarkerPosition: function(attrs, pct) {
+  }
+  updateMarkerPosition(attrs, pct) {
     let g = this.props.parseGradientString()
     let colorStops = g.colorStops || []
     g.colorStops = colorStops
@@ -139,16 +140,16 @@ export default React.createClass({
     }
     let s = this.props.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  updateMarkerColor: function(attrs, newColor) {
+  }
+  updateMarkerColor = (attrs, newColor) => {
     let g = this.props.parseGradientString()
     let colorStops = g.colorStops
     let gi = this.getGradientItemIndexFromAttrs(g, attrs)
     gi >= 0 && (colorStops[gi].c = newColor)
     let s = this.props.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  render: function() {
+  }
+  render() {
     let colorStops, gradientMarkers, gradientArrString
     try {
       let g = this.props.parseGradientString()
@@ -206,4 +207,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
