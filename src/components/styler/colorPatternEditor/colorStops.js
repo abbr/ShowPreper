@@ -55,6 +55,7 @@ export default class extends Draggable.draggableMixin(
     }
   }
   componentWillMount() {
+    super.componentWillMount && super.componentWillMount()
     this.mouseDownHdlrs = []
   }
   onMouseDown = (evt, markerAttrs) => {

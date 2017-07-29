@@ -27,11 +27,15 @@ const linearGradientDirectionArr = [
   { value: 'to left bottom', text: 'to left bottom' },
   { value: 'to angle', text: 'to angle' }
 ]
-export default React.createClass({
-  getInitialState: () => ({
-    isGradientAngleBeingDragged: false
-  }),
-  componentDidMount: function() {
+export default class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isGradientAngleBeingDragged: false
+    }
+  }
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
     $('#sp-background-solid-colorpicker').spectrum({
       color: this.props.currentStyle,
       showAlpha: true,
@@ -44,22 +48,23 @@ export default React.createClass({
         })
       }
     })
-  },
-  componentWillUnmount: function() {
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount && super.componentWillUnmount()
     $('#sp-background-solid-colorpicker').spectrum('destroy')
-  },
-  onToggleGradientShape: function() {
+  }
+  onToggleGradientShape = (...args) => {
     let g = this.parseGradientString()
     if (g) {
-      g.shape = arguments[0].target.value
+      g.shape = args[0].target.value
       if (g.extent && g.extent.indexOf('px') >= 0) {
         g.extent = 'farthest-corner'
       }
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  onToggleIsRepeating: function(evt) {
+  }
+  onToggleIsRepeating = evt => {
     let g = this.parseGradientString()
     if (!g) {
       return
@@ -67,12 +72,12 @@ export default React.createClass({
     g.isRepeating = evt.target.checked
     let s = this.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  onChangeGradientExtent: function() {
+  }
+  onChangeGradientExtent = (...args) => {
     let g = this.parseGradientString()
     if (g) {
-      g.extent = arguments[0].value
-      if (arguments[0].value === 'length') {
+      g.extent = args[0].value
+      if (args[0].value === 'length') {
         g.extent = '100px'
         if (!g.shape || g.shape === 'ellipse') {
           g.extent += ' 100px'
@@ -81,8 +86,8 @@ export default React.createClass({
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  onChangeGradientExtentPct: function(dimension, ev) {
+  }
+  onChangeGradientExtentPct = (dimension, ev) => {
     let g = this.parseGradientString()
     if (g && g.extent) {
       let xyExtArr = g.extent.split(' ')
@@ -91,8 +96,8 @@ export default React.createClass({
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  onChangeGradientPosition: function(dimension, ev) {
+  }
+  onChangeGradientPosition = (dimension, ev) => {
     let g = this.parseGradientString()
     g.position = g.position || {}
     if (dimension) {
@@ -107,61 +112,63 @@ export default React.createClass({
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  onChangeGradientDirection: function() {
+  }
+  onChangeGradientDirection = (...args) => {
     let g = this.parseGradientString()
     if (g) {
-      g.direction = arguments[0].value
-      if (arguments[0].value === 'to angle') {
+      g.direction = args[0].value
+      if (args[0].value === 'to angle') {
         g.direction = '0deg'
       }
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  onGradientDirectionAngleInputKeydown: function() {
-    if (arguments[0].key !== 'Enter') {
+  }
+  onGradientDirectionAngleInputKeydown = (...args) => {
+    if (args[0].key !== 'Enter') {
       return
     }
-    arguments[0].preventDefault && arguments[0].preventDefault()
-    arguments[0].target.blur()
-  },
-  onChangeGradientDirectionAngle: function() {
+    args[0].preventDefault && args[0].preventDefault()
+    args[0].target.blur()
+  }
+  onChangeGradientDirectionAngle = (...args) => {
     document.addEventListener('mouseup', this.onGradientDirectionAngleMouseUp)
     let g = this.parseGradientString()
     let newAngle
-    switch (typeof arguments[0]) {
+    switch (typeof args[0]) {
       case 'number':
-        newAngle = (arguments[0] + 360) % 360
+        newAngle = (args[0] + 360) % 360
         this.setState({ isGradientAngleBeingDragged: true })
         break
       case 'object':
-        newAngle = parseInt(arguments[0].target.innerHTML)
+        newAngle = parseInt(args[0].target.innerHTML)
     }
     if (g) {
       g.direction = newAngle + 'deg'
     }
     let s = this.composeGradientString(g)
     this.props.updateStyle({ background: s })
-  },
-  onGradientDirectionAngleEdit: function(ev) {
+  }
+
+  onGradientDirectionAngleEdit = ev => {
     ev.stopPropagation && ev.stopPropagation()
-  },
-  onGradientDirectionAngleMouseUp: function() {
+  }
+  onGradientDirectionAngleMouseUp = () => {
     this.setState({ isGradientAngleBeingDragged: false })
     document.removeEventListener(
       'mouseup',
       this.onGradientDirectionAngleMouseUp
     )
-  },
+  }
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
+    super.componentDidUpdate && super.componentDidUpdate()
     $('#sp-background-solid-colorpicker').spectrum(
       'set',
       this.props.currentStyle
     )
-  },
-  parseGradientString: function() {
+  }
+  parseGradientString = () => {
     let gradientString,
       gradientFormatMatch,
       gradientFormat = {}
@@ -223,14 +230,14 @@ export default React.createClass({
         return ret
       })
     return gradientFormat
-  },
-  composeGradientString: function() {
+  }
+  composeGradientString = (...args) => {
     let gradientFormat, colorStops
-    if (arguments[0].constructor === Array) {
-      colorStops = arguments[0]
+    if (args[0].constructor === Array) {
+      colorStops = args[0]
     } else {
-      colorStops = arguments[0].colorStops
-      gradientFormat = arguments[0]
+      colorStops = args[0].colorStops
+      gradientFormat = args[0]
     }
     let gradientFormatString = ''
     if (gradientFormat) {
@@ -284,8 +291,8 @@ export default React.createClass({
       )
     }
     return fullGradientString
-  },
-  render: function() {
+  }
+  render() {
     let type,
       gradientExtentSelect,
       gradientExtentXExtentPct,
@@ -661,4 +668,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
