@@ -113,9 +113,13 @@ export default class extends React.Component {
               </div>
               <div className="row">
                 <div className="col-xs-12">
-                  <ul className="nav nav-tabs">
+                  <ul className="nav nav-tabs" role="tablist">
                     <li className="active">
-                      <a data-toggle="tab" href="#spStylerTabBackground">
+                      <a
+                        data-toggle="tab"
+                        href="#spStylerTabBackground"
+                        aria-expanded={true}
+                      >
                         {lang.background}
                       </a>
                     </li>
