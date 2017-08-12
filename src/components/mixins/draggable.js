@@ -20,8 +20,12 @@ module.exports = function(
       // only left mouse button or touchstart
       if (ev.button !== 0 && ev.type !== 'touchstart') return
       if (!this.state.draggable) return
-      document.addEventListener('touchmove', this.onDraggableMouseMove)
-      document.addEventListener('touchend', this.onDraggableMouseUp)
+      document.addEventListener('touchmove', this.onDraggableMouseMove, {
+        passive: false
+      })
+      document.addEventListener('touchend', this.onDraggableMouseUp, {
+        passive: false
+      })
       document.addEventListener('mousemove', this.onDraggableMouseMove)
       document.addEventListener('mouseup', this.onDraggableMouseUp)
       document.body.style.WebkitUserSelect = 'none'
@@ -50,7 +54,7 @@ module.exports = function(
       ev.stopPropagation && ev.stopPropagation()
     },
     onDraggableMouseMove: function(ev) {
-      ev.preventDefault && ev.preventDefault()
+      !ev.targetTouches && ev.preventDefault && ev.preventDefault()
       ev.stopPropagation && ev.stopPropagation()
       let pageX = ev.targetTouches ? ev.targetTouches[0].pageX : ev.pageX
       let pageY = ev.targetTouches ? ev.targetTouches[0].pageY : ev.pageY
@@ -101,6 +105,7 @@ module.exports = function(
         mouseMoveWidgetUpdateFunction &&
           mouseMoveWidgetUpdateFunction.bind(this, e, updatedProps)()
       })
+      return true
     },
     onDraggableMouseUp: function(ev) {
       if (ev.type === 'touchend' && ev.targetTouches.length > 0) {
