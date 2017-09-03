@@ -27,12 +27,15 @@ module.exports = class extends autoScaleMixin(React.Component) {
       this.props.deck.activateSlide(ev.index)
     })
     this._resized()
-    window.addEventListener('resize', this._resized)
+    window.addEventListener('resize', this._windowResized)
   }
   componentWillUnmount = () => {
-    window.removeEventListener('resize', this._resized)
+    window.removeEventListener('resize', this._windowResized)
   }
-  _resized = () => {
+  _windowResized = () => {
+    this._resized(true)
+  }
+  _resized = recomputeDomSize => {
     let scaleFactor = this.props.deck.bespokeZoomFactor || 1
     let cx = this.props.deck.slideWidth / 2
     let cy = this.props.deck.slideHeight / 2
@@ -42,7 +45,7 @@ module.exports = class extends autoScaleMixin(React.Component) {
       bottom: cy + this.props.deck.slideHeight * scaleFactor / 2,
       left: cx - this.props.deck.slideWidth * scaleFactor / 2
     }
-    this._scale(bb)
+    this._scale(bb, recomputeDomSize)
   }
   zoom = delta => {
     this.props.onSelectedWidgetUpdated(

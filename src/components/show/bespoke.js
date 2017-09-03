@@ -22,13 +22,17 @@ let BeSpoke = class extends autoScaleMixin(React.Component) {
     super.componentDidMount && super.componentDidMount()
     bespoke.from('article', [bespokeKeys(), bespokeClasses(), bespokeTouch()])
     this._resized()
-    window.addEventListener('resize', this._resized)
+    window.addEventListener('resize', this._windowResized)
   }
   componentWillUnmount() {
     super.componentWillUnmount && super.componentWillUnmount()
-    window.removeEventListener('resize', this._resized)
+    window.removeEventListener('resize', this._windowResized)
   }
-  _resized = () => {
+  _windowResized = () => {
+    this._resized(true)
+  }
+
+  _resized = recomputeDomSize => {
     let scaleFactor = this.state.deck.bespokeZoomFactor || 1
     let cx = this.state.deck.slideWidth / 2
     let cy = this.state.deck.slideHeight / 2
@@ -38,7 +42,7 @@ let BeSpoke = class extends autoScaleMixin(React.Component) {
       bottom: cy + this.state.deck.slideHeight * scaleFactor / 2,
       left: cx - this.state.deck.slideWidth * scaleFactor / 2
     }
-    this._scale(bb)
+    this._scale(bb, recomputeDomSize)
   }
   render() {
     let deckView = this.state.deck.components.map((component, index) => {

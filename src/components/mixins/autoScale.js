@@ -13,21 +13,31 @@ exports.getFitSquareScaleFactor = function(
     : frameWidth / width
 }
 
-exports._scale = function(size) {
-  let rootElSize
-  try {
-    rootElSize = window.getComputedStyle(ReactDOM.findDOMNode(this))
-  } catch (ex) {
-    return
+exports._scale = function(size, recomputeDomSize) {
+  let rootElSize, domWidth, domHeight
+  domWidth = this.state.domSize && this.state.domSize.domWidth
+  domHeight = this.state.domSize && this.state.domSize.domHeight
+  if (!this.state.domSize || recomputeDomSize) {
+    try {
+      rootElSize = window.getComputedStyle(ReactDOM.findDOMNode(this))
+      domWidth =
+        parseInt(rootElSize.width) -
+        parseInt(rootElSize.paddingLeft) -
+        parseInt(rootElSize.paddingRight)
+      domHeight =
+        parseInt(rootElSize.height) -
+        parseInt(rootElSize.paddingTop) -
+        parseInt(rootElSize.paddingBottom)
+      this.setState({
+        domSize: {
+          domWidth: domWidth,
+          domHeight: domHeight
+        }
+      })
+    } catch (ex) {
+      return
+    }
   }
-  let domWidth =
-    parseInt(rootElSize.width) -
-    parseInt(rootElSize.paddingLeft) -
-    parseInt(rootElSize.paddingRight)
-  let domHeight =
-    parseInt(rootElSize.height) -
-    parseInt(rootElSize.paddingTop) -
-    parseInt(rootElSize.paddingBottom)
 
   let componentWidth,
     componentHeight,

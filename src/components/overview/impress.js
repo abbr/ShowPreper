@@ -61,16 +61,20 @@ module.exports = class extends Draggable.draggableMixin(
   componentDidMount() {
     super.componentDidMount && super.componentDidMount()
     this._resized()
-    window.addEventListener('resize', this._resized)
+    window.addEventListener('resize', this._windowResized)
   }
   componentWillUnmount() {
     super.componentWillUnmount && super.componentWillUnmount()
-    window.removeEventListener('resize', this._resized)
+    window.removeEventListener('resize', this._windowResized)
   }
-  _resized = () => {
+  _windowResized = () => {
+    this._resized(true)
+  }
+
+  _resized = recomputeDomSize => {
     let bb =
       this.props.deck.boundingBox || this.props.deck.getDefaultDeckBoundingBox()
-    let newBB = this._scale(bb)
+    let newBB = this._scale(bb, recomputeDomSize)
     if (newBB) {
       this.props.onSelectedWidgetUpdated(
         { container: this.props.deck, index: -1 },

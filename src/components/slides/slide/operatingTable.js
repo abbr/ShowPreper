@@ -84,22 +84,25 @@ let OperatingTable = class extends Draggable.draggableMixin(
   componentDidMount() {
     super.componentDidMount && super.componentDidMount()
     this._resized()
-    window.addEventListener('resize', this._resized)
+    window.addEventListener('resize', this._windowResized)
     key.bind('g', this.onToggleGrid)
   }
   componentWillUnmount() {
     super.componentWillUnmount && super.componentWillUnmount()
-    window.removeEventListener('resize', this._resized)
+    window.removeEventListener('resize', this._windowResized)
     key.unbind('g')
   }
   onToggleGrid = ev => {
     this.setState({ showGrid: !this.state.showGrid })
   }
-  _resized = () => {
+  _windowResized = () => {
+    this._resized(true)
+  }
+  _resized = recomputeDomSize => {
     let deck = this.props.deck
     let slideWidth = this.props.component.width || deck.slideWidth
     let slideHeight = this.props.component.height || deck.slideHeight
-    this._scale({ width: slideWidth, height: slideHeight })
+    this._scale({ width: slideWidth, height: slideHeight }, recomputeDomSize)
   }
   onMouseDown = (...args) => {
     this.mouseDownHdlrs.forEach(e => e.apply(this, args))
