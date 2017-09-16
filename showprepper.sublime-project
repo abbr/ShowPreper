@@ -16,12 +16,12 @@
   {
     "cmd": [
       "npm.cmd",
-      "test",
-      "--",
-      "--no-colors",
+      "test"
     ],
     "name": "npm-run-test",
-    "working_dir": "${project_path}"
+    "working_dir": "${project_path}",
+    "target": "ansi_color_build",
+    "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
   }],
   "folders": [
   {
