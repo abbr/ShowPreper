@@ -1,0 +1,39 @@
+{
+  "build_systems": [
+  {
+    "cmd": [
+      "node.exe",
+      "server.js"
+    ],
+    "env":
+    {
+      "env": "dev",
+      "port": "8888"
+    },
+    "name": "node-app",
+    "working_dir": "${project_path}"
+  },
+  {
+    "cmd": [
+      "npm.cmd",
+      "test",
+      "--",
+      "--no-colors",
+    ],
+    "name": "npm-run-test",
+    "working_dir": "${project_path}"
+  }],
+  "folders": [
+  {
+    "path": "."
+  },
+  {
+    "path": "../impress.js"
+  },
+  {
+    "path": "../strut2"
+  },
+  {
+    "path": "../Strut"
+  }]
+}

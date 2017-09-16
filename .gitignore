@@ -36,3 +36,6 @@ nbproject/private/
 
 #WebStorm
 /.idea/
+
+#ST
+*.sublime-workspace
