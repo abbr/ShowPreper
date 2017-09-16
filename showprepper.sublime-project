@@ -22,6 +22,17 @@
     "working_dir": "${project_path}",
     "target": "ansi_color_build",
     "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
+  },
+  {
+    "cmd": [
+      "npm.cmd",
+      "run",
+      "dist"
+    ],
+    "name": "npm-run-dist",
+    "working_dir": "${project_path}",
+    "target": "ansi_color_build",
+    "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
   }],
   "folders": [
   {
