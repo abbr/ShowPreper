@@ -1,8 +1,8 @@
 var path = require('path')
-var port = process.env.port || 8000
 var srcPath = path.join(__dirname, '/../src')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+var webpack = require('webpack')
 var gitRevisionPlugin = new (require('git-revision-webpack-plugin'))()
 var gitHash = ''
 try {
@@ -10,8 +10,6 @@ try {
 } catch (ex) {}
 
 module.exports = {
-  port: port,
-  debug: true,
   context: path.join(__dirname, '..'),
   output: {
     path: path.join(__dirname, '/../dist'),
@@ -25,7 +23,7 @@ module.exports = {
     vendors: ['webpack-material-design-icons', 'babel-polyfill']
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     alias: {
       actions: srcPath + '/actions/',
       components: srcPath + '/components/',
@@ -34,46 +32,54 @@ module.exports = {
       styles: srcPath + '/styles/',
       config: srcPath + '/config/' + process.env.REACT_WEBPACK_ENV
     },
-    root: srcPath
+    modules: [srcPath, 'node_modules']
   },
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'src'),
+        enforce: 'pre',
         loader: 'eslint-loader'
       },
       {
         test: /about\.js$/,
-        loader: 'string-replace',
+        loader: 'string-replace-loader',
+        enforce: 'pre',
         query: {
           search: '$$GIT_HASH$$',
           replace: gitHash
         }
-      }
-    ],
-    loaders: [
+      },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader'
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.sass/,
-        loader:
-          'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader?outputStyle=expanded&indentedSyntax'
+        ]
       },
       {
         test: /\.scss/,
-        loader:
-          'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded'
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader?outputStyle=expanded'
+        ]
       },
       {
         test: /\.less/,
-        loader: 'style-loader!css-loader!postcss-loader!less-loader'
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       {
         test: /\.styl/,
-        loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
       },
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
@@ -84,24 +90,24 @@ module.exports = {
       // loads bootstrap's css.
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
       },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       },
-      { test: /\.(json|spj)$/, loader: 'json-loader' }
+      { test: /\.spj$/, loader: 'json-loader' }
     ]
   },
-  postcss: function() {
-    return []
-  },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../src/', 'index.html'),
       filename: 'index.html',

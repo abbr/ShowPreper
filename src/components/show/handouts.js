@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import DeckStore from 'stores/deck'
-import 'expose?$!expose?jQuery!jquery'
+import 'expose-loader?$!expose-loader?jQuery!jquery'
 import 'bootstrap-webpack'
 import './handouts.less'
 import Global from 'react-global'

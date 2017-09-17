@@ -6,14 +6,13 @@ var srcPath = path.join(__dirname, '/../src/')
 module.exports = {
   devtool: 'eval',
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         loader: 'isparta-instrumenter-loader',
+        enforce: 'pre',
         include: [path.join(__dirname, '/../src')]
-      }
-    ],
-    loaders: [
+      },
       {
         test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
         loader: 'null-loader'
@@ -29,7 +28,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     alias: {
       actions: srcPath + 'actions/',
       helpers: path.join(__dirname, '/../test/helpers'),

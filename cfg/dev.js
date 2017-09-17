@@ -1,21 +1,21 @@
 var path = require('path')
 var webpack = require('webpack')
-var baseConfig = require('./base')
+var port = process.env.port || 8000
 
 // Add needed plugins here
 
 var config = {
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:' + baseConfig.port + '/',
+      'webpack-dev-server/client?http://localhost:' + port + '/',
       'webpack/hot/dev-server'
     ]
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'react-hot!babel-loader',
+        use: ['react-hot-loader', 'babel-loader'],
         include: path.join(__dirname, '/../src')
       }
     ]
@@ -23,15 +23,14 @@ var config = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    port: baseConfig.port,
-    inline: true,
-    info: true
+    port: port,
+    inline: true
   },
   cache: true,
   devtool: 'inline-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }
 
