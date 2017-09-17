@@ -96,7 +96,7 @@
     "url": "https://github.com/abbr/ShowPreper.git"
   },
   "engines": {
-    "node": ">=4.2.4"
+    "node": ">=5.10"
   },
   "private": true,
   "license": "MIT"
