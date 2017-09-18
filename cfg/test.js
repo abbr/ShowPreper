@@ -13,10 +13,10 @@ module.exports = {
         enforce: 'pre',
         include: [path.join(__dirname, '/../src')]
       },
-      {
-        test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
-        loader: 'null-loader'
-      },
+      // {
+      //   test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
+      //   loader: 'null-loader'
+      // },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',

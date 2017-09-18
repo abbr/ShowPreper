@@ -33,6 +33,22 @@
     "working_dir": "${project_path}",
     "target": "ansi_color_build",
     "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
+  },
+  {
+    "cmd": [
+      "node.exe",
+      "--inspect-brk",
+      "node_modules/karma/bin/karma",
+      "start"
+    ],
+    "env":
+    {
+      "NODE_ENV": "test"
+    },
+    "name": "debug-karma",
+    "working_dir": "${project_path}",
+    "target": "ansi_color_build",
+    "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
   }],
   "folders": [
   {
