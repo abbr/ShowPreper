@@ -27,7 +27,6 @@ var config = {
     inline: true
   },
   cache: true,
-  devtool: 'inline-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

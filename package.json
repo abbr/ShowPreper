@@ -15,8 +15,8 @@
     "serve": "node server.js --env=dev",
     "serve:dist": "node server.js --env=dist",
     "start": "node server.js --env=dev",
-    "test": "karma start",
-    "test:watch": "karma start --autoWatch=true --singleRun=false",
+    "test": "cross-env NODE_ENV=test karma start",
+    "test:watch": "cross-env NODE_ENV=test karma start --autoWatch=true --singleRun=false",
     "heroku-postbuild": "npm run dist"
   },
   "devDependencies": {
@@ -37,6 +37,7 @@
     "classnames": "^2.2.1",
     "clean-webpack-plugin": "^0.1.10",
     "copy-webpack-plugin": "^3.0.1",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.23.0",
     "eslint": "^1.2.1",
     "eslint-loader": "^1.0.0",
@@ -55,6 +56,7 @@
     "json-loader": "^0.5.4",
     "karma": "^0.13.9",
     "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^0.5.3",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",

@@ -129,5 +129,6 @@ module.exports = {
       chunks: ['vendors', 'bespoke']
     }),
     new CopyWebpackPlugin([{ from: 'src/favicon.ico' }])
-  ]
+  ],
+  devtool: 'inline-source-map'
 }
