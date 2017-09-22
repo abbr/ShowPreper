@@ -132,7 +132,7 @@ module.exports = class extends Draggable.draggableMixin(
     this.setState({ draggable: draggable })
   }
   render() {
-    let selectedWidgets = this.props.deck.components.reduce((pv, e, i, a) => {
+    let selectedWidgets = this.props.deck.components.reduce((pv, e, i) => {
       if (e.selected) pv.push(i)
       return pv
     }, [])

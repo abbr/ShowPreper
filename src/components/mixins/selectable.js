@@ -23,7 +23,7 @@ exports.onSelectionMouseDown = function(ev, i) {
   if (typeof i === 'number') {
     selectedWidgets.unshift(i)
   }
-  this.props.component.components.forEach((e, i, a) => {
+  this.props.component.components.forEach((e, i) => {
     if (
       (e.selected && selectedWidgets.indexOf(i) < 0) ||
       (selectedWidgets.indexOf(i) >= 0 && e.selected !== true)

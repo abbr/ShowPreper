@@ -284,7 +284,7 @@ export default class extends React.Component {
     if (gradientFormat) {
       fullGradientString = fullGradientString.replace(
         /(repeating-)?(linear|radial)-gradient/,
-        (match, p1, p2) =>
+        () =>
           (gradientFormat.isRepeating ? 'repeating-' : '') +
           gradientFormat.type +
           '-gradient'
@@ -393,7 +393,7 @@ export default class extends React.Component {
               aria-expanded="false"
               aria-controls="collapseOne"
               href="#collapseOne"
-              onClick={evt => {
+              onClick={() => {
                 if (type !== 'color') {
                   this.props.updateStyle({ background: 'rgb()' })
                 }
@@ -435,7 +435,7 @@ export default class extends React.Component {
               href="#collapseTwo"
               aria-expanded="false"
               aria-controls="collapseTwo"
-              onClick={evt => {
+              onClick={() => {
                 if (type !== 'linear-gradient') {
                   this.props.updateStyle({ background: 'linear-gradient()' })
                 }
@@ -533,7 +533,7 @@ export default class extends React.Component {
               aria-expanded="false"
               aria-controls="collapseThree"
               href="#collapseThree"
-              onClick={evt => {
+              onClick={() => {
                 if (type !== 'radial-gradient') {
                   this.props.updateStyle({ background: 'radial-gradient()' })
                 }

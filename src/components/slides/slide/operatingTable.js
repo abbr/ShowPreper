@@ -92,7 +92,7 @@ let OperatingTable = class extends Draggable.draggableMixin(
     window.removeEventListener('resize', this._windowResized)
     key.unbind('g')
   }
-  onToggleGrid = ev => {
+  onToggleGrid = () => {
     this.setState({ showGrid: !this.state.showGrid })
   }
   _windowResized = () => {
@@ -113,7 +113,7 @@ let OperatingTable = class extends Draggable.draggableMixin(
   render() {
     try {
       let slide = this.props.deck.getActiveSlide()
-      let selectedWidgets = slide.components.reduce((pv, e, i, a) => {
+      let selectedWidgets = slide.components.reduce((pv, e, i) => {
         if (e.selected) pv.push(i)
         return pv
       }, [])

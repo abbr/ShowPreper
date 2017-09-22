@@ -200,7 +200,7 @@ let App = class extends React.Component {
         break
     }
     if (!component) return
-    let selectedComponents = component.components.reduce((pv, cv, i) => {
+    let selectedComponents = component.components.reduce((pv, cv) => {
       if (cv.selected) {
         pv.push(cv)
       }

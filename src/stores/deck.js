@@ -83,7 +83,7 @@ Deck.prototype.redo = function() {
     )
 }
 Deck.prototype.getSlides = function() {
-  return this.components.filter((e, i, a) => e.type === 'Slide')
+  return this.components.filter(e => e.type === 'Slide')
 }
 Deck.prototype.getSlideBoundingBox = function(e) {
   let nCols = Math.ceil(Math.sqrt(this.getSlides().length))

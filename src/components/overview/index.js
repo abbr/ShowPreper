@@ -8,13 +8,10 @@ module.exports = class extends React.Component {
     switch (this.props.presentationFormat) {
       case 'handouts':
         return <Handouts {...this.props} />
-        break
       case 'impress':
         return <Impress {...this.props} />
-        break
       case 'bespoke':
         return <Bespoke {...this.props} />
-        break
       default:
         break
     }

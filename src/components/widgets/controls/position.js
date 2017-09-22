@@ -19,7 +19,7 @@ let PositionControl = class extends React.Component {
       lang.moveComponents
     )
   }
-  onDoubleClick = (axis, ev) => {
+  onDoubleClick = axis => {
     let newPropObj = {}
     newPropObj[axis] = 0
     this.props.onSelectedWidgetUpdated(

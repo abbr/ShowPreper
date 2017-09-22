@@ -28,7 +28,7 @@ let TextBox = class extends React.Component {
       let editable = editor.editable(this.element)
       editable.hasFocus = true
     })
-    editor.on('blur', function(evt) {
+    editor.on('blur', function() {
       setTimeout(() => {
         this.destroy()
         delete reactEle.editor

@@ -19,7 +19,7 @@ export default class extends React.Component {
       }
     })
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     super.componentWillUnmount && super.componentWillUnmount()
     $('#sp-border-colorpicker').spectrum('destroy')
   }
@@ -41,7 +41,7 @@ export default class extends React.Component {
         this.props.currentStyle.borderWidth.trim() === ''
           ? null
           : this.props.currentStyle.borderWidth.split(' ')
-      border.width.components = widthComponentsRaw.map((e, i) => {
+      border.width.components = widthComponentsRaw.map(e => {
         let lengthMatch = e.trim().match(/(\d+)(\D+)/)
         if (lengthMatch) {
           return {
@@ -58,7 +58,7 @@ export default class extends React.Component {
         this.props.currentStyle.borderRadius.trim() === ''
           ? null
           : this.props.currentStyle.borderRadius.split(' ')
-      border.radius.components = radiusComponentsRaw.map((e, i) => {
+      border.radius.components = radiusComponentsRaw.map(e => {
         let lengthMatch = e.trim().match(/(\d+)(\D+)/)
         if (lengthMatch) {
           return {
@@ -77,7 +77,7 @@ export default class extends React.Component {
     let borderStyleObject = { borderStyle: parsedBorder.style }
     try {
       borderStyleObject.borderWidth = parsedBorder.width.components
-        .reduce((pv, cv, ci) => {
+        .reduce((pv, cv) => {
           return pv + ' ' + (typeof cv == 'string' ? cv : cv.length + cv.uom)
         }, '')
         .trim()
@@ -189,9 +189,7 @@ export default class extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-1" />
-          <div className="col-xs-11 row">
-            {borderWidthComponents}
-          </div>
+          <div className="col-xs-11 row">{borderWidthComponents}</div>
         </div>
         <div className="row">
           <div className="col-xs-1">Style</div>
@@ -237,9 +235,7 @@ export default class extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-1" />
-          <div className="col-xs-11 row">
-            {borderRadiusComponents}
-          </div>
+          <div className="col-xs-11 row">{borderRadiusComponents}</div>
         </div>
       </div>
     )

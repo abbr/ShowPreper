@@ -78,7 +78,8 @@ export default class extends Draggable.draggableMixin(
     let pct = (Math.max(
       0,
       Math.min(1, (x - panelDomRect.left) / (panelDomRect.width || 1))
-    ) * 100).toFixed(2)
+    ) * 100
+    ).toFixed(2)
     this.updateMarkerPosition(null, pct)
   }
   getGradientItemIndexFromAttrs(parsedGradientObject, attrs) {
@@ -156,9 +157,7 @@ export default class extends Draggable.draggableMixin(
       let g = this.props.parseGradientString()
       colorStops = g.colorStops
       if (colorStops) {
-        gradientArrString = colorStops
-          .map((e, i) => e.c + ' ' + e.p + '%')
-          .join(',')
+        gradientArrString = colorStops.map(e => e.c + ' ' + e.p + '%').join(',')
       }
       gradientMarkers =
         colorStops &&

@@ -28,11 +28,9 @@ export default class AngleInput extends React.Component {
   }
   normalize(degree) {
     var step = this.props.step || 1
-    return (
-      (Math.round(degree / this.props.step) * this.props.step % 360 + 360) % 360
-    )
+    return ((Math.round(degree / step) * step) % 360 + 360) % 360
   }
-  _onMouseDown = e => {
+  _onMouseDown = () => {
     this.beginTracking()
   }
   _onMouseMove = e => {

@@ -215,7 +215,7 @@ let QuickStyler = class extends React.Component {
           extraCN = ' special-style glyphicon glyphicon-edit'
           title = lang.customizeStyle
           mouseEvtHdlr = null
-          mouseClickHdlr = evt => {
+          mouseClickHdlr = () => {
             $('#sp-styler-modal').modal('show')
           }
           break

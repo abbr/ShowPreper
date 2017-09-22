@@ -11,22 +11,17 @@ export default class extends React.Component {
     $('#sp-styler-modal-content').draggable({
       handle: '.modal-header'
     })
-    $('#sp-styler-modal').on('hide.bs.modal', e => {
+    $('#sp-styler-modal').on('hide.bs.modal', () => {
       this.props.setTargetStyle(this.props.selectedStyleTarget + 'Style', null)
     })
   }
   updateStyle = newStyleComponent => {
     let s = this.props.getStyle()
-    let targetStyle = _.mergeWith(
-      {},
-      s,
-      newStyleComponent,
-      (ov, sv, k, o, s) => {
-        if (sv === undefined) {
-          delete o[k]
-        }
+    let targetStyle = _.mergeWith({}, s, newStyleComponent, (ov, sv, k, o) => {
+      if (sv === undefined) {
+        delete o[k]
       }
-    )
+    })
     this.props.setTargetStyle(
       this.props.selectedStyleTarget + 'Style',
       targetStyle
@@ -64,7 +59,7 @@ export default class extends React.Component {
     let pDivs = _.map(p, (e, i) => {
       let s = _.clone(e)
       let title = 'palette ' + (1 + parseInt(i))
-      let mouseEvtHdlr = evt => {
+      let mouseEvtHdlr = () => {
         this.props.updatePalette(i)
       }
       return (
@@ -107,9 +102,7 @@ export default class extends React.Component {
                     <div className="sp-styler-preview" style={s} />
                   </div>
                 </div>
-                <div className="col-md-8">
-                  {sDisp}
-                </div>
+                <div className="col-md-8">{sDisp}</div>
               </div>
               <div className="row">
                 <div className="col-xs-12">
