@@ -4,7 +4,6 @@ var srcPath = path.join(__dirname, '/../src/')
 // Add needed plugins here
 
 module.exports = {
-  devtool: 'eval',
   module: {
     rules: [
       {
