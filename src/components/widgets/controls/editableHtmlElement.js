@@ -29,7 +29,7 @@ let EditableHtmlElement = class extends React.Component {
     otherProps.onMouseDown = this.onMouseDown
     otherProps.onBlur = this.onBlur
     otherProps.onKeyPress = this.onKeyPress
-    return React.DOM[eleNm]({ ...otherProps })
+    return React.createElement(eleNm, { ...otherProps })
   }
 }
 module.exports = EditableHtmlElement
