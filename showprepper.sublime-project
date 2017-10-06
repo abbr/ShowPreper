@@ -1,66 +1,65 @@
 {
-  "build_systems": [
-  {
-    "cmd": [
-      "node.exe",
-      "server.js"
-    ],
-    "env":
-    {
-      "env": "dev",
-      "port": "8888"
+  "build_systems": [{
+      "cmd": [
+        "node.exe",
+        "server.js"
+      ],
+      "env": {
+        "env": "dev",
+        "port": "8888"
+      },
+      "name": "node-app",
+      "working_dir": "${project_path}"
     },
-    "name": "node-app",
-    "working_dir": "${project_path}"
-  },
-  {
-    "cmd": [
-      "npm.cmd",
-      "test"
-    ],
-    "name": "npm-run-test",
-    "working_dir": "${project_path}",
-    "target": "ansi_color_build",
-    "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
-  },
-  {
-    "cmd": [
-      "npm.cmd",
-      "run",
-      "dist"
-    ],
-    "name": "npm-run-dist",
-    "working_dir": "${project_path}",
-    "target": "ansi_color_build",
-    "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
-  },
-  {
-    "cmd": [
-      "node.exe",
-      "--inspect-brk",
-      "node_modules/karma/bin/karma",
-      "start"
-    ],
-    "env":
     {
-      "NODE_ENV": "test"
+      "cmd": [
+        "npm.cmd",
+        "test"
+      ],
+      "name": "npm-run-test",
+      "working_dir": "${project_path}",
+      "target": "ansi_color_build",
+      "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
     },
-    "name": "debug-karma",
-    "working_dir": "${project_path}",
-    "target": "ansi_color_build",
-    "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
-  }],
-  "folders": [
-  {
-    "path": "."
-  },
-  {
-    "path": "../impress.js"
-  },
-  {
-    "path": "../strut2"
-  },
-  {
-    "path": "../Strut"
-  }]
+    {
+      "cmd": [
+        "npm.cmd",
+        "run",
+        "dist"
+      ],
+      "name": "npm-run-dist",
+      "working_dir": "${project_path}",
+      "target": "ansi_color_build",
+      "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
+    },
+    {
+      "cmd": [
+        "node.exe",
+        "node_modules/karma/bin/karma",
+        "start",
+        "--no-single-run",
+        "--no-colors",
+        "--browsers",
+        "Chrome"
+      ],
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "name": "debug-karma",
+      "working_dir": "${project_path}"
+    }
+  ],
+  "folders": [{
+      "path": "."
+    },
+    {
+      "path": "../impress.js"
+    },
+    {
+      "path": "../strut2"
+    },
+    {
+      "path": "../Strut"
+    }
+  ]
 }

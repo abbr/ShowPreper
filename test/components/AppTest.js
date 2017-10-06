@@ -18,6 +18,7 @@ describe('MainComponent', () => {
   })
 
   it('should have its component name as default className', () => {
+    debugger
     expect(MainComponent.props.className).to.equal('sp-main-container')
   })
 })
