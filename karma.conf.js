@@ -11,6 +11,11 @@ if (process.argv.indexOf('--browsers') < 0) {
 
 const webpackCfg = require('./webpack.config')
 module.exports = function(config) {
+  let reporters = ['mocha', 'coverage']
+  // don't run coverage in watch (CI) mode
+  if (config.autoWatch && !config.singleRun) {
+    reporters = ['mocha']
+  }
   config.set({
     basePath: '',
     browsers: ['ChromeHeadless'],
@@ -24,7 +29,7 @@ module.exports = function(config) {
     colors: true,
     singleRun: true,
     logLevel: config.LOG_INFO,
-    reporters: ['mocha', 'coverage'],
+    reporters: reporters,
     preprocessors: {
       'test/loadtests.js': ['webpack', 'sourcemap']
     },
