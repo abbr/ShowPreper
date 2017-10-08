@@ -7,8 +7,9 @@
 // import React from 'react/addons';
 // const TestUtils = React.addons.TestUtils;
 import createComponent from 'helpers/shallowRenderHelper'
-
+import { shallow, mount } from 'enzyme'
 import Main from 'components/app'
+import React from 'react'
 
 describe('MainComponent', () => {
   let MainComponent
@@ -20,5 +21,13 @@ describe('MainComponent', () => {
   it('should have its component name as default className', () => {
     debugger
     expect(MainComponent.props.className).to.equal('sp-main-container')
+  })
+})
+
+describe('<Main />', () => {
+  it.only('should have its component name as default className', () => {
+    debugger
+    const wrapper = mount(<Main />)
+    expect(wrapper.is('.sp-main-container')).to.equal(true)
   })
 })

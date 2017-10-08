@@ -15,7 +15,7 @@ var config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: ['react-hot-loader', 'babel-loader'],
+        use: ['babel-loader'],
         include: path.join(__dirname, '/../src')
       }
     ]
