@@ -34,9 +34,6 @@ module.exports = function(config) {
       'test/loadtests.js': ['webpack', 'sourcemap']
     },
     webpack: webpackCfg,
-    webpackServer: {
-      noInfo: true
-    },
     coverageReporter: {
       dir: 'coverage/',
       reporters: [{ type: 'html' }, { type: 'text' }]

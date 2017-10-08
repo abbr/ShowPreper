@@ -54,7 +54,6 @@
     "glob": "^6.0.0",
     "html-webpack-plugin": "^2.30.1",
     "imports-loader": "^0.6.5",
-    "isparta-instrumenter-loader": "^1.0.0",
     "jquery": "^2.1.4",
     "jquery-ui": "~1.10.5",
     "json-loader": "^0.5.7",
@@ -103,5 +102,6 @@
     "node": ">=5.10"
   },
   "private": true,
-  "license": "MIT"
+  "license": "MIT",
+  "false": {}
 }

@@ -6,12 +6,6 @@ var srcPath = path.join(__dirname, '/../src/')
 module.exports = {
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'isparta-instrumenter-loader',
-        enforce: 'pre',
-        include: [path.join(__dirname, '/../src')]
-      },
       // {
       //   test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
       //   loader: 'null-loader'
