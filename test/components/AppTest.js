@@ -28,6 +28,6 @@ describe('<Main />', () => {
   it.only('should have its component name as default className', () => {
     debugger
     const wrapper = mount(<Main />)
-    expect(wrapper.is('.sp-main-container')).to.equal(true)
+    expect(wrapper.children().is('.sp-main-container')).to.equal(true)
   })
 })
