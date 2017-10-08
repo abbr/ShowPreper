@@ -25,6 +25,15 @@
       "cmd": [
         "npm.cmd",
         "run",
+        "test:watch"
+      ],
+      "name": "npm-run-test:watch",
+      "working_dir": "${project_path}"
+    },
+    {
+      "cmd": [
+        "npm.cmd",
+        "run",
         "dist"
       ],
       "name": "npm-run-dist",
