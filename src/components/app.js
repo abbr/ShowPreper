@@ -10,6 +10,7 @@ import Slides from './slides'
 import Overview from './overview'
 import DeckStore from 'stores/deck'
 import _ from 'lodash'
+import $script from 'scriptjs'
 let key = require('mousetrap')
 let App = class extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ let App = class extends React.Component {
   componentWillMount() {
     super.componentWillMount && super.componentWillMount()
     this.setDocTitle(this.state.deck._fn)
+    $script('//cdn.ckeditor.com/4.5.7/full-all/ckeditor.js','ckeditor')
   }
   componentDidMount() {
     super.componentDidMount && super.componentDidMount()
