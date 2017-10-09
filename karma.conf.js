@@ -19,7 +19,7 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     browsers: ['ChromeHeadless'],
-    files: ['test/loadtests.js'],
+    files: ['test/loadTests.js'],
     port: 8080,
     captureTimeout: 60000,
     frameworks: ['mocha', 'chai'],
@@ -31,7 +31,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     reporters: reporters,
     preprocessors: {
-      'test/loadtests.js': ['webpack', 'sourcemap']
+      'test/loadTests.js': ['webpack', 'sourcemap']
     },
     webpack: webpackCfg,
     coverageReporter: {
