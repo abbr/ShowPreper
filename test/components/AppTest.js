@@ -6,9 +6,6 @@
 // import React from 'react/addons';
 // const TestUtils = React.addons.TestUtils;
 // import createComponent from 'helpers/shallowRenderHelper'
-import { mount } from 'enzyme'
-import Main from 'components/app'
-import React from 'react'
 
 // describe('MainComponent', () => {
 //   let MainComponent
@@ -21,10 +18,9 @@ import React from 'react'
 //     expect(MainComponent.props.className).to.equal('sp-main-container')
 //   })
 // })
-
+import {appWrapper} from 'helpers/fullRenderHelper'
 describe('App', () => {
   it('should have its component className as sp-main-container', () => {
-    const wrapper = mount(<Main />, { attachTo: app })
-    expect(wrapper.children().is('.sp-main-container')).to.equal(true)
+    expect(appWrapper.children().is('.sp-main-container')).to.equal(true)
   })
 })
