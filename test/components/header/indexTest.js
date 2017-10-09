@@ -1,6 +1,6 @@
 import { appWrapper } from 'helpers/fullRenderHelper'
 
-describe('Header', () => {
+describe('header', () => {
   it('should add a text widget when clicking insert object button', () => {
     expect(appWrapper.state().deck.getActiveSlide().components.length).to.equal(
       1
