@@ -104,5 +104,6 @@
   },
   "private": true,
   "license": "MIT",
-  "false": {}
+  "false": {},
+  "dependencies": {}
 }
