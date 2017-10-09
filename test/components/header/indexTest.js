@@ -13,5 +13,14 @@ describe('Header', () => {
       .first()
       .simulate('click')
     expect(wrapper.state().deck.getActiveSlide().components.length).to.equal(2)
+    expect(
+      wrapper.state().deck.getActiveSlide().components[1].selected
+    ).to.equal(true)
+    expect(
+      wrapper.state().deck.getActiveSlide().components[1].x
+    ).to.equal(0)
+    expect(
+      wrapper.state().deck.getActiveSlide().components[1].y
+    ).to.equal(0)
   })
 })
