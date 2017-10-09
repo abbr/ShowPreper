@@ -38,7 +38,10 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: path.join(__dirname, 'src'),
+        include: [
+          path.join(__dirname, '/../src'),
+          path.join(__dirname, '/../test')
+        ],
         enforce: 'pre',
         loader: 'eslint-loader'
       },
@@ -50,6 +53,14 @@ module.exports = {
           search: '$$GIT_HASH$$',
           replace: gitHash
         }
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: ['babel-loader'],
+        include: [
+          path.join(__dirname, '/../src'),
+          path.join(__dirname, '/../test')
+        ]
       },
       {
         test: /\.css$/,

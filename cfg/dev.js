@@ -11,15 +11,6 @@ var config = {
       'webpack/hot/dev-server'
     ]
   },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: ['babel-loader'],
-        include: path.join(__dirname, '/../src')
-      }
-    ]
-  },
   devServer: {
     historyApiFallback: true,
     hot: true,

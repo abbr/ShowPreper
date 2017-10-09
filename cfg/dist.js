@@ -7,15 +7,6 @@ var config = {
   output: {
     filename: '[name].[hash].js'
   },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, '/../src')
-      }
-    ]
-  },
   cache: false,
   devtool: 'sourcemap',
   plugins: [
