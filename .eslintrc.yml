@@ -1,0 +1,25 @@
+env:
+  amd: true
+  browser: true
+  es6: true
+  jquery: true
+  node: true
+parser: babel-eslint
+plugins:
+- react
+rules:
+  comma-dangle: 1
+  global-strict: 0
+  no-alert: 0
+  no-console: 1
+  no-trailing-spaces:
+  - 1
+  - skipBlankLines: true
+  no-undef: 1
+  no-underscore-dangle: 0
+  no-unreachable: 1
+  no-unused-vars:
+  - 1
+  - ignoreRestSiblings: true
+  react/jsx-uses-react: 1
+  react/jsx-uses-vars: 1
