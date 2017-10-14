@@ -14,7 +14,7 @@ exports.onRotateMouseDown = function(ev, idx, _axis, _operation) {
   let axis = _axis || 'z'
   let operation = _operation || 'rotate'
   // only left mouse button or touchstart
-  if (ev.button !== 0 && ev.type !== 'touchstart') return
+  if (ev.buttons !== 1 && ev.type !== 'touchstart') return
   document.addEventListener('mousemove', this.onRotateMouseMove)
   document.addEventListener('touchmove', this.onRotateMouseMove)
   document.addEventListener('mouseup', this.onRotateMouseUp)
