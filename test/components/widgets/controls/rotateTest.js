@@ -1,7 +1,7 @@
 import { appWrapper } from 'helpers/fullRenderHelper'
 
 describe('widgets > controls > rotate', () => {
-  it('should rotate 90° cw along z axis', () => {
+  it('should rotate about 90° cw along z axis', () => {
     let domComponent = $('.sp-operating-table .sp-ot-slide .sp-component:first')
     expect(
       domComponent.find('.sp-edit-ctrls .rotate-z span:first').text()
