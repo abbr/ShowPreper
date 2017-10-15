@@ -22,9 +22,12 @@ module.exports = class extends Draggable.draggableMixin(
     return this.props.selectedWidgets
   },
   function getInitialWidgetPosition(e) {
+    let bb = this.props.deck.getSlideBoundingBox(
+      this.props.component.components[e]
+    )
     return {
-      x: this.props.component.components[e].x || 0,
-      y: this.props.component.components[e].y || 0,
+      x: this.props.component.components[e].x || bb.left || 0,
+      y: this.props.component.components[e].y || bb.top || 0,
       z: this.props.component.components[e].z || 0
     }
   },
