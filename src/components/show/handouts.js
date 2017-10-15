@@ -5,7 +5,7 @@ import DeckStore from 'stores/deck'
 import 'expose-loader?$!expose-loader?jQuery!jquery'
 import 'bootstrap-webpack'
 import './handouts.less'
-import Global from 'react-global'
+import Global from './global'
 
 var DisplayableComponent = require('components/widgets/displayableComponent')
 let Handouts = class extends React.Component {

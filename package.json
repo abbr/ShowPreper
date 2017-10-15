@@ -82,7 +82,6 @@
     "puppeteer": "^0.10.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-global": "^0.1.8",
     "react-test-renderer": "^16.0.0",
     "react-widgets": "^3.5.0",
     "rimraf": "^2.6.2",

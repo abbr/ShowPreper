@@ -6,7 +6,7 @@ import './impress.less'
 import DeckStore from 'stores/deck'
 import AutoScale from 'components/mixins/autoScale'
 import _ from 'lodash'
-import Global from 'react-global'
+import Global from './global'
 var DisplayableComponent = require('components/widgets/displayableComponent')
 
 let Presentation = class extends AutoScale.autoScaleMixin(React.Component) {

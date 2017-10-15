@@ -6,7 +6,7 @@ import bespoke from 'bespoke'
 import bespokeKeys from 'bespoke-keys'
 import bespokeClasses from 'bespoke-classes'
 import bespokeTouch from 'bespoke-touch'
-import Global from 'react-global'
+import Global from './global'
 import './bespoke.less'
 import { autoScaleMixin } from 'components/mixins/autoScale'
 
