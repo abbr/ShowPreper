@@ -1,6 +1,5 @@
 'use strict'
 import 'normalize.css'
-import 'expose-loader?$!expose-loader?jQuery!jquery'
 import 'bootstrap-webpack'
 import './app.less'
 import lang from 'i18n/lang'
