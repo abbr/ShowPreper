@@ -1,6 +1,11 @@
-import { appWrapper } from 'helpers/fullRenderHelper'
+import getAppWrapper from 'helpers/fullRenderHelper'
 
 describe('header', () => {
+  let appWrapper
+  beforeEach(() => {
+    appWrapper = getAppWrapper('App')
+  })
+
   it('should add a text widget when clicking insert object button', () => {
     expect(appWrapper.state().deck.getActiveSlide().components.length).to.equal(
       1

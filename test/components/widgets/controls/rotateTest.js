@@ -1,6 +1,11 @@
-import { appWrapper } from 'helpers/fullRenderHelper'
+import getAppWrapper from 'helpers/fullRenderHelper'
 
 describe('widgets > controls > rotate', () => {
+  let appWrapper
+  beforeEach(() => {
+    appWrapper = getAppWrapper('App')
+  })
+
   it('should rotate about 90° cw along z axis', () => {
     let domComponent = $('.sp-operating-table .sp-ot-slide .sp-component:first')
     expect(

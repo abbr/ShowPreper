@@ -1,6 +1,11 @@
-import { appWrapper } from 'helpers/fullRenderHelper'
+import getAppWrapper from 'helpers/fullRenderHelper'
 
 describe('styler > quick', () => {
+  let appWrapper
+  beforeEach(() => {
+    appWrapper = getAppWrapper('App')
+  })
+
   it('should change style when hover mouse over palette #1', () => {
     let otSlide = $('.sp-operating-table .sp-ot-slide')
     const originalStyle = otSlide.css('background').slice(0)

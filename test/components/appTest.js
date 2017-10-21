@@ -17,8 +17,12 @@
 //     expect(MainComponent.props.className).to.equal('sp-main-container')
 //   })
 // })
-import { appWrapper } from 'helpers/fullRenderHelper'
+import getAppWrapper from 'helpers/fullRenderHelper'
 describe('app', () => {
+  let appWrapper
+  beforeEach(() => {
+    appWrapper = getAppWrapper('App')
+  })
   it('should have its component className as sp-main-container', () => {
     expect(appWrapper.children().is('.sp-main-container')).to.equal(true)
   })

@@ -1,7 +1,12 @@
-import { appWrapper } from 'helpers/fullRenderHelper'
+import getAppWrapper from 'helpers/fullRenderHelper'
 import 'helpers/jquery.simulate.drag-sortable.js'
 
 describe('slides > well', () => {
+  let appWrapper
+  beforeEach(() => {
+    appWrapper = getAppWrapper('App')
+  })
+
   it('should add a slide when clicking top insert slide button', () => {
     expect(appWrapper.state().deck.components.length).to.equal(4)
     appWrapper

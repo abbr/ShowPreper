@@ -1,6 +1,11 @@
-import { appWrapper } from 'helpers/fullRenderHelper'
+import getAppWrapper from 'helpers/fullRenderHelper'
 
 describe('widgets > editableComponent', () => {
+  let appWrapper
+  beforeEach(() => {
+    appWrapper = getAppWrapper('App')
+  })
+
   it('should display edit controls when clicking a widget in ot', () => {
     expect(
       $(
