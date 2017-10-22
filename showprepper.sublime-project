@@ -23,15 +23,10 @@
     },
     {
       "cmd": [
-        "node",
-        "node_modules/karma/bin/karma",
-        "start",
-        "--no-colors",
-        "--no-single-run"
+        "npm.cmd",
+        "run",
+        "test:watch"
       ],
-      "env": {
-        "NODE_ENV": "test"
-      },
       "name": "npm-run-test:watch",
       "working_dir": "${project_path}"
     },
