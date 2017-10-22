@@ -148,6 +148,9 @@ let Presentation = class extends AutoScale.autoScaleMixin(React.Component) {
     )
   }
 }
+if (require.main === module) {
+  // Render the main component into the dom
+  ReactDOM.render(<Presentation />, document.getElementById('app'))
+}
+// for testing
 export default Presentation
-// Render the main component into the dom
-ReactDOM.render(<Presentation />, document.getElementById('app'))

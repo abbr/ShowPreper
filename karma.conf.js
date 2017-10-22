@@ -20,7 +20,6 @@ module.exports = function(config) {
     basePath: '',
     browsers: ['ChromeHeadless'],
     files: ['test/loadTests.js'],
-    port: 8080,
     captureTimeout: 60000,
     frameworks: ['mocha', 'chai'],
     client: {

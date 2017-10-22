@@ -17,6 +17,7 @@
     "serve:dist": "node server.js --env=dist",
     "start": "node server.js --env=dev",
     "test": "cross-env NODE_ENV=test karma start",
+    "test:debug": "cross-env NODE_ENV=test karma start --no-single-run --browsers Chrome",
     "test:watch": "cross-env NODE_ENV=test karma start --no-colors --no-single-run",
     "heroku-postbuild": "npm run dist"
   },
