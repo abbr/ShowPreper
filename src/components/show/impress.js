@@ -1,14 +1,14 @@
 'use strict'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './impress-vendor.js'
+import { Impress, ImpressHandleEvents } from './impress-vendor.js'
 import './impress.less'
 import DeckStore from 'stores/deck'
 import AutoScale from 'components/mixins/autoScale'
 import _ from 'lodash'
 import Global from './global'
 var DisplayableComponent = require('components/widgets/displayableComponent')
-
+ImpressHandleEvents(document, window)
 let Presentation = class extends AutoScale.autoScaleMixin(React.Component) {
   constructor(props) {
     super(props)
@@ -23,6 +23,7 @@ let Presentation = class extends AutoScale.autoScaleMixin(React.Component) {
   }
 
   componentDidMount() {
+    Impress(document, window)
     super.componentDidMount && super.componentDidMount()
     if ('ontouchstart' in document.documentElement) {
       document.querySelector('.hint').innerHTML =

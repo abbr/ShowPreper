@@ -21,7 +21,7 @@
 
 // You are one of those who like to know how things work inside?
 // Let me show you the cogs that make impress.js run...
-;(function(document, window) {
+export function Impress(document, window) {
   'use strict'
 
   // HELPER FUNCTIONS
@@ -687,7 +687,7 @@
 
   // Flag that can be used in JS to check if browser have passed the support test
   impress.supported = impressSupported
-})(document, window)
+}
 
 // NAVIGATION EVENTS
 
@@ -697,7 +697,7 @@
 //
 // In future I think about moving it to make them optional, move to separate files
 // and treat more like a 'plugins'.
-;(function(document, window) {
+export function ImpressHandleEvents() {
   'use strict'
 
   // Throttling function calls, by Remy Sharp
@@ -768,27 +768,22 @@
             return
           }
 
-          if (
-            event.keyCode === 9 ||
-            (event.keyCode >= 32 && event.keyCode <= 34) ||
-            (event.keyCode >= 37 && event.keyCode <= 40)
-          ) {
-            switch (event.keyCode) {
-              case 33: // Page up
-              case 37: // Left
-              case 38: // Up
-                api.prev()
-                break
-              case 9: // Tab
-              case 32: // Space
-              case 34: // Page down
-              case 39: // Right
-              case 40: // Down
-                api.next()
-                break
-            }
-
-            event.preventDefault()
+          switch (event.key) {
+            case 'PageUp':
+            case 'ArrowLeft':
+            case 'ArrowUp':
+              api.prev()
+              event.preventDefault()
+              break
+            case 'Tab':
+            case 'Space':
+            case 'PageDown':
+            case 'ArrowRight':
+            case 'ArrowDown':
+              api.next()
+              event.preventDefault()
+              break
+            default:
           }
         },
         false
@@ -885,7 +880,7 @@
     },
     false
   )
-})(document, window)
+}
 
 // THAT'S ALL FOLKS!
 //

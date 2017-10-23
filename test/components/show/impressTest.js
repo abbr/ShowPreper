@@ -4,10 +4,31 @@ describe('show > impress', () => {
   beforeEach(() => {
     appWrapper = getAppWrapper('Impress')
   })
+  afterEach(() => {
+    $('body').removeAttr('style')
+    $('body').removeAttr('class')
+  })
 
   it('should have 5 initial views', () => {
     expect(appWrapper.find('#impress').props().children.length).to.equal(5)
     expect($('body').attr('class')).to.contain('impress-on-step-1')
-    expect($('#step-1').attr('class').split(' ')).to.include('active')
+    expect(
+      $('#step-1')
+        .attr('class')
+        .split(' ')
+    ).to.include('active')
+  })
+
+  it('should move to 2nd step when press right key', () => {
+    let event = new KeyboardEvent('keyup', {
+      key: 'ArrowRight'
+    })
+    document.dispatchEvent(event)
+    expect($('body').attr('class')).to.contain('impress-on-step-2')
+    expect(
+      $('#step-2')
+        .attr('class')
+        .split(' ')
+    ).to.include('active')
   })
 })
