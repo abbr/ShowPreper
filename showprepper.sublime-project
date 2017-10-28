@@ -1,13 +1,9 @@
 {
   "build_systems": [{
       "cmd": [
-        "node.exe",
-        "server.js"
+        "npm.cmd",
+        "start"
       ],
-      "env": {
-        "env": "dev",
-        "port": "8888"
-      },
       "name": "node-app",
       "working_dir": "${project_path}"
     },

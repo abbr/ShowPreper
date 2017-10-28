@@ -4,12 +4,10 @@ var webpack = require('webpack')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
 
 var config = {
-  output: {
-    filename: '[name].[hash].js'
-  },
-  cache: false,
   devtool: 'sourcemap',
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),

@@ -8,12 +8,13 @@ var gitHash = ''
 try {
   gitHash = gitRevisionPlugin.commithash()
 } catch (ex) {}
+let port = process.env.port || 8000
 
 module.exports = {
   context: path.join(__dirname, '..'),
   output: {
     path: path.join(__dirname, '/../dist'),
-    filename: '[name].js'
+    filename: '[name].[hash].js'
   },
   entry: {
     app: [path.join(__dirname, '../src/components/run')],
@@ -57,10 +58,9 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         use: ['babel-loader'],
-        include: [
-          path.join(__dirname, '/../src'),
-          path.join(__dirname, '/../test')
-        ]
+        exclude: new RegExp(
+          'node_modules\\' + path.sep + '(?!webpack-dev-server).*'
+        )
       },
       {
         test: /\.css$/,
@@ -145,5 +145,11 @@ module.exports = {
     }),
     new CopyWebpackPlugin([{ from: 'src/favicon.ico' }])
   ],
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    port: port,
+    inline: true
+  }
 }
