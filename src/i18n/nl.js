@@ -48,7 +48,7 @@ module.exports = {
   emptyFileNameErr: 'File name cannot be empty.',
   btnOk: 'Ok',
   btnCancel: 'Cancel',
-  triClickEdt: 'tripple click to select & edit',
+  triClickEdt: 'triple click to select & edit',
   insertObject: 'Insert object',
   setAppearance: 'Set style for',
   defaultSlide: 'default slides',
