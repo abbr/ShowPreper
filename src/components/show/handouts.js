@@ -1,13 +1,12 @@
 'use strict'
 import React from 'react'
-import ReactDOM from 'react-dom'
 import DeckStore from 'stores/deck'
 import 'bootstrap-webpack'
 import './handouts.less'
 import Global from './global'
 
 var DisplayableComponent = require('components/widgets/displayableComponent')
-let Handouts = class extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -63,6 +62,3 @@ let Handouts = class extends React.Component {
     )
   }
 }
-
-// Render the main component into the dom
-ReactDOM.render(<Handouts />, document.getElementById('app'))

@@ -1,6 +1,5 @@
 'use strict'
 import React from 'react'
-import ReactDOM from 'react-dom'
 import DeckStore from 'stores/deck'
 import bespoke from 'bespoke'
 import bespokeKeys from 'bespoke-keys'
@@ -11,7 +10,7 @@ import './bespoke.less'
 import { autoScaleMixin } from 'components/mixins/autoScale'
 
 var DisplayableComponent = require('components/widgets/displayableComponent')
-let BeSpoke = class extends autoScaleMixin(React.Component) {
+export default class extends autoScaleMixin(React.Component) {
   constructor(props) {
     super(props)
     this.state = {
@@ -98,6 +97,3 @@ let BeSpoke = class extends autoScaleMixin(React.Component) {
     )
   }
 }
-
-// Render the main component into the dom
-ReactDOM.render(<BeSpoke />, document.getElementById('app'))

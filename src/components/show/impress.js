@@ -1,6 +1,5 @@
 'use strict'
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Impress, ImpressHandleEvents } from './impress-vendor.js'
 import './impress.less'
 import DeckStore from 'stores/deck'
@@ -148,10 +147,6 @@ let Presentation = class extends AutoScale.autoScaleMixin(React.Component) {
       </div>
     )
   }
-}
-if (require.main === module) {
-  // Render the main component into the dom
-  ReactDOM.render(<Presentation />, document.getElementById('app'))
 }
 // for testing
 export default Presentation

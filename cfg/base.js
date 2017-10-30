@@ -18,9 +18,9 @@ module.exports = {
   },
   entry: {
     app: [path.join(__dirname, '../src/components/run')],
-    impress: path.join(__dirname, '../src/components/show/impress'),
-    bespoke: path.join(__dirname, '../src/components/show/bespoke'),
-    handouts: path.join(__dirname, '../src/components/show/handouts'),
+    impress: path.join(__dirname, '../src/components/show/renderImpress'),
+    bespoke: path.join(__dirname, '../src/components/show/renderBespoke'),
+    handouts: path.join(__dirname, '../src/components/show/renderHandouts'),
     vendors: ['webpack-material-design-icons', 'babel-polyfill']
   },
   resolve: {
