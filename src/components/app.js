@@ -2,7 +2,7 @@
 import 'normalize.css'
 import 'bootstrap'
 import './app.less'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import React from 'react'
 import Header from './header'
 import Slides from './slides'
@@ -22,8 +22,12 @@ let App = class extends React.Component {
       defaultSlideStyle: null,
       selectedSlidesStyle: null,
       thisSlideStyle: null,
-      clipboard: null
+      clipboard: null,
+      language: App.getDefaultLang()
     }
+  }
+  static getDefaultLang() {
+    return window.navigator.language || window.navigator.userLanguage || 'en'
   }
   setDocTitle(t) {
     document.title = 'ShowPreper - ' + t
@@ -31,7 +35,7 @@ let App = class extends React.Component {
   componentWillMount() {
     super.componentWillMount && super.componentWillMount()
     this.setDocTitle(this.state.deck._fn)
-    $script('//cdn.ckeditor.com/4.5.7/full-all/ckeditor.js','ckeditor')
+    $script('//cdn.ckeditor.com/4.5.7/full-all/ckeditor.js', 'ckeditor')
   }
   componentDidMount() {
     super.componentDidMount && super.componentDidMount()
@@ -42,42 +46,58 @@ let App = class extends React.Component {
     key.bind('ctrl+y', this.onRedo)
     key.bind('del', this.deleteWidgets)
     key.bind('left', () => this.panBy('x', -1), 'keydown')
-    key.bind('left', () => this.panBy('x', 0, lang.moveComponents), 'keyup')
+    key.bind(
+      'left',
+      () => this.panBy('x', 0, langs[this.state.language].moveComponents),
+      'keyup'
+    )
     key.bind('shift+left', () => this.panBy('x', -10), 'keydown')
     key.bind(
       'shift+left',
       () => {
-        this.panBy('x', 0, lang.moveComponents)
+        this.panBy('x', 0, langs[this.state.language].moveComponents)
       },
       'keyup'
     )
     key.bind('right', () => this.panBy('x', 1), 'keydown')
-    key.bind('right', () => this.panBy('x', 0, lang.moveComponents), 'keyup')
+    key.bind(
+      'right',
+      () => this.panBy('x', 0, langs[this.state.language].moveComponents),
+      'keyup'
+    )
     key.bind('shift+right', () => this.panBy('x', 10), 'keydown')
     key.bind(
       'shift+right',
       () => {
-        this.panBy('x', 0, lang.moveComponents)
+        this.panBy('x', 0, langs[this.state.language].moveComponents)
       },
       'keyup'
     )
     key.bind('up', () => this.panBy('y', -1), 'keydown')
-    key.bind('up', () => this.panBy('y', 0, lang.moveComponents), 'keyup')
+    key.bind(
+      'up',
+      () => this.panBy('y', 0, langs[this.state.language].moveComponents),
+      'keyup'
+    )
     key.bind('shift+up', () => this.panBy('y', -10), 'keydown')
     key.bind(
       'shift+up',
       () => {
-        this.panBy('y', 0, lang.moveComponents)
+        this.panBy('y', 0, langs[this.state.language].moveComponents)
       },
       'keyup'
     )
     key.bind('down', () => this.panBy('y', 1), 'keydown')
-    key.bind('down', () => this.panBy('y', 0, lang.moveComponents), 'keyup')
+    key.bind(
+      'down',
+      () => this.panBy('y', 0, langs[this.state.language].moveComponents),
+      'keyup'
+    )
     key.bind('shift+down', () => this.panBy('y', 10), 'keydown')
     key.bind(
       'shift+down',
       () => {
-        this.panBy('y', 0, lang.moveComponents)
+        this.panBy('y', 0, langs[this.state.language].moveComponents)
       },
       'keyup'
     )
@@ -223,7 +243,7 @@ let App = class extends React.Component {
   }
   onCut = () => {
     this.onCopy(null, null, true)
-    this.deleteWidgets(lang.cut)
+    this.deleteWidgets(langs[this.state.language].cut)
   }
   onPaste = () => {
     if (this.state.clipboard.view !== this.state.view) {
@@ -248,7 +268,7 @@ let App = class extends React.Component {
     this.state.clipboard.items.forEach((e, i) => {
       let markUndoDesc
       if (i === this.state.clipboard.items.length - 1) {
-        markUndoDesc = lang.paste
+        markUndoDesc = langs[this.state.language].paste
       }
       this.onNewWidget(component, null, _.cloneDeep(e), markUndoDesc)
     })
@@ -290,7 +310,9 @@ let App = class extends React.Component {
       }
     }
     if (hasDeletedSomething) {
-      deck.markUndo(typeof args[0] == 'string' ? args[0] : lang.delete)
+      deck.markUndo(
+        typeof args[0] == 'string' ? args[0] : langs[this.state.language].delete
+      )
       this.setState({
         deck: deck
       })

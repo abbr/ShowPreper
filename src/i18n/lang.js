@@ -9,4 +9,5 @@ var langs = {
 }
 
 var lang = window.navigator.language || window.navigator.userLanguage
-module.exports = langs[lang.split('-')[0]] || langs.en
+export default langs[lang.split('-')[0]] || langs.en
+export { langs }
