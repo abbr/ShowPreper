@@ -8,6 +8,8 @@ import localizer from 'react-widgets/lib/localizers/simple-number'
 import ColorStops from './colorStops'
 import AngleInput from './angleInput'
 import classNames from 'classnames'
+import lang from 'i18n/lang'
+
 localizer()
 const gradientExtentSelectionArr = [
   { value: 'closest-corner', text: 'closest-corner' },
@@ -406,7 +408,7 @@ export default class extends React.Component {
                       ? 'radio_button_checked'
                       : 'radio_button_unchecked'}
                   </i>{' '}
-                  &nbsp; color
+                  &nbsp; {lang.color}
                 </span>
               </h4>
             </div>
@@ -447,7 +449,7 @@ export default class extends React.Component {
                     ? 'radio_button_checked'
                     : 'radio_button_unchecked'}
                 </i>{' '}
-                &nbsp; linear gradient
+                &nbsp; {lang.linearGradient}
               </h4>
             </div>
             <div
@@ -462,7 +464,7 @@ export default class extends React.Component {
             >
               <div className="panel-body container-fluid">
                 <div className="row">
-                  <div className="col-xs-2">Repeating</div>
+                  <div className="col-xs-2">{lang.repeating}</div>
                   <div className="col-xs-1">
                     <input
                       type="checkbox"
@@ -474,7 +476,7 @@ export default class extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">Direction</div>
+                  <div className="col-xs-2">{lang.direction}</div>
                   <div className="col-xs-4">
                     <DropdownList
                       data={linearGradientDirectionArr}
@@ -513,7 +515,7 @@ export default class extends React.Component {
                     </AngleInput>
                   </div>
                 </div>
-                Color Stops
+                {lang.colorStops}
                 <ColorStops
                   id="sp-linear-color-stops"
                   parseGradientString={this.parseGradientString}
@@ -545,7 +547,7 @@ export default class extends React.Component {
                     ? 'radio_button_checked'
                     : 'radio_button_unchecked'}
                 </i>{' '}
-                &nbsp; radial gradient
+                &nbsp; {lang.radialGradient}
               </h4>
             </div>
             <div
@@ -560,7 +562,7 @@ export default class extends React.Component {
             >
               <div className="panel-body container-fluid">
                 <div className="row">
-                  <div className="col-xs-2">Repeating</div>
+                  <div className="col-xs-2">{lang.repeating}</div>
                   <div className="col-xs-1">
                     <input
                       type="checkbox"
@@ -572,7 +574,7 @@ export default class extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">Shape</div>
+                  <div className="col-xs-2">{lang.shape}</div>
                   <div className="col-xs-2">
                     <input
                       type="radio"
@@ -597,7 +599,7 @@ export default class extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">Extent</div>
+                  <div className="col-xs-2">{lang.extent}</div>
                   <div className="col-xs-4">
                     <DropdownList
                       data={gradientExtentSelectionArr}
@@ -610,7 +612,7 @@ export default class extends React.Component {
                   {gradientExtentInput}
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">Position</div>
+                  <div className="col-xs-2">{lang.position}</div>
                   <div className="col-xs-2">
                     <input
                       type="radio"
@@ -654,7 +656,7 @@ export default class extends React.Component {
                     />px
                   </div>
                 </div>
-                Color Stops
+                {lang.colorStops}
                 <ColorStops
                   id="sp-radial-color-stops"
                   parseGradientString={this.parseGradientString}

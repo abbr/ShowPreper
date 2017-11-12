@@ -91,7 +91,7 @@ module.exports = class extends React.Component {
           </li>
           <li>
             <a href="#sp-about" data-toggle="modal" title="about">
-              About...
+              {lang.about}...
             </a>
           </li>
         </ul>

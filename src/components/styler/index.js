@@ -145,7 +145,7 @@ export default class extends React.Component {
             <div className="modal-footer">
               <div style={{ float: 'left' }}>
                 <div style={{ textAlign: 'left' }}>
-                  replace palette with this style
+                  {lang.replacePalette}
                 </div>
                 {pDivs}
               </div>
@@ -154,7 +154,7 @@ export default class extends React.Component {
                 className="btn btn-default"
                 data-dismiss="modal"
               >
-                Close
+                {lang.btnClose}
               </button>
               <button
                 type="button"
@@ -164,7 +164,7 @@ export default class extends React.Component {
                   $('#sp-styler-modal').modal('hide')
                 }}
               >
-                Apply Style
+                {lang.applyStyle}
               </button>
             </div>
           </div>

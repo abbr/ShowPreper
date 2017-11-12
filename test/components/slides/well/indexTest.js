@@ -23,7 +23,7 @@ describe('slides > well', () => {
     setTimeout(() => {
       expect(
         appWrapper.state().deck.components[2].components[0].text
-      ).to.contain('Welcome to ShowPreper!')
+      ).to.contain('Welcome to ShowPreper')
       done()
     }, 10)
   })
