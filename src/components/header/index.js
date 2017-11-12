@@ -91,6 +91,44 @@ module.exports = class Header extends React.Component {
               {styleMenu}
             </div>
             <div className="navbar-right">
+              <div className="dropdown">
+                <button
+                  className="btn btn-link dropdown-toggle"
+                  type="button"
+                  id="sp-header-lang-dropdown"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  En
+                </button>
+                <ul
+                  className="dropdown-menu sp-lang-dropdown-menu"
+                  aria-labelledby="sp-header-lang-dropdown"
+                >
+                  <li>
+                    <a href="en">English</a>
+                  </li>
+                  <li>
+                    <a href="es">Español</a>
+                  </li>
+                  <li>
+                    <a href="fr">français</a>
+                  </li>
+                  <li>
+                    <a href="nl">Nederlands</a>
+                  </li>
+                  <li>
+                    <a href="de">Deutsch</a>
+                  </li>
+                  <li>
+                    <a href="zh">中文</a>
+                  </li>
+                  <li>
+                    <a href="ru">Русский</a>
+                  </li>
+                </ul>
+              </div>
               <ul className="nav navbar-btn sp-view-btns">
                 <li
                   style={
@@ -108,9 +146,7 @@ module.exports = class Header extends React.Component {
                     }}
                   >
                     <span className={'glyphicon glyphicon-th-list'} />
-                    <div className="btn-label">
-                      {lang.slides}
-                    </div>
+                    <div className="btn-label">{lang.slides}</div>
                   </button>
                 </li>
                 <li
@@ -129,9 +165,7 @@ module.exports = class Header extends React.Component {
                     }}
                   >
                     <span className={'glyphicon glyphicon-th'} />
-                    <div className="btn-label">
-                      {lang.overview}
-                    </div>
+                    <div className="btn-label">{lang.overview}</div>
                   </button>
                 </li>
               </ul>
@@ -143,9 +177,7 @@ module.exports = class Header extends React.Component {
                   target="_blank"
                 >
                   <span className="glyphicon glyphicon-play" />
-                  <div>
-                    {_.capitalize(this.props.presentationFormat)}
-                  </div>
+                  <div>{_.capitalize(this.props.presentationFormat)}</div>
                 </a>
                 <button
                   type="button"
