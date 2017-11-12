@@ -1,6 +1,6 @@
 'use strict'
 import 'normalize.css'
-import 'bootstrap-webpack'
+import 'bootstrap'
 import './app.less'
 import lang from 'i18n/lang'
 import React from 'react'

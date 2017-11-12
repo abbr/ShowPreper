@@ -35,7 +35,6 @@
     "bespoke-keys": "^1.1.0",
     "bespoke-touch": "^1.0.0",
     "bootstrap": "^3.3.6",
-    "bootstrap-webpack": "0.0.6",
     "chai": "^3.2.0",
     "classnames": "^2.2.1",
     "clean-webpack-plugin": "^0.1.17",

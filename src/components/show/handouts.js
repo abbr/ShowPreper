@@ -1,7 +1,8 @@
 'use strict'
 import React from 'react'
 import DeckStore from 'stores/deck'
-import 'bootstrap-webpack'
+import 'bootstrap'
+import 'components/app.less'
 import './handouts.less'
 import Global from './global'
 
