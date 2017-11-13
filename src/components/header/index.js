@@ -225,7 +225,11 @@ module.exports = class Header extends React.Component {
                   target="_blank"
                 >
                   <span className="glyphicon glyphicon-play" />
-                  <div>{_.capitalize(this.props.presentationFormat)}</div>
+                  <div>
+                    {langs[this.props.language][
+                      this.props.presentationFormat
+                    ] || _.capitalize(this.props.presentationFormat)}
+                  </div>
                 </a>
                 <button
                   type="button"
