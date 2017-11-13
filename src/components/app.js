@@ -27,10 +27,17 @@ let App = class extends React.Component {
     }
   }
   static getDefaultLang() {
-    let lang = window.navigator.language || window.navigator.userLanguage
+    let lang
+    if (typeof Storage !== 'undefined') {
+      lang = localStorage.getItem('language')
+    }
+    lang = lang || window.navigator.language || window.navigator.userLanguage
     return (lang && lang.split('-')[0]) || 'en'
   }
   setLanguage = lang => {
+    if (typeof Storage !== 'undefined') {
+      localStorage.setItem('language', lang)
+    }
     this.setState({ language: lang })
   }
   setDocTitle(t) {
