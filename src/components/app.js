@@ -27,7 +27,11 @@ let App = class extends React.Component {
     }
   }
   static getDefaultLang() {
-    return window.navigator.language || window.navigator.userLanguage || 'en'
+    let lang = window.navigator.language || window.navigator.userLanguage
+    return (lang && lang.split('-')[0]) || 'en'
+  }
+  setLanguage = lang => {
+    this.setState({ language: lang })
   }
   setDocTitle(t) {
     document.title = 'ShowPreper - ' + t
@@ -366,6 +370,7 @@ let App = class extends React.Component {
         Main = (
           <Slides
             deck={this.state.deck}
+            language={this.state.language}
             onSlideClicked={this.onSlideClicked}
             onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
             onNewWidget={this.onNewWidget}
@@ -384,6 +389,7 @@ let App = class extends React.Component {
           <Overview
             presentationFormat={this.state.presentationFormat}
             deck={this.state.deck}
+            language={this.state.language}
             component={this.state.deck}
             selectedWidgets={selectedWidgets}
             onSelectedWidgetUpdated={this.onSelectedWidgetUpdated}
@@ -398,6 +404,8 @@ let App = class extends React.Component {
       <div className="sp-main-container">
         <Header
           deck={this.state.deck}
+          language={this.state.language}
+          setLanguage={this.setLanguage}
           onUndo={this.onUndo}
           onRedo={this.onRedo}
           changeView={this.changeView}

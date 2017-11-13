@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import FileMenu from './fileMenu'
 import StyleMenu from './styleMenu'
 import './index.less'
@@ -23,11 +23,11 @@ module.exports = class Header extends React.Component {
         y: 0,
         text:
           '<p><span style="font-size: 26px"><span style="font-family:arial,helvetica,sans-serif">(' +
-          lang['triClickEdt'] +
+          langs[this.props.language]['triClickEdt'] +
           ')</span></span></p>',
         selected: true
       },
-      lang['new'] + ' ' + lang[type]
+      langs[this.props.language]['new'] + ' ' + langs[this.props.language][type]
     )
   }
 
@@ -85,7 +85,9 @@ module.exports = class Header extends React.Component {
                 <span className={'glyphicon glyphicon-text-width'} />&nbsp;
                 <span className={'glyphicon glyphicon-picture'} />&nbsp;
                 <span className={'glyphicon glyphicon-globe'} />
-                <div className="btn-label">{lang.insertObject}</div>
+                <div className="btn-label">
+                  {langs[this.props.language].insertObject}
+                </div>
               </button>
               {bespokeThemeMenu}
               {styleMenu}
@@ -100,32 +102,74 @@ module.exports = class Header extends React.Component {
                   aria-haspopup="true"
                   aria-expanded="true"
                 >
-                  En
+                  {this.props.language}
                 </button>
                 <ul
                   className="dropdown-menu sp-lang-dropdown-menu"
                   aria-labelledby="sp-header-lang-dropdown"
                 >
                   <li>
-                    <a href="en">English</a>
+                    <a
+                      onClick={() => {
+                        this.props.setLanguage('en')
+                      }}
+                    >
+                      English
+                    </a>
                   </li>
                   <li>
-                    <a href="es">Español</a>
+                    <a
+                      onClick={() => {
+                        this.props.setLanguage('es')
+                      }}
+                    >
+                      Español
+                    </a>
                   </li>
                   <li>
-                    <a href="fr">français</a>
+                    <a
+                      onClick={() => {
+                        this.props.setLanguage('fr')
+                      }}
+                    >
+                      français
+                    </a>
                   </li>
                   <li>
-                    <a href="nl">Nederlands</a>
+                    <a
+                      onClick={() => {
+                        this.props.setLanguage('nl')
+                      }}
+                    >
+                      Nederlands
+                    </a>
                   </li>
                   <li>
-                    <a href="de">Deutsch</a>
+                    <a
+                      onClick={() => {
+                        this.props.setLanguage('de')
+                      }}
+                    >
+                      Deutsch
+                    </a>
                   </li>
                   <li>
-                    <a href="zh">中文</a>
+                    <a
+                      onClick={() => {
+                        this.props.setLanguage('zh')
+                      }}
+                    >
+                      中文
+                    </a>
                   </li>
                   <li>
-                    <a href="ru">Русский</a>
+                    <a
+                      onClick={() => {
+                        this.props.setLanguage('ru')
+                      }}
+                    >
+                      Русский
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -146,7 +190,9 @@ module.exports = class Header extends React.Component {
                     }}
                   >
                     <span className={'glyphicon glyphicon-th-list'} />
-                    <div className="btn-label">{lang.slides}</div>
+                    <div className="btn-label">
+                      {langs[this.props.language].slides}
+                    </div>
                   </button>
                 </li>
                 <li
@@ -165,7 +211,9 @@ module.exports = class Header extends React.Component {
                     }}
                   >
                     <span className={'glyphicon glyphicon-th'} />
-                    <div className="btn-label">{lang.overview}</div>
+                    <div className="btn-label">
+                      {langs[this.props.language].overview}
+                    </div>
                   </button>
                 </li>
               </ul>
@@ -209,7 +257,7 @@ module.exports = class Header extends React.Component {
                         'handouts'
                       )}
                     >
-                      {lang.handouts}
+                      {langs[this.props.language].handouts}
                     </a>
                   </li>
                   <li>
