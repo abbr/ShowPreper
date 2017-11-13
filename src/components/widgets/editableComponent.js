@@ -33,6 +33,7 @@ let EditableComponent = class extends React.Component {
         <div className="sp-edit-ctrls">
           <PositionControl
             idx={this.props.idx}
+            language={this.props.language}
             component={this.props.component}
             container={this.props.container}
             onMouseDown={this.onMouseDown}
@@ -41,6 +42,7 @@ let EditableComponent = class extends React.Component {
           />
           <ScaleControl
             idx={this.props.idx}
+            language={this.props.language}
             component={this.props.component}
             container={this.props.container}
             onScaleMouseDown={this.props.onScaleMouseDown}
@@ -48,6 +50,7 @@ let EditableComponent = class extends React.Component {
           />
           <RotateControl
             idx={this.props.idx}
+            language={this.props.language}
             component={this.props.component}
             container={this.props.container}
             axis="z"
@@ -57,6 +60,7 @@ let EditableComponent = class extends React.Component {
           />
           <RotateControl
             idx={this.props.idx}
+            language={this.props.language}
             component={this.props.component}
             container={this.props.container}
             axis="x"
@@ -66,6 +70,7 @@ let EditableComponent = class extends React.Component {
           />
           <RotateControl
             idx={this.props.idx}
+            language={this.props.language}
             component={this.props.component}
             container={this.props.container}
             axis="y"
@@ -74,6 +79,7 @@ let EditableComponent = class extends React.Component {
           />
           <SkewControl
             idx={this.props.idx}
+            language={this.props.language}
             component={this.props.component}
             container={this.props.container}
             axis="x"
@@ -82,6 +88,7 @@ let EditableComponent = class extends React.Component {
           />
           <SkewControl
             idx={this.props.idx}
+            language={this.props.language}
             component={this.props.component}
             container={this.props.container}
             axis="y"

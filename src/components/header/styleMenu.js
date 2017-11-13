@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import QuickStyler from 'components/styler/quick'
 import './styleMenu.less'
 module.exports = class extends React.Component {
@@ -20,11 +20,9 @@ module.exports = class extends React.Component {
             className="btn btn-default dropdown-toggle"
             data-toggle="dropdown"
           >
-            <div>
-              {lang.setAppearance}
-            </div>
+            <div>{langs[this.props.language].setAppearance}</div>
             <div className="btn-label">
-              {lang[this.state.selectedStyleTarget]}
+              {langs[this.props.language][this.state.selectedStyleTarget]}
               <span className="caret" />
             </div>
           </button>
@@ -35,47 +33,51 @@ module.exports = class extends React.Component {
                   this.setState({ selectedStyleTarget: 'defaultSlide' })
                 }}
               >
-                {lang.defaultSlide}
+                {langs[this.props.language].defaultSlide}
               </a>
             </li>
             {(this.props.currentView === 'slides' ||
-              this.props.presentationFormat === 'bespoke') &&
-              <li>
-                <a
-                  onClick={() => {
-                    this.setState({ selectedStyleTarget: 'thisSlide' })
-                  }}
-                >
-                  {lang.thisSlide}
-                </a>
-              </li>}
+              this.props.presentationFormat === 'bespoke') && (
+                <li>
+                  <a
+                    onClick={() => {
+                      this.setState({ selectedStyleTarget: 'thisSlide' })
+                    }}
+                  >
+                    {langs[this.props.language].thisSlide}
+                  </a>
+                </li>
+              )}
             {this.props.currentView === 'overview' &&
-              this.props.presentationFormat === 'impress' &&
-              <li>
-                <a
-                  onClick={() => {
-                    this.setState({ selectedStyleTarget: 'selectedSlides' })
-                  }}
-                >
-                  {lang.selectedSlides}
-                </a>
-              </li>}
-            {this.props.currentView === 'overview' &&
+              this.props.presentationFormat === 'impress' && (
+                <li>
+                  <a
+                    onClick={() => {
+                      this.setState({ selectedStyleTarget: 'selectedSlides' })
+                    }}
+                  >
+                    {langs[this.props.language].selectedSlides}
+                  </a>
+                </li>
+              )}
+            {this.props.currentView === 'overview' && (
               <li>
                 <a
                   onClick={() => {
                     this.setState({ selectedStyleTarget: 'presentation' })
                   }}
                 >
-                  {lang.presentation}
+                  {langs[this.props.language].presentation}
                 </a>
-              </li>}
+              </li>
+            )}
           </ul>
         </div>
         <QuickStyler
           selectedStyleTarget={this.state.selectedStyleTarget}
           presentationStyle={this.props.presentationStyle}
           deck={this.props.deck}
+          language={this.props.language}
           defaultSlideStyle={this.props.defaultSlideStyle}
           selectedSlidesStyle={this.props.selectedSlidesStyle}
           thisSlideStyle={this.props.thisSlideStyle}

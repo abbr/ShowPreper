@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import Draggable from '../../mixins/draggable'
 import ClassNames from 'classnames'
 export default class extends Draggable.draggableMixin(
@@ -20,7 +20,7 @@ export default class extends Draggable.draggableMixin(
     this.resizeSlide(e, updatedProps)
   },
   function(e, updatedProps) {
-    this.resizeSlide(e, updatedProps, lang.changeAspectRatio)
+    this.resizeSlide(e, updatedProps, langs[this.props.language].changeAspectRatio)
   }
 ) {
   constructor(props) {
@@ -123,15 +123,15 @@ export default class extends Draggable.draggableMixin(
   render() {
     let title
     if (this.props.slideDragTarget === 'thisSlide') {
-      title = lang.dragToChangeThisSlideAspectRatio + ';\n'
+      title = langs[this.props.language].dragToChangeThisSlideAspectRatio + ';\n'
       if (this.props.component.width) {
-        title += lang.doubleClickToResetToDefault
+        title += langs[this.props.language].doubleClickToResetToDefault
       } else {
-        title += lang.clickToChangeDefaultSlide
+        title += langs[this.props.language].clickToChangeDefaultSlide
       }
     } else {
-      title = lang.dragToChangeDefaultSlideAspectRatio + ';\n'
-      title += lang.clickToChangeThisSlide
+      title = langs[this.props.language].dragToChangeDefaultSlideAspectRatio + ';\n'
+      title += langs[this.props.language].clickToChangeThisSlide
     }
     return (
       <div

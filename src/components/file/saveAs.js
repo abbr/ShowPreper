@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 
 module.exports = class FileSaveAs extends React.Component {
   constructor(props) {
@@ -17,9 +17,11 @@ module.exports = class FileSaveAs extends React.Component {
       newName !== this.props.deck._fn &&
       Object.keys(localStorage).indexOf(newName) >= 0
     ) {
-      this.setState({ errMsg: lang.duplicatedFileNameErr })
+      this.setState({
+        errMsg: langs[this.props.language].duplicatedFileNameErr
+      })
     } else if (newName.length === 4) {
-      this.setState({ errMsg: lang.emptyFileNameErr })
+      this.setState({ errMsg: langs[this.props.language].emptyFileNameErr })
     } else {
       this.setState({ errMsg: '' })
     }
@@ -57,7 +59,7 @@ module.exports = class FileSaveAs extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
               <h4 className="modal-title">
-                {lang.saveAs}
+                {langs[this.props.language].saveAs}
               </h4>
             </div>
             <div className="modal-body">
@@ -74,7 +76,7 @@ module.exports = class FileSaveAs extends React.Component {
                 className="btn btn-default"
                 data-dismiss="modal"
               >
-                {lang.btnCancel}
+                {langs[this.props.language].btnCancel}
               </button>
               <button
                 type="button"
@@ -82,7 +84,7 @@ module.exports = class FileSaveAs extends React.Component {
                 onClick={this.onOk}
                 data-dismiss="modal"
               >
-                {lang.btnOk}
+                {langs[this.props.language].btnOk}
               </button>
             </div>
           </div>

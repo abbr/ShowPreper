@@ -4,7 +4,7 @@ var React = require('react')
 import ReactDOM from 'react-dom'
 import 'jquery-ui/jquery-ui.js'
 import 'jquery-ui/themes/smoothness/jquery-ui.min.css'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import './touchPunch'
 
 var WellSlide = require('./wellSlide')
@@ -46,7 +46,7 @@ var SlideWell = class extends React.Component {
       this.props.onSelectedWidgetUpdated(
         { container: this.props.deck, index: index },
         null,
-        lang.delete
+        langs[this.props.language].delete
       )
     }
   }
@@ -72,7 +72,7 @@ var SlideWell = class extends React.Component {
             >
               <span
                 className="glyphicon glyphicon-remove-sign"
-                title={lang.delete}
+                title={langs[this.props.language].delete}
               />
             </div>
           </WellSlide>
@@ -80,7 +80,7 @@ var SlideWell = class extends React.Component {
             <span
               className="glyphicon glyphicon-plus btn-success centered-child"
               onClick={this.newSlide(index)}
-              title={lang.new}
+              title={langs[this.props.language].new}
             />
           </div>
         </div>
@@ -92,12 +92,10 @@ var SlideWell = class extends React.Component {
           <span
             className="glyphicon glyphicon-plus btn-success centered-child"
             onClick={this.newSlide(-1)}
-            title={lang.new}
+            title={langs[this.props.language].new}
           />
         </div>
-        <div ref="slides">
-          {slides}
-        </div>
+        <div ref="slides">{slides}</div>
       </div>
     )
   }

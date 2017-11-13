@@ -7,7 +7,7 @@ import Scalable from 'components/mixins/scalable'
 import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
 import Killable from 'components/mixins/killable'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import _ from 'lodash'
 var EditableComponent = require('components/widgets/editableComponent')
 module.exports = class extends Draggable.draggableMixin(
@@ -49,7 +49,7 @@ module.exports = class extends Draggable.draggableMixin(
           index: e
         },
         updatedProps,
-        lang.moveComponents
+        langs[this.props.language].moveComponents
       )
   }
 ) {
@@ -162,6 +162,7 @@ module.exports = class extends Draggable.draggableMixin(
           className="sp-overview-component"
           component={component}
           container={this.props.deck}
+          language={this.props.language}
           key={index}
           idx={index}
           ref={index}

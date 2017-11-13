@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
+import {langs} from 'i18n/lang'
 
 module.exports = class extends React.Component {
   render() {
@@ -51,7 +51,7 @@ module.exports = class extends React.Component {
                 className="btn btn-default"
                 data-dismiss="modal"
               >
-                {lang.btnCancel}
+                {langs[this.props.language].btnCancel}
               </button>
             </div>
           </div>

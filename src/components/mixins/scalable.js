@@ -1,6 +1,6 @@
 'use strict'
 import ReactDOM from 'react-dom'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 
 exports.componentWillUnmount = function() {
   document.removeEventListener('mousemove', this.onScaleMouseMove)
@@ -70,7 +70,7 @@ exports.onScaleMouseUp = function(ev) {
             y: this._scalable.scales[e].osy * deltaScale
           }
         },
-        lang.scaleComponents
+        langs[this.props.language].scaleComponents
       )
   })
 }

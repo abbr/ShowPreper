@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import EditableHtmlElement from './editableHtmlElement'
-import lang from 'i18n/lang'
+import {langs} from 'i18n/lang'
 import _ from 'lodash'
 
 let SkewControl = class extends React.Component {
@@ -17,7 +17,7 @@ let SkewControl = class extends React.Component {
         index: this.props.idx
       },
       { skew: newPropObj },
-      lang.skewComponents
+      langs[this.props.language].skewComponents
     )
   }
   onDoubleClick = () => {
@@ -29,7 +29,7 @@ let SkewControl = class extends React.Component {
         index: this.props.idx
       },
       { skew: newPropObj },
-      lang.skewComponents
+      langs[this.props.language].skewComponents
     )
   }
   onMouseDown = ev => {
@@ -47,7 +47,7 @@ let SkewControl = class extends React.Component {
           onTouchStart={this.onMouseDown}
           className={'sp-skew-' + this.props.axis + '-icon'}
           onDoubleClick={this.onDoubleClick}
-          title={lang.skew + '-' + this.props.axis}
+          title={langs[this.props.language].skew + '-' + this.props.axis}
         >
           ♢
         </span>

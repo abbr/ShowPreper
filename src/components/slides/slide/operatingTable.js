@@ -9,7 +9,7 @@ import Scalable from 'components/mixins/scalable'
 import Selectable from 'components/mixins/selectable'
 import Rotatable from 'components/mixins/rotatable'
 import Killable from 'components/mixins/killable'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import GridImage from './img/grid.svg'
 import Dragger from './dragger'
 
@@ -53,7 +53,7 @@ let OperatingTable = class extends Draggable.draggableMixin(
           index: e
         },
         updatedProps,
-        lang.moveComponents
+        langs[this.props.language].moveComponents
       )
   }
 ) {
@@ -121,6 +121,7 @@ let OperatingTable = class extends Draggable.draggableMixin(
         return (
           <EditableComponent
             component={component}
+            language={this.props.language}
             container={slide}
             onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
             key={index}
@@ -161,6 +162,7 @@ let OperatingTable = class extends Draggable.draggableMixin(
             <Dragger
               onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
               deck={this.props.deck}
+              language={this.props.language}
               component={this.props.component}
               scale={this.state.scale}
               resized={this._resized}
@@ -171,6 +173,7 @@ let OperatingTable = class extends Draggable.draggableMixin(
             <Dragger
               onSelectedWidgetUpdated={this.props.onSelectedWidgetUpdated}
               deck={this.props.deck}
+              language={this.props.language}
               component={this.props.component}
               scale={this.state.scale}
               resized={this._resized}

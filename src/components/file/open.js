@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import OpenEntry from './openEntry'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 
 module.exports = class FileOpener extends React.Component {
   render() {
@@ -26,20 +26,16 @@ module.exports = class FileOpener extends React.Component {
               >
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h4 className="modal-title">
-                {lang.open}
-              </h4>
+              <h4 className="modal-title">{langs[this.props.language].open}</h4>
             </div>
-            <div className="modal-body">
-              {keys}
-            </div>
+            <div className="modal-body">{keys}</div>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-default"
                 data-dismiss="modal"
               >
-                {lang.btnCancel}
+                {langs[this.props.language].btnCancel}
               </button>
             </div>
           </div>

@@ -8,7 +8,7 @@ import localizer from 'react-widgets/lib/localizers/simple-number'
 import ColorStops from './colorStops'
 import AngleInput from './angleInput'
 import classNames from 'classnames'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 
 localizer()
 const gradientExtentSelectionArr = [
@@ -408,7 +408,7 @@ export default class extends React.Component {
                       ? 'radio_button_checked'
                       : 'radio_button_unchecked'}
                   </i>{' '}
-                  &nbsp; {lang.color}
+                  &nbsp; {langs[this.props.language].color}
                 </span>
               </h4>
             </div>
@@ -449,7 +449,7 @@ export default class extends React.Component {
                     ? 'radio_button_checked'
                     : 'radio_button_unchecked'}
                 </i>{' '}
-                &nbsp; {lang.linearGradient}
+                &nbsp; {langs[this.props.language].linearGradient}
               </h4>
             </div>
             <div
@@ -464,7 +464,9 @@ export default class extends React.Component {
             >
               <div className="panel-body container-fluid">
                 <div className="row">
-                  <div className="col-xs-2">{lang.repeating}</div>
+                  <div className="col-xs-2">
+                    {langs[this.props.language].repeating}
+                  </div>
                   <div className="col-xs-1">
                     <input
                       type="checkbox"
@@ -476,7 +478,9 @@ export default class extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">{lang.direction}</div>
+                  <div className="col-xs-2">
+                    {langs[this.props.language].direction}
+                  </div>
                   <div className="col-xs-4">
                     <DropdownList
                       data={linearGradientDirectionArr}
@@ -515,7 +519,7 @@ export default class extends React.Component {
                     </AngleInput>
                   </div>
                 </div>
-                {lang.colorStops}
+                {langs[this.props.language].colorStops}
                 <ColorStops
                   id="sp-linear-color-stops"
                   parseGradientString={this.parseGradientString}
@@ -547,7 +551,7 @@ export default class extends React.Component {
                     ? 'radio_button_checked'
                     : 'radio_button_unchecked'}
                 </i>{' '}
-                &nbsp; {lang.radialGradient}
+                &nbsp; {langs[this.props.language].radialGradient}
               </h4>
             </div>
             <div
@@ -562,7 +566,9 @@ export default class extends React.Component {
             >
               <div className="panel-body container-fluid">
                 <div className="row">
-                  <div className="col-xs-2">{lang.repeating}</div>
+                  <div className="col-xs-2">
+                    {langs[this.props.language].repeating}
+                  </div>
                   <div className="col-xs-1">
                     <input
                       type="checkbox"
@@ -574,7 +580,9 @@ export default class extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">{lang.shape}</div>
+                  <div className="col-xs-2">
+                    {langs[this.props.language].shape}
+                  </div>
                   <div className="col-xs-2">
                     <input
                       type="radio"
@@ -599,7 +607,9 @@ export default class extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">{lang.extent}</div>
+                  <div className="col-xs-2">
+                    {langs[this.props.language].extent}
+                  </div>
                   <div className="col-xs-4">
                     <DropdownList
                       data={gradientExtentSelectionArr}
@@ -612,7 +622,9 @@ export default class extends React.Component {
                   {gradientExtentInput}
                 </div>
                 <div className="row">
-                  <div className="col-xs-2">{lang.position}</div>
+                  <div className="col-xs-2">
+                    {langs[this.props.language].position}
+                  </div>
                   <div className="col-xs-2">
                     <input
                       type="radio"
@@ -656,7 +668,7 @@ export default class extends React.Component {
                     />px
                   </div>
                 </div>
-                {lang.colorStops}
+                {langs[this.props.language].colorStops}
                 <ColorStops
                   id="sp-radial-color-stops"
                   parseGradientString={this.parseGradientString}

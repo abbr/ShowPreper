@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import $script from 'scriptjs'
 let TextBox = class extends React.Component {
   constructor(props) {
@@ -52,7 +52,11 @@ let TextBox = class extends React.Component {
       <div style={this.props.style} className={this.props.className}>
         <div
           contentEditable={this.state.editable}
-          title={this.props.selected ? lang.doubleClickEdit : null}
+          title={
+            this.props.selected
+              ? langs[this.props.language].doubleClickEdit
+              : null
+          }
           onDoubleClick={this.props.editable && this.onDoubleClick}
           dangerouslySetInnerHTML={{ __html: this.props.component.text }}
           ref="editableContent"

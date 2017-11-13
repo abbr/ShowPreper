@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import EditableHtmlElement from './editableHtmlElement'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import _ from 'lodash'
 
 let ScaleControl = class extends React.Component {
@@ -17,7 +17,7 @@ let ScaleControl = class extends React.Component {
         index: this.props.idx
       },
       { scale: newPropObj },
-      lang.scaleComponents
+      langs[this.props.language].scaleComponents
     )
   }
   onDoubleClick = () => {
@@ -29,7 +29,7 @@ let ScaleControl = class extends React.Component {
         index: this.props.idx
       },
       { scale: newPropObj },
-      lang.scaleComponents
+      langs[this.props.language].scaleComponents
     )
   }
   onMouseDown = ev => {
@@ -50,7 +50,7 @@ let ScaleControl = class extends React.Component {
           onTouchStart={this.onMouseDown}
           className="sp-scale-icon"
           onDoubleClick={this.onDoubleClick}
-          title={lang.scale}
+          title={langs[this.props.language].scale}
         >
           ↔
         </span>

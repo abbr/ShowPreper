@@ -15,7 +15,7 @@ let App = class extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      deck: DeckStore.getDefaultDeck(),
+      deck: DeckStore.getDefaultDeck(undefined, App.getDefaultLang()),
       view: 'slides',
       presentationFormat: 'impress',
       presentationStyle: null,
@@ -187,7 +187,7 @@ let App = class extends React.Component {
     )
   }
   onNewDeck = (nm, props) => {
-    let deck = new DeckStore.Deck(nm, props)
+    let deck = new DeckStore.Deck(nm, props, this.state.language)
     deck.save()
     this.setState({
       deck: deck
@@ -195,7 +195,7 @@ let App = class extends React.Component {
   }
   onDeleteDeck = () => {
     this.state.deck.delete()
-    let deck = DeckStore.getDefaultDeck()
+    let deck = DeckStore.getDefaultDeck(undefined, this.state.language)
     deck.save()
     this.setState({
       deck: deck

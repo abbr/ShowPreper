@@ -1,11 +1,11 @@
 'use strict'
 import _ from 'lodash'
-import DefaultDeck from 'sources/default.spj'
+import DefaultDeckFactory from 'sources/default.spj'
 const _spDefaultFileNm = 'default.spj'
 const _spDefaultDeck = '_defaultDeck'
 const DEFAULT_SLIDE_SIZE = { width: 640, height: 480 }
 
-let Deck = function(fn, props) {
+let Deck = function(fn, props, language) {
   var savedDeckObj
   var _fn = fn || _spDefaultFileNm
   if (typeof Storage !== 'undefined') {
@@ -13,7 +13,8 @@ let Deck = function(fn, props) {
       savedDeckObj = JSON.parse(localStorage.getItem(_fn))
     } catch (ex) {}
   }
-  let deckObj = props || savedDeckObj || _.cloneDeep(DefaultDeck)
+  let deckObj =
+    props || savedDeckObj || _.cloneDeep(DefaultDeckFactory(language))
   _.assign(this, deckObj)
   Object.defineProperty(this, 'undoStack', {
     enumerable: false,

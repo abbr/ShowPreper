@@ -1,6 +1,6 @@
 'use strict'
 import ReactDOM from 'react-dom'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import _ from 'lodash'
 
 exports.componentWillUnmount = function() {
@@ -112,7 +112,7 @@ exports.onRotateMouseUp = function(ev) {
           index: e
         },
         newOperation,
-        lang.rotateComponents
+        langs[this.props.language].rotateComponents
       )
   })
   ev.stopPropagation && ev.stopPropagation()

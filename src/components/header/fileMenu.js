@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import Downloader from 'components/file/download'
 import Uploader from 'components/file/upload'
 import FileOpener from 'components/file/open'
@@ -17,11 +17,11 @@ module.exports = class extends React.Component {
 
   render() {
     let undoTitle =
-      lang.undo +
+      langs[this.props.language].undo +
       ' ' +
       this.props.deck.undoStack.stack[this.props.deck.undoStack.current].desc
     let redoTitle =
-      lang.redo +
+      langs[this.props.language].redo +
       ' ' +
       (this.props.deck.undoStack.current + 1 <
       this.props.deck.undoStack.stack.length
@@ -45,61 +45,80 @@ module.exports = class extends React.Component {
         <ul className="dropdown-menu">
           <li>
             <a href="#" onClick={this.props.onUndo} title={undoTitle}>
-              {lang.undo}
+              {langs[this.props.language].undo}
               <span className="badge">Ctrl-z</span>
             </a>
           </li>
           <li>
             <a href="#" onClick={this.props.onRedo} title={redoTitle}>
-              {lang.redo}
+              {langs[this.props.language].redo}
               <span className="badge">Ctrl-y</span>
             </a>
           </li>
           <li>
-            <a href="#sp-file-open" data-toggle="modal" title={lang.open}>
-              {lang.open}...
+            <a
+              href="#sp-file-open"
+              data-toggle="modal"
+              title={langs[this.props.language].open}
+            >
+              {langs[this.props.language].open}...
             </a>
           </li>
           <li>
-            <a href="#sp-file-save-as" data-toggle="modal" title={lang.saveAs}>
-              {lang.saveAs}...
+            <a
+              href="#sp-file-save-as"
+              data-toggle="modal"
+              title={langs[this.props.language].saveAs}
+            >
+              {langs[this.props.language].saveAs}...
             </a>
           </li>
           <li>
             <a
               href="#sp-open-download"
               data-toggle="modal"
-              title={lang.download}
+              title={langs[this.props.language].download}
             >
-              {lang.download}...
+              {langs[this.props.language].download}...
             </a>
           </li>
           <li>
-            <a href="#" onClick={this.onUpload} title={lang.upload}>
-              {lang.upload}...
+            <a
+              href="#"
+              onClick={this.onUpload}
+              title={langs[this.props.language].upload}
+            >
+              {langs[this.props.language].upload}...
             </a>
           </li>
           <li>
             <a
               href="#"
               onClick={this.onDelete}
-              title={lang.delete}
+              title={langs[this.props.language].delete}
               style={{ color: 'red' }}
             >
-              {lang.delete}
+              {langs[this.props.language].delete}
             </a>
           </li>
           <li>
             <a href="#sp-about" data-toggle="modal" title="about">
-              {lang.about}...
+              {langs[this.props.language].about}...
             </a>
           </li>
         </ul>
-        <FileOpener onNewDeck={this.props.onNewDeck} />
-        <FileSaveAs onNewDeck={this.props.onNewDeck} deck={this.props.deck} />
+        <FileOpener
+          onNewDeck={this.props.onNewDeck}
+          language={this.props.language}
+        />
+        <FileSaveAs
+          onNewDeck={this.props.onNewDeck}
+          deck={this.props.deck}
+          language={this.props.language}
+        />
         <Downloader {...this.props} />
         <Uploader onNewDeck={this.props.onNewDeck} ref="uploader" />
-        <About />
+        <About language={this.props.language} />
       </div>
     )
   }

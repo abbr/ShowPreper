@@ -1,5 +1,5 @@
 import React from 'react'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import './index.less'
 import _ from 'lodash'
 import ColorPatternEditor from './colorPatternEditor'
@@ -92,7 +92,8 @@ export default class extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
               <h4 className="modal-title" id="sp-styler-modal-label">
-                {lang.setAppearance} {lang[this.props.selectedStyleTarget]}
+                {langs[this.props.language].setAppearance}{' '}
+                {langs[this.props.language][this.props.selectedStyleTarget]}
               </h4>
             </div>
             <div className="modal-body">
@@ -113,12 +114,12 @@ export default class extends React.Component {
                         href="#spStylerTabBackground"
                         aria-expanded={true}
                       >
-                        {lang.background}
+                        {langs[this.props.language].background}
                       </a>
                     </li>
                     <li>
                       <a data-toggle="tab" href="#spStylerTabBorder">
-                        {lang.border}
+                        {langs[this.props.language].border}
                       </a>
                     </li>
                   </ul>
@@ -128,12 +129,14 @@ export default class extends React.Component {
                       className="tab-pane fade in active"
                     >
                       <ColorPatternEditor
+                        language={this.props.language}
                         currentStyle={s && s.background}
                         updateStyle={this.updateStyle}
                       />
                     </div>
                     <div id="spStylerTabBorder" className="tab-pane fade">
                       <BorderEditor
+                        language={this.props.language}
                         currentStyle={s}
                         updateStyle={this.updateStyle}
                       />
@@ -145,7 +148,7 @@ export default class extends React.Component {
             <div className="modal-footer">
               <div style={{ float: 'left' }}>
                 <div style={{ textAlign: 'left' }}>
-                  {lang.replacePalette}
+                  {langs[this.props.language].replacePalette}
                 </div>
                 {pDivs}
               </div>
@@ -154,7 +157,7 @@ export default class extends React.Component {
                 className="btn btn-default"
                 data-dismiss="modal"
               >
-                {lang.btnClose}
+                {langs[this.props.language].btnClose}
               </button>
               <button
                 type="button"
@@ -164,7 +167,7 @@ export default class extends React.Component {
                   $('#sp-styler-modal').modal('hide')
                 }}
               >
-                {lang.applyStyle}
+                {langs[this.props.language].applyStyle}
               </button>
             </div>
           </div>

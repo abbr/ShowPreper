@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import EditableHtmlElement from './editableHtmlElement'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 
 let PositionControl = class extends React.Component {
   onBlur = (p, v) => {
@@ -16,7 +16,7 @@ let PositionControl = class extends React.Component {
         index: this.props.idx
       },
       newPropObj,
-      lang.moveComponents
+      langs[this.props.language].moveComponents
     )
   }
   onDoubleClick = axis => {
@@ -28,7 +28,7 @@ let PositionControl = class extends React.Component {
         index: this.props.idx
       },
       newPropObj,
-      lang.moveComponents
+      langs[this.props.language].moveComponents
     )
     this.props.setDraggable(true)
   }
@@ -44,7 +44,7 @@ let PositionControl = class extends React.Component {
           onDoubleClick={this.onDoubleClick.bind(null, 'x')}
           onMouseDown={this.onMouseDown.bind(null, 'x')}
           onTouchStart={this.onMouseDown.bind(null, 'x')}
-          title={lang.translate + '-x'}
+          title={langs[this.props.language].translate + '-x'}
         >
           →
         </span>
@@ -59,7 +59,7 @@ let PositionControl = class extends React.Component {
           onDoubleClick={this.onDoubleClick.bind(null, 'y')}
           onMouseDown={this.onMouseDown.bind(null, 'y')}
           onTouchStart={this.onMouseDown.bind(null, 'y')}
-          title={lang.translate + '-y'}
+          title={langs[this.props.language].translate + '-y'}
         >
           ↓
         </span>
@@ -74,7 +74,7 @@ let PositionControl = class extends React.Component {
           onDoubleClick={this.onDoubleClick.bind(null, 'z')}
           onMouseDown={this.onMouseDown.bind(null, 'z')}
           onTouchStart={this.onMouseDown.bind(null, 'z')}
-          title={lang.translate + '-z'}
+          title={langs[this.props.language].translate + '-z'}
         >
           ↙
         </span>

@@ -3,7 +3,7 @@ import React from 'react'
 import './quick.less'
 import Palettes from 'stores/palettes'
 import _ from 'lodash'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import Styler from './'
 
 let QuickStyler = class extends React.Component {
@@ -72,7 +72,9 @@ let QuickStyler = class extends React.Component {
                   index: -1
                 },
                 'defaultSlideStyle',
-                lang.setAppearance + ' ' + lang.defaultSlide
+                langs[this.props.language].setAppearance +
+                  ' ' +
+                  langs[this.props.language].defaultSlide
               )
             } else {
               this.props.onSelectedWidgetUpdated(
@@ -81,7 +83,9 @@ let QuickStyler = class extends React.Component {
                   index: -1
                 },
                 { defaultSlideStyle: targetStyle },
-                lang.setAppearance + ' ' + lang.defaultSlide
+                langs[this.props.language].setAppearance +
+                  ' ' +
+                  langs[this.props.language].defaultSlide
               )
             }
           default:
@@ -104,7 +108,9 @@ let QuickStyler = class extends React.Component {
                   index: -1
                 },
                 'style',
-                lang.setAppearance + ' ' + lang.thisSlide
+                langs[this.props.language].setAppearance +
+                  ' ' +
+                  langs[this.props.language].thisSlide
               )
             } else {
               this.props.onSelectedWidgetUpdated(
@@ -113,7 +119,9 @@ let QuickStyler = class extends React.Component {
                   index: -1
                 },
                 { style: targetStyle },
-                lang.setAppearance + ' ' + lang.thisSlide
+                langs[this.props.language].setAppearance +
+                  ' ' +
+                  langs[this.props.language].thisSlide
               )
             }
           default:
@@ -151,7 +159,9 @@ let QuickStyler = class extends React.Component {
               }
             })
             this.props.deck.markUndo(
-              lang.setAppearance + ' ' + lang.selectedSlides
+              langs[this.props.language].setAppearance +
+                ' ' +
+                langs[this.props.language].selectedSlides
             )
           default:
             this.props.setTargetStyle('selectedSlidesStyle', null)
@@ -173,7 +183,9 @@ let QuickStyler = class extends React.Component {
                   index: -1
                 },
                 'style',
-                lang.setAppearance + ' ' + lang.presentation
+                langs[this.props.language].setAppearance +
+                  ' ' +
+                  langs[this.props.language].presentation
               )
             } else {
               this.props.onSelectedWidgetUpdated(
@@ -182,7 +194,9 @@ let QuickStyler = class extends React.Component {
                   index: -1
                 },
                 { style: targetStyle },
-                lang.setAppearance + ' ' + lang.presentation
+                langs[this.props.language].setAppearance +
+                  ' ' +
+                  langs[this.props.language].presentation
               )
             }
           default:
@@ -205,15 +219,15 @@ let QuickStyler = class extends React.Component {
       switch (i) {
         case '7':
           s.background = 'url(' + require('./transparent.svg') + ')'
-          title = lang.setToTransparent
+          title = langs[this.props.language].setToTransparent
           break
         case '8':
           extraCN = ' special-style glyphicon glyphicon-remove'
-          title = lang.removeStyle
+          title = langs[this.props.language].removeStyle
           break
         case '9':
           extraCN = ' special-style glyphicon glyphicon-edit'
-          title = lang.customizeStyle
+          title = langs[this.props.language].customizeStyle
           mouseEvtHdlr = null
           mouseClickHdlr = () => {
             $('#sp-styler-modal').modal('show')
@@ -241,6 +255,7 @@ let QuickStyler = class extends React.Component {
           selectedStyleTarget={this.props.selectedStyleTarget}
           presentationStyle={this.props.presentationStyle}
           deck={this.props.deck}
+          language={this.props.language}
           defaultSlideStyle={this.props.defaultSlideStyle}
           selectedSlidesStyle={this.props.selectedSlidesStyle}
           thisSlideStyle={this.props.thisSlideStyle}

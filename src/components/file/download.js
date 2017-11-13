@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 
 module.exports = class Exporter extends React.Component {
   render() {
@@ -27,7 +27,7 @@ module.exports = class Exporter extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
               <h4 className="modal-title">
-                {lang.download}
+                {langs[this.props.language].download}
               </h4>
             </div>
             <div className="modal-body">
@@ -39,7 +39,7 @@ module.exports = class Exporter extends React.Component {
                     role="tab"
                     data-toggle="tab"
                   >
-                    {lang.project}
+                    {langs[this.props.language].project}
                   </a>
                 </li>
                 <li role="presentation">
@@ -49,7 +49,7 @@ module.exports = class Exporter extends React.Component {
                     role="tab"
                     data-toggle="tab"
                   >
-                    {lang.presentation}
+                    {langs[this.props.language].presentation}
                   </a>
                 </li>
               </ul>
@@ -60,7 +60,7 @@ module.exports = class Exporter extends React.Component {
                   id="sp-project"
                 >
                   <div className="alert alert-info">
-                    {lang.downloadProjectFileExplain}
+                    {langs[this.props.language].downloadProjectFileExplain}
                   </div>
                   <div className="alert alert-success">
                     <a
@@ -70,7 +70,8 @@ module.exports = class Exporter extends React.Component {
                         (this.props.deck._fn.endsWith('.spj') ? '' : '.spj')
                       }
                     >
-                      {lang.download} {this.props.deck._fn}
+                      {langs[this.props.language].download}{' '}
+                      {this.props.deck._fn}
                     </a>
                   </div>
                 </div>
@@ -87,9 +88,7 @@ module.exports = class Exporter extends React.Component {
                         Click the
                         <a type="button" className="btn btn-success">
                           <span className="glyphicon glyphicon-play" />
-                          <div>
-                            {this.props.presentationFormat}
-                          </div>
+                          <div>{this.props.presentationFormat}</div>
                         </a>
                         button
                       </li>
@@ -108,7 +107,7 @@ module.exports = class Exporter extends React.Component {
                 className="btn btn-default"
                 data-dismiss="modal"
               >
-                {lang.btnClose}
+                {langs[this.props.language].btnClose}
               </button>
             </div>
           </div>

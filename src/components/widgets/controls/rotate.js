@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import EditableHtmlElement from './editableHtmlElement'
-import lang from 'i18n/lang'
+import { langs } from 'i18n/lang'
 import _ from 'lodash'
 
 let RotateControl = class extends React.Component {
@@ -10,14 +10,14 @@ let RotateControl = class extends React.Component {
       return
     }
     let newPropObj = _.cloneDeep(this.props.component.rotate || {})
-    newPropObj[p] = parseInt(v) % 360 * Math.PI / 180
+    newPropObj[p] = (parseInt(v) % 360) * Math.PI / 180
     this.props.onSelectedWidgetUpdated(
       {
         container: this.props.container,
         index: this.props.idx
       },
       { rotate: newPropObj },
-      lang.rotateComponents
+      langs[this.props.language].rotateComponents
     )
   }
   onDoubleClick = () => {
@@ -29,7 +29,7 @@ let RotateControl = class extends React.Component {
         index: this.props.idx
       },
       { rotate: newPropObj },
-      lang.rotateComponents
+      langs[this.props.language].rotateComponents
     )
   }
   onMouseDown = ev => {
@@ -54,9 +54,7 @@ let RotateControl = class extends React.Component {
           style={{ verticalAlign: 'text-bottom' }}
         >
           <g>
-            <title>
-              {lang.rotate + '-' + this.props.axis}
-            </title>
+            <title>{langs[this.props.language].rotate + '-' + this.props.axis}</title>
             <path
               fill="#000000"
               id="path3036"
