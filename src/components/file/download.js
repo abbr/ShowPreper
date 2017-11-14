@@ -1,6 +1,7 @@
 'use strict'
 import React from 'react'
 import { langs } from 'i18n/lang'
+import _ from 'lodash'
 
 module.exports = class Exporter extends React.Component {
   render() {
@@ -81,20 +82,35 @@ module.exports = class Exporter extends React.Component {
                   id="sp-presentation"
                 >
                   <div className="alert alert-info">
-                    The most effective way to archive your rendered presentation
-                    is to:
+                    {langs[this.props.language].downloadRenderedPresentation}
                     <ol>
+                      <li>{langs[this.props.language].closeThisDialog}</li>
                       <li>
-                        Click the
-                        <a type="button" className="btn btn-success">
-                          <span className="glyphicon glyphicon-play" />
-                          <div>{this.props.presentationFormat}</div>
-                        </a>
-                        button
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: langs[
+                              this.props.language
+                            ].clickRenderButton.replace(
+                              '{BTN}',
+                              `<a type="button" class="btn btn-success">
+                          <span class="glyphicon glyphicon-play" />
+                          <div>${langs[this.props.language][
+                            this.props.presentationFormat
+                          ] ||
+                            _.capitalize(this.props.presentationFormat)}</div>
+                        </a>`
+                            )
+                          }}
+                        />
                       </li>
                       <li>
-                        Press <code>Ctrl+S</code>(windows) or <code>⌘+S</code>(Mac)
-                        to save the entire presentation to disk.
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: langs[this.props.language].pressCtrlSToSave
+                              .replace('{CtrlS}', '<code>Ctrl+S</code>')
+                              .replace('{CmdS}', '<code>⌘+S</code>')
+                          }}
+                        />
                       </li>
                     </ol>
                   </div>

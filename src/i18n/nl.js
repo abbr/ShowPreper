@@ -29,7 +29,7 @@ module.exports = {
   reset: 'Terugzetten',
   go: 'Gaan',
   downloadProjectFileExplain:
-    'Hiermee kunt u een bestand met extensie .spj opslaan op uw computer dat u later naar ShowPreper kunt uploaden.',
+    'Hiermee kunt u een bestand met extensie .spj opslaan op uw computer dat u later naar ShowPreper kunt uploaden om te bewerken en presenteren.',
   background: 'Achtergrond',
   surface: 'Werkblad',
   invalidFilename: 'Ongeldige bestandsnaam',
@@ -88,5 +88,14 @@ module.exports = {
   replacePalette: 'vervang palet door deze stijl',
   welcomeToSP: 'Welkom bij ShowPreper - <br/> een Impress en Bespoke-editor!',
   clickMeToSelect: 'klik op mij om te selecteren',
-  orDoubleClickToEdit: 'of dubbelklik om te bewerken'
+  orDoubleClickToEdit: 'of dubbelklik om te bewerken',
+  setBespokeThemeTo: 'Stel het Bespoke -thema in op',
+  palette: 'palet',
+  copyRightStatement: 'Copyright © 2017-present @author@ onder MIT-licentie.',
+  sourceCode: 'Broncode',
+  productHomePage: 'Product Homepage',
+  downloadRenderedPresentation: 'Presentaties kunnen direct in uw browser worden weergegeven zonder ShowPreper. De meest effectieve manier om uw presentatie te downloaden is door',
+  clickRenderButton: 'Klik op de knop {BTN} in de rechterbovenhoek van het scherm',
+  closeThisDialog: 'Sluit dit dialoogvenster',
+  pressCtrlSToSave: 'In het nieuw geopende venster of tabblad drukt u op {CtrlS} (Windows) of {CmdS} (Mac) om de hele presentatie op schijf op te slaan'
 }

@@ -1,6 +1,7 @@
 'use strict'
 import React from 'react'
 import './bespokeThemeMenu.less'
+import { langs } from 'i18n/lang'
 let formats = require.context(
   './img', // context folder
   true // useSubdirectories
@@ -35,7 +36,7 @@ module.exports = class extends React.Component {
           data-toggle="dropdown"
         >
           <div className="btn-label">
-            {' '}set bespoke theme to
+            {langs[this.props.language].setBespokeThemeTo}
             <img
               src={formats(
                 './' + (this.props.deck.bespokeTheme || 'coverflow') + '.svg'

@@ -29,7 +29,7 @@ module.exports = {
   reset: 'Reajustar',
   go: 'Ir',
   downloadProjectFileExplain:
-    'Esto le permite guardar un archivo con extensión .spj en su computadora que puede cargar de nuevo a ShowPreper más tarde.',
+    'Esto le permite guardar un archivo con la extensión .spj en su computadora que puede cargar de nuevo a ShowPreper más adelante para editar y presentar.',
   background: 'Fondo',
   surface: 'Superficie',
   invalidFilename: 'Nombre de archivo inválido',
@@ -89,5 +89,14 @@ module.exports = {
   replacePalette: 'reemplazar la paleta con este estilo',
   welcomeToSP: '¡Bienvenido a ShowPreper - <br/> un editor de Impress and Bespoke!',
   clickMeToSelect: 'haga clic en mí para seleccionar',
-  orDoubleClickToEdit: 'o haga doble clic para editar'
+  orDoubleClickToEdit: 'o haga doble clic para editar',
+  setBespokeThemeTo: 'Establecer el tema Bespoke para',
+  palette: 'paleta',
+  copyRightStatement: 'Copyright © 2017-presente @author@ bajo la licencia de MIT.',
+  sourceCode: 'Código fuente',
+  productHomePage: 'Página de inicio del producto',
+  downloadRenderedPresentation: 'Las presentaciones se pueden realizar directamente en su navegador sin ShowPreper. La forma más efectiva de descargar su presentación es',
+  clickRenderButton: 'Haga clic en el botón {BTN} en la parte superior derecha de la pantalla',
+  closeThisDialog: 'Cierre este cuadro de diálogo',
+  pressCtrlSToSave: 'En la ventana o pestaña recién abierta, presione {CtrlS} (Windows) o {CmdS} (Mac) para guardar toda la presentación en el disco'
 }

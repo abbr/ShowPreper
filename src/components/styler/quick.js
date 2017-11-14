@@ -234,7 +234,7 @@ let QuickStyler = class extends React.Component {
           }
           break
         default:
-          title = 'palette ' + (parseInt(i) + 1)
+          title = langs[this.props.language].palette + ' ' + (parseInt(i) + 1)
       }
       return (
         <div
