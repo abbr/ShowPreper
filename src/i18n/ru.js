@@ -72,8 +72,10 @@ module.exports = {
     'перетаскивание для изменения соотношения сторон слайда по умолчанию',
   doubleClickToResetToDefault:
     'дважды щелкните, чтобы сбросить соотношение сторон слайда по умолчанию',
-  clickToChangeDefaultSlide: "нажмите, чтобы изменить соотношение сторон слайда по умолчанию",
-  clickToChangeThisSlide: "нажмите, чтобы изменить соотношение сторон этого слайда",
+  clickToChangeDefaultSlide:
+    'нажмите, чтобы изменить соотношение сторон слайда по умолчанию',
+  clickToChangeThisSlide:
+    'нажмите, чтобы изменить соотношение сторон этого слайда',
   changeAspectRatio: 'изменить соотношение сторон',
   about: 'Около',
   applyStyle: 'Применить стиль',
@@ -87,7 +89,8 @@ module.exports = {
   extent: 'степень',
   position: 'Должность',
   replacePalette: 'замените палитру таким стилем',
-  welcomeToSP: 'Добро пожаловать в ShowPreper - <br/> редактор Impress и Bespoke!',
+  welcomeToSP:
+    'Добро пожаловать в ShowPreper - <br/> редактор Impress и Bespoke!',
   clickMeToSelect: 'нажмите, чтобы выбрать',
   orDoubleClickToEdit: 'или дважды щелкните, чтобы изменить',
   setBespokeThemeTo: 'Задайте тему Bespoke',
@@ -95,8 +98,12 @@ module.exports = {
   copyRightStatement: 'Copyright © 2017-present @author@ под лицензией MIT.',
   sourceCode: 'Исходный код',
   productHomePage: 'Главная страница продукта',
-  downloadRenderedPresentation: 'Презентации могут отображаться непосредственно в вашем браузере без ShowPreper. Самый эффективный способ загрузки презентации -',
+  downloadRenderedPresentation:
+    'Презентации могут отображаться непосредственно в вашем браузере без ShowPreper. Самый эффективный способ загрузки презентации -',
   clickRenderButton: 'Нажмите кнопку {BTN} в правом верхнем углу экрана',
   closeThisDialog: 'Закрыть это диалоговое окно',
-  pressCtrlSToSave: 'В открывшемся окне или вкладке нажмите {CtrlS} (Windows) или {CmdS} (Mac), чтобы сохранить всю презентацию на диск'
+  pressCtrlSToSave:
+    'В открывшемся окне или вкладке нажмите {CtrlS} (Windows) или {CmdS} (Mac), чтобы сохранить всю презентацию на диск',
+  saveAsWarning:
+    '<strong> Предупреждение! </strong> Файл будет сохранен в этом браузере, может быть доступен только с этого компьютера и будет удален при очистке кеша браузера. Чтобы сохранить на своем жестком диске постоянно, используйте меню <i> Загрузка ... </i>.'
 }

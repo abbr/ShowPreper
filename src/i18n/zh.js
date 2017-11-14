@@ -42,8 +42,7 @@ module.exports = {
   show: '显示',
   handouts: '讲义',
   doubleClickEdit: '双击进行编辑',
-  duplicatedFileNameErr:
-    '文件名重复。如果您单击确定，旧文件将被覆盖。',
+  duplicatedFileNameErr: '文件名重复。如果您单击确定，旧文件将被覆盖。',
   emptyFileNameErr: '文件名不能为空。',
   btnOk: '确定',
   btnCancel: '取消',
@@ -66,13 +65,11 @@ module.exports = {
   rotate: '旋转',
   skew: '扭转',
   scale: '缩放',
-  dragToChangeThisSlideAspectRatio: "拖动以更改此幻灯片的宽高比",
-  dragToChangeDefaultSlideAspectRatio:
-    "拖动以更改默认幻灯片的宽高比",
-  doubleClickToResetToDefault:
-    "双击以重置为默认幻灯片的宽高比",
-  clickToChangeDefaultSlide: "点击更改默认幻灯片的",
-  clickToChangeThisSlide: "点击更改此幻灯片的",
+  dragToChangeThisSlideAspectRatio: '拖动以更改此幻灯片的宽高比',
+  dragToChangeDefaultSlideAspectRatio: '拖动以更改默认幻灯片的宽高比',
+  doubleClickToResetToDefault: '双击以重置为默认幻灯片的宽高比',
+  clickToChangeDefaultSlide: '点击更改默认幻灯片的',
+  clickToChangeThisSlide: '点击更改此幻灯片的',
   changeAspectRatio: '更改宽高比',
   about: '关于',
   applyStyle: '施行样式',
@@ -97,5 +94,7 @@ module.exports = {
   downloadRenderedPresentation: '放映文件可以在浏览器上直接打开,不需ShowPreper。下载放映文件的最有效的方法是',
   clickRenderButton: '点击屏幕右上方 {BTN} 按钮',
   closeThisDialog: '关闭这个对话框',
-  pressCtrlSToSave: '在新开窗口里按 {CtrlS}(windows) 或 {CmdS}(Mac) 键把放映文件存盘'
+  pressCtrlSToSave: '在新开窗口里按 {CtrlS}(windows) 或 {CmdS}(Mac) 键把放映文件存盘',
+  saveAsWarning:
+    '<strong>警告！</strong>该文件将保存在此浏览器中，可能只能从此计算机访问，并且在清除浏览器缓存时将被删除。要永久保存到您的硬盘，请使用<i>下载... </i>菜单。'
 }

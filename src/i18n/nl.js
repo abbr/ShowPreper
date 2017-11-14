@@ -50,9 +50,9 @@ module.exports = {
   triClickEdt: 'klik drie keer om te selecteren en bewerken',
   insertObject: 'Object invoegen',
   setAppearance: 'Stijl instellen voor',
-  defaultSlide: 'standaard dia\'s',
+  defaultSlide: "standaard dia's",
   thisSlide: 'deze dia',
-  selectedSlides: 'geselecteerde dia\'s',
+  selectedSlides: "geselecteerde dia's",
   presentation: 'presentatie',
   customizeStyle: 'Stijl aanpassen ...',
   removeStyle: 'Stijl verwijderen',
@@ -66,13 +66,15 @@ module.exports = {
   rotate: 'draaien',
   skew: 'hellen',
   scale: 'schubben',
-  dragToChangeThisSlideAspectRatio: "slepen om de beeldverhouding van deze dia te wijzigen",
+  dragToChangeThisSlideAspectRatio:
+    'slepen om de beeldverhouding van deze dia te wijzigen',
   dragToChangeDefaultSlideAspectRatio:
-    "slepen om de beeldverhouding van standaarddia te wijzigen",
+    'slepen om de beeldverhouding van standaarddia te wijzigen',
   doubleClickToResetToDefault:
-    "dubbelklik om te resetten naar de beeldverhouding van standaard dia",
-  clickToChangeDefaultSlide: "klik om de beeldverhouding van standaard dia te wijzigen",
-  clickToChangeThisSlide: "klik om de beeldverhouding van deze dia te wijzigen",
+    'dubbelklik om te resetten naar de beeldverhouding van standaard dia',
+  clickToChangeDefaultSlide:
+    'klik om de beeldverhouding van standaard dia te wijzigen',
+  clickToChangeThisSlide: 'klik om de beeldverhouding van deze dia te wijzigen',
   changeAspectRatio: 'verander de beeldverhouding',
   about: 'Over',
   applyStyle: 'Stijl toepassen',
@@ -94,8 +96,13 @@ module.exports = {
   copyRightStatement: 'Copyright © 2017-present @author@ onder MIT-licentie.',
   sourceCode: 'Broncode',
   productHomePage: 'Product Homepage',
-  downloadRenderedPresentation: 'Presentaties kunnen direct in uw browser worden weergegeven zonder ShowPreper. De meest effectieve manier om uw presentatie te downloaden is door',
-  clickRenderButton: 'Klik op de knop {BTN} in de rechterbovenhoek van het scherm',
+  downloadRenderedPresentation:
+    'Presentaties kunnen direct in uw browser worden weergegeven zonder ShowPreper. De meest effectieve manier om uw presentatie te downloaden is door',
+  clickRenderButton:
+    'Klik op de knop {BTN} in de rechterbovenhoek van het scherm',
   closeThisDialog: 'Sluit dit dialoogvenster',
-  pressCtrlSToSave: 'In het nieuw geopende venster of tabblad drukt u op {CtrlS} (Windows) of {CmdS} (Mac) om de hele presentatie op schijf op te slaan'
+  pressCtrlSToSave:
+    'In het nieuw geopende venster of tabblad drukt u op {CtrlS} (Windows) of {CmdS} (Mac) om de hele presentatie op schijf op te slaan',
+  saveAsWarning:
+    '<strong> Waarschuwing! </strong> het bestand wordt opgeslagen in deze browser, is mogelijk alleen toegankelijk via deze computer en wordt verwijderd wanneer u de browsercache wist. Gebruik in plaats daarvan het menu <i> Downloaden ... </i> om permanent op uw harde schijf op te slaan.'
 }

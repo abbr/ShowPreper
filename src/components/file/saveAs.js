@@ -1,6 +1,7 @@
 'use strict'
 import React from 'react'
 import { langs } from 'i18n/lang'
+import classNames from 'classnames'
 
 module.exports = class FileSaveAs extends React.Component {
   constructor(props) {
@@ -68,7 +69,18 @@ module.exports = class FileSaveAs extends React.Component {
                 onChange={this.onChange}
                 value={this.state.fn.replace(/\.spj$/, '')}
               />.spj
-              <div style={{ color: 'red' }}>{this.state.errMsg}</div>
+              <p />
+              <div
+                className={classNames(
+                  'alert',
+                  this.state.errMsg ? 'alert-danger' : 'alert-warning'
+                )}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    this.state.errMsg ||
+                    langs[this.props.language].saveAsWarning
+                }}
+              />
             </div>
             <div className="modal-footer">
               <button

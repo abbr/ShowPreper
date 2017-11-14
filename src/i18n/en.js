@@ -94,8 +94,12 @@ module.exports = {
   copyRightStatement: 'Copyright © 2017-present @author@ under MIT license.',
   sourceCode: 'Source Code',
   productHomePage: 'Product Home Page',
-  downloadRenderedPresentation: 'Presentations can be rendered directly on your browser without ShowPreper. The most effective way to download your presentation is to',
+  downloadRenderedPresentation:
+    'Presentations can be rendered directly on your browser without ShowPreper. The most effective way to download your presentation is to',
   clickRenderButton: 'Click the {BTN} button on top right of the screen',
   closeThisDialog: 'Close this dialog box',
-  pressCtrlSToSave: 'In newly opened window or tab, press {CtrlS}(Windows) or {CmdS}(Mac) to save the entire presentation to disk'
+  pressCtrlSToSave:
+    'In newly opened window or tab, press {CtrlS}(Windows) or {CmdS}(Mac) to save the entire presentation to disk',
+  saveAsWarning:
+    '<strong>Warning!</strong> The file will be saved in this browser, may accessible only from this computer, and will be deleted when you clear the browser cache. To save permanently to your hard drive, use <i>Download...</i> menu instead.'
 }

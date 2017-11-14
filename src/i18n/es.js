@@ -69,11 +69,13 @@ module.exports = {
   dragToChangeThisSlideAspectRatio:
     'arrastre para cambiar la relación de aspecto de esta diapositiva',
   dragToChangeDefaultSlideAspectRatio:
-    "arrastre para cambiar la relación de aspecto de la diapositiva predeterminada",
+    'arrastre para cambiar la relación de aspecto de la diapositiva predeterminada',
   doubleClickToResetToDefault:
-    "haga doble clic para restablecer la relación de aspecto de la diapositiva predeterminada",
-  clickToChangeDefaultSlide: "haga clic para cambiar la relación de aspecto de la diapositiva predeterminada",
-  clickToChangeThisSlide: "haga clic para cambiar la relación de aspecto de esta diapositiva",
+    'haga doble clic para restablecer la relación de aspecto de la diapositiva predeterminada',
+  clickToChangeDefaultSlide:
+    'haga clic para cambiar la relación de aspecto de la diapositiva predeterminada',
+  clickToChangeThisSlide:
+    'haga clic para cambiar la relación de aspecto de esta diapositiva',
   changeAspectRatio: 'cambiar la relación de aspecto',
   about: 'Acerca de',
   applyStyle: 'Aplicar estilo',
@@ -87,16 +89,23 @@ module.exports = {
   extent: 'Grado',
   position: 'Posición',
   replacePalette: 'reemplazar la paleta con este estilo',
-  welcomeToSP: '¡Bienvenido a ShowPreper - <br/> un editor de Impress and Bespoke!',
+  welcomeToSP:
+    '¡Bienvenido a ShowPreper - <br/> un editor de Impress and Bespoke!',
   clickMeToSelect: 'haga clic en mí para seleccionar',
   orDoubleClickToEdit: 'o haga doble clic para editar',
   setBespokeThemeTo: 'Establecer el tema Bespoke para',
   palette: 'paleta',
-  copyRightStatement: 'Copyright © 2017-presente @author@ bajo la licencia de MIT.',
+  copyRightStatement:
+    'Copyright © 2017-presente @author@ bajo la licencia de MIT.',
   sourceCode: 'Código fuente',
   productHomePage: 'Página de inicio del producto',
-  downloadRenderedPresentation: 'Las presentaciones se pueden realizar directamente en su navegador sin ShowPreper. La forma más efectiva de descargar su presentación es',
-  clickRenderButton: 'Haga clic en el botón {BTN} en la parte superior derecha de la pantalla',
+  downloadRenderedPresentation:
+    'Las presentaciones se pueden realizar directamente en su navegador sin ShowPreper. La forma más efectiva de descargar su presentación es',
+  clickRenderButton:
+    'Haga clic en el botón {BTN} en la parte superior derecha de la pantalla',
   closeThisDialog: 'Cierre este cuadro de diálogo',
-  pressCtrlSToSave: 'En la ventana o pestaña recién abierta, presione {CtrlS} (Windows) o {CmdS} (Mac) para guardar toda la presentación en el disco'
+  pressCtrlSToSave:
+    'En la ventana o pestaña recién abierta, presione {CtrlS} (Windows) o {CmdS} (Mac) para guardar toda la presentación en el disco',
+  saveAsWarning:
+    '<strong> ¡Advertencia! </strong> El archivo se guardará en este navegador, solo podrá accederse desde esta computadora y se eliminará cuando borre la memoria caché del navegador. Para guardar de forma permanente en su disco duro, use el menú <i> Descargar ... </i>.'
 }

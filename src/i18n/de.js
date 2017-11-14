@@ -66,13 +66,16 @@ module.exports = {
   rotate: 'drehen',
   skew: 'verzerren',
   scale: 'schuppen',
-  dragToChangeThisSlideAspectRatio: "Ziehen Sie, um das Seitenverhältnis dieser Folie zu ändern.",
+  dragToChangeThisSlideAspectRatio:
+    'Ziehen Sie, um das Seitenverhältnis dieser Folie zu ändern.',
   dragToChangeDefaultSlideAspectRatio:
-    "Ziehen Sie, um das Seitenverhältnis der Standardfolie zu ändern.",
+    'Ziehen Sie, um das Seitenverhältnis der Standardfolie zu ändern.',
   doubleClickToResetToDefault:
-    "Doppelklicken Sie auf das Seitenverhältnis der Standardfolie zurücksetzen",
-  clickToChangeDefaultSlide: "Klicken Sie, um das Seitenverhältnis der Standardfolie zu ändern",
-  clickToChangeThisSlide: "Klicken, um das Seitenverhältnis dieser Folie zu ändern",
+    'Doppelklicken Sie auf das Seitenverhältnis der Standardfolie zurücksetzen',
+  clickToChangeDefaultSlide:
+    'Klicken Sie, um das Seitenverhältnis der Standardfolie zu ändern',
+  clickToChangeThisSlide:
+    'Klicken, um das Seitenverhältnis dieser Folie zu ändern',
   changeAspectRatio: 'Seitenverhältnis ändern',
   about: 'Über',
   applyStyle: 'Stil anwenden',
@@ -86,7 +89,8 @@ module.exports = {
   extent: 'Umfang',
   position: 'Position',
   replacePalette: 'Ersetzen Sie die Palette mit diesem Stil',
-  welcomeToSP: 'Willkommen bei ShowPreper -<br/> einem Impress und Bespoke Editor!',
+  welcomeToSP:
+    'Willkommen bei ShowPreper -<br/> einem Impress und Bespoke Editor!',
   clickMeToSelect: 'klick mich, um auszuwählen',
   orDoubleClickToEdit: 'oder doppelklicken Sie zum Bearbeiten',
   setBespokeThemeTo: 'Setzen Sie das Thema Bespoke auf',
@@ -94,8 +98,13 @@ module.exports = {
   copyRightStatement: 'Copyright © 2017-present @author@ unter MIT-Lizenz.',
   sourceCode: 'Quellcode',
   productHomePage: 'Produkt-Startseite',
-  downloadRenderedPresentation: 'Präsentationen können ohne ShowPreper direkt in Ihrem Browser gerendert werden. Der effektivste Weg, Ihre Präsentation herunterzuladen, ist',
-  clickRenderButton: 'Klicken Sie oben rechts auf dem Bildschirm auf die Schaltfläche {BTN}',
+  downloadRenderedPresentation:
+    'Präsentationen können ohne ShowPreper direkt in Ihrem Browser gerendert werden. Der effektivste Weg, Ihre Präsentation herunterzuladen, ist',
+  clickRenderButton:
+    'Klicken Sie oben rechts auf dem Bildschirm auf die Schaltfläche {BTN}',
   closeThisDialog: 'Schließen Sie dieses Dialogfeld',
-  pressCtrlSToSave: 'Drücken Sie im neu geöffneten Fenster oder Tab {CtrlS} (Windows) bzw. {CmdS} (Mac), um die gesamte Präsentation auf der Festplatte zu speichern.'
+  pressCtrlSToSave:
+    'Drücken Sie im neu geöffneten Fenster oder Tab {CtrlS} (Windows) bzw. {CmdS} (Mac), um die gesamte Präsentation auf der Festplatte zu speichern.',
+  saveAsWarning:
+    '<strong> Warnung! </strong> Die Datei wird in diesem Browser gespeichert, kann nur von diesem Computer aus aufgerufen werden und wird gelöscht, wenn Sie den Browser-Cache löschen. Um dauerhaft auf Ihrer Festplatte zu speichern, verwenden Sie stattdessen das Menü <i> Download ... </i>.'
 }
