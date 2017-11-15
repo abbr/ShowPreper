@@ -3,47 +3,54 @@ import React from 'react'
 import { langs } from 'i18n/lang'
 import classNames from 'classnames'
 
-module.exports = class FileSaveAs extends React.Component {
+export default class Create extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      fn: this.props.deck._fn,
-      errMsg: ''
+      fn: '',
+      errMsg: '',
+      okBtnDisabled: true
     }
+  }
+  componentDidMount() {
+    super.componentDidMount && super.componentDidMount()
+    $('#' + this.props.domId).on('hidden.bs.modal', () => {
+      this.setState({
+        fn: '',
+        errMsg: '',
+        okBtnDisabled: true
+      })
+    })
   }
 
   onChange = e => {
     let newName = e.target.value + '.spj'
-    if (
-      newName !== this.props.deck._fn &&
-      Object.keys(localStorage).indexOf(newName) >= 0
-    ) {
+    if (Object.keys(localStorage).indexOf(newName) >= 0) {
       this.setState({
-        errMsg: langs[this.props.language].duplicatedFileNameErr
+        errMsg: langs[this.props.language].duplicatedFileNameErr,
+        okBtnDisabled: true
       })
     } else if (newName.length === 4) {
-      this.setState({ errMsg: langs[this.props.language].emptyFileNameErr })
+      this.setState({
+        errMsg: langs[this.props.language].emptyFileNameErr,
+        okBtnDisabled: true
+      })
     } else {
-      this.setState({ errMsg: '' })
+      this.setState({ errMsg: '', okBtnDisabled: false })
     }
     this.setState({ fn: newName })
   }
   onOk = () => {
-    this.props.onNewDeck(this.state.fn, this.props.deck)
-  }
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.deck._fn !== this.props.deck._fn) {
-      this.setState({
-        fn: nextProps.deck._fn,
-        errMsg: ''
-      })
-    }
+    this.props.onNewDeck(
+      this.state.fn,
+      this.props.mode === 'saveAs' ? this.props.deck : undefined
+    )
   }
 
   render() {
     return (
       <div
-        id="sp-file-save-as"
+        id={this.props.domId}
         className="modal fade"
         tabIndex="-1"
         role="dialog"
@@ -60,7 +67,7 @@ module.exports = class FileSaveAs extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
               <h4 className="modal-title">
-                {langs[this.props.language].saveAs}
+                {langs[this.props.language][this.props.mode]}
               </h4>
             </div>
             <div className="modal-body">
@@ -95,6 +102,7 @@ module.exports = class FileSaveAs extends React.Component {
                 className="btn btn-primary"
                 onClick={this.onOk}
                 data-dismiss="modal"
+                disabled={this.state.okBtnDisabled}
               >
                 {langs[this.props.language].btnOk}
               </button>

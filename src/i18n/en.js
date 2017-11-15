@@ -101,5 +101,6 @@ module.exports = {
   pressCtrlSToSave:
     'In newly opened window or tab, press {CtrlS}(Windows) or {CmdS}(Mac) to save the entire presentation to disk',
   saveAsWarning:
-    '<strong>Warning!</strong> The file will be saved in this browser, may accessible only from this computer, and will be deleted when you clear the browser cache. To save permanently to your hard drive, use <i>Download...</i> menu instead.'
+    '<strong>Warning!</strong> The file will be saved in this browser, may accessible only from this computer, and will be deleted when you clear the browser cache. To save permanently to your hard drive, use <i>Download...</i> menu instead.',
+  newFile: 'New'
 }

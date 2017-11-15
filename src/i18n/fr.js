@@ -104,5 +104,6 @@ module.exports = {
   pressCtrlSToSave:
     'Dans une nouvelle fenêtre ou un nouvel onglet, appuyez sur {CtrlS} (Windows) ou {CmdS} (Mac) pour enregistrer la totalité de la présentation sur le disque',
   saveAsWarning:
-    '<strong> Avertissement! </strong> Le fichier sera sauvegardé dans ce navigateur, accessible uniquement depuis cet ordinateur, et sera supprimé lorsque vous effacerez le cache du navigateur. Pour enregistrer définitivement sur votre disque dur, utilisez plutôt le menu <i> Download ... </i>.'
+    '<strong> Avertissement! </strong> Le fichier sera sauvegardé dans ce navigateur, accessible uniquement depuis cet ordinateur, et sera supprimé lorsque vous effacerez le cache du navigateur. Pour enregistrer définitivement sur votre disque dur, utilisez plutôt le menu <i> Download ... </i>.',
+  newFile: 'Nouveau'
 }

@@ -4,7 +4,7 @@ import { langs } from 'i18n/lang'
 import Downloader from 'components/file/download'
 import Uploader from 'components/file/upload'
 import FileOpener from 'components/file/open'
-import FileSaveAs from 'components/file/saveAs'
+import FileCreate from 'components/file/create'
 import About from 'components/file/about'
 import Logo from './logo.svg'
 module.exports = class extends React.Component {
@@ -53,6 +53,15 @@ module.exports = class extends React.Component {
             <a href="#" onClick={this.props.onRedo} title={redoTitle}>
               {langs[this.props.language].redo}
               <span className="badge">Ctrl-y</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#sp-file-new"
+              data-toggle="modal"
+              title={langs[this.props.language].saveAs}
+            >
+              {langs[this.props.language].newFile}...
             </a>
           </li>
           <li>
@@ -111,8 +120,17 @@ module.exports = class extends React.Component {
           onNewDeck={this.props.onNewDeck}
           language={this.props.language}
         />
-        <FileSaveAs
+        <FileCreate
           onNewDeck={this.props.onNewDeck}
+          domId="sp-file-save-as"
+          mode="saveAs"
+          deck={this.props.deck}
+          language={this.props.language}
+        />
+        <FileCreate
+          onNewDeck={this.props.onNewDeck}
+          domId="sp-file-new"
+          mode="newFile"
           deck={this.props.deck}
           language={this.props.language}
         />
