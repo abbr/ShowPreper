@@ -9,6 +9,20 @@ var langs = {
   zh: require('./zh')
 }
 
-var lang = window.navigator.language || window.navigator.userLanguage
-export default langs[lang.split('-')[0]] || langs.en
-export { langs }
+function getDefaultLang() {
+  let lang
+  if (typeof Storage !== 'undefined') {
+    lang = localStorage.getItem('language')
+  }
+  if (!lang) {
+    try {
+      lang = (window.navigator.language || window.navigator.userLanguage).split(
+        '-'
+      )[0]
+    } catch (ex) {}
+  }
+  return lang || 'en'
+}
+
+export default langs[getDefaultLang()]
+export { langs, getDefaultLang }

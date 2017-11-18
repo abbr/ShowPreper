@@ -97,5 +97,6 @@ module.exports = {
   pressCtrlSToSave: '在新开窗口里按 {CtrlS}(windows) 或 {CmdS}(Mac) 键把放映文件存盘',
   saveAsWarning:
     '<strong>警告！</strong>该文件将保存在此浏览器中，可能只能从此计算机访问，并且在清除浏览器缓存时将被删除。要永久保存到您的硬盘，请使用<i>下载... </i>菜单。',
-  newFile: '新文件'
+  newFile: '新文件',
+  notes: '笔记'
 }

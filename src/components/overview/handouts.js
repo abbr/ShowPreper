@@ -2,6 +2,7 @@
 import React from 'react'
 import './handouts.less'
 import _ from 'lodash'
+import { langs } from 'i18n/lang'
 
 var DisplayableComponent = require('components/widgets/displayableComponent')
 module.exports = class extends React.Component {
@@ -46,7 +47,7 @@ module.exports = class extends React.Component {
             combinedTransform={true}
           />
           <div className="col-xs-1">
-            Notes:
+            {langs[this.props.language].notes}:
             <textarea
               value={component.notes}
               onBlur={this.updateNotes.bind(null, index, 'notes')}

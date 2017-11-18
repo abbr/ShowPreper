@@ -43,7 +43,6 @@ export default class extends React.Component {
             combinedTransform={true}
           />
           <div className="col-xs-6">
-            notes:
             <div>{component.notes}</div>
           </div>
         </div>
@@ -56,9 +55,7 @@ export default class extends React.Component {
             deck: this.state.deck
           }}
         />
-        <div className="sp-handouts container-fluid">
-          {deckView}
-        </div>
+        <div className="sp-handouts container-fluid">{deckView}</div>
       </div>
     )
   }

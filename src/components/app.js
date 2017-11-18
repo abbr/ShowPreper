@@ -2,7 +2,7 @@
 import 'normalize.css'
 import 'bootstrap'
 import './app.less'
-import { langs } from 'i18n/lang'
+import { langs, getDefaultLang } from 'i18n/lang'
 import React from 'react'
 import Header from './header'
 import Slides from './slides'
@@ -15,7 +15,7 @@ let App = class extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      deck: DeckStore.getDefaultDeck(undefined, App.getDefaultLang()),
+      deck: DeckStore.getDefaultDeck(undefined, getDefaultLang()),
       view: 'slides',
       presentationFormat: 'impress',
       presentationStyle: null,
@@ -23,21 +23,8 @@ let App = class extends React.Component {
       selectedSlidesStyle: null,
       thisSlideStyle: null,
       clipboard: null,
-      language: App.getDefaultLang()
+      language: getDefaultLang()
     }
-  }
-  static getDefaultLang() {
-    let lang
-    if (typeof Storage !== 'undefined') {
-      lang = localStorage.getItem('language')
-    }
-    if (!lang) {
-      try {
-        lang = (window.navigator.language || window.navigator.userLanguage
-        ).split('-')[0]
-      } catch (ex) {}
-    }
-    return lang || 'en'
   }
   setLanguage = lang => {
     if (typeof Storage !== 'undefined') {

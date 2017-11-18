@@ -107,5 +107,6 @@ module.exports = {
     'Drücken Sie im neu geöffneten Fenster oder Tab {CtrlS} (Windows) bzw. {CmdS} (Mac), um die gesamte Präsentation auf der Festplatte zu speichern.',
   saveAsWarning:
     '<strong> Warnung! </strong> Die Datei wird in diesem Browser gespeichert, kann nur von diesem Computer aus aufgerufen werden und wird gelöscht, wenn Sie den Browser-Cache löschen. Um dauerhaft auf Ihrer Festplatte zu speichern, verwenden Sie stattdessen das Menü <i> Download ... </i>.',
-  newFile: 'Neu'
+  newFile: 'Neu',
+  notes: 'Anmerkungen'
 }

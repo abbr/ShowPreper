@@ -105,5 +105,6 @@ module.exports = {
     'In het nieuw geopende venster of tabblad drukt u op {CtrlS} (Windows) of {CmdS} (Mac) om de hele presentatie op schijf op te slaan',
   saveAsWarning:
     '<strong> Waarschuwing! </strong> het bestand wordt opgeslagen in deze browser, is mogelijk alleen toegankelijk via deze computer en wordt verwijderd wanneer u de browsercache wist. Gebruik in plaats daarvan het menu <i> Downloaden ... </i> om permanent op uw harde schijf op te slaan.',
-  newFile: 'Nieuw'
+  newFile: 'Nieuw',
+  notes: 'Notes'
 }

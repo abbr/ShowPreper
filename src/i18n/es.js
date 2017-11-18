@@ -108,5 +108,6 @@ module.exports = {
     'En la ventana o pestaña recién abierta, presione {CtrlS} (Windows) o {CmdS} (Mac) para guardar toda la presentación en el disco',
   saveAsWarning:
     '<strong> ¡Advertencia! </strong> El archivo se guardará en este navegador, solo podrá accederse desde esta computadora y se eliminará cuando borre la memoria caché del navegador. Para guardar de forma permanente en su disco duro, use el menú <i> Descargar ... </i>.',
-  newFile: 'Nuevo'
+  newFile: 'Nuevo',
+  notes: 'Notas'
 }
