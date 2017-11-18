@@ -5,6 +5,7 @@ var langs = {
   fr: require('./fr'),
   nl: require('./nl'),
   ru: require('./ru'),
+  'zh-cn': require('./zh'),
   zh: require('./zh')
 }
 

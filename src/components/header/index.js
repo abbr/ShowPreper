@@ -156,10 +156,10 @@ module.exports = class Header extends React.Component {
                   <li>
                     <a
                       onClick={() => {
-                        this.props.setLanguage('zh')
+                        this.props.setLanguage('zh-cn')
                       }}
                     >
-                      中文
+                      中文(简体)
                     </a>
                   </li>
                   <li>

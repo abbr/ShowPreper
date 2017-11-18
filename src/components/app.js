@@ -31,8 +31,13 @@ let App = class extends React.Component {
     if (typeof Storage !== 'undefined') {
       lang = localStorage.getItem('language')
     }
-    lang = lang || window.navigator.language || window.navigator.userLanguage
-    return (lang && lang.split('-')[0]) || 'en'
+    if (!lang) {
+      try {
+        lang = (window.navigator.language || window.navigator.userLanguage
+        ).split('-')[0]
+      } catch (ex) {}
+    }
+    return lang || 'en'
   }
   setLanguage = lang => {
     if (typeof Storage !== 'undefined') {
