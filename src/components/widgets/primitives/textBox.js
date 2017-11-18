@@ -19,6 +19,7 @@ let TextBox = class extends React.Component {
       return
     }
     $script.ready('ckeditor', () => {
+      window.CKEDITOR.config.language = this.props.language
       let editor = (this.editor = window.CKEDITOR.inline(
         this.refs.editableContent,
         {
