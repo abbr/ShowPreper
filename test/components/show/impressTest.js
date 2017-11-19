@@ -9,6 +9,13 @@ describe('show > impress', () => {
     $('body').removeAttr('class')
   })
 
+  it('should populate window.deck global variable', () => {
+    let deck
+    let deckStr = $('#app script')[0].innerHTML // var deck = ...
+    eval(deckStr.substr(deckStr.indexOf('deck'))) // deck = ...
+    expect(deck.components instanceof Object).to.equal(true)
+  })
+
   it('should have 5 initial views', () => {
     expect(appWrapper.find('#impress').props().children.length).to.equal(5)
     expect($('body').attr('class')).to.contain('impress-on-step-1')
