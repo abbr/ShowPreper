@@ -1,7 +1,7 @@
 to debug test, run
 
 ```sh
-./node_modules/.bin/karma start --no-single-run --browsers Chrome
+npm run test:debug 
 ```
 then click debug and press F12 to launch Chrome Developer Tools
 

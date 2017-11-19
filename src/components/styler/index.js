@@ -2,7 +2,7 @@ import React from 'react'
 import { langs } from 'i18n/lang'
 import './index.less'
 import _ from 'lodash'
-import ColorPatternEditor from './colorPatternEditor'
+import BackgroundEditor from './backgroundEditor'
 import BorderEditor from './borderEditor'
 
 export default class extends React.Component {
@@ -128,7 +128,7 @@ export default class extends React.Component {
                       id="spStylerTabBackground"
                       className="tab-pane fade in active"
                     >
-                      <ColorPatternEditor
+                      <BackgroundEditor
                         language={this.props.language}
                         currentStyle={s && s.background}
                         updateStyle={this.updateStyle}
