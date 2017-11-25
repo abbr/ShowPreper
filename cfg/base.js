@@ -21,7 +21,7 @@ module.exports = {
     impress: path.join(__dirname, '../src/components/show/renderImpress'),
     bespoke: path.join(__dirname, '../src/components/show/renderBespoke'),
     handouts: path.join(__dirname, '../src/components/show/renderHandouts'),
-    vendors: ['webpack-material-design-icons', 'babel-polyfill']
+    vendors: ['babel-polyfill']
   },
   resolve: {
     extensions: ['.js', '.jsx'],
