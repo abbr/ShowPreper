@@ -28,7 +28,7 @@ export default class Create extends React.Component {
     if (Object.keys(localStorage).indexOf(newName) >= 0) {
       this.setState({
         errMsg: langs[this.props.language].duplicatedFileNameErr,
-        okBtnDisabled: true
+        okBtnDisabled: false
       })
     } else if (newName.length === 4) {
       this.setState({
@@ -43,7 +43,8 @@ export default class Create extends React.Component {
   onOk = () => {
     this.props.onNewDeck(
       this.state.fn,
-      this.props.mode === 'saveAs' ? this.props.deck : undefined
+      this.props.mode === 'saveAs' ? this.props.deck : undefined,
+      true
     )
   }
 

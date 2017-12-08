@@ -179,8 +179,8 @@ let App = class extends React.Component {
       cb
     )
   }
-  onNewDeck = (nm, props) => {
-    let deck = new DeckStore.Deck(nm, props, this.state.language)
+  onNewDeck = (nm, props, override) => {
+    let deck = new DeckStore.Deck(nm, props, this.state.language, override)
     deck.save()
     this.setState({
       deck: deck

@@ -5,10 +5,10 @@ const _spDefaultFileNm = 'default.spj'
 const _spDefaultDeck = '_defaultDeck'
 const DEFAULT_SLIDE_SIZE = { width: 640, height: 480 }
 
-let Deck = function(fn, props, language) {
+let Deck = function(fn, props, language, override) {
   var savedDeckObj
   var _fn = fn || _spDefaultFileNm
-  if (typeof Storage !== 'undefined') {
+  if (typeof Storage !== 'undefined' && !override) {
     try {
       savedDeckObj = JSON.parse(localStorage.getItem(_fn))
     } catch (ex) {}
