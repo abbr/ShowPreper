@@ -20,6 +20,7 @@ let TextBox = class extends React.Component {
     }
     $script.ready('ckeditor', () => {
       window.CKEDITOR.config.language = this.props.language
+      window.CKEDITOR.config.allowedContent = true
       let editor = (this.editor = window.CKEDITOR.inline(
         this.refs.editableContent,
         {
