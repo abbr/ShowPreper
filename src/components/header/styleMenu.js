@@ -26,7 +26,7 @@ module.exports = class extends React.Component {
               <span className="caret" />
             </div>
           </button>
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <ul className="dropdown-menu btn" aria-labelledby="dropdownMenu1">
             <li>
               <a
                 onClick={() => {

@@ -105,7 +105,7 @@ module.exports = class Header extends React.Component {
                   {this.props.language}
                 </button>
                 <ul
-                  className="dropdown-menu sp-lang-dropdown-menu"
+                  className="dropdown-menu sp-lang-dropdown-menu btn"
                   aria-labelledby="sp-header-lang-dropdown"
                 >
                   <li>
