@@ -6,15 +6,15 @@ describe('widgets > primitives > textBox', () => {
     appWrapper = getAppWrapper('App')
   })
 
-  it('should display ckeditor when double-click; hide when blur', done => {
+  it('should display ckeditor when double-click; hide when blur', function(done) {
+    this.timeout(5000)
     expect($('.cke').length).to.equal(0)
     expect(
       $('.sp-operating-table .sp-component .sp-widget .cke_editable_inline')
         .length
     ).to.equal(0)
     appWrapper
-      .find('.sp-operating-table TextBox')
-      .childAt(0)
+      .find('.sp-operating-table .sp-widget').last()
       .childAt(0)
       .simulate('doubleclick')
     setTimeout(() => {
@@ -37,6 +37,6 @@ describe('widgets > primitives > textBox', () => {
         ).to.equal(0)
         done()
       }, 500)
-    }, 500)
+    }, 3000)
   })
 })

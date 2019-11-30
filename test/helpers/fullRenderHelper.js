@@ -6,7 +6,10 @@ const AppMap = {
   App,
   Impress
 }
+let appWrapper
 export default function(appNm){
   let TheApp = AppMap[appNm]
-  return mount(<TheApp />, { attachTo: document.getElementById('app') })
+  appWrapper && appWrapper.unmount()
+  appWrapper = mount(<TheApp />, { attachTo: document.getElementById('app') })
+  return appWrapper
 }

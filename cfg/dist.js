@@ -1,23 +1,19 @@
 var path = require('path')
 var webpack = require('webpack')
 // Add needed plugins here
-var CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 var config = {
+  mode: 'production',
   devtool: 'sourcemap',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    }),
-    new webpack.optimize.UglifyJsPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpackPlugin(['dist'], {
+    new CleanWebpackPlugin({
       root: path.join(__dirname, '..'),
       verbose: true,
       dry: false

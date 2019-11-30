@@ -21,7 +21,7 @@ module.exports = {
     impress: path.join(__dirname, '../src/components/show/renderImpress'),
     bespoke: path.join(__dirname, '../src/components/show/renderBespoke'),
     handouts: path.join(__dirname, '../src/components/show/renderHandouts'),
-    vendors: ['babel-polyfill']
+    vendors: ['@babel/polyfill']
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -64,33 +64,27 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.sass/,
         use: [
           'style-loader',
           'css-loader',
-          'postcss-loader',
           'sass-loader?outputStyle=expanded&indentedSyntax'
         ]
       },
       {
         test: /\.scss/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader?outputStyle=expanded'
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader?outputStyle=expanded']
       },
       {
         test: /\.less/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.styl/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+        use: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
@@ -112,7 +106,7 @@ module.exports = {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       },
-      { test: /\.spj$/, loader: 'json-loader' }
+      { test: /\.spj$/, type: 'json' }
     ]
   },
   plugins: [
@@ -147,6 +141,7 @@ module.exports = {
   ],
   devtool: 'inline-source-map',
   devServer: {
+    contentBase: path.join(__dirname, '..', 'dist'),
     historyApiFallback: true,
     hot: true,
     port: port,

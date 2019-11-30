@@ -1,12 +1,5 @@
 if (process.argv.indexOf('--browsers') < 0) {
-  const ChromiumRevision = require('puppeteer/package.json').puppeteer
-    .chromium_revision
-  const Downloader = require('puppeteer/utils/ChromiumDownloader')
-  const revisionInfo = Downloader.revisionInfo(
-    Downloader.currentPlatform(),
-    ChromiumRevision
-  )
-  process.env.CHROME_BIN = revisionInfo.executablePath
+  process.env.CHROME_BIN = require('puppeteer').executablePath()
 }
 
 const webpackCfg = require('./webpack.config')
@@ -36,7 +29,6 @@ module.exports = function(config) {
     coverageReporter: {
       dir: 'coverage/',
       reporters: [{ type: 'html' }, { type: 'text' }]
-    },
-    concurrency: Infinity
+    }
   })
 }
