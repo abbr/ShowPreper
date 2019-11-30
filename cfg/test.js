@@ -4,6 +4,7 @@ var srcPath = path.join(__dirname, '/../src/')
 // Add needed plugins here
 
 module.exports = {
+  mode: 'production',
   module: {
     rules: [
       // {

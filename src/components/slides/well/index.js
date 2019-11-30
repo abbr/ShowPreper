@@ -2,8 +2,8 @@
 
 var React = require('react')
 import ReactDOM from 'react-dom'
-import 'jquery-ui/jquery-ui.js'
-import 'jquery-ui/themes/smoothness/jquery-ui.min.css'
+import 'jquery-ui-dist/jquery-ui.js'
+import 'jquery-ui-dist/jquery-ui.min.css'
 import { langs } from 'i18n/lang'
 import './touchPunch'
 
