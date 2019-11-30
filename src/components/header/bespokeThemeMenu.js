@@ -23,7 +23,7 @@ module.exports = class extends React.Component {
       return (
         <li key={i}>
           <a onClick={this.updateBespokeTheme.bind(null, e)}>
-            <img src={formats(e)} />
+            <img src={formats(e).default} />
           </a>
         </li>
       )
@@ -40,7 +40,7 @@ module.exports = class extends React.Component {
             <img
               src={formats(
                 './' + (this.props.deck.bespokeTheme || 'coverflow') + '.svg'
-              )}
+              ).default}
               className="sp-bespoke-active-theme"
             />
             <span className="caret" />

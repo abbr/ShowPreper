@@ -1,7 +1,6 @@
 {
   "generator-react-webpack": {
     "appName": "showPreper",
-    "style": "less",
-    "postcss": true
+    "style": "less"
   }
 }

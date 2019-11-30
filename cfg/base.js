@@ -21,7 +21,7 @@ module.exports = {
     impress: path.join(__dirname, '../src/components/show/renderImpress'),
     bespoke: path.join(__dirname, '../src/components/show/renderBespoke'),
     handouts: path.join(__dirname, '../src/components/show/renderHandouts'),
-    vendors: ['babel-polyfill']
+    vendors: ['@babel/polyfill', 'webpack-material-design-icons']
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -64,33 +64,27 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.sass/,
         use: [
           'style-loader',
           'css-loader',
-          'postcss-loader',
           'sass-loader?outputStyle=expanded&indentedSyntax'
         ]
       },
       {
         test: /\.scss/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader?outputStyle=expanded'
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader?outputStyle=expanded']
       },
       {
         test: /\.less/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.styl/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+        use: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
@@ -112,7 +106,7 @@ module.exports = {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       },
-      { test: /\.spj$/, loader: 'json-loader' }
+      { test: /\.spj$/, type: 'json' }
     ]
   },
   plugins: [
@@ -126,27 +120,32 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../src/', 'index.html'),
       filename: 'index.html',
+      chunksSortMode: 'manual',
       chunks: ['vendors', 'app']
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../src/', 'impress.html'),
       filename: 'impress.html',
+      chunksSortMode: 'manual',
       chunks: ['vendors', 'impress']
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../src/', 'handouts.html'),
       filename: 'handouts.html',
+      chunksSortMode: 'manual',
       chunks: ['vendors', 'handouts']
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../src/', 'bespoke.html'),
       filename: 'bespoke.html',
+      chunksSortMode: 'manual',
       chunks: ['vendors', 'bespoke']
     }),
     new CopyWebpackPlugin([{ from: 'src/favicon.ico' }])
   ],
   devtool: 'inline-source-map',
   devServer: {
+    contentBase: path.join(__dirname, '..', 'dist'),
     historyApiFallback: true,
     hot: true,
     port: port,

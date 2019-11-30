@@ -8,7 +8,6 @@ import Header from './header'
 import Slides from './slides'
 import Overview from './overview'
 import DeckStore from 'stores/deck'
-import 'webpack-material-design-icons'
 import _ from 'lodash'
 import $script from 'scriptjs'
 let key = require('mousetrap')
