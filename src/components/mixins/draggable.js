@@ -91,15 +91,19 @@ module.exports = function(
             updatedProps.x =
               this._draggable.drags[i].oleft +
               Math.round((pageX - this._draggable.ox) / scale / zScale)
+            if (ev.ctrlKey) {
+              updatedProps.x =
+                updatedProps.x && 10 * Math.round(updatedProps.x / 10)
+            }
           }
           if (this.state.draggable === 'y' || this.state.draggable === true) {
             updatedProps.y =
               this._draggable.drags[i].otop +
               Math.round((pageY - this._draggable.oy) / scale / zScale)
-          }
-          if (ev.ctrlKey) {
-            updatedProps.x = 10 * Math.round(updatedProps.x / 10)
-            updatedProps.y = 10 * Math.round(updatedProps.y / 10)
+            if (ev.ctrlKey) {
+              updatedProps.y =
+                updatedProps.y && 10 * Math.round(updatedProps.y / 10)
+            }
           }
         }
         mouseMoveWidgetUpdateFunction &&
@@ -144,15 +148,17 @@ module.exports = function(
             updatedProps.x =
               this._draggable.drags[i].oleft +
               Math.round((pageX - this._draggable.ox) / scale / zScale)
+            if (ev.ctrlKey) {
+              updatedProps.x = 10 * Math.round(updatedProps.x / 10)
+            }
           }
           if (this.state.draggable === 'y' || this.state.draggable === true) {
             updatedProps.y =
               this._draggable.drags[i].otop +
               Math.round((pageY - this._draggable.oy) / scale / zScale)
-          }
-          if (ev.ctrlKey) {
-            updatedProps.x = 10 * Math.round(updatedProps.x / 10)
-            updatedProps.y = 10 * Math.round(updatedProps.y / 10)
+            if (ev.ctrlKey) {
+              updatedProps.y = 10 * Math.round(updatedProps.y / 10)
+            }
           }
         }
         mouseUpWidgetUpdateFunction &&
