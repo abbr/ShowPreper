@@ -11,22 +11,22 @@ For the impatient, full feature of ShowPreper can be accessed free [online](http
 
 ### Prerequisites
 
-* node@>=4.2.4
-* npm@>=3.5.3
+* git
+* node@>=10.0.0
 
 ### Development
 ```
 git clone https://github.com/abbr/ShowPreper.git
 cd ShowPreper
-npm install
-node .
+npm i
+npm start
 ```
 
 ### Production
 ```
 git clone https://github.com/abbr/ShowPreper.git
 cd ShowPreper
-npm install
+npm i
 npm run dist
 ```
 Then deploy `/dist` folder to a web server such as Nginx. ShowPreper runs fully on client-side so there is no minimum server requirements other than serving static files.
