@@ -57,8 +57,8 @@ module.exports = class extends Draggable.draggableMixin(
     super(props)
     this.state = { draggable: true }
   }
-  componentWillMount() {
-    super.componentWillMount && super.componentWillMount()
+  UNSAFE_componentWillMount() {
+    super.UNSAFE_componentWillMount && super.UNSAFE_componentWillMount()
     this.mouseDownHdlrs = []
   }
   componentDidMount() {

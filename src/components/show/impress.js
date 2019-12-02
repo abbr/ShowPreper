@@ -16,8 +16,8 @@ let Presentation = class extends AutoScale.autoScaleMixin(React.Component) {
     }
   }
 
-  componentWillMount() {
-    super.componentWillMount && super.componentWillMount()
+  UNSAFE_componentWillMount() {
+    super.UNSAFE_componentWillMount && super.UNSAFE_componentWillMount()
     _.merge(document.body.style, this.state.deck.style)
   }
 

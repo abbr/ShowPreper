@@ -15,8 +15,8 @@ var WellSlide = class extends AutoScale.autoScaleMixin(React.Component) {
     super.componentDidMount && super.componentDidMount()
     this._resized()
   }
-  componentWillReceiveProps() {
-    super.componentWillReceiveProps && super.componentWillReceiveProps()
+  UNSAFE_componentWillReceiveProps() {
+    super.UNSAFE_componentWillReceiveProps && super.UNSAFE_componentWillReceiveProps()
     this._resized()
   }
   _resized() {

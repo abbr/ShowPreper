@@ -35,8 +35,8 @@ let App = class extends React.Component {
   setDocTitle(t) {
     document.title = 'ShowPreper - ' + t
   }
-  componentWillMount() {
-    super.componentWillMount && super.componentWillMount()
+  UNSAFE_componentWillMount() {
+    super.UNSAFE_componentWillMount && super.UNSAFE_componentWillMount()
     this.setDocTitle(this.state.deck._fn)
     $script('//cdn.ckeditor.com/4.5.7/full-all/ckeditor.js', 'ckeditor')
   }
@@ -346,8 +346,8 @@ let App = class extends React.Component {
       )
     })
   }
-  componentWillUpdate(nextProps, nextState) {
-    super.componentWillUpdate && super.componentWillUpdate()
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
+    super.UNSAFE_componentWillUpdate && super.UNSAFE_componentWillUpdate()
     if (nextState.deck._fn !== this.state.deck._fn) {
       this.setDocTitle(nextState.deck._fn)
     }

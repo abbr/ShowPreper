@@ -19,9 +19,9 @@ export default class AngleInput extends React.Component {
     var y = vector[1] - center[1]
     return (-parseInt(Math.atan2(x, y) * 180 / Math.PI) + 180 + 360) % 360
   }
-  componentWillReceiveProps(nextProps) {
-    super.componentWillReceiveProps &&
-      super.componentWillReceiveProps(nextProps)
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    super.UNSAFE_componentWillReceiveProps &&
+      super.UNSAFE_componentWillReceiveProps(nextProps)
     if (nextProps.defaultValue) {
       this.setState({ value: nextProps.defaultValue })
     }

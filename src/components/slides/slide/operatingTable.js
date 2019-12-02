@@ -73,12 +73,12 @@ let OperatingTable = class extends Draggable.draggableMixin(
           : 'thisSlide'
     })
   }
-  componentWillMount() {
-    super.componentWillMount && super.componentWillMount()
+  UNSAFE_componentWillMount() {
+    super.UNSAFE_componentWillMount && super.UNSAFE_componentWillMount()
     this.mouseDownHdlrs = []
   }
-  componentWillReceiveProps() {
-    super.componentWillReceiveProps && super.componentWillReceiveProps()
+  UNSAFE_componentWillReceiveProps() {
+    super.UNSAFE_componentWillReceiveProps && super.UNSAFE_componentWillReceiveProps()
     this._resized()
   }
   componentDidMount() {
