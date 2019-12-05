@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import { langs } from 'i18n/lang'
 import classNames from 'classnames'

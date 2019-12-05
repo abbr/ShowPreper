@@ -1,4 +1,3 @@
-'use strict'
 import _ from 'lodash'
 import DefaultDeckFactory from 'sources/default.spj'
 const _spDefaultFileNm = 'default.spj'

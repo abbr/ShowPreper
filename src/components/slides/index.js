@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import SlideWell from 'components/slides/well'
 import SlideEditor from 'components/slides/slide'

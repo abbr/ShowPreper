@@ -1,5 +1,3 @@
-'use strict'
-
 exports.onKillMouseDown = function(ev) {
   ev.stopPropagation && ev.stopPropagation()
   let i = this.props.component.components.length

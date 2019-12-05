@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import OperatingTable from './operatingTable'
 let SlideEditor = class extends React.Component {

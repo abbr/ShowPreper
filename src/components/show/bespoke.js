@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import DeckStore from 'stores/deck'
 import bespoke from 'bespoke'

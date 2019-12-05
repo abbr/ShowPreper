@@ -1,5 +1,3 @@
-'use strict'
-
 var React = require('react')
 let _ = require('lodash')
 var DisplayableComponent = require('components/widgets/displayableComponent')

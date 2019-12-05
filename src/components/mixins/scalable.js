@@ -1,4 +1,3 @@
-'use strict'
 import ReactDOM from 'react-dom'
 import { langs } from 'i18n/lang'
 

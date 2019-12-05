@@ -1,5 +1,3 @@
-'use strict'
-
 exports.componentDidMount = function() {
   this.mouseDownHdlrs.unshift(this.onSelectionMouseDown)
 }

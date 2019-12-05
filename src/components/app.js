@@ -1,4 +1,3 @@
-'use strict'
 import 'normalize.css'
 import 'bootstrap'
 import './app.less'

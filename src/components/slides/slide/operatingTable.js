@@ -1,5 +1,3 @@
-'use strict'
-
 let React = require('react')
 let _ = require('lodash')
 import EditableComponent from 'components/widgets/editableComponent'

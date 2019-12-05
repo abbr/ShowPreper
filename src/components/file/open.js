@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import OpenEntry from './openEntry'
 import { langs } from 'i18n/lang'

@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 
 let KillControl = class extends React.Component {

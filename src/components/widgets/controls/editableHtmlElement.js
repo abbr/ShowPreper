@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 
 let EditableHtmlElement = class extends React.Component {

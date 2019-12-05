@@ -22,9 +22,7 @@
 // You are one of those who like to know how things work inside?
 // Let me show you the cogs that make impress.js run...
 export function Impress(document, window) {
-  'use strict'
-
-  // HELPER FUNCTIONS
+    // HELPER FUNCTIONS
 
   // `pfx` is a function that takes a standard CSS property name as a parameter
   // and returns it's prefixed version valid for current browser it runs in.
@@ -698,9 +696,7 @@ export function Impress(document, window) {
 // In future I think about moving it to make them optional, move to separate files
 // and treat more like a 'plugins'.
 export function ImpressHandleEvents() {
-  'use strict'
-
-  // Throttling function calls, by Remy Sharp
+    // Throttling function calls, by Remy Sharp
   // http://remysharp.com/2010/07/21/throttling-function-calls/
   var throttle = function(fn, delay) {
     var timer = null

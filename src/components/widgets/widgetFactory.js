@@ -1,4 +1,3 @@
-'use strict'
 import './widgets.less'
 var constructors = {
   TextBox: require('./primitives/textBox'),

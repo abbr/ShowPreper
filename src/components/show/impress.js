@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import { Impress, ImpressHandleEvents } from './impress-vendor.js'
 import './impress.less'

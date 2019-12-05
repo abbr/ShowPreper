@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import EditableHtmlElement from './editableHtmlElement'
 import {langs} from 'i18n/lang'

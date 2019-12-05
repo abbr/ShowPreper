@@ -1,4 +1,3 @@
-'use strict'
 import _ from 'lodash'
 import DefaultPalettes from 'sources/default_palettes.json'
 

@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import './impress.less'
 import AutoScale from 'components/mixins/autoScale'

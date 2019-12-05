@@ -1,5 +1,3 @@
-'use strict'
-
 var React = require('react')
 import ReactDOM from 'react-dom'
 import 'jquery-ui-dist/jquery-ui.js'

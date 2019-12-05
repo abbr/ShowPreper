@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import './bespokeThemeMenu.less'
 import { langs } from 'i18n/lang'

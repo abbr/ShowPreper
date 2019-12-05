@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import bespoke from 'bespoke'
 import bespokeKeys from 'bespoke-keys'

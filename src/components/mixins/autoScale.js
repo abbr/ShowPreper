@@ -1,4 +1,3 @@
-'use strict'
 import ReactDOM from 'react-dom'
 
 // fit (width, height) into (frameWidth, frameHeight)

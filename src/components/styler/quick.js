@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import './quick.less'
 import Palettes from 'stores/palettes'
