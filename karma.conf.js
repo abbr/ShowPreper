@@ -1,9 +1,11 @@
+let path = require('path')
 if (process.argv.indexOf('--browsers') < 0) {
   process.env.CHROME_BIN = require('puppeteer').executablePath()
 }
 
 const webpackCfg = require('./webpack.config')
 module.exports = function(config) {
+  process.env.BABEL_ENV = 'test'
   let reporters = ['mocha', 'coverage']
   // don't run coverage in watch (CI) mode
   if (config.autoWatch && !config.singleRun) {
@@ -23,7 +25,8 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     reporters: reporters,
     preprocessors: {
-      'test/loadTests.js': ['webpack', 'sourcemap']
+      'test/loadTests.js': ['webpack'],
+      'src/**/*.js': 'coverage'
     },
     webpack: webpackCfg,
     coverageReporter: {

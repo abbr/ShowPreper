@@ -5,6 +5,8 @@ var srcPath = path.join(__dirname, '/../src/')
 
 module.exports = {
   mode: 'production',
+  // entry is determined by webpack preprocessors in karma.conf.js
+  entry: null,
   module: {
     rules: [
       // {

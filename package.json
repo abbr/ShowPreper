@@ -12,7 +12,7 @@
     "serve": "npm start",
     "serve:dist": "webpack-dev-server --open --env=dist",
     "start": "webpack-dev-server --open",
-    "test": "cross-env NODE_ENV=test karma start",
+    "test": "cross-env NODE_ENV=test karma start --no-auto-watch --single-run",
     "test:debug": "cross-env NODE_ENV=test karma start --no-single-run --browsers Chrome",
     "test:watch": "cross-env NODE_ENV=test karma start --no-colors --no-single-run",
     "heroku-postbuild": "npm run dist"
@@ -27,6 +27,7 @@
     "@babel/preset-react": "^7.7.4",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.0",
+    "babel-plugin-istanbul": "^5.2.0",
     "bespoke": "^1.1.0",
     "bespoke-classes": "^1.0.0",
     "bespoke-keys": "^1.1.0",
