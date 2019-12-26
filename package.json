@@ -7,6 +7,7 @@
   "scripts": {
     "clean": "rimraf dist/*",
     "dist": "webpack --env=dist",
+    "dist:ga": "webpack --env=dist --ga",
     "lint": "eslint ./src",
     "pretest": "npm run lint",
     "serve": "npm start",
@@ -15,7 +16,7 @@
     "test": "cross-env NODE_ENV=test karma start --no-auto-watch --single-run",
     "test:debug": "cross-env NODE_ENV=test karma start --no-single-run --browsers Chrome",
     "test:watch": "cross-env NODE_ENV=test karma start --no-colors --no-single-run",
-    "heroku-postbuild": "npm run dist"
+    "heroku-postbuild": "npm run dist:ga"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

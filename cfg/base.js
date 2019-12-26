@@ -9,7 +9,19 @@ try {
   gitHash = gitRevisionPlugin.commithash()
 } catch (ex) {}
 let port = process.env.port || 8000
+const args = require('minimist')(process.argv.slice(2))
+const gaTrackingStr =
+  args.ga &&
+  `<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=${process.env.Google_Analytics_Tracking_ID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', '${process.env.Google_Analytics_Tracking_ID}');
+</script>
+`
 module.exports = {
   context: path.join(__dirname, '..'),
   output: {
@@ -118,25 +130,37 @@ module.exports = {
       debug: true
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/', 'index.html'),
+      template: path.join(__dirname, '../src/', 'index.html.ejs'),
+      templateParameters: {
+        googleTrackingCode: gaTrackingStr
+      },
       filename: 'index.html',
       chunksSortMode: 'manual',
       chunks: ['vendors', 'app']
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/', 'impress.html'),
+      template: path.join(__dirname, '../src/', 'impress.html.ejs'),
+      templateParameters: {
+        googleTrackingCode: gaTrackingStr
+      },
       filename: 'impress.html',
       chunksSortMode: 'manual',
       chunks: ['vendors', 'impress']
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/', 'handouts.html'),
+      template: path.join(__dirname, '../src/', 'handouts.html.ejs'),
+      templateParameters: {
+        googleTrackingCode: gaTrackingStr
+      },
       filename: 'handouts.html',
       chunksSortMode: 'manual',
       chunks: ['vendors', 'handouts']
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/', 'bespoke.html'),
+      template: path.join(__dirname, '../src/', 'bespoke.html.ejs'),
+      templateParameters: {
+        googleTrackingCode: gaTrackingStr
+      },
       filename: 'bespoke.html',
       chunksSortMode: 'manual',
       chunks: ['vendors', 'bespoke']
