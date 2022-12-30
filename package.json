@@ -63,7 +63,7 @@
     "less-loader": "^5.0.0",
     "lodash": "^4.17.15",
     "minimist": "^1.2.0",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "mousetrap": "^1.6.3",
     "normalize.css": "^3.0.3",
     "parse-color": "^1.0.0",
